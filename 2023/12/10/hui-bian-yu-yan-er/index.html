@@ -1,0 +1,1558 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/27.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">汇编语言（二）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E3%80%8A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E3%80%8B/">
+                                <span class="chip bg-color">《汇编语言》</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+                                <span class="chip bg-color">汇编语言</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                编程语言
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="汇编语言（二）"><a href="#汇编语言（二）" class="headerlink" title="汇编语言（二）"></a>汇编语言（二）</h1><h2 id="汇编语言基础"><a href="#汇编语言基础" class="headerlink" title="汇编语言基础"></a>汇编语言基础</h2><h3 id="1-程序分段"><a href="#1-程序分段" class="headerlink" title="1.程序分段"></a>1.程序分段</h3><blockquote>
+<p>主要可分为<strong>数据段、栈段和程序段</strong></p>
+</blockquote>
+<h4 id="1-1内存申请"><a href="#1-1内存申请" class="headerlink" title="1.1内存申请"></a>1.1内存申请</h4><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 定义了多少数据，就相当于申请了对应长度的内存空间</div>
+<p><strong>①相关指令</strong></p>
+<blockquote>
+<p><code>db</code>：定义<strong>字节型数据</strong><br><code>db 数据1,数据2,...,数据N</code></p>
+</blockquote>
+<blockquote>
+<p><code>dw</code>：定义<strong>字型数据</strong><br><code>dw 数据1,数据2,...,数据N</code></p>
+</blockquote>
+<blockquote>
+<p><code>dd</code>：定义<strong>双字数据</strong><br><code>dd 数据1,数据2,...,数据N</code></p>
+</blockquote>
+<blockquote>
+<p><code>dup</code>：配合<code>db</code>、<code>dw</code>、<code>dd</code>进行<strong>重复数据的定义</strong><br><code>dd 重复次数 dup (重复数据列表)</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> dd 3 dup (0,1,2)相当于dd 0,1,2,0,1,2,0,1,2</div>
+
+<p><strong>②实例</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 由于dw指令在程序开头，故这些数据的地址从CS:0开始</div>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:code
+code segment
+dw 0123h,0456h,0789h,0abch,0defh,0fedh,0cbah,0987h
+
+    mov bx,0
+    mov ax,0
+
+    mov cx,8
+  s: add ax.cs:[bx]
+    add bx,2
+    loop s
+
+    mov ax,400ch
+    int 21h
+  code ends
+  end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③程序跟踪</strong></p>
+<blockquote>
+<p>使用<code>-u</code>查看程序内容，这些内容实际上是<code>dw</code><strong>定义的数据</strong>，但是被<code>debug</code>程序<strong>强行翻译为指令</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_18.png" alt="查看程序"></p>
+<blockquote>
+<p>使用<code>-r</code>查看<strong>前十六个字节</strong>的详细内容</p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_19.png" alt="查看"></p>
+<h4 id="1-2设置程序入口"><a href="#1-2设置程序入口" class="headerlink" title="1.2设置程序入口"></a>1.2设置程序入口</h4><p><strong>①<code>start</code>伪指令</strong>：将<code>CS:IP</code>指向对应地址</p>
+<blockquote>
+<p>上述程序<strong>不能正常运行</strong>，因为程序入口是<strong>数据强行翻译的指令</strong></p>
+</blockquote>
+<p><strong>②实例</strong></p>
+<blockquote>
+<p><code>end start</code>伪指令不仅仅描述<strong>程序的结束</strong>，也描述了<strong>程序的入口</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:code
+code segment
+dw 0123h,0456h,0789h,0abch,0defh,0fedh,0cbah,0987h
+start: mov bx,0
+    mov ax,0
+
+    mov cx,8
+ s: add ax.cs:[bx]
+    add bx,2
+    loop s
+
+    mov ax,400ch
+    int 21h
+  code ends
+  end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-3栈机制"><a href="#1-3栈机制" class="headerlink" title="1.3栈机制"></a>1.3栈机制</h4><p><strong>①引言</strong></p>
+<blockquote>
+<p><strong>概述</strong>：可以把<strong>一段内存</strong>当作<strong>栈</strong>来使用<br><code>push 容器</code>：将容器中数据放入<strong>栈顶</strong><br><code>pop 容器</code>：将栈顶数据弹出并<strong>存入容器</strong>中</p>
+</blockquote>
+<blockquote>
+<p><strong>相关寄存器</strong><br>段寄存器<code>SS</code>和寄存器<code>SP</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> SS:SP指向栈顶的物理地址</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 指定了SS，也就相当于指定了一段内存作为栈，一个栈段最大为64KB</div>
+
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_2.png" alt="CPU的栈机制"><br><strong>②push和pop的详细过程</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_3.png" alt="push"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_4.png" alt="pop"></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 执行pop后，原来的栈顶元素并不会消失，直到被新push的元素覆盖</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 当栈满时push元素以及当栈空时pop元素，都会发生越界问题，需要自己注意</div>
+
+<p><strong>③实例</strong></p>
+<blockquote>
+<p><strong>概述</strong>：将一段内存中数据<strong>反序排列</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:codesg
+codesg segment
+
+;定义16个字型数据，其中0为字节型数据，将这段空间当作栈来使用
+dw 0123h,0456h,0789h,0abch,0defh,0fedh,0cbah,0987h
+dw 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+;设置栈顶指针，注意栈是从高地址向低地址增长
+start: mov ax,cs
+    mov ss,ax
+    mov sp,30h
+
+    mov bx,0
+    mov cx,8
+
+;将对应元素放入栈中
+s:  push cs:[bx]
+    add bx,2
+    loop s
+
+;重置循环相关寄存器
+    mov bx,0
+    mov cs,8
+
+;将栈中元素依次放入原来的位置，但是顺序颠倒
+s0: pop cs:[bx]
+    add bx,2
+    loop s0
+
+    mov ax,4c00h
+    int 21h
+codesg ends
+end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 栈的地址空间需要自己申请，并将ss:sp指向对应位置</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 栈从高地址向低地址增长</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 使用栈时要注意出栈、入栈顺序</div>
+
+<h4 id="1-4使用多个段"><a href="#1-4使用多个段" class="headerlink" title="1.4使用多个段"></a>1.4使用多个段</h4><p><strong>①意义</strong></p>
+<blockquote>
+<p>将<strong>不同的类型数据</strong>放入<strong>不同的段</strong>中<br>使用<strong>更大的内存空间</strong></p>
+</blockquote>
+<p><strong>②实例</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:code,ds:data,ss:stack
+
+data segment
+;定义8个字型数据
+dw 0123h,0456h,0789h,0abch,0defh,0fedh,0cbah,0987h
+data ends
+
+stack segment
+;申请栈空间
+dw 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+stack ends
+
+code segment
+;设置栈顶指针，注意栈是从高地址向低地址增长
+start: mov ax,stack ;注意段寄存器名换为段名
+    mov ss,ax
+    mov sp,20h ;为什么变为20h？
+
+;ds指向data段
+    mov ax,data
+    mov ds,ax
+
+    mov bx,0
+    mov cx,8
+
+;将对应元素放入栈中
+s:  push [bx]
+    add bx,2
+    loop s
+
+;重置循环相关寄存器
+    mov bx,0
+    mov cs,8
+
+;将栈中元素依次放入原来的位置，但是顺序颠倒
+s0: pop [bx]
+    add bx,2
+    loop s0
+
+    mov ax,4c00h
+    int 21h
+code ends
+end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 定义段，还需要申请一定大小的的内存</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> assume指令只是将段寄存器和对应段的名称联系到一起，并没有设定段寄存器的值，因为assume本质上还是一个伪指令，伪指令并不能控制cpu，还是需要修改ds、ss的值以访问对应段</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 段名本质上是一个字面值，不能直接将其存入段寄存器中</div>
+<pre class="line-numbers language-none"><code class="language-none">mov ax,data
+mov ds,ax
+;而不是
+mov ds,data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h3 id="2-转移"><a href="#2-转移" class="headerlink" title="2.转移"></a>2.转移</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><p><strong>①转移指令</strong></p>
+<blockquote>
+<p>可以修改<code>IP</code>寄存器或者<strong>同时</strong>修改<code>CS</code>和<code>IP</code>寄存器的指令</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 转移指令可以控制CPU执行某一处代码</div>
+<p><strong>②分类</strong></p>
+<blockquote>
+<p><strong>段内转移</strong>：只修改<code>IP</code><br><strong>段间转移</strong>：同时修改<code>CS</code>和<code>IP</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 段内转移也可分为短转移和近转移</div>
+<blockquote>
+<p><strong>短转移</strong>：<code>IP</code>修改范围为<code>-128~127</code><br><strong>近转移</strong>：<code>IP</code>修改范围为<code>-32768~32767</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 注意这个范围限制，如果超出了对应的范围，会出错</div>
+<p><strong>③<code>offset</code>操作符</strong></p>
+<blockquote>
+<p>取得<strong>标号</strong>的<strong>偏移地址</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:codesg
+codesg segment
+start: mov ax,offset start ;相当于mov ax，0，代码段的偏移地址从0开始
+s:     mov ax,offset s ;相当于mov ax，3，因为前一条指令占两个字节<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> seg会取得标号的段地址</div>
+
+<h4 id="2-2跳转指令"><a href="#2-2跳转指令" class="headerlink" title="2.2跳转指令"></a>2.2跳转指令</h4><p><strong>①格式</strong></p>
+<blockquote>
+<p><strong>标号转移</strong><br><code>jmp short 标号</code>：<strong>段内短转移</strong><br><code>jmp near ptr 标号</code>：<strong>段内近转移</strong><br><code>jmp far ptr 标号</code>：<strong>段间转移</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 标号实际上标识了一个地址</div>
+<blockquote>
+<p><strong>地址转移</strong><br><code>jmp 段地址：偏移地址</code>：将<code>CS:IP</code>修改为对应的地址<br><code>jmp 寄存器名</code>：将<code>IP</code>的值改为<strong>寄存器中数据</strong><br><code>jmp word ptr 内存单元地址</code>：从对应地址处读取<strong>一个字</strong>，用于修改<code>IP</code><br><code>jmp dword ptr 内存单元地址</code>从对应地址处读取<strong>两个字</strong>，<strong>高地址</strong>的字用于修改<code>CS</code>，<strong>低地址</strong>的字用于修改<code>IP</code></p>
+</blockquote>
+<blockquote>
+<p><strong>条件转移</strong><br><code>jcxz 标号</code>：如果<code>cx</code><strong>寄存器</strong>的值为0，则跳转到<strong>标号</strong>处，只能<strong>段内短转移</strong></p>
+</blockquote>
+<p><strong>②段内转移原理</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:codesg
+codesg segment
+
+start: mov ax,0
+       jmp short s
+       add ax,1
+s:     inc ax
+
+codesg ends
+
+end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>在<code>debug</code>中将上述程序其翻译为<strong>机器指令</strong>，可知<code>jmp short s</code>对应<strong>机器指令</strong>为<code>EB03</code></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_21.png" alt="对应机器指令"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_22.png" alt="转移原理"></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 段内转移对应机器指令并不包含目的地址信息，段内短转移是对IP进行八位位移，段内近转移是对IP进行十六位位移</div>
+
+
+<p><strong>③段间转移原理</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:codesg
+
+codesg segment
+start: mov ax,0
+       mov bx,0
+       jmp far ptr s
+       db 256 dup (0)
+s:     add ax,1
+       inc ax
+codesg ends
+
+end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>对应<strong>机器指令</strong>如下，<code>jmp far ptr s</code>对应机器指令为<code>EA0B01BD0B</code></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_23.png" alt="对应机器指令"></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 段间转移对应机器指令包含目的地址信息，BD0B为对应段地址0BBDH，0B01为对应偏移地址010BH</div>
+
+<h4 id="2-3循环指令"><a href="#2-3循环指令" class="headerlink" title="2.3循环指令"></a>2.3循环指令</h4><p><strong>①格式</strong>：<code>loop 标号</code></p>
+<blockquote>
+<p>当cpu执行到<code>loop</code>指令时，首先将<strong>循环寄存器</strong><code>cx</code>中的值<strong>减一</strong>，若cx中的值<strong>不为零</strong>，则<strong>返回标号处</strong>执行程序，反之向下执行</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 循环指令本质上是一个短转移</div>
+
+<p><strong>②实例</strong></p>
+<blockquote>
+<p>以下汇编程序计算了<code>2^12</code>的值</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:code
+code segment
+    mov ax,2
+
+    mov cx,11
+s:  add ax.ax
+    loop s
+    mov ax,4c00h
+    int 21h
+code ends
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③多重循环</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 因为只有一个循环寄存器，若要多重循环，则每次开始内层循环时，将外层循环的cx中的数值保存起来，在执行外层的循环时，再恢复外层循环的cx数</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以用栈、寄存器和某块特定内存（数据域中申请）存储数据</div>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:codesg,ds:datasg,ss:stacksg
+
+datasg segment
+db 'ibm             '
+db 'dec             '
+db 'dos             '
+db 'vax             '
+datasg ends
+
+stacksg segment
+dw 0,0,0,0,0,0,0,0 ;定义一个栈段，容量为16字节
+stacksg ends
+
+codesg segment
+start:mov ax,stacksg ;将栈寄存器指向定义的栈段
+    mov ss,ax
+    mov sp,16
+
+    mov ax datasg ;找到对应的数据段
+    mov ds,ax
+    mov bx,0
+
+    mov cx,4
+
+s0: push cx ;保存外层循环的值
+    mov si,0
+    mov cx,3 ;将cx设置为内层循环的次数
+
+s:  mov al,[bx+si]
+    and al,11011111b ;将对应字母转化为大写
+    mov [bx+si],al
+    inc si ;si每次加1，进行精定位
+    loop s
+
+    add bx,16 ;bx每次加16，进行粗定位，移动到下一行
+    pop cx
+    
+    loop s0
+
+    mov ax,4c00H
+    int 21H
+
+codesg ends
+end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_20.png" alt="图解"></p>
+<h4 id="2-4栈跳转"><a href="#2-4栈跳转" class="headerlink" title="2.4栈跳转"></a>2.4栈跳转</h4><p><strong>①相关指令</strong></p>
+<blockquote>
+<p><code>ret</code>：使用<strong>栈中的数据</strong>修改<code>IP</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 相当于pop IP</div>
+<blockquote>
+<p><code>retf</code>：使用<strong>栈中的数据</strong>修改<code>CS</code>和<code>IP</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 相当于pop IP和pop CS</div>
+<blockquote>
+<p><code>call 标号</code>：将当前<code>IP</code><strong>压入栈</strong>中，并<strong>转移到标号处</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 相当于push IP和jmp near ptr 标号</div>
+<blockquote>
+<p><code>call 16位寄存器</code>：将当前<code>IP</code><strong>压入栈</strong>中，并将<code>IP</code>设置为<strong>对应寄存器值</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 相当于push IP和jmp 16位寄存器</div>
+<blockquote>
+<p><code>call word ptr 内存单元地址</code>：将当前<code>IP</code><strong>压入栈</strong>中，并将<code>IP</code>设置为<strong>对应内存单元数据</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 相当于push IP和jmp word ptr 内存单元地址</div>
+<blockquote>
+<p><code>call dword ptr 内存单元地址</code>：将当前<code>CS</code>和<code>IP</code><strong>压入栈</strong>中，并将<code>CS</code>和<code>IP</code>设置为<strong>对应内存单元数据</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 相当于push CS、push IP和jmp dword ptr 内存单元地址</div>
+
+<p><strong>②<code>call</code>和<code>ret</code>的配合使用</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:code
+code segment
+start: mov ax,1
+       mov cx,3
+       call s
+       mov bx,ax
+       mov ax,4c00h
+       int 21
+s:     add ax,ax
+       loop s
+       ret
+code ends
+end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong>程序过程概述</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>（1）</strong>当CPU读取<code>call s</code>指令后，<code>IP</code>指向了<strong>其后面</strong>的指令<code>mov bx,ax</code>，随后执行<code>call s</code>指令，将<strong>当前的<code>IP</code>值</strong>（<code>mov bx,ax</code>的偏移地址）<strong>压栈</strong>，并将<code>IP</code>指向标号<code>s</code><br><strong>（2）</strong>执行标号<code>s</code>处的循环，即<code>2^3</code><br><strong>（3）</strong>CPU读取<code>ret</code>指令，<code>IP</code>指向<code>ret</code>指令后的内存单元，CPU执行<code>ret</code>指令，此时<code>IP</code>指向<code>mov bx,ax</code>，随后执行至完成</p>
+</blockquote>
+<h3 id="3-模块化"><a href="#3-模块化" class="headerlink" title="3.模块化"></a>3.模块化</h3><h4 id="3-1模板"><a href="#3-1模板" class="headerlink" title="3.1模板"></a>3.1模板</h4><pre class="line-numbers language-none"><code class="language-none">assume cd:code
+code segment
+main:
+
+    ... ;主程序内容
+    mov ax,4c00h
+    int 21h
+
+sub1:
+
+    ... ;子程序1内容
+    
+sub2:
+
+    ... ;子程序2内容
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-2实例"><a href="#3-2实例" class="headerlink" title="3.2实例"></a>3.2实例</h4><blockquote>
+<p>计算<strong>一组数据</strong>的三次方，并保存在<strong>其后</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:code
+data segment
+    dw 1,2,3,4,5,6,7,8
+    dd 0,0,0,0,0,0,0,0
+data ends
+
+code segement
+start: mov ax,data
+       mov ds,ax
+       mov si,0
+       mov di,16
+
+       mov cx,8
+s:     mov bx,[si]
+       call cube
+       mov [di],ax
+       mov [di].2,dx
+       add si,2
+       add di,4
+       loop s
+
+       mov ax,4c00h
+       int 21h
+
+cube:  mov ax,bx
+       mul bx
+       mul bx
+       ret
+code ends
+end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-3批量数据传递"><a href="#3-3批量数据传递" class="headerlink" title="3.3批量数据传递"></a>3.3批量数据传递</h4><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 利用循环以及寄存器</div>
+<blockquote>
+<p>将一段数据全部转化为<strong>大写</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:code
+
+data segment
+    db 'conversation'
+data ends
+
+code segment
+start: mov ax,data
+       mov ds,ax
+       mov si,0
+
+       mov cx,12
+       call capital
+       mov ax,4c00h
+       int 21h
+
+capital: and byte ptr [si],11011111b
+         inc si
+         loop capital
+         ret
+code ends
+end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-4寄存器冲突"><a href="#3-4寄存器冲突" class="headerlink" title="3.4寄存器冲突"></a>3.4寄存器冲突</h4><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 子程序和主程序寄存器冲突，在子程序开始之前将所有用到的寄存器中的内容保存起来，在子程序返回前在恢复</div>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:code
+data segment
+    db 'word',0
+    db 'unix',0
+    db 'wind',0
+    db 'good',0
+data ends
+
+code segment
+start: mov ax,data
+       mov ds,ax
+       mov bx,0
+
+       mov cx,4
+s:     mov si,bx
+       call capital
+       add bx,5
+       loop s
+
+capital: push cx
+         push si
+
+change:  mov cl,[si]
+         mov ch,0
+         jcxz ok
+         and byte ptr [si],11011111b
+         inc si
+         jmp short change
+
+ok:      pop si
+         pop cx
+         ret
+
+code ends
+end start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/hui-bian-yu-yan-er/">http://example.com/2023/12/10/hui-bian-yu-yan-er/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E3%80%8A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E3%80%8B/">
+                                    <span class="chip bg-color">《汇编语言》</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+                                    <span class="chip bg-color">汇编语言</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/suan-fa-fan-shi-shang/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="算法范式（上）">
+                        
+                        <span class="card-title">算法范式（上）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            分治、回溯、贪心和动态规划
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">计算机基础</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
+                        <span class="chip bg-color">《hello 算法》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/suan-fa-fan-shi-xia/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="算法范式（下）">
+                        
+                        <span class="card-title">算法范式（下）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            分治、回溯、贪心和动态规划
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">计算机基础</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
+                        <span class="chip bg-color">《hello 算法》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

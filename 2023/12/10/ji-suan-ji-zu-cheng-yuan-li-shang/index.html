@@ -1,0 +1,1460 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/39.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">计算机组成原理（上）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                                <span class="chip bg-color">计算机组成原理</span>
+                            </a>
+                        
+                            <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E3%80%8B/">
+                                <span class="chip bg-color">《计算机组成原理》</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                计算机基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="计算机组成原理（上）"><a href="#计算机组成原理（上）" class="headerlink" title="计算机组成原理（上）"></a>计算机组成原理（上）</h1><h2 id="计算机组成原理启蒙"><a href="#计算机组成原理启蒙" class="headerlink" title="计算机组成原理启蒙"></a>计算机组成原理启蒙</h2><h3 id="1-计算机基本组成"><a href="#1-计算机基本组成" class="headerlink" title="1.计算机基本组成"></a>1.计算机基本组成</h3><h4 id="1-1冯诺依曼结构"><a href="#1-1冯诺依曼结构" class="headerlink" title="1.1冯诺依曼结构"></a>1.1冯诺依曼结构</h4><p><strong>①特点</strong></p>
+<blockquote>
+<p>计算机由<strong>运算器</strong>、<strong>控制器</strong>、<strong>存储器</strong>、<strong>输入设备</strong>、<strong>输出设备</strong>五大部分组成</p>
+</blockquote>
+<blockquote>
+<p><strong>指令</strong>和<strong>数据</strong>以<strong>同等地位</strong>存储，用<strong>二进制</strong>表示，其中<strong>指令</strong>由<strong>操作码</strong>和<strong>地址码</strong>组成</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 指令的操作数可能是立即数、寄存器编号或者存储地址，操作完后大概率会将结果回写到寄存器中</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 程序是指令的集合，也存储在存储器中</div>
+<blockquote>
+<p>以<strong>运算器</strong>为中心</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 以运算器为中心导致运算器成为瓶颈，故再次基础上对其进行改进，以存储器为核心</div>
+<p><strong>②以存储器为核心</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_1.png" alt="以存储器为核心的冯诺依曼结构"></p>
+<h4 id="1-2主要部件"><a href="#1-2主要部件" class="headerlink" title="1.2主要部件"></a>1.2主要部件</h4><p><strong>①存储器</strong></p>
+<blockquote>
+<p><strong>存储体</strong>：由多个<strong>存储单元</strong>构成，存放<strong>二进制代码</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>MAR</strong>：存储器<strong>地址寄存器</strong>，反映存储<strong>单元个数</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>MDR</strong>：存储器<strong>数据寄存器</strong>，反映存储器<strong>字长</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> MAR相当于存储器的地址线，MDR相当于存储器的数据线</div>
+
+<p><strong>②运算器</strong></p>
+<blockquote>
+<p><strong>ALU</strong>：<strong>算数逻辑单元</strong>，进行<strong>主要运算</strong>的单元</p>
+</blockquote>
+<blockquote>
+<p><strong>相关寄存器</strong>：<code>ACC</code>、<code>MQ</code>、<code>X</code>寄存器，不同的<strong>指令</strong>，这些寄存器的<strong>用途不同</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 使用运算器前，需要将各个数据放入对应的寄存器中，运算完成后，结果也存放在对应寄存器中</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 不同的CPU运算器都是不同的，尤其是寄存器的个数及其用途</div>
+
+<p><strong>③控制器</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 解释指令、保证指令的按序执行并自动取下一条指令</div>
+<blockquote>
+<p><strong>PC</strong>：存放当前<strong>欲执行指令的地址</strong>，即<strong>取指</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>IR</strong>：存放当前<strong>欲执行的指令</strong>，即<strong>分析指令</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>CU</strong>：取得指令的<strong>操作码</strong>和<strong>地址码</strong>，并根据<strong>操作码</strong>发出<strong>控制信号</strong>以<strong>执行指令</strong></p>
+</blockquote>
+<p><strong>④一条指令的执行</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 以取数指令为例</div>
+<blockquote>
+<p><strong>PC</strong>将<strong>指令地址</strong>送入<strong>MAR</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>MAR</strong>从存储体中<strong>取出取数指令</strong>放入<strong>MDR</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>MDR</strong>将<strong>指令</strong>送入<strong>IR</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>IR</strong>将指令的<strong>操作码</strong>送入<strong>CU</strong>，<strong>地址码</strong>送入<strong>MAR</strong></p>
+</blockquote>
+<blockquote>
+<p>在<strong>CU</strong>的控制下，从<strong>存储体</strong>中取出<strong>对应数据</strong>放入<strong>MDR</strong>，随后送入<strong>ACC</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>PC+1</strong>等待<strong>下一条指令</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_2.png" alt="结构"></p>
+<h4 id="1-3机器主要指标"><a href="#1-3机器主要指标" class="headerlink" title="1.3机器主要指标"></a>1.3机器主要指标</h4><blockquote>
+<p><strong>机器字长</strong>：CPU<strong>一次</strong>能处理<strong>数据的位数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 通常情况，机器字长和寄存器长度是相同的</div>
+<blockquote>
+<p><strong>运算速度</strong>：<strong>主频</strong>、<strong>核数</strong>、<strong>CPI</strong>和<strong>MIPS</strong>等</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> CPI为执行一条指令所需的时钟周期数，MIPS为每秒能执行多少条指令</div>
+<blockquote>
+<p><strong>存储容量</strong>：可以表示为<strong>字节数</strong>或者<strong>存储单元个数x存储字长</strong></p>
+</blockquote>
+<hr>
+<h3 id="2-系统总线"><a href="#2-系统总线" class="headerlink" title="2.系统总线"></a>2.系统总线</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>连接<strong>各个部件</strong>的<strong>信息传输线</strong>，是各个部件<strong>共享的传输介质</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 一根总线在同一时间只能被一组设备使用</div>
+
+<p><strong>②总线的分类</strong></p>
+<blockquote>
+<p><strong>片内总线</strong>：<strong>芯片内部</strong>的总线</p>
+</blockquote>
+<blockquote>
+<p><strong>系统总线</strong>：<strong>计算机各部件之间</strong>的总线</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 还可细分位数据总线、地址总线和控制总线</div>
+
+<blockquote>
+<p><strong>通信总线</strong>：<strong>计算机系统之间</strong>或者计算机系统<strong>与其他系统</strong>的通信</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 通信总线还可细分位串行通信总线和并行通信总线</div>
+
+<p><strong>③设备分类</strong></p>
+<blockquote>
+<p><strong>主设备</strong>：可以主<strong>动申请总线资源</strong>并对总线进行<strong>控制权</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>从设备</strong>：只能<strong>响应主设备</strong>发来的<strong>总线命令</strong>，不能<strong>主动</strong>申请<strong>总线资源</strong></p>
+</blockquote>
+<p><strong>④总线性能指标</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 只列出一些重要的指标</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 总线标准：一种对总线各种性能指标的规定，如USB和PCI等</div>
+<blockquote>
+<p><strong>总线宽度</strong>：数据线的<strong>根数</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>标准传输率</strong>：<strong>每秒</strong>传输的<strong>最大字节数</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>时钟同步/异步</strong>：是否有<strong>同步时钟</strong></p>
+</blockquote>
+<h4 id="2-2总线结构"><a href="#2-2总线结构" class="headerlink" title="2.2总线结构"></a>2.2总线结构</h4><div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 单总线、双总线结构存在总线争用严重、无法进行设备分级等问题，故不作主要介绍</div>
+<p><strong>①三总线结构</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>DMA总线</strong>连接<strong>高速设备</strong>，<strong>系统总线</strong>连接<strong>低速设备</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 无法平衡主存和CPU的处理速度差异</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_3.png" alt="四总线结构"><br><strong>②四总线结构</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>高速总线</strong>连接<strong>高速设备</strong>，<strong>扩展总线</strong>连接<strong>低速设备</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> cache用于平衡主存和CPU的处理速度差异</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_5.png" alt="四总线结构"></p>
+<p><strong>③PCI总线结构</strong></p>
+<blockquote>
+<p><strong>概述</strong>：其中<strong>设备能接的地方</strong>也能接<code>PCI桥</code>，从而实现<strong>设备分级</strong>，经过<strong>越多的桥</strong>，<strong>速度越慢</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_6.png" alt="PCI总线结构"></p>
+<h4 id="2-3总线占用控制"><a href="#2-3总线占用控制" class="headerlink" title="2.3总线占用控制"></a>2.3总线占用控制</h4><p><strong>①链式查询方式</strong></p>
+<blockquote>
+<p><strong>BR线</strong>：设备通过这条线发出<strong>总线占用请求</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>BS线</strong>：如果<strong>总线被占用</strong>，则会<strong>收到对应信号</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>BG线</strong>：总线<strong>授权</strong>线，按照<strong>设备的优先级</strong>依次连接</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 总线空闲时，多个设备提出总线占用请求，通过BG线依次查询部件，先给优先级高的部件提供总线，并设置总线忙</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 对电路故障敏感，且靠后的设备很难申请到总线，速度较慢，通常用于简单的系统中</div>
+
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_7.png" alt="链式查询方式"></p>
+<p><strong>②计数器定时查询</strong></p>
+<blockquote>
+<p><strong>总线控制部件</strong>中有一个<strong>计数器</strong>，值为<code>n</code>，当接收到<strong>总线请求</strong>后，通过<strong>设备地址线</strong>从<strong>第n个部件开始</strong>查找<strong>找到发出总线请求</strong>的部件</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 和链式类似，但是链式的值只能是0，定时器可以人为或者通过程序设置优先级</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_8.png" alt="计数器定时查询"></p>
+<p><strong>③独立请求方式</strong></p>
+<blockquote>
+<p><strong>每个部件</strong>都有对应的<strong>BR线</strong>和<strong>BS线</strong>，<strong>总线控制部件</strong>中有一个<strong>排队器</strong>设置<strong>设备的优先级</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_9.png" alt="独立请求方式"></p>
+<h4 id="2-4总线通信控制"><a href="#2-4总线通信控制" class="headerlink" title="2.4总线通信控制"></a>2.4总线通信控制</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 主要是控制主设备和从设备的通信</div>
+<p><strong>①同步通信</strong></p>
+<blockquote>
+<p><strong>统一时标</strong>控制<strong>通信过程</strong>，需要在<strong>对应的传输周期节点</strong>必须完成<strong>对应的操作</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 总线传输周期可分为申请分配阶段、寻址阶段、传数阶段和结束阶段</div>
+<blockquote>
+<p><strong>各个阶段</strong>分别完成<strong>总线申请</strong>、<strong>主设备找到从设备</strong>、<strong>交换数据</strong>和<strong>撤销请求</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 对于速度不一样的模块，选择速度最慢的模块对时标进行设计，即速度快的模块需要等速度慢的模块</div>
+<p><strong>②异步通信</strong></p>
+<blockquote>
+<p><strong>不互锁</strong>：主设备<strong>发出请求</strong>，<strong>一定时间后</strong>撤销，从设备<strong>接收到请求后应答</strong>，<strong>一段时间后</strong>撤销</p>
+</blockquote>
+<blockquote>
+<p><strong>半互锁</strong>：主设备<strong>发出请求</strong>后，只有<strong>接收到应答信号</strong>才撤销请求信号，从设备<strong>接收到请求后应答</strong>，<strong>一段时间后</strong>撤销</p>
+</blockquote>
+<blockquote>
+<p><strong>全互锁</strong>：在<strong>半互锁</strong>基础上，从设备<strong>接收到请求后应答</strong>，只有<strong>知道主设备撤销请求后</strong>再撤销应答信号</p>
+</blockquote>
+<p><strong>③半同步通信</strong></p>
+<blockquote>
+<p>类似于<strong>同步通信</strong>，但是如果<strong>某个时间点</strong>主/从设备<strong>没有准备好</strong>，则会插入<strong>一个个等待周期</strong>，直到其<strong>准备好继续</strong></p>
+</blockquote>
+<p><strong>④分离式通信</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一个总线传输周期会有不使用总线的小周期，比如从设备准备数据</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 为了提高总线使用效率，将总线周期分为两个子周期，在不使用总线时先释放总线，随后需要使用再申请</div>
+<blockquote>
+<p><strong>第一个子周期</strong>：<strong>主模块申请占用总线</strong>，使用完后<strong>放弃总线的使用权</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>第二个子周期</strong>：当主/从模块<strong>准备好数据</strong>，<strong>从模块在申请占用总线</strong>，将<strong>各种信息</strong>送至<strong>总线</strong>上</p>
+</blockquote>
+<hr>
+<h3 id="3-存储器"><a href="#3-存储器" class="headerlink" title="3.存储器"></a>3.存储器</h3><h4 id="3-1引言"><a href="#3-1引言" class="headerlink" title="3.1引言"></a>3.1引言</h4><p><strong>①分类</strong></p>
+<blockquote>
+<p><strong>存储介质</strong>：<strong>半导体存储器</strong>、<strong>磁表面存储器</strong>、<strong>磁芯存储器</strong>、<strong>光盘存储器</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 其中半导体存储器是易失的，即如果不加电，信息会丢失</div>
+<blockquote>
+<p><strong>存取方式</strong>：<strong>随机存储器</strong>、<strong>顺序存取存储器</strong>、<strong>直接存取存储器</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 其中随机存储器存取时间与物理地址无关，顺序存取存储器和直接存取存储器则有关</div>
+<blockquote>
+<p><strong>作用</strong>：<strong>主存储器</strong>、<strong>高速缓存</strong>、<strong>辅助存储器</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 主存储器还可分为RAM和ROM其中RAM可读可写，ROM只读</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 辅助存储器通常用于存放数据和文档，并不直接和CPU交换数据</div>
+<p><strong>②层次结构</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将不同层次的存储器结合到一起，使其整体形成一个容量大、速度快、价格合适的存储器</div>
+<blockquote>
+<p><strong>主存辅存结构</strong>：解决<strong>容量问题</strong>，若<strong>程序过大</strong>，则会将<strong>执行部分</strong>放入<strong>主存</strong>，<strong>其余部分</strong>放入<strong>辅存</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>主存缓存结构</strong>：解决<strong>CPU和主存速度差异问题</strong>，<strong>缓存</strong>中存放<strong>CPU经常使用</strong>的的<strong>主存信息</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_10.png" alt="层次"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_11.png" alt="结构"></p>
+<h4 id="3-2主存"><a href="#3-2主存" class="headerlink" title="3.2主存"></a>3.2主存</h4><p><strong>①基本构成</strong></p>
+<blockquote>
+<p><strong>CPU和主存</strong>通过<strong>地址总线</strong>、<strong>数据总线</strong>、<strong>控制总线</strong>和<strong>片选线</strong>连接</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 片选先表示该存储器芯片是否被选择</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 各种介质的存储器抽象结构都是类似的，只是其实现细节不一样</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_4.png" alt="主存基本构成"><br><strong>②存储方式</strong></p>
+<blockquote>
+<p><strong>大端大尾</strong>：<strong>高位字节</strong>存储<strong>数据的低位</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>小端小尾</strong>：<strong>低位字节</strong>存储<strong>数据的低位</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 均以数据低位字节所在地址作为该数据的地址</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 边界对齐：数据存放的起始地址是数据长度（以字节为单位）的整数倍</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 不同存储方式的文件和机器在交换数据时需要统一</div>
+
+
+
+<p><strong>③译码驱动方式</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 译码驱动就是根据地址线找到对应的地址单元</div>
+<blockquote>
+<p><strong>线选法</strong>：只有一个<strong>地址译码器</strong>，将<strong>存储矩阵</strong>看作为<strong>一个个线性的数组</strong>，每次通过<strong>译码结果</strong>选择<strong>其中一行</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 当地址线很多时，如20根，译码器需要1M根线，导致无法高度集成</div>
+<blockquote>
+<p><strong>重合法</strong>：有<strong>行地址译码器</strong>和<strong>列地址译码器</strong>，根据<strong>两者译码结果</strong>打开对应<strong>行列的开关</strong>，选取<strong>对应坐标的存储单元</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 20地址线，平均分为两份，每份需要1K根线，总共只要2k条，所以主要使用重合法进行译码驱动</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一个列选信号可能对应多列，从而一次性取出多位数据</div>
+<blockquote>
+<p>假设有<strong>16列</strong>，将其分为<strong>4组</strong>，<strong>列选信号</strong><code>0</code>表示选择<strong>每一组的第0列</strong>，从而<strong>一次选取4列</strong></p>
+</blockquote>
+<p><strong>④主要技术指标</strong></p>
+<blockquote>
+<p><strong>存储容量</strong>：存放<strong>二进制代码</strong>的<strong>总位数</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>存取时间</strong>：存储器的<strong>访问时间</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>存储周期</strong>：<strong>连续两次独立</strong>的存储器操作所需的<strong>最小间隔时间</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>存储器带宽</strong>：<strong>单位时间存储读取的长度（位/秒）</strong></p>
+</blockquote>
+<p><strong>④随机存取存储器RAM</strong></p>
+<blockquote>
+<p><strong>静态RAM</strong>：使用<strong>双稳态触发器</strong>存放<code>0/1</code></p>
+</blockquote>
+<blockquote>
+<p><strong>动态RAM</strong>：使用<strong>电容</strong>存放<code>0/1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 电容很容易漏电，需要定时对电容进行充电，也就是刷新</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 刷新方式可分为集中刷新、分散刷新和异步刷新</div>
+<blockquote>
+<p><strong>集中刷新</strong>：<strong>每隔一段时间</strong>对<strong>所有单元</strong>进行刷新</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 刷新期间无法对芯片进行读写，也被称为死区，一次性刷新所有单元导致死区时间较长</div>
+<blockquote>
+<p><strong>分散刷新</strong>：<strong>每个读写周期</strong>后，对<strong>一个存储单元</strong>进行刷新，使<strong>读写周期变长</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>异步刷新</strong>：<strong>每隔一段时间</strong>刷新<strong>一行</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 合理安排刷新时间，如安排在指令译码阶段，则不会出现死区</div>
+<p><strong>⑤只读存储器ROM</strong></p>
+<blockquote>
+<p><strong>ROM</strong>的主要供<strong>读取</strong>，通常<strong>不可修改</strong>或者<strong>修改起来很麻烦</strong>，通常用来保存<strong>系统程序</strong>以及<strong>系统配置信息</strong></p>
+</blockquote>
+<blockquote>
+<p>可分为<strong>MROM</strong>、<strong>PROM</strong>、<strong>ERPOM</strong>、<strong>EEPROM</strong>和<strong>闪存</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> MROM不能修改，PROM可以被修改一次，EPROM可紫外线擦写多次，EEPROM电可擦写多次</div>
+
+<h4 id="3-3主存和CPU的连接"><a href="#3-3主存和CPU的连接" class="headerlink" title="3.3主存和CPU的连接"></a>3.3主存和CPU的连接</h4><p><strong>①扩展</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 扩展的本质就是合理安排各个芯片的数据线、地址线和片选线</div>
+<blockquote>
+<p><strong>位扩展</strong>：增加<strong>存储字长</strong>，如使用<strong>2片1Kx4位</strong>的存储芯片组成<strong>一个1Kx8位</strong>的存储器</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 1KX4位芯片有10根地址线和4根数据线，1KX8位芯片有10根地址线和8根数据线</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将两个1Kx4位芯片的数据线分别连接到八根数据线上，地址线同连在10根地址线上，并将两者的片选线并联即可</div>
+<blockquote>
+<p><strong>字扩展</strong>：增加<strong>存储容量</strong>，如使用<strong>2片1Kx4位</strong>的存储芯片组成<strong>一个2Kx4位</strong>的存储器</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 1KX4位芯片有10根地址线和4根数据线，2KX4位芯片有11根地址线和4根数据线</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将两个1Kx4位芯片的数据线同连到4根数据线上，地址线同连在10根地址线上，并将多余地址线作为两芯片的片选线</div>
+
+<blockquote>
+<p><strong>字位同时扩展</strong>：使用<strong>4片1Kx4位</strong>的存储芯片组成<strong>一个2Kx8位</strong>的存储器</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 先进行位扩展，再进行字扩展即可</div>
+
+<p><strong>②校验</strong></p>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 存储器可能被周围环境干扰，导致其存储单元的数值发生变化，从而产生误码</div>
+<blockquote>
+<p><strong>合法代码集</strong>：不在该<strong>集合中</strong>的<strong>码元</strong>是<strong>误码</strong></p>
+</blockquote>
+<blockquote>
+<p>如<code>{000,111}</code>使用<code>000</code>表示<code>0</code>，<code>111</code>表示<code>1</code>，当出现<code>100</code>，会被自动纠正位<code>000</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 由于1位错误发生概率最大，所以出现误码时，认为其出现1位错误</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 该合法代码集合无法检测出两位错误并纠正，这也是合法代码集的局限性</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 合法代码集的纠错能力与其冗余度有关，冗余度越高，纠错能力越强，如{00000,11111}可以检测出两位错误并纠正</div>
+<blockquote>
+<p><strong>汉明码</strong>：采用<strong>偶校验</strong>、<strong>分组校验</strong>，能<strong>检测并纠错1位</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 偶校验即本来代码的1个数为偶数个，若发生一位误码，则校验位变为1，使其变为偶数个，奇校验类似</div>
+<blockquote>
+<p>假设代码有<strong>x位</strong>，其<strong>二进制表示</strong>有<strong>y位</strong>，则将其<strong>分为y组</strong>，如<code>0000000</code>有<strong>7位</strong>，则将其分为<strong>3组</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>索引二进制形式第i位为1</strong>的为<strong>第i组</strong>，并将<strong>索引第i位为1，其他位为0</strong>的那一位作为<strong>所在组</strong>的<strong>校验位</strong>，第<code>1、3、5、7</code>位分为<strong>一组</strong>，第<code>2、3、6、7</code>位分为<strong>一组</strong>，第<code>4、5、6、7</code>位分为<strong>一组</strong>，其中第<code>1、2、4</code>位作为<strong>校验位</strong></p>
+</blockquote>
+<blockquote>
+<p>如果<strong>没有差错</strong>，<strong>校验位</strong>应该<strong>均为0</strong>，若<strong>出现差错</strong>，则将<strong>校验位从小到大进行排序</strong>，组成的<strong>二进制数对应索引位</strong>出现<strong>错误</strong>，若<strong>校验位</strong>分别为<code>001</code>，则<strong>第一位出错</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 001表示第一组出错，但是其余两组没错，则就是第一位错，因为只有1在第一组而不再其余两组中</div>
+
+<p><strong>③主存结构</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> CPU需要从内存中读取/写入指令和数据才能进行工作，所以需要提升CPU和内存的交互速度</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以一次性从内存中读取多个存储单元以提升两者交互速度</div>
+<blockquote>
+<p><strong>单体多字</strong>：一次性<strong>线性选择</strong>多个存储单元</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 不够灵活，如果如果只需要读取/存储一个或者零星分布的存储单元，将比较麻烦</div>
+
+<blockquote>
+<p><strong>高位交叉</strong>：将<strong>存储地址</strong>分为<code>存储体号:体内地址</code>，每次先根据<strong>存储体号</strong>选择<strong>存储体</strong>，再根据<strong>体内地址</strong>选择<strong>存储单元</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 由于程序是连续存储的，执行程序时会一直访问局部单元（即低位变化），导致一个存储体特别繁忙</div>
+
+<blockquote>
+<p><strong>低位交叉</strong>：将<strong>存储地址</strong>分为<code>体内地址:存储体号</code>，其余<strong>和高位交叉一致</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 这样就可以将程序分布在多个存储体中，执行程序时，多个存储体可以并行工作</div>
+
+<h4 id="3-4高速缓存Cache"><a href="#3-4高速缓存Cache" class="headerlink" title="3.4高速缓存Cache"></a>3.4高速缓存Cache</h4><p><strong>①引言</strong></p>
+<blockquote>
+<p>由于<strong>局部性原理</strong>，将程序<strong>近期使用的指令和数据</strong>放入<strong>Cache</strong>中以<strong>提升访问速度</strong>，<strong>Cache</strong>的<strong>访问速度块</strong>，但是<strong>容量小</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 局部性原理：当前正在使用的指令和数据不久后很有可能在此使用，其相邻的指令和数据也很有可能被调用</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以通过对Cache进行分级或者将其分为指令Cache和数据Cache进一步提升效率</div>
+<p><strong>②工作原理</strong></p>
+<blockquote>
+<p><strong>Cache地址</strong>可分为<code>缓存块号:块内地址</code>，<strong>主存地址</strong>可分为<code>主存块号:块内地址</code></p>
+</blockquote>
+<blockquote>
+<p><strong>Cache</strong>每个块有一个<strong>标记</strong>，保存了<code>缓存块号</code>和<code>主存块号</code>的<strong>映射关系</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>读数据</strong>时，先查看<strong>访问地址的</strong><code>主存块号</code>是否<strong>在Cache中</strong>，如果在则<strong>直接读取</strong>，如果<strong>不在</strong>，则将其<strong>存入Cache</strong>中</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如果Cache没有空闲空间，则采用替换算法取出不用的块再将其存入，常见的替换算法有FIFO和LUR</div>
+
+<blockquote>
+<p><strong>写数据</strong>时，可以将数据<strong>同时</strong>写入<strong>缓存块</strong>和<strong>对应主存块</strong>，也可以<strong>先更新缓存块</strong>，当缓存块被<strong>替换</strong>时，再<strong>更新主存块</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 第一种方法可能导致对同一个主存块的频繁访问</div>
+
+
+<p><strong>③地址映射</strong></p>
+<blockquote>
+<p><strong>直接映射</strong>：将主存<strong>分区</strong>，该区的<strong>主存块</strong>只能映射到Cache的<strong>某个固定缓存块</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 访问速度较快，但是容易产生冲突</div>
+<blockquote>
+<p><strong>全相联映射</strong>：主存块可以放在<strong>任意缓存块位置</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 不会发生冲突，但是每次访问需要遍历缓存块，访问速度较慢</div>
+<blockquote>
+<p><strong>组相联映射</strong>：主存<strong>分区</strong>，Cache<strong>分组</strong>，主存储器<strong>某个区的存储单元</strong>只能存储到Cache的<strong>固定组的任意位置</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 直接映射和全相联映射的结合，中和了两者的优点和缺点</div>
+
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/ji-suan-ji-zu-cheng-yuan-li-shang/">http://example.com/2023/12/10/ji-suan-ji-zu-cheng-yuan-li-shang/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                                    <span class="chip bg-color">计算机组成原理</span>
+                                </a>
+                            
+                                <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E3%80%8B/">
+                                    <span class="chip bg-color">《计算机组成原理》</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/ji-suan-ji-xi-tong-ji-chu-shang/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/30.webp" class="responsive-img" alt="计算机系统基础（上）">
+                        
+                        <span class="card-title">计算机系统基础（上）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            计算机系统基础
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CSAPP/">
+                        <span class="chip bg-color">CSAPP</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">计算机系统基础</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/ji-suan-ji-zu-cheng-yuan-li-xia/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/39.webp" class="responsive-img" alt="计算机组成原理（下）">
+                        
+                        <span class="card-title">计算机组成原理（下）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            输入输出
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                        <span class="chip bg-color">计算机组成原理</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E3%80%8B/">
+                        <span class="chip bg-color">《计算机组成原理》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

@@ -1,0 +1,1476 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/39.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">计算机组成原理（下）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                                <span class="chip bg-color">计算机组成原理</span>
+                            </a>
+                        
+                            <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E3%80%8B/">
+                                <span class="chip bg-color">《计算机组成原理》</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                计算机基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="计算机组成原理"><a href="#计算机组成原理" class="headerlink" title="计算机组成原理"></a>计算机组成原理</h1><h2 id="计算机组成原理（下）"><a href="#计算机组成原理（下）" class="headerlink" title="计算机组成原理（下）"></a>计算机组成原理（下）</h2><h3 id="1-I-x2F-O系统"><a href="#1-I-x2F-O系统" class="headerlink" title="1.I/O系统"></a>1.I/O系统</h3><h4 id="1-1组成"><a href="#1-1组成" class="headerlink" title="1.1组成"></a>1.1组成</h4><p><strong>①软件部分</strong></p>
+<blockquote>
+<p><strong>I/O指令</strong>：<strong>CPU指令集</strong>的一部分，格式为<code>操作码:命令码:设备码</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 操作码指明该指令是I/O指令，命令码指明操作，设备码指定I/O设备或者其端口的地址</div>
+
+<blockquote>
+<p><strong>通道指令</strong>：<strong>通道自身</strong>的指令，用于控制<strong>通道的工作</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 通道是一种小型的DMA处理机，实现I/O设备和主机直接进行信息传输</div>
+<p><strong>②硬件部分</strong></p>
+<blockquote>
+<p><strong>I/O设备</strong>：由<strong>设备控制器</strong>和<strong>其他部分</strong>组成</p>
+</blockquote>
+<blockquote>
+<p><strong>接口</strong>：<strong>I/O设备</strong>通过<strong>设备控制器</strong>和<strong>接口</strong>相连，从而和<strong>主机总线</strong>连接</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如果设备使用通道，设备通过设备控制器和子通道连接</div>
+
+<p><strong>③接口组成</strong></p>
+<blockquote>
+<p><strong>设备选择电路</strong>：<strong>一个接口</strong>可能连接<strong>多个设备</strong>，<strong>一个设备</strong>也有<strong>多个端口</strong>，需要通过<strong>设备地址/端口号</strong>进行选择</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> I/O设备可能被看作内存的一部分进行统一编址，也可能单独设置一个地址空间，后者需要专门的I/O指令</div>
+<blockquote>
+<p><strong>数据缓冲寄存器</strong>：用于作为<strong>数据缓冲区</strong>，平衡<strong>处理器</strong>和<strong>外设</strong>之间的<strong>速度差异</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>命令寄存器和译码器</strong>：用于<strong>存储</strong>以及<strong>解释I/O指令</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>状态标记</strong>：用于告知<strong>控制逻辑电路</strong>外设和处理器状态，如是否<strong>准备完成</strong>，是否<strong>空闲</strong>、是否<strong>允许中断</strong>等</p>
+</blockquote>
+<blockquote>
+<p><strong>控制逻辑电路</strong>：接口中的<strong>控制单元</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 除此之外，接口还需要协调外设和处理器，如进行数据串—并格式转换，并记录数据传输信息，如</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_12.png" alt="接口组成"></p>
+<p><strong>④程序查询方式</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一种CPU和外设通信的方式，其余还有程序中断方式和DMA方式</div>
+<blockquote>
+<p><strong>CPU</strong>发出<strong>I/O指令</strong>后，根据<strong>设备优先级</strong>依次检查设备，若该设备<strong>准备好</strong>，则进行<strong>对应操作</strong>，否则一直<strong>轮询</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> I/O处理过程中，CPU一直被占用，效率很低</div>
+
+<h4 id="1-2程序中断方式"><a href="#1-2程序中断方式" class="headerlink" title="1.2程序中断方式"></a>1.2程序中断方式</h4><p><strong>①工作原理</strong></p>
+<blockquote>
+<p>CPU发出<strong>I/O指令</strong>后，<strong>启动外设</strong>后继续<strong>执行主程序</strong>，外设<strong>开始准备</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>I/O设备准备好后</strong>，向CPU发送<strong>中断信号</strong>，CPU执行完<strong>当前指令</strong>后，如果<strong>可以处理该中断</strong>，转去执行<strong>中断处理程序</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> CPU可以只有其中断允许触发器EINT为01时才能响应中断，且中断是有优先级的，会优先响应优先级高的设备</div>
+<p><strong>②中断流程</strong></p>
+<blockquote>
+<p><strong>提出中断</strong>：<strong>每个中断源</strong>都有一个<strong>INTR触发器</strong>用于提出<strong>中断请求</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>触发中断</strong>：CPU使用<strong>中断请求标记寄存器</strong>记录<strong>各个</strong>中断源<strong>是否发出请求</strong>，每次<strong>执行完指令</strong>后<strong>查询该寄存器</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 中断请求标记寄存器的每一位按照优先级对应一个中断源，1表示发出中断请求，0表示没有发出中断请求或者被屏蔽</div>
+
+<blockquote>
+<p><strong>响应中断</strong>：选择<strong>优先级最高的中断</strong>，随后执行<strong>中断隐指令</strong>，并跳转到<strong>对应中断服务程序</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 中断隐指令会保存程序断点PC，随后将中断程序入口地址置给C，并将中断允许触发器EINT置为0，全部由硬件完成</div>
+
+<blockquote>
+<p><strong>中断服务程序</strong>：保存<strong>CPU各个寄存器内容</strong>，并根据<strong>I/O指令</strong>做出<strong>对应操作</strong>，跳转到<strong>返回地址</strong>，并恢复<strong>寄存器内容</strong></p>
+</blockquote>
+<p><strong>③中断屏蔽字</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>每个中断源</strong>都有一个<strong>中断屏蔽字</strong>，<strong>各个位</strong>对应<strong>各个中断源的中断屏蔽触发器</strong>，为<code>1</code>使其<strong>无法发出中断请求</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 中断屏蔽字通常在该中断被响应且执行中断隐指令后，开中断前设置</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 中断屏蔽字可以人为设置，使该中断执行过程中，不会被某些中断打断</div>
+
+<p><strong>④单重/多重中断</strong></p>
+<blockquote>
+<p><strong>单重中断</strong>：<strong>不允许</strong>中断<strong>现行的中断服务程序</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 执行中断服务程序之前关中断，直到恢复现场后才开中断</div>
+
+<blockquote>
+<p><strong>多重中断</strong>：<strong>允许级别更高的中断源</strong>中断<strong>现行的中断服务程序</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 保护现场之后就开中断</div>
+
+
+<h4 id="1-3DMA方式"><a href="#1-3DMA方式" class="headerlink" title="1.3DMA方式"></a>1.3DMA方式</h4><p><strong>①工作原理</strong></p>
+<blockquote>
+<p>CPU发出<strong>I/O指令</strong>后，<strong>启动外设</strong>后继续<strong>执行主程序</strong>，外设<strong>开始准备</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>I/O设备准备好后</strong>，<strong>DMA控制器</strong>发出<strong>DMA请求</strong>，占用<strong>总线</strong>和<strong>内存</strong>，进行<strong>I/O设备</strong>和<strong>内存</strong>的<strong>数据交换</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> MA方式中，主存和I/O设备之间有一条直接的数据通道，不需要通过CPU寄存器进行数据交互</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> DMA工作期间，CPU虽然不能使用总线以及访问内存，但是可以进行其他工作，如执行缓存中的指令</div>
+
+<p><strong>②占用方式</strong></p>
+<blockquote>
+<p><strong>直接占用</strong>：当<strong>发出DMA请求</strong>时，使得CPU<strong>放弃总线和主存控制权</strong>，直到<strong>DMA</strong>工作<strong>全部完成</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若DMA工作时间过长，会影响CPU工作，因为CPU还要去主存取出指令和数据</div>
+<blockquote>
+<p><strong>交替访问</strong>：CPU<strong>工作周期</strong>中，有<strong>一段时间</strong>专门提供给<strong>DMA</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 不够灵活</div>
+<blockquote>
+<p><strong>周期挪用</strong>：当<strong>发出DMA请求</strong>时，若CPU<strong>正在访问</strong>主存，则<strong>DMA等待</strong>，若<strong>CPU没有访问主存</strong>，DMA挪<strong>用一个或者固定几个存取周期</strong>，两者<strong>同时请求</strong>，<strong>DMA优先</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> DMA分批次传送数据，若数据没有被传输完，则再发送DMA请求，直到数据传输完成</div>
+
+<p><strong>③传送过程</strong></p>
+<blockquote>
+<p><strong>预处理</strong>：将一定的<strong>控制信息</strong>存入<strong>DMA接口的寄存器</strong>中，随后<strong>启动设备</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 控制信息主要有传输方向、设备地址、主存地址和传送字数</div>
+<blockquote>
+<p><strong>数据传送</strong>：<strong>CPU</strong>继续<strong>执行主程序</strong>，由<strong>DMA</strong>完成<strong>数据输送</strong>，<strong>传输完成</strong>后，向CPU发出<strong>中断请求</strong>告知</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每次传输完数据后，还需要修改控制信息，以便于下一次的传输</div>
+
+<blockquote>
+<p><strong>后处理</strong>：执行<strong>中断服务程序</strong>，以<strong>检查</strong>这次传输过程<strong>是否出现错误</strong></p>
+</blockquote>
+<p><strong>④DMA接口分类</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 同样，一个DMA接口可能连接多个设备，有请求线和响应线，连接方式类似于总线的链式请求和独立请求</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 设备的传输速度越快，优先级较高</div>
+<blockquote>
+<p><strong>选择型</strong>：各个寄存器<strong>只有一套</strong>，只能给<strong>一个设备</strong>使用，直到<strong>数据全部传输结束</strong>，才<strong>释放接口</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>多路型</strong>：各个寄存器有<strong>多套</strong>，每一套也称为<strong>子通道</strong>，每次有一个<strong>新的设备的I/O请求</strong>，就给其<strong>分配一个空闲子通道</strong>，供其进行<strong>为数据传输进行准备</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 两者都只能是一个设备传输数据，但是多路型可以在多个设备间交替传输，即使一个设备的任务还没有完成</div>
+<hr>
+<h3 id="2-计算机数字"><a href="#2-计算机数字" class="headerlink" title="2.计算机数字"></a>2.计算机数字</h3><h4 id="2-1表示形式"><a href="#2-1表示形式" class="headerlink" title="2.1表示形式"></a>2.1表示形式</h4><p><strong>①真值与机器数</strong></p>
+<blockquote>
+<p><strong>概述</strong>：称<strong>真实世界</strong>的数字为<strong>真值</strong>，如<code>+0.1101111B</code>，<strong>存储在机器中</strong>的<strong>01序列</strong>为<strong>机器数</strong>，如<code>01101111B</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 数字中的小数点规定在特定位置，并不显示出现在机器数中</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 本质上就是用有限个数值表示对应范围，机器数的位数越多，范围/精度越大</div>
+<blockquote>
+<p><strong>进制</strong>：<strong>计算机</strong>采用<strong>二进制</strong>保存数据，同时辅以<strong>其他进制</strong>，如<strong>八进制</strong>、<strong>十进制</strong>、<strong>十六进制</strong>等</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 两个稳定态的物理实现简单，且二进制便于计算以及逻辑运算</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 同样的信息，二进制表示较长，可以将其转化为八进制以及十六进制减少其长度</div>
+<p><strong>②有符号/无符号数</strong></p>
+<blockquote>
+<p><strong>有符号数</strong>：<strong>最高位</strong>为<strong>符号位</strong>，<strong>其余位</strong>用于<strong>表示数值大小</strong>，即<code>符号位:数值位</code>，<strong>范围</strong>为<code>-2^n-1</code>至<code>2^(n-1)-1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 符号位为0表示正，符号位为1表示负</div>
+<blockquote>
+<p><strong>无符号数</strong>：<strong>所有位</strong>都用于<strong>表示数值</strong>，<strong>范围</strong>为<code>0</code>至<code>2^n-1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 同一二进制序列，被解释为有符号数和无符号数差别是很大的</div>
+<blockquote>
+<p>若<strong>有符号负数</strong>被解释为<strong>无符号数</strong>，相当于<strong>真值加</strong><code>2^n</code>，若若<strong>无符号数</strong>被解释为<strong>有符号数</strong>，相当于<strong>真值减</strong><code>2^n</code></p>
+</blockquote>
+<p><strong>③定点/浮点数</strong></p>
+<blockquote>
+<p><strong>定点数</strong>：<strong>小数点</strong>规定在<strong>特定位置</strong>，常见的有在<strong>符号位后</strong>或者在<strong>数值位后</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 小数点在符号位后，则只能表示整数，小数点在数值位后，则只能表示绝对值小于等于1的小数</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 机器数位相同的情况下，定点数能表示的范围太小</div>
+<blockquote>
+<p><strong>浮点数</strong>：根据<code>IEEE 754</code>标准，<strong>机器位</strong>分为<code>数符位S:阶码位E:尾数位N</code>，<strong>数值</strong>为<code>(-1)^Sx(1+N)x2^(E-127)</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 阶码位为定点整数，尾数位为定点小数，浮点数的表示范围为最小负数—最大负数和最小正数—最大正数</div>
+<blockquote>
+<p>当<strong>阶码</strong>为<code>0</code>，<strong>尾数</strong>为<code>0</code>时，浮点数表示<code>+/-0</code></p>
+</blockquote>
+<blockquote>
+<p>当<strong>阶码</strong>为<strong>全一</strong>，<strong>尾数</strong>为<code>0</code>时，表示<code>+/-∞</code>，<strong>尾数</strong>不为<code>0</code>，表示<code>NaN</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 为了充分利用数值位，规定尾数形式为1.xxx，其中小数点前的1省略不写，在计算时自动加上即可</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 当输入数据是一个不可表示数时，转化为最邻近的可表示数</div>
+
+
+<h4 id="2-2编码方案"><a href="#2-2编码方案" class="headerlink" title="2.2编码方案"></a>2.2编码方案</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 主要讨论8位有符号定点数，假设小数点在数值位后，浮点数将其中各个部分按照定点数规则变换即可</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 常用字符编码方案为UTF-8,为一种可变长度的编码，根据字符的复杂性使用1到4字节来表示一个字符，不多介绍</div>
+<p><strong>①原码</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>符号位</strong>表示其<strong>正负</strong>，<strong>数值位</strong>表示<strong>其绝对值</strong>，如<code>01101111B</code>为<code>+1101111B</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 使用原码进行加减运算，无法统一，不利于硬件实现，如一个正数加上一个负数，还需要考虑符号位转化为减法</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 通常使用使用原码表示浮点数尾数</div>
+<p><strong>②反码</strong></p>
+<blockquote>
+<p><strong>概述</strong>：对于<strong>正数</strong>，反码为<strong>原码</strong>，对于<strong>负数</strong>保持原码<strong>符号位不变</strong>，<strong>数值位依次取反</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 通常使用补码表示有符号整数</div>
+
+<p><strong>③补码</strong></p>
+<blockquote>
+<p><strong>概述</strong>：本质上是其<strong>补数的原码</strong>，对于<strong>正数</strong>，补码为其<strong>原码</strong>，对于<strong>负数</strong>，在其<strong>反码的基础</strong>上加<code>1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 补码10000000的原码为00000000，与00000000相矛盾，故规定10000000为-128</div>
+<blockquote>
+<p><strong>补数</strong>：一个数<strong>加上模数</strong>即为补数，<strong>加一个数的补数减去模数</strong>，相当于<strong>减去该数</strong>，此处<strong>模数</strong>为<code>2^n</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如将时钟6点调整到3点，可以顺时针拨动9格，也可以逆时针拨动3格</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 计算机会自动帮机器数减去模数，所以使用补码可以很简单的统一正负数的加减法，有利于硬件实现</div>
+<blockquote>
+<p>由于<strong>补码</strong>可以<strong>将减法转化为加法</strong>，故计算机内部的<strong>硬件电路</strong>主要是<strong>基于加法运算</strong>设计的</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 使用补码无法通过机器直接判断两个数的大小</div>
+<blockquote>
+<p>如<code>+21</code>的<strong>补码</strong>为<code>00010101</code> <code>-21</code>的<strong>补码</strong>为<code>10010101</code>，判断大小会判断<strong>后者大于前者</strong></p>
+</blockquote>
+<p><strong>④移码</strong></p>
+<blockquote>
+<p><strong>概述</strong>：无论是<strong>正数还是负数</strong>，移码为<strong>补码</strong>的<strong>符号位取反</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 移码的就是给其加上2^n-1，只有整数形式的定义</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 移码便于比较大小，常用于表示浮点数阶码</div>
+<p><strong>⑤机器零</strong></p>
+<blockquote>
+<p><strong>机器零</strong>：可分为<code>+0</code>和<code>-0</code>，两者<strong>补码</strong>和<strong>移码</strong>相同，<strong>源码</strong>和<strong>反码</strong>不同</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 所以8位机器数的补码和移码表示范围为-128-127，源码和反码只能表示-127-127</div>
+<blockquote>
+<p>对于<strong>浮点数</strong>，当其<strong>尾数</strong>为<code>0</code>、<strong>阶码为最小负值</strong>或者处于<strong>最大负数</strong>和<strong>最小正数</strong>之间，都可<strong>判断</strong>其为<code>0</code></p>
+</blockquote>
+<h4 id="2-3定点运算"><a href="#2-3定点运算" class="headerlink" title="2.3定点运算"></a>2.3定点运算</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 浮点数的运算最后还是会转化为定点运算，其中加减运算，需要同时调整阶码和尾数使其阶码一致且大小不变</div>
+<p><strong>①移位运算</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>数据位</strong>相对于<strong>小数点</strong>进行<strong>左/右移</strong>，<strong>绝对值</strong>进行<strong>扩大/缩小</strong>，对于<strong>二进制</strong>，移动<strong>一位</strong>，数值变化<strong>2倍</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 移位运算可分为算数移位和逻辑移位，前者面对有符号数，后者面对无符号数</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 移位操作还可以将移出部分记录到寄存器中</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意移位操作移动的是数值位，不会影响符号位</div>
+<blockquote>
+<p><strong>算数移位</strong>：对于<strong>正数</strong>，<strong>任何情况</strong>都填<code>0</code>，对于<strong>负数</strong>，<strong>原码</strong>填<code>0</code>，<strong>反码</strong>填<code>1</code>，<strong>补码左移</strong>填<code>0</code>，<strong>右移</strong>填<code>1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 移动时，右移丢1会导致精度丢失，可能向上或者向下进位，左移丢1可能会导致结果错误，实际上就是溢出</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 能选择时，最好进行右移，因为右移顶多精度丢失，如调整浮点数阶码一致，小阶阶码右移向大阶看齐</div>
+<blockquote>
+<p><strong>逻辑移位</strong>：<strong>所有的位</strong>都会参加移位，<strong>左移右移</strong>均填<code>0</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 通常采用对无符号数进行逻辑移位，移植性更强</div>
+<p><strong>②加减法运算</strong></p>
+<blockquote>
+<p><strong>概述</strong>：通过<strong>补码</strong>进行<strong>运算</strong>，<code>A+B</code>的<strong>补码</strong>等于<code>A</code>的<strong>补码</strong>加上<code>B</code>的<strong>补码</strong>，<code>A-B</code>的<strong>补码</strong>等于<code>A</code>的<strong>补码</strong>加上<code>-B</code>的<strong>补码</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 符号位一起相加，符号位产生的进位自然丢掉</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将正负数的加减法都统一为补码的加法</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 进行加减操作时，需要考虑结果是否超出存储单元长度，即发生了溢出</div>
+<blockquote>
+<p><strong>溢出</strong>：当参加操作的两个数<strong>符号相同</strong>，其<strong>结果符号</strong>与<strong>原操作数符号不同</strong>，则发生<strong>溢出</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 因为只有两个正数/负数相加才可能发生溢出</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 若数值位最高位发生的进位与符号位产生的进位结果不相同（异或结果为1），则发生了溢出</div>
+<p><strong>③乘法运算</strong></p>
+<blockquote>
+<p><strong>概述</strong>：将<strong>乘数数值位拆分</strong>为多个<strong>乘法因子</strong>相加，<strong>与乘法因子相乘</strong>相当于进行<strong>移位操作</strong>，最后将<strong>各个结果相加</strong>即可</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 结果的符号位有乘数和被乘数的符号位异或得到</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 第i个乘法因子即第i位为原值，其余位为0，如11拆为10+01</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 被乘数和乘数的位应该相同，结果保存到长度为其两倍的寄存器中</div>
+<p><strong>④除法运算</strong></p>
+<blockquote>
+<p><strong>概述</strong>：比较<strong>被除数</strong>和<strong>除数</strong>的<strong>绝对值</strong>，根据两者大小做出<strong>不同的操作</strong>，随后<strong>除数右移</strong>，循环操作</p>
+</blockquote>
+<blockquote>
+<p>若<strong>被除数大于除数</strong>，被除数<strong>减少除数</strong>，<strong>末位</strong>添<code>0</code>，<strong>商</strong>上<code>1</code></p>
+</blockquote>
+<blockquote>
+<p>若<strong>被除数大于除数</strong>，被除数<strong>不变</strong>，<strong>末位</strong>添<code>0</code>，<strong>商</strong>上<code>1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 除法进行过程中，除数和被除数的长度不断增加，对于N位除法，需要使用2N位的加法器</div>
+<blockquote>
+<p>当<strong>商的位数</strong>等于其<strong>存储器长度</strong>时，<strong>被除数减去除数</strong>的值为<strong>余数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 结果的符号位有除数和被除数的符号位异或得到</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 对于小数除法，除数应该大于被除数，对于整数除法，除数应该小于被除数，否则会发生溢出</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 除数不能为0</div>
+<hr>
+<h3 id="3-CPU"><a href="#3-CPU" class="headerlink" title="3.CPU"></a>3.CPU</h3><h4 id="3-1机器指令"><a href="#3-1机器指令" class="headerlink" title="3.1机器指令"></a>3.1机器指令</h4><p><strong>①格式</strong></p>
+<blockquote>
+<p>将指令分为<strong>多个字段</strong><code>字段1:字段2...字段N</code>，分别<strong>按需分配</strong>给<strong>操作码</strong>和<strong>地址码</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 操作码指出操作类型及操作数类型，地址码指出操作数地址，操作码位数影响指令种类，地址码位数影响寻址范围</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 采用硬件资源替代指令字中的地址码字段，以节省字段分配给其他部分，以提升指令种类/寻址范围上限</div>
+<blockquote>
+<p>如8086的<strong>乘法指令</strong>，将<strong>操作数</strong>以及<strong>结果</strong>存入<strong>指定寄存器</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 短操作码不能是长操作码前缀，通常将短操作码中的全1序列作为特殊序列，表示其后一个字段也是操作码部分</div>
+<blockquote>
+<p>如<code>1110:1010:1010:1010</code>的<strong>第一个字段</strong>为<strong>操作码</strong>，<code>1111:1010:1010:1010</code>的<strong>前两个字段</strong>为<strong>操作码</strong>，以此类推</p>
+</blockquote>
+<p><strong>②寻址方式</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 指令中的地址码为形式地址，需要根据指令中的寻址方式找到真实地址</div>
+<blockquote>
+<p><strong>立即寻址</strong>：形式地址就是<strong>操作数</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>直接寻址</strong>：形式地址就是<strong>存储单元的真实地址</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>隐含寻址</strong>：操作数地址<strong>隐含在操作码中</strong>，如8086的<strong>乘法指令</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>间接寻址</strong>：形式地址为一<strong>内存单元地址</strong>，其中<strong>保存数据真实地址</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>寄存器寻址</strong>：形式地址为一<strong>寄存器编号</strong>，其中<strong>保存数据</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>寄存器间接寻址</strong>：形式地址为一<strong>寄存器编号</strong>，其中<strong>保存数据真实地址</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>基址寻址</strong>：<strong>基址寄存器数值</strong>经过<strong>一定变换</strong>加上<strong>形式地址</strong>得到<strong>真实地址</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>变址寻址</strong>：<strong>变址寄存器数值</strong>直接加上<strong>形式地址</strong>得到<strong>真实地址</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>堆栈寻址</strong> ：<strong>真实地址</strong>为<strong>栈顶地址</strong></p>
+</blockquote>
+<p><strong>③指令集</strong></p>
+<blockquote>
+<p><strong>精简指令集计算机RISC</strong>：指令<strong>数量少</strong>，每条指令的<strong>功能简单</strong>，<strong>复杂指令</strong>由<strong>简单指令组合</strong>实现</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> RISC便于设计，成本低，运算速度快，但是不易兼容</div>
+<blockquote>
+<p><strong>复杂指令集计算机CISC</strong>：指令<strong>数量多</strong>，每条指令<strong>功能强大</strong>，使用的<strong>频度相差较大</strong></p>
+</blockquote>
+<h4 id="3-2CPU功能"><a href="#3-2CPU功能" class="headerlink" title="3.2CPU功能"></a>3.2CPU功能</h4><p><strong>①结构概述</strong></p>
+<blockquote>
+<p><strong>控制器</strong>：<strong>取指令</strong>，<strong>分析指令</strong>并给出对应<strong>控制信号</strong>，还需要处理<strong>异常</strong>和<strong>特殊请求</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>运算器</strong>：实现<strong>算数运算</strong>和<strong>逻辑运算</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>中断系统</strong>：</p>
+</blockquote>
+<blockquote>
+<p><strong>寄存器</strong>：可分为<strong>通用寄存器</strong>、<strong>数据寄存器</strong>、<strong>地址寄存器</strong>、<strong>条件码寄存器</strong>、<strong>控制寄存器</strong>和<strong>状态寄存器</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 寄存器存放CPU工作需要的信息，如操作数、地址、段地址、条件码、程序状态等</div>
+<blockquote>
+<p>还有一些<strong>用户不可见</strong>的寄存器，如<code>IR</code>、<code>MAR</code>和<code>MDR</code></p>
+</blockquote>
+<p><strong>②周期</strong></p>
+<blockquote>
+<p><strong>指令周期</strong>：<strong>取出并执行</strong>指令所需的<strong>全部时间</strong>，按<strong>时间顺序</strong>可分为<strong>取址周期</strong>、<strong>间址周期</strong>、<strong>执行周期</strong>和<strong>中断周期</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每条指令一定有取址周期和执行周期，不一定有间址周期和中断周期，当然也有其他的分割方法</div>
+<blockquote>
+<p><strong>机器周期</strong>：指令执行的一个<strong>基准时间</strong>，<strong>每个指令周期</strong>可以分为<strong>多个机器周期</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 机器周期的长度可以相等也可以不相等，即包含的节拍数可以不同</div>
+<blockquote>
+<p><strong>时钟周期</strong>：控制计算机操作的<strong>最小时间单位</strong>，<strong>每个机器周期</strong>可以分为<strong>多个相等的时钟周期</strong></p>
+</blockquote>
+<p><strong>③指令流水</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>一条指令的执行</strong>可以分为<strong>不同阶段</strong>，在<strong>进行一条指令的某个阶段</strong>的同时进行<strong>其他指令的其他阶段</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 指令流水本质就是指令级的并行，由硬件实现，可以显著提升指令执行效率</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 并行可分为并发和同时，前者表示多个时间在同一段时间内发生，后者表示多个事件在同一时刻发生</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 实际执行会遇到很多非理想情况，如各个阶段时间不同、跳转指令的影响、资源的冲突、指令必要的先后顺序等</div>
+<blockquote>
+<p>可以利用<strong>缓冲部件</strong>、<strong>分支预测</strong>、<strong>指令停顿</strong>、<strong>后推法</strong>等分别解决上述问题</p>
+</blockquote>
+<blockquote>
+<p><strong>指标</strong>：吞吐率、加速比等</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 吞吐率指单位时间内流水线完成指令的数量，加速比指采用流水线的速度和不采用流水线速度之比</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 在流水线基础上，还可以采用流水线的多发、超流水和超长指令字等技术提升效率</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JZ_13.png" alt="指令流水"></p>
+<h4 id="3-3控制器设计"><a href="#3-3控制器设计" class="headerlink" title="3.3控制器设计"></a>3.3控制器设计</h4><p><strong>①引言</strong></p>
+<blockquote>
+<p><strong>微操作</strong>：在<strong>指令解释过程</strong>中由<strong>控制单元</strong>发出的<strong>控制信号</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 微操作可采用同步控制、异步控制，类似于总线的同步通信和异步通信</div>
+<blockquote>
+<p>还可采用<strong>联合控制</strong>，对于<strong>大部分微操作</strong>采用<strong>同步控制</strong>，对于<strong>很难确定完成时间</strong>的微操作采用<strong>异步操作</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将可以并行的微操作安排在同一个时钟周期中，在一个时钟周期先后执行两个较短的微操作以提升效率</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 微操作之间有先后顺序，不能随意更改</div>
+<blockquote>
+<p><strong>时钟信号</strong>：由<strong>时序电路</strong>产生，每个<strong>时钟脉冲</strong>对应一个<strong>时钟周期</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一个时钟周期可以产生一个或一组可以并行的微操作命令</div>
+
+<blockquote>
+<p><strong>标志信息</strong>：表明<strong>CPU的状态</strong></p>
+</blockquote>
+<p><strong>②组合逻辑设计</strong></p>
+<blockquote>
+<p><strong>设计思路</strong>：根据<strong>每个控制信号</strong>的<strong>产生条件</strong>，写出其<strong>逻辑表达式</strong>，载转化为对应<strong>逻辑电路</strong>即可</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 控制信号的产生条件指收到的指令操作码、时钟信号和标志信息等，在对应时间收到对应信息便发出对应控制信号</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 组合逻辑设计全部由硬件实现，速度非常快</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 较为复杂，且兼容性较差，新增加一个指令，需要修改与之相关的所有微操作的逻辑电路</div>
+
+
+
+
+<p><strong>③微程序设计</strong></p>
+<blockquote>
+<p><strong>设计思路</strong>：使用<strong>一串0/1序列</strong>记录<strong>一个时钟周期中执行的微操作</strong>，即<strong>微指令</strong>，按<strong>时间周期顺序</strong>排列构成<strong>微程序</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一条机器指令对应一个微程序，调用微程序，即可在每个是时钟周期发出对应控制信号</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 根据IR中的操作码形成微程序的首地址，每条微指令还会记录下一条微指令定址</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/ji-suan-ji-zu-cheng-yuan-li-xia/">http://example.com/2023/12/10/ji-suan-ji-zu-cheng-yuan-li-xia/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                                    <span class="chip bg-color">计算机组成原理</span>
+                                </a>
+                            
+                                <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E3%80%8B/">
+                                    <span class="chip bg-color">《计算机组成原理》</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/ji-suan-ji-zu-cheng-yuan-li-shang/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/39.webp" class="responsive-img" alt="计算机组成原理（上）">
+                        
+                        <span class="card-title">计算机组成原理（上）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            计算机基本组成、总线、存储器
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                        <span class="chip bg-color">计算机组成原理</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E3%80%8B/">
+                        <span class="chip bg-color">《计算机组成原理》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/ji-suan-ji-wang-luo-xia/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/31.webp" class="responsive-img" alt="计算机网络（下）">
+                        
+                        <span class="card-title">计算机网络（下）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            网络层、运输层和应用层
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B/">
+                        <span class="chip bg-color">《计算机网络自顶向下》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

@@ -1,0 +1,1300 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/41.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux工作流（三）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+                                <span class="chip bg-color">工作流</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E9%93%BE/" class="post-category">
+                                工具链
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Linux工作流"><a href="#Linux工作流" class="headerlink" title="Linux工作流"></a>Linux工作流</h1><h2 id="Linux进阶操作"><a href="#Linux进阶操作" class="headerlink" title="Linux进阶操作"></a>Linux进阶操作</h2><h3 id="1-辅助功能"><a href="#1-辅助功能" class="headerlink" title="1.辅助功能"></a>1.辅助功能</h3><h4 id="1-1定时调度"><a href="#1-1定时调度" class="headerlink" title="1.1定时调度"></a>1.1定时调度</h4><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 指定系统在指定时间执行指定脚本/指令，脚本文件需要有执行权限</div>
+<p><strong>①<code>crontab</code>命令</strong></p>
+<blockquote>
+<p><code>crontab [选项]</code>：<code>-e/l/r</code>选项<strong>打开/查询/删除</strong>任务列表，<code>-r</code>选项后跟<strong>任务号</strong>删除<strong>特定任务</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 先打开任务列表，在其中按照特定格式输入任务即可</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 使用前使用service crond restart保证crond正在启动</div>
+<blockquote>
+<p><strong>任务格式</strong>：<code>[] [] [] [] [] [指令]/[脚本文件路径]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个占位符都有其特殊含义，组合起来表示任务执行的频率</div>
+<blockquote>
+<p><code>第一个</code>：表示<strong>一个小时</strong>的<strong>第几分钟</strong>，<strong>取值范围</strong>为<code>0-59</code></p>
+</blockquote>
+<blockquote>
+<p><code>第二个</code>：表示<strong>一天</strong>中的<strong>第几个小时</strong>，<strong>取值范围</strong>为<code>0-23</code></p>
+</blockquote>
+<blockquote>
+<p><code>第三个</code>：表示<strong>一个月</strong>中的<strong>第几天</strong>，<strong>取值范围</strong>为<code>1-31</code></p>
+</blockquote>
+<blockquote>
+<p><code>第四个</code>：表示<strong>一年</strong>中的<strong>第几个月</strong>，<strong>取值范围</strong>为<code>1-12</code></p>
+</blockquote>
+<blockquote>
+<p><code>第五个</code>：表示<strong>一周</strong>中的<strong>星期几</strong>，<strong>取值范围</strong>为<code>1-7</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个占位符都有其特殊格式，表示特殊意义</div>
+<blockquote>
+<p><code>*</code>：表示<strong>任何时间</strong>，如第一个<code>*</code>表示<strong>一小时的每分钟</strong></p>
+</blockquote>
+<blockquote>
+<p><code>,</code>：表示<strong>不连续的时间</strong>，<code>0,30 1 * * *</code>表示<strong>每天的一点和一点半</strong></p>
+</blockquote>
+<blockquote>
+<p><code>-</code>：表示<strong>连续的时间</strong>，如<code>0-30 1 * * *</code>，表示<strong>每天的一点到一点半</strong></p>
+</blockquote>
+<blockquote>
+<p><code>*/n</code>：表示<strong>每隔多久执行一次</strong>，如<code>*/10 1 * * *</code>，表示<strong>每天的一点到两点每隔十分钟执行一次</strong></p>
+</blockquote>
+<p><strong>②<code>at</code>命令</strong></p>
+<blockquote>
+<p><code>at [时间]</code>：回车后输入<strong>指令</strong>或者<strong>脚本路径</strong>，随后输入<strong>两次</strong><code>ctrl+D</code><strong>结束输入</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 可以使用atq查看未执行的任务队列，并采用atrm 任务编号删除对应任务</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 需要保证atd正在执行，可以使用ps -ef|grep atd检查</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 一次性定时任务,时间格式如下</div>
+<blockquote>
+<p><code>小时:分钟 日/月/年</code>：在<strong>对应时间</strong>执行，若<strong>只有</strong><code>小时:分钟</code>，则在<strong>当天对应时间</strong>执行</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若当天的对应时间过去，则会在第二天的对应时间执行</div>
+<blockquote>
+<p><code>now+n 时间单位</code> ：<strong>多久之后</strong>执行</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时间单位有minutes、hours、days和weeks</div>
+
+<h4 id="1-2磁盘管理"><a href="#1-2磁盘管理" class="headerlink" title="1.2磁盘管理"></a>1.2磁盘管理</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 磁盘可分为硬盘和软盘，现在软盘已经被淘汰了，所以磁盘相当于就是硬盘</div>
+<p><strong>①硬盘信息</strong></p>
+<blockquote>
+<p><strong><code>lsblk</code><strong>：查看</strong>硬盘分区</strong>情况，可以添加<code>-f</code>选项查看<strong>详细信息</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> NAME、FSTYPE、FSUSE%、MOUNTPOINT分别为磁盘/分区编号、文件系统类型、使用百分比、挂载目录</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 磁盘的每个分区都可以通过挂载和某个目录联系到一起，访问这个目录相当于访问该分区</div>
+
+<p><strong>②硬盘分区</strong></p>
+<blockquote>
+<p><code>fdisk [硬盘路径]</code>：进入<strong>界面</strong>后，输入<code>n</code>、选择<strong>分区类型</strong>、选择<strong>分区数目</strong>即可完成<strong>分区</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> linux中硬盘也是文件，存储在/dev目录下，所以磁盘路径通常为/dev/[磁盘编号]</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 分区后需要书去w进行保存，不保存则按q退出</div>
+
+<p><strong>③磁盘格式化</strong></p>
+<blockquote>
+<p><code>mkfs -t [文件系统类型] [分区路径]</code>：将<strong>对应分区</strong>格式化为对应<strong>文件系统</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 硬盘分区也是/dev下的一个文件，通常路径为/dev/[分区编号]</div>
+
+<p><strong>④磁盘挂载</strong></p>
+<blockquote>
+<p><code>mount [分区路径] [目录路径]</code>：将对应分区<strong>挂载</strong>到对应目录下</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在该目录创建文件后，文件写入到该分区中</div>
+<blockquote>
+<p><code>umount [分区路径]/[目录路径]</code>：<strong>撤销</strong>对应分区/目录的<strong>挂载映射关系</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 撤销挂载映射关系后，该目录文件消失，但是分区中文件不会消失</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在命令行中挂载/撤销挂载，重启后会失效</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可通过修改/etc/fstab文件实现永久挂载，其中UUID可以使用分区路径替代，执行mount -a/重启即可生效</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 不能在卸载的目录中执行撤销指令</div>
+<p><strong>⑤硬盘使用情况</strong></p>
+<blockquote>
+<p><code>df -h</code>：显示硬盘的<strong>整体使用情况</strong></p>
+</blockquote>
+<blockquote>
+<p><code>du -h [目录路径]</code>：显示该目录下<strong>所有文件的大小</strong>，不指定是<strong>当前目录</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> -s选项仅仅显示汇总，-c选项同时显示汇总和明细，--max-depth=n指定n为子目录深度</div>
+
+<h4 id="1-3网络管理"><a href="#1-3网络管理" class="headerlink" title="1.3网络管理"></a>1.3网络管理</h4><p><strong>①IP获取</strong></p>
+<blockquote>
+<p><strong>自动获取</strong>：<strong>启动后</strong>自动获取IP，可以<strong>避免IP冲突</strong>，但是每次的<strong>地址不同</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在setting的network选项卡中修改</div>
+<blockquote>
+<p><strong>指定IP</strong>：修改对应<strong>配置文件</strong>，修改<code>BOOTPROTO="static"</code>，并新增<code>IPADDR</code>、<code>GATEWAY</code>、<code>DNS1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 新增项分别为IP地址、网关地址和域名解析器地址，network restart重启网络服务即可生效</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果使用的是虚拟机，则还需要通过虚拟网络编辑器修改虚拟机的子网和网关等信息</div>
+<p><strong>②主机名映射</strong></p>
+<blockquote>
+<p><code>hostname</code>：<strong>查看</strong>主机名，可以在<code>/etc/hostname</code>中<strong>修改主机名</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 修改etc/hosts，设置主机名和IP地址的映射，输入主机名相当于输入对应IP地址</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 只是简单的替代关系，所以可以在etc/hosts中随意新增映射关系</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> host文件中的映射关系不能乱写，否则很可能找不到正确的IP地址</div>
+<blockquote>
+<p>在浏览器中<strong>输入网址</strong>后，浏览器依次从<strong>浏览器缓存</strong>、<strong>本地DNS解析缓存</strong>、<strong>hosts文件</strong>、<strong>DNS服务器</strong>查找IP地址</p>
+</blockquote>
+<p><strong>③网络状态</strong></p>
+<blockquote>
+<p><code>ping [IP地址]</code>：测试<strong>能否访问</strong>对应网络地址</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ping后可以跟任何可以映射为IP地址的东西，如主机名和URL</div>
+<blockquote>
+<p><code>ifconfig</code>：查看<strong>网络详细信息</strong>，如<strong>IP地址</strong>、<strong>子网掩码</strong>等</p>
+</blockquote>
+<blockquote>
+<p><code>netstat -anp</code>：查看系统<strong>网络连接</strong>状态</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Proto网络协议、Local Address本地监听端口、Foreign Address外地请求端口，State端口状态</div>
+
+<h4 id="1-4进程管理"><a href="#1-4进程管理" class="headerlink" title="1.4进程管理"></a>1.4进程管理</h4><p><strong>①进程信息</strong></p>
+<blockquote>
+<p><code>ps -aux</code>：显示<strong>进程信息</strong>，<code>-a</code>选项显示<strong>所有进程</strong>，<code>-u</code>以<strong>用户格式</strong>显示 <code>-x</code>显示<strong>后台进程</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> %CPU、%MEM、STAT和COMMAND分别表示CPU占用、物理内存占用、进程状态和启动进程的命令</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以配合管道命令和more或者grep，ps -aux | more，ps -aux | grep xxx</div>
+<blockquote>
+<p><code>ps -ef</code>：<strong>全格式</strong>显示所有进程，主要用于查看<code>PPID</code><strong>父进程</strong>、<code>C</code>执行<strong>优先级</strong></p>
+</blockquote>
+<blockquote>
+<p><code>pstree</code>：查看<strong>进程树</strong></p>
+</blockquote>
+<p><strong>②进程管理</strong></p>
+<blockquote>
+<p><code>kill [选项] [进程号]</code>：<strong>终止</strong>进程，但是该请求<strong>可能会被屏蔽</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> -9选项强制终止进程</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> kill对应用户使用的ssh进程，从而阻止该用户远程登录</div>
+<blockquote>
+<p><code>killall [进程名称]</code>：<strong>终止</strong>进程以及<strong>其子进程</strong></p>
+</blockquote>
+<blockquote>
+<p><code>top [选项]</code>：<strong>动态</strong>显示进程，以及<strong>概述信息</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> -dn设置隔n秒更新，默认是3秒，-i不显示闲置和僵死进程，-p [进程号]监控某个进程</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 进入界面后，可按下某键进行交互</div>
+<blockquote>
+<p><code>M/N/P</code>：按照<strong>内存占用率/PID/CPU占用率</strong>排序</p>
+</blockquote>
+<blockquote>
+<p><code>u</code>：<strong>回车</strong>后输入<strong>用户名</strong>，即可仅查看<strong>某用户进程</strong></p>
+</blockquote>
+<blockquote>
+<p><code>k</code>：<strong>回车</strong>后输入<strong>PID</strong>，<strong>回车</strong>后再输入<strong>信号量如9</strong>，即可<strong>终止</strong>对应进程</p>
+</blockquote>
+<blockquote>
+<p><code>q</code>：<strong>退出</strong></p>
+</blockquote>
+<h4 id="1-5服务管理"><a href="#1-5服务管理" class="headerlink" title="1.5服务管理"></a>1.5服务管理</h4><p><strong>①引言</strong></p>
+<blockquote>
+<p><strong>服务</strong>：一个<strong>后台进程</strong>，<strong>监听</strong>某个<strong>端口</strong>，<strong>等待</strong>其他程序的<strong>请求</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>运行级别</strong>：系统的<strong>运行状态</strong>，常用的有<code>3</code><strong>有网络的多用户状态</strong>、<code>5</code><strong>图形界面</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 不同的运行级别，会有不同的服务开机时自启动</div>
+<blockquote>
+<p><code>systemctl get-default</code>：<strong>获取</strong>运行级别</p>
+</blockquote>
+<blockquote>
+<p><code>systemctl set-default [运行级别对应字符串]</code>：<strong>修改</strong>运行级别，<strong>重启生效</strong></p>
+</blockquote>
+<blockquote>
+<p><code>systemctl list-unit-files</code>：查看<strong>当前运行级别</strong>各个服务进程的<strong>自启动状态</strong></p>
+</blockquote>
+<blockquote>
+<p><code>systemctl [start/stop/restart/status] [服务名]</code>：<strong>开始/停止/重启/查看</strong>对应服务</p>
+</blockquote>
+<blockquote>
+<p><code>systemctl [enable/disable/is-enabled] [服务名]</code>：<strong>设置</strong>服务进程开机<strong>是/否自启动</strong>，<strong>查询</strong>自启动状态</p>
+</blockquote>
+<p><strong>②防火墙</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 用于管理端口，外界只能访问防火墙允许访问的端口</div>
+<blockquote>
+<p><code>telnet [ip地址] [端口号]</code>：从<strong>某个端口</strong>连接<strong>对应IP地址</strong></p>
+</blockquote>
+<blockquote>
+<p><code>sudo ufw allow [端口号]</code>：<strong>打开</strong>端口</p>
+</blockquote>
+<blockquote>
+<p><code>sudo ufw delete allow [端口号]</code>：<strong>关闭</strong>端口</p>
+</blockquote>
+<blockquote>
+<p><code>sudo ufw status</code>：查看<strong>已经开启</strong>的端口</p>
+</blockquote>
+<blockquote>
+<p><code>sudo ufw reload</code>：防火墙<strong>重启</strong></p>
+</blockquote>
+<p><strong>③SSH</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一种建立在应用层和运输层基础上的安全协议，常用于远程登录，分为客户端和服务端，服务端在22号端口监听</div>
+<blockquote>
+<p><code>sudo apt-get install openssh-server</code>：安装SSH<strong>服务端与客户端</strong>，Ubuntu需要要<strong>手动安装</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 安装后使用systemctl重启并设置自启动即可</div>
+<blockquote>
+<p><code>ssh [用户名]@[IP地址]</code>：以<strong>某个用户</strong>连接<strong>对应IP地址主机</strong>，需要输入<strong>该用户密码</strong></p>
+</blockquote>
+<blockquote>
+<p><code>exit/logout</code>：<strong>退出</strong>远程连接</p>
+</blockquote>
+<p><strong>④apt</strong></p>
+<blockquote>
+<p><strong>概述</strong>：一种<strong>包管理器</strong>，可以从对应<strong>apt服务器</strong>下载安装软件</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> /etc/apt/sources.list中存放使用的apt服务器地址，可以将其修改为镜像源，如清华大学开源软件镜像站</div>
+<blockquote>
+<p><code>sudo apt-get update</code>：<strong>更新</strong>apt源</p>
+</blockquote>
+<blockquote>
+<p><code>sudo apt-get install [包名称]</code>：<strong>安装</strong>软件包</p>
+</blockquote>
+<blockquote>
+<p><code>sudo apt-get source [包名称]</code>：获取<strong>源代码</strong></p>
+</blockquote>
+<blockquote>
+<p><code>sudo apt-get remove [包名称]</code>：删除包</p>
+</blockquote>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/linux-gong-zuo-liu-san/">http://example.com/2023/12/10/linux-gong-zuo-liu-san/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+                                    <span class="chip bg-color">工作流</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/linux-nei-he-she-ji-yu-shi-xian-er/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/3.webp" class="responsive-img" alt="linux内核设计与实现（二）">
+                        
+                        <span class="card-title">linux内核设计与实现（二）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            进程管理和进程调度
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux%E5%86%85%E6%A0%B8/" class="post-category">
+                                    Linux内核
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux%E5%86%85%E6%A0%B8/">
+                        <span class="chip bg-color">Linux内核</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/mit6.1810-yi/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/40.webp" class="responsive-img" alt="MIT6.1810（一）">
+                        
+                        <span class="card-title">MIT6.1810（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            手搓操作系统
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="post-category">
+                                    项目实战
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/MIT6-1810/">
+                        <span class="chip bg-color">MIT6.1810</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

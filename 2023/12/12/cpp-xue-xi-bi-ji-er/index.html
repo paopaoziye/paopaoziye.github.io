@@ -1,0 +1,1452 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Cpp学习笔记（二）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C++</span>
+                            </a>
+                        
+                            <a href="/tags/%E3%80%8AC-primer%E3%80%8B/">
+                                <span class="chip bg-color">《C++ primer》</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                编程语言
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-12
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="2-类的基本实现"><a href="#2-类的基本实现" class="headerlink" title="2.类的基本实现"></a>2.类的基本实现</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>类名</strong>相当于自定义的<strong>数据类型</strong>，可以创建对应的<strong>对象实例</strong>，每个类都有其<strong>成员函数</strong>用于操作其<strong>实例</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 操作符本质上也是一个函数，类可能会对操作符函数进行重写</div>
+<p><strong>②基本框架</strong></p>
+<blockquote>
+<p><strong>概述</strong>：类的实现分为<strong>两部分</strong>，<strong>头文件</strong>给出类的<strong>定义</strong>并<strong>声明</strong>各种函数接口，<strong>程序代码文件</strong>包含这些<strong>函数的具体实现</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 类的头文件和程序代码文件名都和类名一致，只是后缀不同，以下为类的头文件框架</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 其中的条件编译指令防止该头文件被多次包含</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">__COMPLEX__</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">__COMPLEX__</span></span>
+
+<span class="token comment">//类的前置声明</span>
+<span class="token keyword">class</span> <span class="token punctuation">[</span>类名<span class="token punctuation">]</span>
+
+<span class="token comment">//类的主体</span>
+<span class="token keyword">class</span> <span class="token punctuation">[</span>类的名称<span class="token punctuation">]</span><span class="token punctuation">{</span>
+
+  <span class="token keyword">friend</span> <span class="token punctuation">[</span>函数声明<span class="token punctuation">]</span><span class="token operator">/</span><span class="token punctuation">[</span>类前置声明<span class="token punctuation">]</span>
+
+  <span class="token keyword">public</span><span class="token operator">:</span>
+      <span class="token comment">//公共接口，即成员函数的声明或者定义</span>
+
+  <span class="token keyword">private</span><span class="token operator">:</span>
+      <span class="token comment">//私有实现，通常是实现该类需要的数据，data member</span>
+
+  <span class="token keyword">protected</span><span class="token operator">:</span>
+      <span class="token comment">//通常存放需要继承给子类的数据和函数</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//inline成员函数定义</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③访问权限</strong></p>
+<blockquote>
+<p><code>public</code>：通常存放<strong>成员函数</strong>的<strong>声明</strong>或<strong>定义</strong>，可以在<strong>程序的任何位置</strong>访问</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 类的实例对象可以通过.操作符访问类的成员，其指针通过-&gt;访问</div>
+<blockquote>
+<p><code>private</code>：通常存放<strong>实现该类</strong>需要的<strong>数据（data member）</strong>，只能被<strong>成员函数</strong>和<strong>friend类</strong>访问</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意对象实例在外界不能直接访问其private对象，需要通过特定成员函数获取或者在成员函数内访问</div>
+<blockquote>
+<p><code>protected</code>：处于该区域的成员能<strong>该类以及被其子类</strong>访问，<strong>外界与父类</strong>不能访问</p>
+</blockquote>
+<blockquote>
+<p><code>friend</code>：类可以将<strong>某个类/函数</strong>指定为<code>friend</code>，在<strong>类主体</strong>中添加<code>friend</code>修饰的<strong>函数声明/类前置声明</strong>即可</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 指定为friend的函数/类的成员函数与该类成员函数具有相同的访问权限</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 将函数/类添加为某个类的friend时，在此之前需要有它们的前置声明</div>
+
+<h4 id="2-2类的成员"><a href="#2-2类的成员" class="headerlink" title="2.2类的成员"></a>2.2类的成员</h4><p><strong>①成员函数</strong></p>
+<blockquote>
+<p><strong>声明</strong>：<strong>所有</strong>的<strong>成员函数</strong>都必须在<strong>类的主体内</strong>声明</p>
+</blockquote>
+<blockquote>
+<p><strong>定义</strong>：若定义在<strong>类主体内</strong>，则默认为<strong>inline函数</strong>，若定义在<strong>类主体外</strong>，需要在<strong>函数名前</strong>添加<code>类名::</code>指明所属</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 定义在类主体外的函数，若需要声明为inline函数，则写在头文件中，反之写在程序文件中</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 在成员函数中，this为一个指向调用者的指针，编译器会自动将其添加到参数列表的最左侧</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在成员函数中的data member，如果不指明其所属，则默认属于调用者</div>
+
+<p><strong>②构造/析构函数</strong></p>
+<blockquote>
+<p><strong>构造函数</strong>：函数名<strong>和类的名称相同</strong>，且<strong>没有返回类型和返回值</strong>，可以<strong>被重载</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当类的实例被创建，编译器自动调用对应的构造函数，通常用于初始化类的实例</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 调用没有参数的构造函数，格式为[类名] [实例名];，若写为[类名] [实例名]();会被解读为一个返回对应类的函数</div>
+
+<blockquote>
+<p><strong>析构函数</strong>：函数名为<strong>类的名称前添加<code>~</code><strong>，没有</strong>返回类型和参数</strong>，故<strong>不能重载</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当类的实例结束生命时，编译器自动调用该函数进行一些清理工作，通常为释放类申请的动态内存</div>
+<p><strong>③拷贝构造和赋值拷贝</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>缺省</strong>时，<strong>编译器</strong>提供以<strong>某个实例</strong>初始化实例的方法，如<code>Matrix my_mat1(my_mat2)</code>和<code>my_mat1 = my_mat2</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 编译器将类的data member一一复制，即将my_mat2的_row、_cal和_pmat赋值给将my_mat1的_row、_cal和_pmat</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 这种初始化方法并不适用于Matrix类，会导致两个实例的_pmat指向同一个二维数组</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以自定义赋值操作符和接收类实例的构造函数，以覆盖编译器的缺省行为</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 实现过程中，要检测自我赋值，如下执行m_data = new char[strlen(str.m_data)+1];时m_data已经被释放</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">inline</span>
+<span class="token class-name">String</span><span class="token double-colon punctuation">::</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token keyword">const</span> String<span class="token operator">&amp;</span> str<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token function">strlen</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>m_data<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">strcpy</span><span class="token punctuation">(</span>m_data<span class="token punctuation">,</span>str<span class="token punctuation">.</span>m_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">inline</span> 
+String<span class="token operator">&amp;</span> String<span class="token double-colon punctuation">::</span><span class="token keyword">operator</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">const</span> String<span class="token operator">&amp;</span> str<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> <span class="token operator">&amp;</span>str<span class="token punctuation">)</span> <span class="token comment">//检测自我赋值</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> m_data<span class="token punctuation">;</span>
+    m_data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token function">strlen</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>m_data<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">strcpy</span><span class="token punctuation">(</span>m_data<span class="token punctuation">,</span>str<span class="token punctuation">.</span>m_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>④成员初始化列表</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>构造函数</strong>的一种<strong>特殊语法</strong>，紧跟在<strong>参数列表后面</strong>，用于<strong>初始化data member</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个列表项由一data member组成，后跟由一对小括号包围的欲赋值给data member的数值，使用逗号隔开</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 若data member为某类的实例，采用成员初始化列表对其进行初始化而不是再构造函数内进行赋值</div>
+<blockquote>
+<p><strong>成员初始化列表</strong>会调用该类的<strong>copy构造函数</strong>对其进行<strong>初始化</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>构造函数内</strong>的初始化，会<strong>先调用</strong>该类的<strong>缺省构造函数</strong>，再调用<strong>该类的赋值运算符函数</strong></p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token class-name">Matrix</span><span class="token double-colon punctuation">::</span><span class="token function">Matrix</span><span class="token punctuation">(</span><span class="token keyword">int</span> row<span class="token punctuation">,</span><span class="token keyword">int</span> col<span class="token punctuation">)</span>
+<span class="token operator">:</span><span class="token function">_row</span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">_col</span><span class="token punctuation">(</span>col<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  _pmat <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">double</span><span class="token punctuation">(</span>row<span class="token operator">*</span>col<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>⑤可变与不变</strong></p>
+<blockquote>
+<p><strong>概述</strong>：如果一个<strong>成员函数</strong>接收一个<code>const</code><strong>参数</strong>，则其<strong>声明和定义</strong>处都需要添加<code>const</code><strong>关键词</strong>声明</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> const关键词紧跟在函数的参数列表后，编译器会检查声明为const的函数是否会改变类对象的data member</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> const成员函数如果返回的是data member的引用，则返回类型也需要被const修饰</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以提供一个函数的const版本和非const版本，若传入的是const对象，则调用const版本，反之调用非const版本</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">&amp;</span> <span class="token function">row</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span><span class="token keyword">return</span> _row<span class="token punctuation">}</span>
+<span class="token keyword">int</span><span class="token operator">&amp;</span> <span class="token function">row</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token keyword">return</span> _row<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p><code>mutable</code>：用以修饰<strong>data member</strong>，表示修改该<strong>data member</strong>不会影响<strong>对象实例</strong>的<strong>常量性</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一个被声明为const的成员函数可以修改以mutable修饰的data member</div>
+<p><strong>⑥静态成员</strong></p>
+<blockquote>
+<p><strong>静态data member</strong>：当<strong>data member</strong>被<code>static</code>修饰，其成为<strong>唯一的共享数据</strong>，<strong>所有该类实例对象</strong>都可以访问</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 需要在程序文件中提供该data member的定义，并且名称前面需要添加[类名]::指明其所属</div>
+<blockquote>
+<p><strong>静态成员函数</strong>：当一个成员函数<strong>不访问</strong>任何<strong>非静态data member</strong>，可以在<strong>函数声明前</strong>添加<code>static</code>关键词</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 静态成员函数不需要依赖类的对象实例调用，只需要在其前面添加[类名]::即可调用</div>
+<h4 id="2-3操作符重载"><a href="#2-3操作符重载" class="headerlink" title="2.3操作符重载"></a>2.3操作符重载</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p><strong>概述</strong>：重新定义<strong>操作符函数</strong>，<strong>函数名称</strong>为<code>operator[操作符]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 不能修改操作符函数的操作数和优先级，除了.、.*、::、?:，其余操作符均可被重载</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 若为二元操作符，操作符的左操作数作为第一个参数传递给操作符函数，右操作数作为第二参数传递给操作符函数</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 参数列表必须至少有一个class类型参数</div>
+<p><strong>②成员/非成员函数</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>操作符重载函数</strong>可以为一<strong>成员函数</strong>，也可为一<strong>非成员函数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若为成员函数，其第一个参数为*this指针，表示其左操作数一定是所属类，而非成员函数可以随意设置顺序</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//成员函数版本定义</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> iterator_to_special_vector<span class="token double-colon punctuation">::</span>
+<span class="token keyword">operator</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">return</span> special_vector<span class="token double-colon punctuation">::</span>_elem<span class="token punctuation">[</span>_index<span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//非成员函数版本定义 需要将其声明为对应类的friend，该函数才能访问_elem和_index</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span>
+<span class="token keyword">operator</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">const</span>  special_vector<span class="token operator">&amp;</span><span class="token punctuation">)</span> <span class="token keyword">const</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">return</span> special_vector<span class="token double-colon punctuation">::</span>_elem<span class="token punctuation">[</span>_index<span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>③前/后置版本</strong></p>
+<blockquote>
+<p><strong>概述</strong>：有些运算符还分为<strong>前置版本</strong>和<strong>后置版本</strong>，如<strong>递增/减</strong>运算符，规定<strong>后置版本</strong>的参数列表多出一个<code>int</code><strong>参数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 编译器会自动传递0给后置版本操作符函数的int参数</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//前置版本</span>
+<span class="token keyword">inline</span> my_iterator<span class="token operator">&amp;</span> myiterator<span class="token double-colon punctuation">::</span>
+<span class="token keyword">operator</span><span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//具体实现</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//后置版本</span>
+<span class="token keyword">inline</span> my_iterator<span class="token operator">&amp;</span> myiterator<span class="token double-colon punctuation">::</span>
+<span class="token keyword">operator</span><span class="token operator">++</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//具体实现</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>④iostream运算符重载</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>&gt;&gt;</code><strong>运算符</strong>的实现较为复杂，还需要判断<strong>读取数据</strong>是否有问题，这里不考虑这些问题</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ostream对象不能声明为const，因为每次输出都会改变该对象状态</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> &lt;&lt;运算符重载函数不能为一个成员函数，否则类必须要放在&lt;&lt;左边</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ostream<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>ostream<span class="token operator">&amp;</span> os<span class="token punctuation">,</span><span class="token keyword">const</span> special_vec<span class="token operator">&amp;</span> vec<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  os<span class="token operator">&lt;&lt;</span><span class="token string">"("</span><span class="token operator">&lt;&lt;</span>vec<span class="token punctuation">.</span>_begin_pos<span class="token operator">&lt;&lt;</span><span class="token string">","</span><span class="token operator">&lt;&lt;</span>vec<span class="token punctuation">.</span>_len<span class="token operator">&lt;&lt;</span><span class="token string">")"</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>vec<span class="token punctuation">.</span>_len<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    os<span class="token operator">&lt;&lt;</span>vec<span class="token punctuation">.</span>_elems<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token generic-function"><span class="token function">os</span><span class="token generic class-name"><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> os<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+istream<span class="token operator">&amp;</span>
+<span class="token keyword">operator</span><span class="token operator">&gt;&gt;</span></span></span><span class="token punctuation">(</span>istream <span class="token operator">&amp;</span>is<span class="token punctuation">,</span>special_vector <span class="token operator">&amp;</span>vec<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">char</span> ch1<span class="token punctuation">,</span>ch2<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> bp<span class="token punctuation">,</span>len<span class="token punctuation">;</span>
+  is<span class="token operator">&gt;&gt;</span>ch1<span class="token operator">&gt;&gt;</span>bp<span class="token operator">&gt;&gt;</span>ch2<span class="token operator">&gt;&gt;</span>len<span class="token punctuation">;</span>
+
+  vec<span class="token punctuation">.</span>_begin_pos <span class="token operator">=</span> bp<span class="token punctuation">;</span>
+  vec<span class="token punctuation">.</span>_len <span class="token operator">=</span> len<span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> is<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h3 id="3-面向对象的编程风格"><a href="#3-面向对象的编程风格" class="headerlink" title="3.面向对象的编程风格"></a>3.面向对象的编程风格</h3><h4 id="3-1引言"><a href="#3-1引言" class="headerlink" title="3.1引言"></a>3.1引言</h4><p><strong>①三大特性</strong></p>
+<blockquote>
+<p><strong>封装</strong>：将<strong>实现细节</strong>部分<strong>包装</strong>、<strong>隐藏</strong>起来，也就是<strong>上述的类</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>继承</strong>：将一系列<strong>相关的类</strong>通过<strong>父子关系</strong>联系到一起，<strong>父类</strong>定义了<strong>子类</strong>的<strong>通用接口和数据</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如图书馆作为一个类，其子类有书，书又有其子类纸质书和电子书</div>
+<blockquote>
+<p><strong>多态</strong>：每个子类都可以<strong>增加自己的接口和数据</strong>，或者<strong>覆盖继承而来的接口和数据</strong>，以实现<strong>自己的行为</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若子类和父类中成员若一致，则子类成员会覆盖掉从父类继承的成员</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若要覆盖继承的成员函数，则子类中对应函数的参数列表、返回类型和常量性必须与之一致</div>
+<blockquote>
+<p>若需要在<strong>子类成员函数</strong>调用<strong>被覆盖的父类函数</strong>，则需要使用<code>[父类名]::</code>对其加以限定</p>
+</blockquote>
+<p><strong>②抽象基类</strong></p>
+<blockquote>
+<p><strong>概述</strong>：继承关系呈现<strong>树型</strong>，处于<strong>根节点</strong>的类称为<strong>抽象基类</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 基类的指针或者引用可以指向任何一个子类的对象</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 使用抽象基类的指针或引用间接操作子类的对象实例，从而在不改变旧有程序的前提下，新增/删除子类</div>
+<blockquote>
+<p>如下，函数的<strong>形参</strong>为<strong>抽象基类</strong>，但是<strong>实际调用</strong>时可以传递<strong>任何子类</strong></p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">loan_check_in</span> <span class="token punctuation">(</span>Lib<span class="token operator">&amp;</span> my_Lib<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  my_Lib<span class="token punctuation">.</span><span class="token function">check_in</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//程序具体实现</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③动态绑定</strong></p>
+<blockquote>
+<p><strong>概述</strong>：如上，<code>my_Lib.check_in()</code>到<strong>执行时</strong>才根据<strong>实际传入的对象类型</strong>调用对应的函数<code>check_in()</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 只有虚函数才具有动态绑定的特性，普通函数在编译时就根据my_Lib类型确定执行哪个check_in()</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若调用的函数不为虚函数，即使传入的是其他子类实例，还是调用对应父类的成员函数</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以明确指出该函数属于那一类，调用时添加[类名]::前缀即可，以遮掩虚函数机制</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 在父类的构造函数和析构函数中，不会调用子类的虚函数，因为此时派生类可能还没有初始化好</div>
+<h4 id="3-2实现"><a href="#3-2实现" class="headerlink" title="3.2实现"></a>3.2实现</h4><p><strong>①框架</strong></p>
+<blockquote>
+<p><strong>概述</strong>：定义了<strong>父类</strong><code>Lib</code>和<strong>子类</strong><code>Book</code>，其中<strong>子类的前置声明后</strong>接<code>:[继承类型][父类名]</code>，表示其<strong>继承自某类</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 子类的头文件需要包含父类的头文件，继承方式有多种，这里只介绍public继承</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Lib</span><span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+
+  <span class="token function">Lib</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>cout<span class="token operator">&lt;&lt;</span><span class="token string">"Create a Lib class!"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+  <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Lib</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>cout<span class="token operator">&lt;&lt;</span><span class="token string">"Release a Lib class!"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span><span class="token punctuation">}</span>
+  <span class="token comment">//Lib类的print函数</span>
+  <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">{</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"I am a Lib class!"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">private</span><span class="token operator">:</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"Lib.h"</span></span>
+<span class="token keyword">class</span> <span class="token class-name">Book</span><span class="token operator">:</span><span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Lib</span></span><span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+
+  <span class="token function">Book</span><span class="token punctuation">(</span><span class="token keyword">const</span> string<span class="token operator">&amp;</span> author<span class="token punctuation">,</span><span class="token keyword">const</span> string<span class="token operator">&amp;</span> title<span class="token punctuation">)</span>
+  <span class="token operator">:</span><span class="token function">_title</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">_author</span><span class="token punctuation">(</span>author<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>cout<span class="token operator">&lt;&lt;</span><span class="token string">"Create a Book class!"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+  <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Book</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>cout<span class="token operator">&lt;&lt;</span><span class="token string">"Release a Book class!"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span><span class="token punctuation">}</span>
+  <span class="token comment">//Book类的print函数，覆盖了从父类继承来的print()</span>
+  <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">{</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"I am a Book class!"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"My title is"</span><span class="token operator">&lt;&lt;</span>_title<span class="token operator">&lt;&lt;</span><span class="token string">"!"</span>endl<span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"My author is"</span><span class="token operator">&lt;&lt;</span>_author<span class="token operator">&lt;&lt;</span><span class="token string">"!"</span>endl<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">protected</span><span class="token operator">:</span>
+  string _title<span class="token punctuation">,</span>_author<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②虚函数</strong></p>
+<blockquote>
+<p><code>virtual</code>：修饰一个<strong>成员函数</strong>使其成为<strong>虚函数</strong>，从而实现<strong>动态绑定</strong>，若其被<strong>赋值</strong>为<code>0</code>，则为<strong>纯虚函数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若不同子类对某函数有不同的实现，则将其声明虚函数，静态成员函数无法被声明为虚函数</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 子类若覆盖从父类继承的虚函数，不必添加virtual关键字修饰，其自动成为虚函数</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若父类中有虚函数，则其析构函数也需要被声明为虚函数</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 成员函数中有纯虚函数的类无法创建对象实例，因为其接口不完整</div>
+
+<p><strong>③构造与析构</strong></p>
+<blockquote>
+<p><strong>构造</strong>：当一个<strong>子类</strong>被定义，<strong>首先</strong>会<strong>自顶向下</strong>调用其<strong>父类</strong>的构造函数，随后再调用<strong>本身</strong>构造函数</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 即定义子类实例时，不仅仅创建了子类对象，还递归的创建了其所有父类对象</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若基类中有data member，则最好在其构造函数中将其初始化，即子类的构造函数还需要调用基类的构造函数</div>
+<blockquote>
+<p>若没有<strong>显式调用</strong>，则编译器会<strong>自动</strong>调用父类的<strong>缺省构造函数</strong></p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">inline</span> <span class="token class-name">Book</span><span class="token double-colon punctuation">::</span>
+<span class="token function">Book</span><span class="token punctuation">(</span>string<span class="token operator">&amp;</span> title<span class="token punctuation">,</span>string<span class="token operator">&amp;</span> author<span class="token punctuation">)</span>
+<span class="token operator">:</span><span class="token function">Lib</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">_title</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">_author</span><span class="token punctuation">(</span>author<span class="token punctuation">)</span>
+<span class="token punctuation">{</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong>析构</strong>：当一个<strong>子类</strong>生命周期中介，<strong>首先</strong>调用<strong>本身析构函数</strong>，随后再<strong>自底向上</strong>调用其<strong>父类的析构函数</strong></p>
+</blockquote>
+<p><strong>④运行时类型鉴定</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 需要包含typeinfo头文件</div>
+<blockquote>
+<p><code>typeid()</code>：接收一个<strong>类实例/类名</strong>，如<code>typeid(*this)</code>，返回一个<code>type_info</code><strong>对象</strong>，包含了该实例的<strong>类相关信息</strong></p>
+</blockquote>
+<blockquote>
+<p><code>name()</code>：返回<code>type_info</code><strong>对象</strong>中的<strong>名字信息</strong>，如<code>typeid(*this).name()</code></p>
+</blockquote>
+<blockquote>
+<p><code>static_cast&lt;class_type&gt;()</code>：接收<strong>一个指针</strong>，强制将其转化为<strong>指向<code>class_type</code>的指针</strong></p>
+</blockquote>
+<blockquote>
+<p><code>dynamic_cast&lt;class_type&gt;()</code>：接收<strong>一个指针</strong>，若其指向<code>class_type</code>，则将其转化为<strong>指向<code>class_type</code>的指针</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若使用指针调用成员函数，则其为指向什么类的指针，就只能调用对应类的成员函数，即使有虚函数机制</div>
+<blockquote>
+<p>如下，<code>p_to_lib</code>为<code>Lib*</code>类的指针，虽然指向<code>Book</code><strong>实例</strong>，但是还是<strong>只能调用</strong><code>Lib</code>类的<strong>成员函数</strong></p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Book a_book<span class="token punctuation">;</span>
+Lib<span class="token operator">*</span> p_to_lib <span class="token operator">=</span> <span class="token operator">&amp;</span>a_book<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="3-3模板类"><a href="#3-3模板类" class="headerlink" title="3.3模板类"></a>3.3模板类</h4><p><strong>①模板template</strong></p>
+<blockquote>
+<p><strong>格式</strong>：在<strong>类前</strong>添加<code>template</code><strong>参数列表</strong>，其中<code>typename</code>为<strong>关键字</strong>，后接一<strong>占位符</strong>，可以有<strong>多对</strong>，用<strong>逗号</strong>隔开</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该占位符相当于参数类型，可以出现在任何参数类型可以出现的地方，编译器将占位符替换为创建类时传递的参数</div>
+<blockquote>
+<p><strong>调用</strong>：在<strong>类名后</strong>接<code>&lt;[类型参数]&gt;</code>传递<strong>类型参数</strong>，如<code>Node_to_tree&lt;int&gt; root;</code>，会将<code>val_type</code><strong>全部替换</strong>为<code>int</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 除了在类主体以及其成员函数定义中，其他地方调用该类都需要使用template参数列表加以限制</div>
+<p><strong>②例子</strong></p>
+<blockquote>
+<p><strong>概述</strong>：利用<strong>模板</strong>实现<strong>节点类</strong>和一个<strong>二叉树类</strong>，两者互为<code>firend</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 其中二叉树类是节点类的friend，因为其要访问节点类的数据</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意两者的friend声明，都必须以template参数列表加以限制，且列表中采用的是本身的占位符</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//二叉树类的前置声明</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> <span class="token class-name">Node_type</span><span class="token operator">&gt;</span>
+<span class="token keyword">class</span> <span class="token class-name">Binary_tree</span><span class="token punctuation">;</span>
+<span class="token comment">//节点类的定义</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> <span class="token class-name">val_type</span><span class="token operator">&gt;</span>
+<span class="token keyword">class</span> <span class="token class-name">Node_to_tree</span><span class="token punctuation">{</span>
+  <span class="token keyword">friend</span> <span class="token keyword">class</span> <span class="token class-name">Binary_tree</span><span class="token operator">&lt;</span>val_type<span class="token operator">&gt;</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+
+  <span class="token keyword">private</span><span class="token operator">:</span>
+  val_type _val<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> _cnt<span class="token punctuation">;</span>
+  Node_to_tree<span class="token operator">*</span> _lchild<span class="token punctuation">;</span>
+  Node_to_tree<span class="token operator">*</span> _rchild<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//二叉树类的定义</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> <span class="token class-name">Node_type</span><span class="token operator">&gt;</span>
+<span class="token keyword">class</span> <span class="token class-name">Binary_tree</span><span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token function">Binary_tree</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">Binary_tree</span><span class="token punctuation">(</span><span class="token keyword">const</span> Binary_tree<span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">~</span><span class="token function">Binary_tree</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  Binary_tree<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">const</span> Binary_tree<span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+  <span class="token keyword">private</span><span class="token operator">:</span>
+  Node_to_tree<span class="token operator">&lt;</span>Node_type<span class="token operator">&gt;</span><span class="token operator">*</span> _root<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">copy</span><span class="token punctuation">(</span>Node_to_tree<span class="token operator">&lt;</span>Node_type<span class="token operator">&gt;</span><span class="token operator">*</span> tar<span class="token punctuation">,</span>Node_to_tree<span class="token operator">&lt;</span>Node_type<span class="token operator">&gt;</span><span class="token operator">*</span> src<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③成员函数定义</strong></p>
+<blockquote>
+<p><strong>概述</strong>：与<strong>普通类</strong>不同，<strong>开头</strong>需要添加<code>template</code><strong>参数列表</strong>，且<strong>类限定符</strong>也需要<code>template</code><strong>列表</strong>加以限定</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在类限定符，即Binary_tree<node_type>::后的语句，都视为定义在Binary_tree类中</node_type></div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> <span class="token class-name">Node_type</span><span class="token operator">&gt;</span>
+<span class="token keyword">inline</span> <span class="token class-name">Binary_tree</span><span class="token operator">&lt;</span>Node_type<span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>
+<span class="token function">Binary_tree</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token function">_root</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/12/cpp-xue-xi-bi-ji-er/">http://example.com/2023/12/12/cpp-xue-xi-bi-ji-er/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C++</span>
+                                </a>
+                            
+                                <a href="/tags/%E3%80%8AC-primer%E3%80%8B/">
+                                    <span class="chip bg-color">《C++ primer》</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/13/xian-xing-jie-gou-xia/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="线性结构（下）">
+                        
+                        <span class="card-title">线性结构（下）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            队列
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">计算机基础</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
+                        <span class="chip bg-color">《hello 算法》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/11/unix-huan-jing-bian-cheng-shang/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/13.webp" class="responsive-img" alt="Unix环境编程（上）">
+                        
+                        <span class="card-title">Unix环境编程（上）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Unix环境介绍
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E9%93%BE/" class="post-category">
+                                    工具链
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E3%80%8AUnix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B/">
+                        <span class="chip bg-color">《Unix环境高级编程》</span>
+                    </a>
+                    
+                    <a href="/tags/Unix/">
+                        <span class="chip bg-color">Unix</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

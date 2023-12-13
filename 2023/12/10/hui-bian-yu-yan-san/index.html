@@ -1,0 +1,1487 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/27.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">汇编语言（三）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E3%80%8A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E3%80%8B/">
+                                <span class="chip bg-color">《汇编语言》</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+                                <span class="chip bg-color">汇编语言</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                编程语言
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="汇编语言（三）"><a href="#汇编语言（三）" class="headerlink" title="汇编语言（三）"></a>汇编语言（三）</h1><h2 id="汇编语言进阶"><a href="#汇编语言进阶" class="headerlink" title="汇编语言进阶"></a>汇编语言进阶</h2><h3 id="1-状态寄存器"><a href="#1-状态寄存器" class="headerlink" title="1.状态寄存器"></a>1.状态寄存器</h3><h4 id="1-1引言"><a href="#1-1引言" class="headerlink" title="1.1引言"></a>1.1引言</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> CPU内部的一种特殊的寄存器，其中每一位都用于记录特定的信息，主要介绍8086的标志寄存器</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 每个指令是否影响标志寄存器，以及影响哪些部分，都是不同的</div>
+<blockquote>
+<p><strong>相关指令</strong>的<strong>执行结果</strong><br>为CPU执行<strong>相关指令</strong>提供<strong>行为依据</strong><br>控制CPU的相关<strong>工作方式</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_24.png" alt="8086的标志寄存器"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_26.png" alt="debug中的8086标志寄存器"></p>
+<h4 id="1-2标志"><a href="#1-2标志" class="headerlink" title="1.2标志"></a>1.2标志</h4><p><strong>①ZF标志</strong></p>
+<blockquote>
+<p>记录<strong>相关指令</strong>的计算结果是否为<code>0</code>，如果为<code>0</code>，则该位为<code>1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 主要是add之类的运算指令以及逻辑运算指令</div>
+
+<p><strong>②PF标志</strong></p>
+<blockquote>
+<p>记录<strong>相关指令</strong>执行后，其结果<code>bit</code>位中<code>1</code>的个数是否为<strong>偶数</strong>，若为偶数，则为<code>1</code></p>
+</blockquote>
+<p><strong>③SF标志</strong></p>
+<blockquote>
+<p>记录<strong>相关指令</strong>执行后，其结果是否为<strong>负</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 这个标志的前提是进行有符号运算</div>
+<blockquote>
+<p>计算机常用<strong>补码</strong>描述<strong>有符号数</strong>，如<code>10000001B</code>可以看作是<strong>无符号数</strong><code>129</code>，也可以看作<strong>有符号数</strong><code>-127</code></p>
+</blockquote>
+<p><strong>④CF标志</strong></p>
+<blockquote>
+<p>记录了<strong>无符号运算</strong>时运算结果的<strong>最高有效位</strong>像<strong>更高位</strong>的<strong>进位值/借位值</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> CF的含义取决于其被什么指令设置，如果为加法指令，则表示进位值，如果为减法指令，则表示借位值</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_25.png" alt="有效位"></p>
+<p><strong>⑤OF标志</strong></p>
+<blockquote>
+<p>记录<strong>有符号运算</strong>的结果是否发生了<strong>溢出</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意，只要执行了对应的指令，相关标志位就会发生改变，无论是有符号运算还是无符号运算，只是某些标志位只在某种特定情况下有意义罢了</div>
+<blockquote>
+<p>如执行<code>0F0H+88H</code>，<code>CF</code>会变为<code>1</code>，因为如果这是一个<strong>无符号运算</strong>，会产生<strong>进位</strong>，<code>OF</code>也会变为<code>1</code>，因为如果这是一个<strong>有符号运算</strong>，会发生<strong>溢出</strong></p>
+</blockquote>
+<h4 id="1-3相关指令"><a href="#1-3相关指令" class="headerlink" title="1.3相关指令"></a>1.3相关指令</h4><p><strong>①<code>adc</code>指令</strong></p>
+<blockquote>
+<p><strong>格式</strong>：<code>adc ax,bx</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 带进位加法指令,adc ax,bx相当于ax+bx+CF</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以利用adc指令实现更大数据的加法运算</div>
+<blockquote>
+<p>计算<code>1EF0001000H+2010001EF0H</code>，将<strong>最高16位</strong>放在<code>ax</code>中，<strong>次高16位</strong>放在<code>bx</code>中，<strong>低16位</strong>放在<code>cx</code>中，更大的数据同理</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">mov ax,001EH
+mov bx,0F000H
+mov cx,1000H
+add cx,1EF0H
+adc bx,1000H
+adc ax,0020H<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>②<code>sbb</code>指令</strong></p>
+<blockquote>
+<p><strong>格式</strong>：<code>sbb ax,bx</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 带进位减法指令，sbb ax,bx相当于ax-bx-CF</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 同上，可以利用sbb实现更大数据的减法运算</div>
+
+<p><strong>③<code>cmp</code>指令</strong></p>
+<blockquote>
+<p><strong>格式</strong>：<code>cmp ax,bx</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 比较指令，功能相当于减法指令，但是不保存结果，只影响标志寄存器</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以通过标志寄存器状态判断参数大小关系</div>
+<blockquote>
+<p><code>ZF</code>：判断两者是否<strong>相等</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>无符号数</strong><br><code>CF</code>：若为<code>1</code>，则<code>ax &lt; bx</code>，反之则<code>ax ≥ bx</code></p>
+</blockquote>
+<blockquote>
+<p><strong>有符号数</strong><br><code>SF</code>：若为1，则逻辑上<code>ax &lt; bx</code>，反之逻辑上<code>ax ≥ bx</code><br><code>OF</code>：判断是否溢出，若<strong>溢出</strong>，则真实大小关系和逻辑大小关系<strong>相反</strong>，反之则一致</p>
+</blockquote>
+<p><strong>④基于比较结果的条件转移</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 检测相关标志，从而转移到标号处，可以配合cmp指令使用，以下列举无符号数的相关指令</div>
+<blockquote>
+<p><code>je 标号</code>：<strong>相等</strong>则转移</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ZF标志为1</div>
+<blockquote>
+<p><code>jne 标号</code>：<strong>不等</strong>则转移</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ZF标志为0</div>
+<blockquote>
+<p><code>jb 标号</code>：<strong>低于</strong>则转移</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> CF标志为1</div>
+<blockquote>
+<p><code>jnb 标号</code>：<strong>不低于</strong>则转移</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> CF标志为0</div>
+<blockquote>
+<p><code>ja 标号</code>：<strong>高于</strong>则转移</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> CF标志为0且ZF标志为0</div>
+<blockquote>
+<p><code>jna 标号</code>：<strong>不高于</strong>则转移</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> CF标志为1且ZF标志为1</div>
+
+<p><strong>⑤串传送指令</strong></p>
+<blockquote>
+<p><strong>DF标志</strong>：控制<strong>串处理过程</strong>中相关寄存器（<code>si</code>和<code>di</code>）<strong>移动方向</strong>，若为<code>0</code>，则<strong>增加</strong>，反之则减少</p>
+</blockquote>
+<blockquote>
+<p><strong>串传送指令</strong><br><code>movsb</code>：将<code>ds:[si]</code>中数据移动到<code>es:[di]</code>，并根据DF标志移动<code>si</code>和<code>di</code>，每次操作<strong>1个内存单位</strong><br><code>movsw</code>：同上，但是每次操作<strong>2个内存单位</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>相关辅助指令</strong><br><code>rep 串传送指令</code>：根据<code>cx</code>的值，<strong>重复执行</strong>其后的串传送指令<br><code>cld</code>：将<strong>DF标志</strong>设为<code>0</code><br><code>std</code>：将<strong>DF标志</strong>设为<code>1</code></p>
+</blockquote>
+<p><strong>⑥访问标志寄存器</strong></p>
+<blockquote>
+<p><code>pushf</code>：将<strong>整个标志寄存器</strong>的值压栈<br><code>popf</code>：从栈中弹出数据，送入<strong>标志寄存器</strong></p>
+</blockquote>
+<hr>
+<h3 id="2-中断"><a href="#2-中断" class="headerlink" title="2.中断"></a>2.中断</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>当CPU接收到<strong>中断信息</strong>后，<strong>执行完</strong>当前正在执行的指令后，<strong>不再向下执行</strong>，转去处理中断信息</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 中断的优先级不一定是最高的，比如在修改栈顶地址过程中发生中断，他是不会响应中断的</div>
+<p><strong>②内中断</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 以8086CPU为例</div>
+<blockquote>
+<p><strong>除法错误</strong>，中断类型码为<code>0</code><br><strong>单步执行</strong>，中断类型码为<code>1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当TF标志为1，则产生单步中断</div>
+<blockquote>
+<p><strong>执行<code>into</code>指令</strong>，中断类型码为<code>4</code><br><strong>执行<code>int</code>指令</strong>，指令格式为<code>int n</code>，其中<code>n</code>为中断类型码</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 利用int指令主动引发中断</div>
+<p><strong>③外中断</strong></p>
+<blockquote>
+<p><strong>可屏蔽外中断</strong>：<strong>可以不响应</strong>的中断，</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 是否相应外中断由IF标志决定，可以通过指令设置其状态</div>
+<blockquote>
+<p><strong>不可屏蔽外中断</strong>：执行完当前指令，<strong>立即响应</strong></p>
+</blockquote>
+<h4 id="2-2中断处理程序"><a href="#2-2中断处理程序" class="headerlink" title="2.2中断处理程序"></a>2.2中断处理程序</h4><p><strong>①中断向量表</strong></p>
+<blockquote>
+<p>提供<strong>中断类型码</strong>与其对应<strong>中断处理程序入口地址</strong>的关系，一个表项占<strong>两个内存单元</strong>，<strong>高地址字</strong>存放<strong>段地址</strong>，<strong>低地址字</strong>存放<strong>偏移地址</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 中断向量表保存在内存特定位置，对于8086CPU，放在内存0000:0000至0000:03FF</div>
+<p><strong>②中断过程</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 以8086CPU为例，由CPU自动执行</div>
+<blockquote>
+<p>从<strong>中断信息</strong>中获取<strong>中断类型码</strong><br><strong>标志寄存器</strong>的值<strong>入栈</strong>，并将标志寄存器的<strong>TF标志</strong>和<strong>IF标志</strong>设为<code>0</code><br><code>CS</code>和<code>IP</code>的值<strong>入栈</strong><br>根据<strong>终端类型码</strong>将<code>CS:IP</code>指向<strong>中断程序入口地址</strong></p>
+</blockquote>
+<p><strong>③中断程序常规步骤</strong></p>
+<blockquote>
+<p>保存<strong>用到的寄存器</strong><code>-&gt;</code>处理中断<code>-&gt;</code><strong>恢复</strong>用到的寄存器<code>-&gt;</code>用<code>iret</code>指令返回</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> iret指令相当于pop IP、pop CS和popf</div>
+
+<p><strong>④BIOS</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 系统板的ROM中存放的程序（基本输入输出系统），主要包括对硬件系统的检测和初始化程序，以及各种中断例程</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 一个中断例程通常包含多个子程序，根据相关寄存器决定执行哪个子程序以及相关效果</div>
+<blockquote>
+<p>如以下常用的<strong>中断例程</strong>，设置<code>ax</code>表示使用<strong>程序返回</strong>功能</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">mov ax,4c00h
+int 21h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/HB_27.png" alt="BIOS安装过程"></p>
+<h4 id="2-3自定义中断处理程序"><a href="#2-3自定义中断处理程序" class="headerlink" title="2.3自定义中断处理程序"></a>2.3自定义中断处理程序</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 以8086下除法溢出为例，编写程序安装自定义中断程序</div>
+<pre class="line-numbers language-none"><code class="language-none">assume cs:code
+
+code segment
+start: mov ax,cs
+       mov ds,ax         ;设置ds:si指向中断程序源地址
+       mov si,offset do0 
+
+       mov ax,0
+       mov es,ax         ;设置es:di指向中断程序最终目标地址
+       mov di,200h
+
+       mov cx,offset do0end-offset do0 ;设置串传输的长度
+
+       cld ;设置传输方向
+       rep movsb
+
+       ;设置中断向量表
+       mov ax,0
+       mov es,ax
+       mov word ptr es:[0*4],200h
+       mov word ptr es:[0*4+2],0
+
+
+       mov ax,4c00h
+       int 21h
+do0：  jmp short do0start
+       db "overflow"
+
+do0start: mov ax,cs
+          mov ds,ax   ;将ds:si指向字符串
+          mov si,202h
+
+          mov ax,0b800h
+          mov es,ax         ;设置es:di指向显存空间的中间位置
+          mov di,12*160+36*2
+
+          mov cx,9
+s:        mov al,[si]
+          mov es:[di],al
+          inc si
+          add di,2
+          loop s
+
+          mov ax 4c00h
+          int 21h
+do0end: nop
+
+code ends
+end start
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>①申请空间</strong></p>
+<blockquote>
+<p>由于CPU<strong>随时</strong>都有可能收到<strong>中断信息</strong>，所以中断处理程序必须<strong>一直存储在某段内存空间中</strong>，所以需要申请一段<strong>不会被别的程序使用</strong>的空间</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在这里为了简便，直接使用了0000:0200至0000:02FF这段空间，因为这段空间是8086中断向量表空余空间，不会被使用</div>
+<p><strong>②安装</strong></p>
+<blockquote>
+<p><strong>安装中断处理程序</strong>主要分为两步，即将<strong>编写的程序复制到申请的空间中</strong>，并将对应<strong>中断向量表项设置为申请空间起始地址</strong></p>
+</blockquote>
+<p><strong>③编写中断程序</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在中断程序中使用寄存器，需要先将其中内容保存字栈中</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 本例中直接退出程序，如果中断过后还需要返回程序，则需要将mov ax 4c00h和int 21h替换为iret指令</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 中断处理程序用到的数据(如overflow)需要在中断处理程序中申请，并记得设置程序的执行起点</div>
+
+<h3 id="3-子程序"><a href="#3-子程序" class="headerlink" title="3.子程序"></a>3.子程序</h3><h4 id="3-1引言"><a href="#3-1引言" class="headerlink" title="3.1引言"></a>3.1引言</h4><p><strong>①带长度信息的标号</strong></p>
+<blockquote>
+<p><strong>标号</strong>实质上就是<strong>对应位置的起始地址</strong>，一些标号<strong>不带长度信息（如<code>a</code>）</strong>，一些标号<strong>带长度信息（如<code>b</code>）</strong>，格式上表现为<strong>后面</strong>是否跟一个<strong>冒号</strong><code>:</code>，以及对应<strong>描述大小的伪指令</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">assume ds:data
+data segment
+a: dw 1,2,3,4,5,6,7,8
+b  dw 1,2,3,4,5,6,7,8
+c  dw a,b
+data ends<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 带有长度的标号相当于一个对应长度的内存单元</div>
+<pre class="line-numbers language-none"><code class="language-none">mov a,2 ;错误，没有指定长度信息
+mov word ptr a,2
+mov b,2 ;相当于mov word ptr cs:[16],2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>②<code>assume</code>详解</strong></p>
+<blockquote>
+<p><code>assume</code>将<strong>对应段寄存器</strong>和<strong>对应段</strong>联系在一起，表现为位于<strong>对应段</strong>的<strong>标号</strong>自动取<strong>对应段寄存器</strong>中的内容作为<strong>段地址</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 以下三条指令是等价的，因为标号b在data段中，会默认取ds寄存器中内容为段地址</div>
+<pre class="line-numbers language-none"><code class="language-none">mov ax,b[bx+si+3]
+mov ax,ds:0[bx+si+3]
+mov ax,0[bx+si+3]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若想使用标号访问数据，需要使用使用伪指令assume将标号所在段和一个段寄存器联系起来，否则编译器无法确定标号的段地址处于哪个寄存器中，但是并没有直接将对应寄存器的值修改为关联地址</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 后面有:的地址标号，只能在代码段中使用</div>
+
+<h4 id="3-2直接定址表"><a href="#3-2直接定址表" class="headerlink" title="3.2直接定址表"></a>3.2直接定址表</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一种映射关系，如0~15和十六进制的0~F，本质上是一种以空间换时间的做法</div>
+<blockquote>
+<p>以下为利用<strong>直接定址表</strong>求对应<code>sin</code>值的<strong>子程序</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">showsin: jmp short show
+         ;存放各个标号的地址
+         table dw ag0,ag30,ag60,ag90,ag120,ag150,ag180
+         ;各个角度对应的sin值的字符串
+         ag0  db '0',0
+         ag30 db '0.5',0
+         ag60 db '0.866',0
+         ag90 db '1',0
+         ag120 db '0.866',0
+         ag150 db '0.5',0
+         ag180 ad '0',0
+
+show:    push bx
+         push es
+         push si
+         mov bx,0b800h
+         mov es,bx
+         ;用ax传递的角度除以30作为相对于table的偏移量，取得对应字符串的偏移地址，放在bx中
+         mov ah,0
+         mov bl,30
+         div bl
+         mov bl,al
+         mov bh,0
+         add bx,bx
+         mov bx,table[bx]
+
+         ;显示对应字符串
+         mov si,160*12+40*2
+shows:   mov ah,cs:[bx]
+         cmp ah,0
+         je showret
+         mov es:[si],ah
+         inc bx
+         add si,2
+         jmp short shows
+
+showret: pop si
+         pop es
+         pop bx
+         ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="3-3可选效果的程序"><a href="#3-3可选效果的程序" class="headerlink" title="3.3可选效果的程序"></a>3.3可选效果的程序</h4><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 利用直接定址表实现程序不同功能</div>
+<blockquote>
+<p>一个子程序<code>setscreen</code>，当<code>ah</code>为<strong>不同的值</strong>时，实现4种<strong>不同的功能</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">setscreen: jmp short set
+           table dw sub1,sub2,sub3,sub4
+
+set:       push bx
+
+           cmp ah,3 ;判断异常情况，即是否超出了功能号范围
+           ja sret
+           mov bl,ah
+           mov bh,0
+           add bx,bx ;计算ah功能号对应位置
+
+           call word ptr table[bx]
+
+sret:      pop bx
+           ret
+
+;清空屏幕：将显存中当前屏幕中字符全部设为空格符
+sub1:      push bx
+           push cx
+           push es
+
+           mov bx,0b800h
+           mov es,bx
+           mov bx,0
+           mov cx,2000
+
+sub1s:     mov byte ptr es:[bx],' '
+           add bx,2
+           loop sub1s
+           pop es
+           pop cx
+           pop bx
+           ret
+
+;设置前景色：将显存中当前屏幕处于奇地址属性字节的0、1、2位设置为al对应值
+sub2:      push bx
+           push cx
+           push es
+
+           mov bx,0b800h
+           mov es,bx
+           mov bx,1
+           mov cx,2000
+
+sub2s:     and byte ptr es:[bx],11111000b
+           or es:[bx],al
+           add bx,2
+           loop sub2s
+
+           pop es
+           pop cx
+           pop bx
+           ret
+
+;设置背景色：将显存中当前屏幕处于奇地址属性字节的4、5、6位设置为al对应值
+ sub3:     push bx
+           push cx
+           push es
+
+           mov cl,4
+           shl al,cl
+           mov bx,0b800h
+           mov es,bx
+           mov bx,1
+           mov cx,2000
+
+sub3s:     and byte ptr es:[bx],10001111b
+           or es:[bx],al
+           add bx,2
+           loop sub2s
+
+           pop es
+           pop cx
+           pop bx
+           ret  
+;向上滚动一行：依次将n+1行的内容复制到第n行，最后一行为空
+sub4:      push cx
+           push si
+           push di
+           push es
+           push ds
+
+           mov si,0b800h
+           mov es,si
+           mov ds,si
+           mov si,160 ;将ds:si指向n+1行
+           mov di,0 ;将es:di指向n行
+           cld
+           mov cx,24 ;共复制24行
+
+sub4s:     push cx
+           mov cx,160
+           rep movsb  ;复制
+           pop cx
+           loop sub4s
+
+           mov cx,80
+           mov si,0
+
+sub4s1:    mov byte ptr [160*24+si],' '
+           add si,2
+           loop sub4s1
+
+           pop ds
+           pop es
+           pop di
+           pop si
+           pop cx
+           ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/hui-bian-yu-yan-san/">http://example.com/2023/12/10/hui-bian-yu-yan-san/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E3%80%8A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E3%80%8B/">
+                                    <span class="chip bg-color">《汇编语言》</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+                                    <span class="chip bg-color">汇编语言</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/hui-bian-yu-yan-yi/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/27.webp" class="responsive-img" alt="汇编语言（一）">
+                        
+                        <span class="card-title">汇编语言（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            汇编语言
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/8086/">
+                        <span class="chip bg-color">8086</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E3%80%8B/">
+                        <span class="chip bg-color">《汇编语言》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/suan-fa-fan-shi-shang/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="算法范式（上）">
+                        
+                        <span class="card-title">算法范式（上）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            分治、回溯、贪心和动态规划
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">计算机基础</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
+                        <span class="chip bg-color">《hello 算法》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

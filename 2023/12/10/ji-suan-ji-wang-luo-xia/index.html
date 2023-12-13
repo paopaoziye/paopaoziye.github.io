@@ -1,0 +1,1525 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/31.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">计算机网络（下）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">计算机网络</span>
+                            </a>
+                        
+                            <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B/">
+                                <span class="chip bg-color">《计算机网络自顶向下》</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                计算机基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="计算机网络（二）"><a href="#计算机网络（二）" class="headerlink" title="计算机网络（二）"></a>计算机网络（二）</h1><h2 id="计算机网络进阶"><a href="#计算机网络进阶" class="headerlink" title="计算机网络进阶"></a>计算机网络进阶</h2><h3 id="1-网络层"><a href="#1-网络层" class="headerlink" title="1.网络层"></a>1.网络层</h3><h4 id="1-1概述"><a href="#1-1概述" class="headerlink" title="1.1概述"></a>1.1概述</h4><p><strong>①任务</strong></p>
+<blockquote>
+<p>实现<strong>数据包</strong>在<strong>各个网络之间</strong>的传输</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 通过IP数据报传递源IP地址和目的IP地址等信息</div>
+<p><strong>②IP地址</strong></p>
+<blockquote>
+<p><strong>因特网</strong>给<strong>每台主机/路由器的每个接口</strong>分配的<strong>全世界</strong>范围内<strong>唯一的标识符</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 主要分为网络号和主机号两部分，前者用于标识不同网络，后者用于标识网络下的不同接口</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 与MAC地址不同，传输过程中，源IP地址和目的ip地址始终保持不变</div>
+<blockquote>
+<p>如一个<strong>主机A</strong>经过<strong>路由B</strong>发送给<strong>主机C</strong>，<code>IP源地址:目的IP地址</code>在<strong>两段链路</strong>中均为<code>IPA:IPC</code></p>
+</blockquote>
+<p><strong>③地址解析协议APR</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 基于APR协议根据IP地址找到对应的MAC地址</div>
+<blockquote>
+<p><strong>每台主机</strong>都有一个<strong>APR高速缓存表</strong>，记录了<strong>其他主机</strong>的<strong>IP地址</strong>和<strong>MAC地址</strong>的<strong>对应关系</strong></p>
+</blockquote>
+<blockquote>
+<p>若<strong>发送方</strong>无法在<strong>APR高速缓存表</strong>中<strong>根据IP地址</strong>到<strong>接受方</strong>的<strong>MAC地址</strong>，则发送<strong>请求报文</strong>给<strong>其他所有主机</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 请求报文包含了发送方的IP地址和MAC地址，以及接收方的IP地址</div>
+
+<blockquote>
+<p><strong>接收方</strong>接收到<strong>请求报文</strong>后，将<strong>发送方的IP地址和MAC地址</strong>记录到自己的<strong>APR高速缓存表</strong>中，并给其发送<strong>响应报文</strong>，<strong>发送方</strong>接受到<strong>响应报文</strong>后其<strong>记录</strong>下来并<strong>使用</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 响应报文包含接收方的IP地址和MAC地址</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> APR协议不能跨网络使用</div>
+
+<hr>
+<h4 id="1-2IP地址应用"><a href="#1-2IP地址应用" class="headerlink" title="1.2IP地址应用"></a>1.2IP地址应用</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 以IPv4地址为例</div>
+<p><strong>①表示</strong></p>
+<blockquote>
+<p><strong>IPv4地址</strong>本质上是<strong>一串32位的比特</strong>，将<strong>每8位作为一组</strong>，转化为<strong>十进制</strong>并<strong>使用<code>.</code>隔开</strong></p>
+</blockquote>
+<p><strong>②编址方式</strong></p>
+<blockquote>
+<p><strong>分类编址</strong>：将<strong>IP地址</strong>分为<strong>几类</strong>，<strong>格式不同</strong>，分配给<strong>不同的接口</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 主要是网络号和主机号的占比不同，从而导致可指派的网络数量和每个网络可分配的IP地址不同</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 分类编址并不灵活，导致一些分类使用较少，使得地址无法被充分利用</div>
+<blockquote>
+<p><strong>划分子网</strong>：在<strong>分类编址的基础</strong>上，将<strong>主机号的一部分</strong>作为<strong>子网号</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 子网掩码的格式决定借用几位作为子网号</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JW_6.png" alt="子网掩码"></p>
+<blockquote>
+<p><strong>无分类编址</strong>：在<strong>IPv4地址后</strong>加上<code>/[数字]</code>，标识<strong>网络号前缀所占比特数量</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 依旧通过子网掩码计算对应的网络号</div>
+
+<p><strong>③应用规划</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 将IPv4地址块划分为几个小的地址块分配给不同网络</div>
+<blockquote>
+<p><strong>定长的子网掩码</strong>：使用<strong>同一个子网掩码</strong>划分子网</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 每个子网所分配的IP地址数量相同，容易造成IP地址的浪费</div>
+<blockquote>
+<p><strong>变长的子网掩码</strong>：使用<strong>不同子网掩码</strong>划分子网</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 根据每个网络所需的IP地址数量决定主机号位数，从而决定子网掩码的格式</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 子网掩码只是一种划分方法</div>
+
+<hr>
+<h4 id="1-3IP数据报的传递"><a href="#1-3IP数据报的传递" class="headerlink" title="1.3IP数据报的传递"></a>1.3IP数据报的传递</h4><p><strong>①路由器</strong></p>
+<blockquote>
+<p><strong>路由器</strong>的<strong>不同接口</strong>连接<strong>不同网络</strong>，接口的<strong>IP地址</strong>也被称为<strong>默认网关</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个路由器都会在路由表中记录其接口的IP地址，即与其相连的网络信息，并将这些信息传递给与之相连的路由器</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 路由器详细记录自身的接口的IP地址信息，粗略记录与之相连的路由器接口的IP地址信息</div>
+<blockquote>
+<p><strong>路由聚合</strong>：记录<strong>其他路由器</strong>的<strong>信息</strong>时，寻找其路由表<strong>所有表项的共同前缀</strong>，并记录在<strong>一个表项中</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JW_7.png" alt="路由聚合"><br><strong>②过程概述</strong></p>
+<blockquote>
+<p>若<strong>发送方</strong>和<strong>接收方</strong>处于<strong>同一网络</strong>，<strong>直接转发</strong>即可</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 将发送方和接收方IP地址与一方地址掩码相与，若结果相同，则两者在同一网络</div>
+<blockquote>
+<p>若两者<strong>不在同一网络</strong>，则在<strong>路由表</strong>中查找<strong>目的网络</strong>，将其<strong>转发</strong>到对应<strong>接口/路由器</strong>，从而传递到<strong>对应网络</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 将目的地址，和表项的地址掩码相与，若结果和表项网络地址一致，则找到目的网络</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JW_8.png" alt="IP数据报的传递"></p>
+<hr>
+<h4 id="1-4路由选择协议"><a href="#1-4路由选择协议" class="headerlink" title="1.4路由选择协议"></a>1.4路由选择协议</h4><p><strong>①引言</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 为了实现信息在路由器之间传递，需要向路由表中填充信息，包含目的网络地址、对应接口和辅助信息</div>
+<blockquote>
+<p><strong>静态路由配置</strong>：<strong>人工配置</strong>网络路由</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 开销小，但是不能及时适应网络状态变化，一般只在小规模网络中使用</div>
+<blockquote>
+<p><strong>动态路由配置</strong>：通过<strong>路由选择协议</strong>自动获取<strong>路由信息</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 将因特网分为多个自治系统AS，系统内采用内部网关协议进行路由选择，系统之间采用外部网关协议进行路由选择</div>
+<p><strong>②路由信息协议RIP</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一种内部网关协议，将路由器到直连网络的距离定义为1，到非直连网络的距离定义为经过的路由器数目加一</div>
+<blockquote>
+<p><strong>一开始</strong>，路由器只知道<strong>自己到直连网络的距离</strong>为<code>1</code></p>
+</blockquote>
+<blockquote>
+<p><strong>每个路由器</strong>和<strong>相邻路由器</strong>周期性<strong>交换信息</strong>并<strong>更新路由表</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当接收到的路由信息中，有新的/更好的路由信息，则添加/替换</div>
+<blockquote>
+<p>经过<strong>若干次交换和更新</strong>后，<strong>每个路由器</strong>都知道<strong>到达本AS内各个网络的最短距离</strong>和<strong>下一跳地址</strong></p>
+</blockquote>
+<p><strong>③开放最短路径优先OSPF协议</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一种内部网关协议，用某一指标（距离、带宽和时延等）描述链路</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 为了适应更大的网络，可以将AS划分为更小的区域进行管理</div>
+<blockquote>
+<p><strong>每个路由器</strong>都会记录其<strong>相邻路由器</strong>，并通过<strong>周期性发送问候分组</strong>维护</p>
+</blockquote>
+<blockquote>
+<p><strong>每个路由器</strong>将其到<strong>直连网络</strong>和<strong>邻居路由器</strong>的<strong>链路状态（LSA）</strong>发送给<strong>其他所有路由器</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>每个路由器</strong>都有一个<strong>数据链路状态库LSDB</strong>存储<strong>LSA</strong>，最后<strong>LSDB</strong>将存储<strong>所有链路信息</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>每个路由器</strong>基于<strong>LSDB</strong>进行<strong>最短路径优先</strong>计算，构建出<strong>各自到达其他路由器的最短路径</strong>，从而构建各自的<strong>路由表</strong></p>
+</blockquote>
+<p><strong>④边界网关协议BGP</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一种外部网关协议，由于不同的AS路由度量标准不一，只能尽力寻找一条能达到目的AS的相对较好的路由</div>
+<blockquote>
+<p><strong>每个AS</strong>都有<strong>一个路由器</strong>作为<strong>BGP发言人</strong>，<strong>不同的AS</strong>通过各自的<strong>BGP发言人</strong>连接</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> BGP发言人除了运行BGP协议，还需要运行其所在AS的内部网关协议</div>
+<blockquote>
+<p><strong>BGP发言人</strong>之间通过建立<strong>TCP连接</strong>交换<strong>路由信息</strong>，并从中找出<strong>到达各自自治系统</strong>的<strong>不存在回路</strong>的路由</p>
+</blockquote>
+<hr>
+<h4 id="1-5虚拟专用网VPN"><a href="#1-5虚拟专用网VPN" class="headerlink" title="1.5虚拟专用网VPN"></a>1.5虚拟专用网VPN</h4><p><strong>①引言</strong></p>
+<blockquote>
+<p><strong>多个主机</strong>使用<strong>同一个公有IP地址</strong>，形成一个<strong>专用网</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> IP地址可分为专用地址和共用地址，专用地址无需申请即可使用，同时也不是唯一的</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 专用网的公有地址通常对应的是其中的一个路由器接口</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 使用专用地址的主机无法在因特网上通信，只能在专用网内通信，且专用网外的主机无法主动联系专用网内的主机</div>
+
+
+<p><strong>②工作原理</strong></p>
+<blockquote>
+<p>若只在<strong>专用网内通信</strong>，则使用<strong>专用地址</strong>即可</p>
+</blockquote>
+<blockquote>
+<p>若需要在<strong>因特网</strong>上进行<strong>数据传输</strong>，<strong>发送方</strong>对数据报<strong>加密</strong>并传递给<strong>发送方路由器</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>接收方路由器</strong>接收到后，<strong>解密</strong>数据报，并<strong>传递</strong>给<strong>对应专用网主机</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若需要访问专用网，则需要接入因特网访问其公有地址</div>
+<p><strong>③网络地址转换NAT</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 有些专用网路由器中不止一个公用IP地址，但是远少于其专用地址，便于主机上网</div>
+<blockquote>
+<p>当<strong>专用网一台主机</strong>需要<strong>接入因特网</strong>时，根据其<strong>专用地址</strong>从<strong>路由器的公用IP地址</strong>中<strong>申请一个</strong>用于互联网通信</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 这样，专用地址和共用地址为一对一的关系，效率较低</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 使用运输层的端口号和IP地址进行转换，这样一个公用地址可以对应多个专用地址</div>
+
+<hr>
+<h3 id="2-运输层"><a href="#2-运输层" class="headerlink" title="2.运输层"></a>2.运输层</h3><h4 id="2-1概述"><a href="#2-1概述" class="headerlink" title="2.1概述"></a>2.1概述</h4><p><strong>①任务</strong></p>
+<blockquote>
+<p>为运行在<strong>不同主机</strong>上的<strong>进程</strong>提供直接的<strong>通信服务</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 网络通信的最终实体还是进程而非主机</div>
+<p><strong>②端口号</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 由于不同操作系统的进程标识符不同，故统一采用16比特的端口号区分不同进程</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 端口号只有本地意义，不同计算机的相同端口号没有联系</div>
+<blockquote>
+<p><strong>熟知端口号</strong>：<code>0~1023</code>，分配给了TCP/IP体系中<strong>最重要的应用协议</strong>，如<strong>HTTP</strong>使用<code>80</code>，<strong>DNS</strong>使用<code>53</code></p>
+</blockquote>
+<blockquote>
+<p><strong>登记端口号</strong>：<code>1024~49151</code>，为<strong>没有熟知端口号</strong>的<strong>应用程序（windows桌面应用）</strong>使用，需要<strong>在IANA机构登记</strong>以防止重复</p>
+</blockquote>
+<blockquote>
+<p><strong>短暂端口号</strong>：<code>49152~65535</code>，留给<strong>客户进程（如浏览器）</strong>选择<strong>短暂使用</strong>，</p>
+</blockquote>
+<p><strong>③UDP和TCP</strong></p>
+<blockquote>
+<p><strong>UDP协议</strong>：支持<strong>单播</strong>、<strong>多播</strong>和<strong>广播</strong>，可以<strong>随时</strong>发送数据，提供<strong>不可靠传输</strong>服务</p>
+</blockquote>
+<blockquote>
+<p><strong>TCP协议</strong>：<strong>仅仅</strong>支持<strong>单播</strong>，需要<strong>先建立连接</strong>然后<strong>发送数据</strong>，<strong>发送完数据</strong>后还需要<strong>释放连接</strong>，提供<strong>可靠传输</strong>服务</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> UDP以应用报文为单位进行封装，而TCP将应用报文划分为多个字节流，从发送缓存取出一部分或全部字节进行封装</div>
+<p><strong>④TCP报文段首部格式</strong></p>
+<blockquote>
+<p><strong>源端口</strong>：标识<strong>发送</strong>TCP报文段的<strong>进程</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>目的端口</strong>：标识<strong>接收</strong>TCP报文段的<strong>进程</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>序号</strong>：指出TCP报文段<strong>数据载荷第一个字节</strong>的<strong>序号</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该序号指的时其再所有数据中的位置，而不是在TCP报文段的位置</div>
+<blockquote>
+<p><strong>确认号</strong>：指出<strong>期望接收</strong>到对方<strong>下一个TCP报文段的数据载荷第一个字节的序号</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 同时也是对之前受到数据的确认，若确认号为n，表示序号为n-1前的数据都被正确接收</div>
+<blockquote>
+<p><strong>ACK</strong>：当该位为<code>1</code>，<strong>确认号有效</strong>，若为<code>0</code>，则<strong>无效</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>SYN</strong>：TCP<strong>建立连接</strong>时<strong>同步序号</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>FIN</strong>：用于<strong>释放TCP连接</strong>，为<code>1</code>时表示为<strong>TCP连接释放报文段</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>RST</strong>：用于<strong>复位TCP连接</strong>，为<code>1</code>时表示<strong>TCP连接出现异常</strong>，需要<strong>释放连接并重新建立</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> RST置1还可用于拒绝一个非法的报文段或者拒绝打开一个TCP连接</div>
+<blockquote>
+<p><strong>窗口</strong>：指出<strong>发送方</strong>的<strong>接收窗口长度</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>填充字段</strong>：由于有些内容<strong>长度可变</strong>，需要使用填充<strong>使报文段首部能被4整除</strong></p>
+</blockquote>
+<hr>
+<h4 id="2-2TCP连接"><a href="#2-2TCP连接" class="headerlink" title="2.2TCP连接"></a>2.2TCP连接</h4><p><strong>①创建</strong></p>
+<blockquote>
+<p><strong>被请求方</strong>首先<strong>创建传输控制块</strong>，随后进入<strong>监听状态</strong>，称为<strong>被动打开连接</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 用于存储TCP连接的重要信息，如TCP连接表等</div>
+<blockquote>
+<p><strong>请求方</strong>建立<strong>传输控制块</strong>，随后发送<strong>TCP连接请求报文段</strong>，并进入<strong>同步已发送状态</strong>，称为<strong>主动打开连接</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> TCP连接请求报文段SYN被置为1，表明为TCP连接请求报文段，不能携带数据，序号初始化为x</div>
+<blockquote>
+<p><strong>被请求方</strong>接收到<strong>TCP连接请求报文段</strong>后，如果<strong>同意建立连接</strong>，则发送<strong>TCP连接请求确认报文段</strong>，进入<strong>同步已接收状态</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该报文段SYN和ACK置为1，确认号为x+1，表示对TCP连接请求报文段的确认，序号初始化为y</div>
+<blockquote>
+<p><strong>请求方</strong>接收到<strong>TCP连接请求确认报文段</strong>后，发送<strong>二次确认报文段</strong>，进入<strong>连接建立状态</strong>，<strong>被请求方</strong>接收到<strong>二次确认报文段</strong>之后也进入<strong>连接建立状态</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该报文段ACK置为1，确认号为y+1，表示对TCP连接请求确认报文段的确认，序号被设为x+1</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 二次确认报文段用于防止失效的TCP连接请求报文段突然又传送到被接受方，导致其进入同步已接受状态，引发错误</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JW_9.png" alt="TCP连接的建立"><br><strong>②释放</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 两方都可释放连接，以请求方主动释放连接为例</div>
+<blockquote>
+<p><strong>请求方</strong>发送<strong>TCP连接释放报文段1</strong>，进入<strong>终止等待1状态</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该报文段FIN，ACK置1，声明其为TCP连接释放报文段1，设置序号u以及确认号为v</div>
+<blockquote>
+<p><strong>被请求方</strong>接收到<strong>TCP连接释放报文段1</strong>之后，发送<strong>TCP确认报文段1</strong>，并进入<strong>关闭等待状态</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该报文段ACK置1，设置序号v以及确认号u+1</div>
+<blockquote>
+<p><strong>请求方</strong>接收到<strong>TCP确认报文段1</strong>之后，进入<strong>终止等待2状态</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 此时被请求方还能向请求方发送数据</div>
+<blockquote>
+<p><strong>被请求方完成数据通信</strong>，进程通知其<strong>释放连接</strong>，发送<strong>TCP连接释放报文段2</strong>，并进入<strong>最后确认状态</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该报文段FIN，ACK置1，设置序号w，因为可能又发送了一些数据，设置确认号u+1，对一开始的重复确认</div>
+<blockquote>
+<p><strong>请求方</strong>接收到<strong>TCP连接释放报文段2</strong>后，发送<strong>TCP确认报文段</strong>，等待<strong>2倍MSL时间</strong>后进入<strong>关闭状态</strong>，<strong>被请求方</strong>接收到<strong>TCP确认报文段2</strong>后进入<strong>关闭状态</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该报文段ACK置1，设置序号u+1以及确认号w+1，对TCP连接释放报文段2进行确认</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> MSL为最长报文寿命，等待这么长时间防止确认报文段丢失</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JW_11.png" alt="TCP连接的释放"></p>
+<hr>
+<h4 id="2-3TCP功能"><a href="#2-3TCP功能" class="headerlink" title="2.3TCP功能"></a>2.3TCP功能</h4><p><strong>①流量控制</strong></p>
+<blockquote>
+<p><strong>控制</strong>发送方的<strong>发送速率</strong>，<strong>便于</strong>接收方<strong>接收</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 接收方根据自己接收窗口的大小动态调整发送方的发送窗口，只有落入发送窗口的数据可以被发送</div>
+<p><strong>②拥塞控制</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 拥塞指网络中某一资源供不应求，会导致网络的性能下降，使用拥塞窗口限制发送窗口大小</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 发送窗口通常取拥塞窗口和接收窗口的小值</div>
+<blockquote>
+<p><strong>慢开始</strong>：<strong>一开始</strong>,<strong>拥塞窗口</strong>大小为<code>1</code>，并随着<strong>发送轮次</strong>的<strong>增大</strong>而<strong>指数级增大</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>拥塞避免</strong>：当<strong>拥塞窗口</strong>增大到<strong>慢开始门限</strong>，不再<strong>指数级增长</strong>，改为<strong>线性增长</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当重传计时器超时，即视为拥塞，慢开始门限变为拥塞时拥塞窗口的一半，并将拥塞窗口变为1，重新开始以上流程</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 然后，重传计时器超时可能并不代表拥塞，而是对应报文丢失，会降低网络的性能</div>
+<blockquote>
+<p><strong>快重传</strong>：<strong>接收方</strong>一旦<strong>接收到数据</strong>就<strong>立即</strong>发送对应的<strong>确认分组</strong>，即使收到了<strong>失序的分组</strong>，当<strong>重复</strong>收到<strong>同一个分组的三个确认分组</strong>，<strong>立即重传</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 排除了其他原因导致的重传计时器超时</div>
+<blockquote>
+<p><strong>快恢复</strong>：执行<strong>快重传</strong>后，<strong>慢开始门限</strong>和<strong>拥塞窗口</strong>调整为<strong>当前窗口的一半</strong>，并执行<strong>拥塞避免算法</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/JW_10.png" alt="拥塞控制"><br><strong>③超时重传</strong></p>
+<blockquote>
+<p><strong>重传时限</strong>最好<strong>略大于</strong>数据的<strong>往返时间RTT</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 不同数据经过的网络不同，往返时间也不同，将每次测量的到的RTT样本加权计算并更新平均往返时间RTT</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 报文段重传会导致样本失效，若仅仅丢弃该样本，可能导致重传时限无法更新导致被反复重传</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 所以每次报文段重传适当增大重传时限</div>
+<p><strong>④可靠传输</strong></p>
+<blockquote>
+<p><strong>发送方</strong>：只有落入<strong>发送窗口</strong>的<strong>字节</strong>才能被<strong>发送</strong>，当收到了<strong>新的确认分组</strong>，<strong>发送窗口后沿向前移动</strong>到<strong>确认号位置</strong>，若<strong>重复收到三次同样的确认号</strong>，则<strong>重发对应的字节</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 发送窗口前沿会受到后沿和窗口大小的影响，可能向前移动，不动甚至是收缩</div>
+<blockquote>
+<p><strong>接收方</strong>：只有落入<strong>接收窗口</strong>的<strong>字节</strong>才能被<strong>接收</strong>，每当<strong>收到数据</strong>，会发送<strong>确认分组</strong>，确认号为<strong>最小的失序字节序号</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 易知可靠传输主要依靠接收方的确认分组实现，所以除了每次收到数据，每隔一段时间也要发送确认分组</div>
+
+<hr>
+<h3 id="3-应用层"><a href="#3-应用层" class="headerlink" title="3.应用层"></a>3.应用层</h3><h4 id="3-1引言"><a href="#3-1引言" class="headerlink" title="3.1引言"></a>3.1引言</h4><p><strong>①任务</strong></p>
+<blockquote>
+<p>通过<strong>应用进程的交互</strong>，实现<strong>特定网络应用</strong>，也是<strong>设计和建设计算机网络</strong>的<strong>最终目的</strong></p>
+</blockquote>
+<p><strong>②进程关系</strong></p>
+<blockquote>
+<p><strong>客户/服务器方式</strong>：进程分为<strong>客户端</strong>和<strong>服务器端</strong>，<strong>客户端</strong>向<strong>服务器端请求服务</strong>，<strong>服务器端收到请求后</strong>为其<strong>提供服务</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 服务器端总是处于运行状态，并具有固定的端口号，等待客户端的请求</div>
+<blockquote>
+<p><strong>对等方式</strong>：各个进程是<strong>对等的</strong>，既<strong>请求服务</strong>，也<strong>提供服务</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可扩展性好，成本低</div>
+
+<hr>
+<h4 id="3-2域名系统DNS"><a href="#3-2域名系统DNS" class="headerlink" title="3.2域名系统DNS"></a>3.2域名系统DNS</h4><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将域名转化为IP地址，这样就可以通过便于记忆的域名寻找对应主机了</div>
+<p><strong>①域名结构</strong></p>
+<blockquote>
+<p>由<strong>多级域名</strong>组成，<strong>级别越低</strong>的域名写在<strong>越左边</strong>，使用<code>.</code><strong>隔开</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>顶级域名</strong>：<strong>国家顶级域名</strong>、<strong>通用顶级域名</strong>和<strong>反向域</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如cn表示中国，com表示企业公司，org表示非营利性组织</div>
+<blockquote>
+<p><strong>二级域名</strong>：由<strong>国家自行决定</strong>，我国将其分为<strong>类别域名</strong>和<strong>行政区域名</strong>两大类</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 二级域名以下还能层层划分，表现为一种树形结构</div>
+<p><strong>②域名服务器</strong></p>
+<blockquote>
+<p><strong>根域名服务器</strong>：记录所有<strong>顶级域名服务器</strong>的<strong>域名</strong>以及<strong>IP地址</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 二级域名以下还能层层划分，表现为一种树形结构</div>
+<blockquote>
+<p><strong>顶级域名服务器</strong>：记录再<strong>该顶级域名服务器</strong>注册的所有<strong>二级域名</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>权限域名服务器</strong>：记录<strong>某个区域</strong>的<strong>所有主机</strong>的域名</p>
+</blockquote>
+<blockquote>
+<p><strong>本地域名服务器</strong>：当<strong>一个主机</strong>发出<strong>DNS请求</strong>时，先传送到<strong>本地域名服务器</strong>，由其<strong>转发</strong>到<strong>以上三种服务器</strong>中</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 本地域名服务器起到代理的作用，需要直接配置在使用该域名服务器的主机上</div>
+<p><strong>③工作原理</strong></p>
+<blockquote>
+<p>当访问<strong>域名</strong>时，<strong>用户主机</strong>会在<strong>自己的DNS高速缓存</strong>中寻找域名<strong>对应的IP地址</strong></p>
+</blockquote>
+<blockquote>
+<p>若没有，发送<strong>DNS查询报文</strong>给<strong>本地域名服务器</strong>，<strong>本地域名服务器</strong>在<strong>上述三种域名服务器</strong>找到<strong>对应域名</strong>后返回给<strong>主机</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 本地域名服务器向上层的查询方式可分为递归查询和迭代查询两种，递归查询代价太大，简单介绍迭代查询</div>
+<blockquote>
+<p><strong>本地域名服务器</strong>先向<strong>根域名服务器</strong>查询，得到对应的<strong>顶级域名服务器</strong>地址，随后从对应<strong>顶级域名服务器</strong>获得对应<strong>权限域名服务器</strong>地址，最后从<strong>权限域名服务器</strong>查找到<strong>目的域名的IP地址</strong></p>
+</blockquote>
+<hr>
+<h4 id="3-3电子邮件"><a href="#3-3电子邮件" class="headerlink" title="3.3电子邮件"></a>3.3电子邮件</h4><p><strong>①组成</strong></p>
+<blockquote>
+<p><strong>用户代理</strong>：<strong>用户</strong>与<strong>电子邮件系统</strong>的接口，即<strong>客户端软件</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>邮件服务器</strong>：<strong>电子邮件系统</strong>的<strong>基础设施</strong>，用于<strong>发送</strong>和<strong>接收邮件</strong>，并<strong>维护用户的邮箱</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 邮件服务器可以看做为多个邮箱的集合</div>
+<p><strong>②工作原理</strong></p>
+<blockquote>
+<p><strong>发送方</strong>使用<strong>用户代理</strong>通过<strong>邮件发送协议</strong>向<strong>发送方邮件服务器</strong>发送邮件</p>
+</blockquote>
+<blockquote>
+<p><strong>发送方邮件服务器</strong>通过<strong>邮件发送协议</strong>向<strong>接收方邮件服务器</strong>发送邮件</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 常用的邮件发送协议为SMTP，两方建立TCP连接后，通过SMTP命令和应答报文段实现通信</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> SMTP协议只能传送ASCLL码文本数据，不能传送二进制对象</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以通过MIME协议将非ASCLL码数据转化为ASCLL码数据，再使用SMTP协议进行传输</div>
+<blockquote>
+<p><strong>接收方</strong>使用<strong>用户代理</strong>通过<strong>邮件接收协议</strong>从<strong>接收方邮件服务器</strong>读取邮件</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 邮件读取协议有POP和IMAP，前者只能从邮件服务器下载文件，后者可以在自己的计算机上操控邮件服务的邮箱</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 若发送时采用了MIME，接收时也需要使用MIME将ASCLL码文本数据转化为非ASCLL码文本数据</div>
+
+<hr>
+<h4 id="3-4万维网"><a href="#3-4万维网" class="headerlink" title="3.4万维网"></a>3.4万维网</h4><p><strong>①引言</strong></p>
+<blockquote>
+<p><strong>定义</strong>：一个<strong>大规模</strong>、<strong>联机式</strong>的<strong>信息储藏所</strong>，是运行在因特网上的一个<strong>分布式应用</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> HTML文档描述网页的结构和内容，CSS文档描述网页的样式，JavaScript文档控制网页的行为</div>
+<blockquote>
+<p><strong>网页基本组成</strong>：<strong>HTML文档</strong>、<strong>CSS文档</strong>、<strong>JavaScript文档</strong>以及一些<strong>资源文件（如图片）</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> HTML文档描述网页的结构和内容，CSS文档描述网页的样式，JavaScript文档控制网页的行为</div>
+
+<blockquote>
+<p><strong>URL资源定位符</strong>：指明<strong>资源的位置</strong>，<strong>格式</strong>为<code>[协议]://[主机]:[端口]/[路径]</code></p>
+</blockquote>
+<p><strong>②HTTP协议</strong></p>
+<blockquote>
+<p><strong>定义</strong>：万维网<strong>客户端</strong>和<strong>服务端</strong>的<strong>通信格式</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 客户端和服务端首先建立TCP连接，客户端向服务端发送请求报文，服务端返回响应报文</div>
+<blockquote>
+<p><strong>请求报文</strong>：主要由<strong>一个请求行</strong>和<strong>多个首部行</strong>组成，以<strong>换行结尾（很少会在换行后跟实体主体）</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 请求行指明方法、URL和HTTP版本，首部行指明请求细节</div>
+<blockquote>
+<p><strong>响应报文</strong>：由<strong>一个状态行</strong>和<strong>多个首部行</strong>，以<strong>换行结尾（有时会在换行后跟实体主体）</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 状态行表明返回结果，如接受请求、请求错误或找不到页面等，首部行和请求报文对应</div>
+<p><strong>③工作原理</strong></p>
+<blockquote>
+<p>在<strong>浏览器中输入域名</strong>，<strong>客户端</strong>和<strong>服务端</strong>建立<strong>TCP连接</strong>，客户端发送<strong>HTTP请求报文</strong>给对应的<strong>服务端</strong>，<strong>服务端</strong>返回<strong>HTTP响应报文</strong>，<strong>浏览器</strong>对<strong>HTTP响应报文</strong>进行<strong>解析</strong>，获得<strong>网站内容</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 浏览器的内核是渲染引擎，不同浏览器的显示效果不同</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将最近的一些请求和响应存放在web缓存中，若新请求与web缓存某请求相同，直接返回对应的响应，不再建立连接</div>
+<p><strong>④Cookie</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 对无状态的HTTP进行状态化</div>
+<blockquote>
+<p>当<strong>用户</strong>的浏览器进程<strong>首次</strong>向<strong>某网页服务端</strong>发送<strong>HTTP请求报文</strong>，<strong>该网页服务端</strong>会创建一个<strong>cookie识别码</strong>并<strong>记录用户访问该网站的各种信息</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>该网页服务端</strong>通过<strong>HTTP响应报文</strong>传回该<strong>Cookie识别码</strong>，<strong>客户端</strong>将其记录在对应的<strong>Cookie文件</strong>中</p>
+</blockquote>
+<blockquote>
+<p>下次用户<strong>再访问该网页</strong>，会向<strong>HTTP请求报文</strong>中添加对应的<strong>Cookie识别码</strong>，<strong>网页服务端</strong>识别<strong>Cookie识别码</strong>后<strong>根据记录信息</strong>返回<strong>特定的网页</strong></p>
+</blockquote>
+<hr>
+<h4 id="3-5其他常见协议"><a href="#3-5其他常见协议" class="headerlink" title="3.5其他常见协议"></a>3.5其他常见协议</h4><p><strong>①动态主机配置协议DHCP</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 各个主机从DHCP服务器请求IP地址、子网掩码、默认网关等网络配置信息</div>
+<blockquote>
+<p><strong>DHCP客户端</strong>广播发送<strong>DHCP发现报文</strong>，其中包含<strong>事务ID</strong>和<strong>客户端的MAC地址</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 因为DHCP客户并不知道网络中有多少个DHCP服务器，故广播发送</div>
+<blockquote>
+<p><strong>DHCP服务器端</strong>接收到<strong>DHCP发现报文</strong>之后，根据<strong>客户端的MAC地址</strong>查找从<strong>数据库</strong>中查找对应的<strong>配置信息</strong>，如果<strong>没有找到</strong>则采用<strong>默认配置信息</strong>，并<strong>广播</strong>发送<strong>DHCP提供报文</strong>，其中包含<strong>事务ID</strong>和<strong>网络配置信息</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 服务端会采用ARP协议检测分配的IP是否被占用再分配</div>
+<blockquote>
+<p><strong>客户端</strong>接收<strong>DHCP提供报文</strong>，并根据<strong>事务ID</strong>判断<strong>是否属于自己</strong>，若属于，则<strong>接收并使用</strong>其中<strong>配置信息</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若网络中有多个DHCP服务端，则可能受到多个DHCP提供报文，选择最先到达的</div>
+<blockquote>
+<p><strong>DHCP客户端</strong>广播发送<strong>DHCP请求报文</strong>，其中包含<strong>事务ID</strong>、<strong>客户端的MAC地址</strong>和<strong>选择的服务端的IP地址</strong>等信息</p>
+</blockquote>
+<blockquote>
+<p><strong>选择的DHCP服务端</strong>广播发送<strong>DHCP确认报文</strong>，<strong>客户端</strong>接收后就<strong>可以使用相关网络配</strong>置了</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 服务端向客户端发送报文均采用广播发送，因为直到现在客户端才有自己的IP地址</div>
+<p><strong>②文件传送协议FTP</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 提供交互式的访问，允许客户指明文件的类型与格式，并允许文件有存取权限</div>
+<blockquote>
+<p><strong>FTP客户端</strong>和<strong>FTP服务端</strong>建立<strong>TCP连接</strong>，并传输<strong>FTP相关控制命令</strong></p>
+</blockquote>
+<blockquote>
+<p>当两者<strong>有数据需要传输时</strong>，再<strong>另外</strong>建立一个<strong>TCP连接</strong>作为<strong>数据通道</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> FTP常常用于在计算机之间批量传输文件，如XFTP软件</div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/ji-suan-ji-wang-luo-xia/">http://example.com/2023/12/10/ji-suan-ji-wang-luo-xia/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">计算机网络</span>
+                                </a>
+                            
+                                <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B/">
+                                    <span class="chip bg-color">《计算机网络自顶向下》</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/ji-suan-ji-zu-cheng-yuan-li-xia/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/39.webp" class="responsive-img" alt="计算机组成原理（下）">
+                        
+                        <span class="card-title">计算机组成原理（下）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            输入输出
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                        <span class="chip bg-color">计算机组成原理</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E3%80%8B/">
+                        <span class="chip bg-color">《计算机组成原理》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/ji-suan-ji-wang-luo-shang/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/31.webp" class="responsive-img" alt="计算机网络（上）">
+                        
+                        <span class="card-title">计算机网络（上）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            计算机网络
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B/">
+                        <span class="chip bg-color">《计算机网络自顶向下》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

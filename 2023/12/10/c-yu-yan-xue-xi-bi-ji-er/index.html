@@ -1,0 +1,1739 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">C语言学习笔记（二）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                                <span class="chip bg-color">C语言</span>
+                            </a>
+                        
+                            <a href="/tags/%E3%80%8AC%E5%92%8C%E6%8C%87%E9%92%88%E3%80%8B/">
+                                <span class="chip bg-color">《C和指针》</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                编程语言
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="C语言学习笔记（二）"><a href="#C语言学习笔记（二）" class="headerlink" title="C语言学习笔记（二）"></a>C语言学习笔记（二）</h1><h2 id="C语言基础"><a href="#C语言基础" class="headerlink" title="C语言基础"></a>C语言基础</h2><h3 id="1-指针"><a href="#1-指针" class="headerlink" title="1.指针"></a>1.指针</h3><h4 id="1-1引言"><a href="#1-1引言" class="headerlink" title="1.1引言"></a>1.1引言</h4><blockquote>
+<p><strong>比特/位</strong>：计算机的<strong>最小存储单位</strong>，可以存储<strong>1和0</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 数据以比特流的形式存储，被解释为什么取决于我们的使用方式和声明方式</div>
+
+<blockquote>
+<p><strong>字节</strong>：<strong>一个字节</strong>包含<strong>8个比特</strong>，存储<strong>一个字符</strong>所需要的<strong>位数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 字节是计算机的最小寻址单位</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 一些数据类型（如整型）的存储的起始位置只能是某些特定的字节，通常是2和4的倍数</div>
+<blockquote>
+<p><strong>字</strong>：<strong>一个字</strong>由<strong>2/4个字节</strong>组成</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个字的地址是其最左边或者最右边的字节的地址，每台机器规定不同</div>
+
+<blockquote>
+<p><strong>寻址</strong>：<strong>高级语言</strong>一般通过<strong>变量名</strong>访问<strong>内存位置</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 变量名和地址的关系由编译器提供，硬件还是通过地址访问内存位置</div>
+
+<h4 id="1-2指针变量"><a href="#1-2指针变量" class="headerlink" title="1.2指针变量"></a>1.2指针变量</h4><p><strong>①声明格式</strong>：</p>
+<blockquote>
+<p><code>[指向变量的数据类型] *[指针变量名] = &amp;[指向的变量]</code></p>
+</blockquote>
+<blockquote>
+<p><code>*</code>为<strong>间接访问操作符</strong>，可以通过它<strong>访问指针指向的地址</strong></p>
+</blockquote>
+<blockquote>
+<p><code>&amp;</code>为<strong>取址符</strong>，通过它可以<strong>获得变量的地址</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 对（*指针变量）进行操作相当于对其指向的变量进行操作</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 指针不是一个整型，其数据类型取决于指向的变量的数据类型</div>
+<blockquote>
+<p>假设<strong>整数</strong><code>a</code>的<strong>地址</strong>是<code>100</code>，不能使用<code>*100 = 10</code>对<code>a</code>进行<strong>赋值</strong>，因为<code>100</code>是<strong>字面量</strong>，<strong>缺省情况</strong>下是<strong>整型</strong>而不是<strong>指针变量</strong>，应该写为<code>*（int*）100 = 10</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以使用该技巧访问特定地址</div>
+
+<p><strong>②未初始化的指针</strong></p>
+<blockquote>
+<p>使用<strong>未初始化的指针</strong>会<strong>引发错误</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">int *a;
+*a = 12;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若指针变量没有被初始化，则其值可能为一垃圾值（动态变量）或者0（静态变量）</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 未初始化指针可能指向非法地址（内存错误）或者导致储存地址处于错误的边界（总线错误）</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以先将指针初始化为空指针NULL，但是注意要进行空指针检查，因为对空指针引用也是错误的</div>
+
+<p><strong>③指针的指针</strong></p>
+<blockquote>
+<p><code>int** a = &amp;b</code>：其中<code>b</code>是一个<strong>指向整型变量的指针</strong>，<code>a</code>表示一<strong>个指向指向整型变量指针的指针</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 依此类推，也称为多重指针</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 尽量少使用多重指针</div>
+<p><strong>④指针与左右值</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">int a = 10；
+int* b = &amp;a；<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p><code>*b</code>相当于<code>a</code>，作为<strong>右值</strong>代表的是<code>10</code>，作为<strong>左值</strong>时代表<code>a</code>的<strong>内存位置</strong></p>
+</blockquote>
+<blockquote>
+<p><code>&amp;a</code>作为<strong>右值</strong>代表<strong>a的地址</strong>，<strong>不能作为左值</strong>，因为<code>&amp;a</code><strong>不能代表内存中某一特定位置</strong></p>
+</blockquote>
+<blockquote>
+<p><code>b</code>作为<strong>右值</strong>代表<code>a</code>的<strong>地址</strong>，作为<strong>左值</strong>表示的是<code>b</code><strong>自身的地址</strong></p>
+</blockquote>
+<h4 id="1-3指针表达式"><a href="#1-3指针表达式" class="headerlink" title="1.3指针表达式"></a>1.3指针表达式</h4><p><strong>①单操作符</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ++/--的优先级高于*，*的优先级高于+/-</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意++/--操作符和+/-1的不同，前者会改变变量，后者不会</div>
+<blockquote>
+<p><code>*b+1</code>：作为<strong>左值</strong>是<strong>非法</strong>的，作为<strong>右值</strong>表示对<strong>变量</strong><code>a</code>中的<strong>数据加1</strong></p>
+</blockquote>
+<blockquote>
+<p><code>*（b+1）</code>：相当于<code>b</code><strong>后一个内存</strong>的<strong>标识符</strong>，作为<strong>左值</strong>代表对应的<strong>内存位置</strong>，作为<strong>右值</strong>代表对应位置<strong>存储的数据</strong>。</p>
+</blockquote>
+<blockquote>
+<p><code>++b</code>：作为<strong>左值</strong>是<strong>非法</strong>的，作为<strong>右值</strong>表示<code>b</code>后一个<strong>内存位置</strong></p>
+</blockquote>
+<blockquote>
+<p><code>b++</code>：作为<strong>左值</strong>是<strong>非法</strong>的，作为<strong>右值</strong>表示<code>b</code>对应的<strong>内存位置</strong>，随后<strong>该指针变量指向后一个内存位置</strong></p>
+</blockquote>
+<blockquote>
+<p><code>*++b</code>：作为的<strong>左值</strong>表示的是<code>b</code><strong>指向内存单元的后一个内存单元</strong>，作为<strong>右值</strong>表示<code>b</code><strong>指向位置后一个位置存放的数据</strong></p>
+</blockquote>
+<blockquote>
+<p><code>*b++</code>：作为<strong>左值</strong>表示的是该<strong>指针指向的内存位置</strong>，随后<strong>该指针变量加一</strong>，作为<strong>右值</strong>表示的是<strong>该指针指向位置存放的数据</strong>，随后<strong>该数据加一</strong></p>
+</blockquote>
+<blockquote>
+<p><code>++*b</code>：作为<strong>左值</strong>是<strong>非法</strong>的，作为<strong>右值</strong>表示的是<strong>b指向变量存放数据</strong>的值<strong>加一</strong></p>
+</blockquote>
+<p><strong>②加减法</strong></p>
+<blockquote>
+<p><strong>与整数加减法</strong>：当对<strong>指针</strong>加减一个<strong>整数</strong><code>n</code>时，该指针会<strong>根据其指向的数据的类型调整自身大小</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如某台机器上float占4个字节，对一个float类型指针+n，该指针的大小会增加4n个字节</div>
+<blockquote>
+<p><strong>指针之间的减法</strong>：只有当<strong>两个指针</strong>都指向<strong>同一数组中的元素</strong>时，才允许进行<strong>减法</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 得到的数据类型是ptrdiff_t，是一种有符号整数，表示两个指针指向位置的距离（以数组元素的长度为单位）</div>
+<p><strong>③比较</strong></p>
+<blockquote>
+<p><strong><code>==</code>与<code>!=</code><strong>：可以用于</strong>任意两个指针</strong>，判断两个指针<strong>是否相同</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>大小比较</strong>：只能用于<strong>同一个数组</strong>内的元素</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 同一数组的元素还包括数组末尾后一位元素，但是不包括数组开头前一位元素</div>
+
+<h4 id="1-4函数指针"><a href="#1-4函数指针" class="headerlink" title="1.4函数指针"></a>1.4函数指针</h4><p><strong>①格式</strong></p>
+<blockquote>
+<p><code>返回类型 (*f)(参数列表)</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ()为函数调用操作符，f()的结果是函数f的返回值</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以解释为f被间接引用后是一个函数，该函数的返回值是一个整型，所以f为一个函数指针</div>
+
+<p><strong>②初始化</strong></p>
+<blockquote>
+<p><code>返回类型 (*f)(参数列表) = 函数名</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在函数指针初始化时，其参数列表需要与之对应</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 其中函数名在编译时会被转换为函数指针，故可以不用取址符号</div>
+
+<p><strong>③函数指针数组</strong></p>
+<blockquote>
+<p><code>返回类型 (*f[]) ();</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ()和[]均为同一优先级，结合性从左向右，优先级均高于*</div>
+<pre class="line-numbers language-none"><code class="language-none">double  (*oper_func[])(double,double) = {a,b,c...};
+result = oper_func[1](i,j);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>④用途</strong></p>
+<blockquote>
+<p><strong>函数指针</strong>可以作为<strong>参数</strong>提供给<strong>另一个函数</strong>，以便在<strong>另一个函数</strong>中使用，也被称为<strong>回调函数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 将函数中与数据类型相关的操作替换为一系列等价的函数，需要使用哪类数据类型的对应操作，传递对应的函数指针</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将传递给函数以及回调函数的数据类型采用*void，用于接收不同数据类型的指针</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在使用这些数据的指针时，必须要强制转换为正确的数据类型</div>
+<pre class="line-numbers language-none"><code class="language-none">/*比较函数的整数版本
+int compare_ints(void const *a,void const *b)
+{
+	if(*(int *)a = *(int *)b)
+		return 0;
+	else
+		return 1;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="2-函数"><a href="#2-函数" class="headerlink" title="2.函数"></a>2.函数</h3><h4 id="2-1格式"><a href="#2-1格式" class="headerlink" title="2.1格式"></a>2.1格式</h4><p><strong>①源文件</strong></p>
+<blockquote>
+<p><strong>概述</strong>：由<strong>返回类型</strong>、<strong>函数名</strong>、<strong>参数列表</strong>和<strong>函数主体</strong>组成</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 函数可以没有返回值，这是返回类型为void</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 函数中的形参是实参的一个副本，修改形参不会影响实参，如果想要修改实参，需要传递实参的地址</div>
+<pre class="line-numbers language-none"><code class="language-none">返回类型 函数名（形参类型1 形参名1，...形参类型n 形参名n）
+{
+	statement；
+    return expression；
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong><code>return</code>语句</strong>：用于<strong>返回结果</strong>并表明此处是函数的<strong>退出点</strong>，可以出现在<strong>函数主体</strong>的<strong>任意位置</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如果函数主体的最后一条语句不是return语句，则该语句之后为函数的隐式退出点</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若函数的返回类型不为void，则需要在每个可能的退出点将值返回，其函数主体最后一条语句必为return语句</div>
+
+<blockquote>
+<p><strong>类型</strong>、<strong>形参</strong>和<strong>statement</strong>都<strong>不是必须</strong>的，因此<strong>最简单的函数</strong>如下</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 这种函数可以达到存根的目的,即为尚未编写的代码“占好位置”，可以保持程序在结构上的完整性</div>
+<pre class="line-numbers language-none"><code class="language-none">void function （void）
+{
+
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>②函数声明</strong></p>
+<blockquote>
+<p><strong>格式</strong>：<code>返回类型 函数名(形参类型n 形参名n);</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 向编译器提供函数相关信息，当调用函数时传入参数与形参的类型不匹配，会根据函数声明强制转换变量类型</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以将函数定义在单独的C文件中，并将函数声明置于同一个头文件中，主函数文件使用include命令调用即可</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若没有对应的函数声明，函数会被调用，但是传递给函数的参数会进行缺省参数提升</div>
+<blockquote>
+<p><code>char</code>和<code>short</code>被转换为<code>int</code>，<code>float</code>被转化为<code>double</code>，且默认返回一个<strong>整型</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 函数原型不要写在代码块中，因为代码块中的函数原型有代码块作用域，可能会覆盖原来的函数声明</div>
+
+
+<p><strong>③黑盒</strong></p>
+<blockquote>
+<p>利用<code>static</code>关键字修饰<strong>函数内置数据和函数</strong>，使其变为<strong>函数文件私有</strong>，<strong>外界不能访问</strong></p>
+</blockquote>
+<h4 id="2-递归函数"><a href="#2-递归函数" class="headerlink" title="2.递归函数"></a>2.递归函数</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>直接或者间接<strong>调用自身</strong>的函数，当递归函数<strong>不再满足某个条件</strong>时，便<strong>停止</strong>调用自身</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 递归函数需要设置限制条件，且每次递归调用之后就越接近该限制条件</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 递归的计算代价非常大，如果可以使用循环等解决问题，不要使用递归</div>
+<p><strong>②例子</strong></p>
+<blockquote>
+<p>输入<code>value</code>为<code>4267</code></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">binary_to_ascii(unsigned int value)
+{
+	unsigned int a;
+	a = value/10;
+	if(a!=0)
+		binary_to_ascii(a)
+	putchar(value%10+‘0)’;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③实现过程</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每次函数调用，都会创建一个栈帧，存放临时变量和返回地址等，并压入程序栈中，直到函数调用结束才会弹出</div>
+<blockquote>
+<p><strong>第一次调用</strong>，在<strong>堆栈</strong>中压入了<code>value1 = 4267</code>和<code>a1 = 426</code></p>
+</blockquote>
+<blockquote>
+<p><code>a!=0</code>，进行<strong>第二次调用</strong>，压入<code>value2 = 426</code>、<code>a2 = 42</code></p>
+</blockquote>
+<blockquote>
+<p><code>a!=0</code>，进行<strong>第三次调用</strong>，压入<code>value3 = 42</code>，<code>a3 = 4</code></p>
+</blockquote>
+<blockquote>
+<p><code>a!=0</code>，进行<strong>第四次调用</strong>，压入<code>value[4] = 4</code>，<code>a[4] = 0</code></p>
+</blockquote>
+<blockquote>
+<p><code>a=0</code>，<strong>递归停止</strong>，开始<strong>从堆栈中弹出并打印</strong>变量<code>a4</code>、<code>a3</code>、<code>a2</code>、<code>a1</code></p>
+</blockquote>
+<h4 id="2-3可变参数列表"><a href="#2-3可变参数列表" class="headerlink" title="2.3可变参数列表"></a>2.3可变参数列表</h4><p><strong>①实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 需要引入stdarg.h头文件</div>
+<blockquote>
+<p>该<strong>头文件</strong>中声明了一个<code>va_list</code><strong>类型</strong>和<strong>三个宏</strong><code>va_start</code>、<code>va_arg</code>和<code>va_end</code></p>
+</blockquote>
+<p><strong>②用法</strong></p>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意函数形参部分的写法，可变参数列表用...代替，在书写函数声明时，也需要注意</div>
+<blockquote>
+<p>在<strong>函数体内部</strong>定义<code>va_list</code>类型参数，代表<strong>可变参数列表</strong></p>
+</blockquote>
+<blockquote>
+<p>使用<code>va_statr</code>宏<strong>初始化</strong><code>va_list</code>类型参数</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该宏第一个参数是va_list类型参数number_n，第二个参数是可变参数列表的前一个参数n_value</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 要使用该宏，则函数必须至少有一个已确定的参数，如下例中的value</div>
+<blockquote>
+<p>使用<code>va_arg</code><strong>代替可变参数</strong>进行计算</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该宏接收的第一个参数是va_list类型参数number_n，第二个参数是可变参数列表的数据类型</div>
+
+<blockquote>
+<p>使用<code>va_end</code><strong>注销</strong>可变参数列表</p>
+</blockquote>
+<p><strong>③例子</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;stdarg.h&gt;</span></span>
+
+<span class="token comment">//用于计算输入数字的平均数</span>
+<span class="token keyword">float</span> <span class="token function">average</span> <span class="token punctuation">(</span><span class="token keyword">int</span> n_value<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	va_list number_n<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> count<span class="token punctuation">;</span>
+	<span class="token keyword">float</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token function">va_start</span><span class="token punctuation">(</span>number_n<span class="token punctuation">,</span>n_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span>count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>count<span class="token operator">&lt;</span>n_value<span class="token punctuation">;</span>count<span class="token operator">+=</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		sum <span class="token operator">=</span> sum<span class="token operator">+</span><span class="token function">va_arg</span><span class="token punctuation">(</span>number_n<span class="token punctuation">,</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token function">va_end</span><span class="token punctuation">(</span>number_n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> sum<span class="token operator">/</span>n_value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-数组"><a href="#3-数组" class="headerlink" title="3.数组"></a>3.数组</h3><h4 id="3-1引言"><a href="#3-1引言" class="headerlink" title="3.1引言"></a>3.1引言</h4><p><strong>①格式</strong></p>
+<blockquote>
+<p><code>数据类型 数组名[数组大小]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> C语言中，数组的长度一开始就要确定</div>
+<p><strong>②数组名</strong></p>
+<blockquote>
+<p><strong>本质</strong>上是一个<strong>指针常量</strong>，指向<strong>数组的起始位置</strong>，同时还包含<strong>数组长度等信息</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 创建数组时编译器会根据其长度为数组划分对应的内存空间，随后为数组名划分内存</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 只有数组名在表达式中被使用了，编译器才会创建对应的指针常量</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 数组名大部分情况下可作为指针常量使用，但是有些情况下代表整个数组</div>
+<blockquote>
+<p>比如<code>sizeof(数组名)</code>会返回<strong>整个数组的长度</strong>，<code>&amp;数组名</code>产生的是一个<strong>数组的指针</strong>，而<strong>不是</strong>一个<strong>指向指针的指针</strong></p>
+</blockquote>
+<p><strong>③下标引用</strong></p>
+<blockquote>
+<p><code>a[b]</code>相当于<code>*(a+b)</code>，<strong>所以下标从0开始</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 指针间接访问的效率大于等于下标引用效率，详细见《C与指针》p145-p150</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> C语言中，下标引用可以应用于所有的指针，不仅仅局限于数组名</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意检查数组越界问题</div>
+<p><strong>④作为形参传递</strong></p>
+<blockquote>
+<p><strong>格式</strong>：<code>数据类型 数组名[]</code>或者<code>数据类型 *指针名</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 函数在声明数组参数时，不需要指明他的长度，因为函数只接受数组的地址，而不为其分配内存</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果需要知道数组的大小，还需要传递另一个参数</div>
+
+<h4 id="3-2初始化"><a href="#3-2初始化" class="headerlink" title="3.2初始化"></a>3.2初始化</h4><p><strong>②格式</strong></p>
+<blockquote>
+<p><code>数据类型 数组名[] = {值1,值2,…}</code></p>
+</blockquote>
+<blockquote>
+<p>当数组为<strong>静态变量</strong>时，在<strong>程序执行前</strong>便被初始化，<strong>缺省情况</strong>下<strong>全部初始化</strong>为<strong>0</strong></p>
+</blockquote>
+<blockquote>
+<p>当数组为<strong>动态变量</strong>时，在<strong>缺省情况</strong>下各个元素的<strong>值是随机的</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 若程序执行流将多次经过一数组，可以将其设置为静态变量，减少其初始化次数</div>
+
+<p><strong>②不完整的初始化</strong></p>
+<blockquote>
+<p><strong>缺少元素</strong>：<strong>优先填充前面的</strong>，<strong>其余</strong>的被<strong>初始化</strong>为<code>0</code></p>
+</blockquote>
+<blockquote>
+<p><strong>缺少数组长度</strong>：<strong>编译器</strong>将其<strong>设置为</strong>刚好能够<strong>容纳所有初始值</strong>的大小</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 只有在显示初始化时才能缺少数组长度</div>
+
+<p><strong>③字符数组的初始化</strong></p>
+<blockquote>
+<p><code>char a[] = “b”</code>相当于<code>char a = {'b',NUL}</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 只有在初始化字符数组时“b”才代表一个初始化列表，其他场合均为字符串常量</div>
+<blockquote>
+<p>如下，<code>message1</code>是一个<strong>字符数组</strong>，<code>message2</code>是一个<strong>指向字符串字面值的指针</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">char message1[] = "hello";
+char *message2 = "hello";<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="3-3多维数组"><a href="#3-3多维数组" class="headerlink" title="3.3多维数组"></a>3.3多维数组</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p><code>数据类型 数组名 [维度1][维度2]…[维度N]</code>，如<code>int a [3][4]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 可以解读为a数组有三个元素，每个元素又是一个包含4个元素的数组</div>
+<blockquote>
+<p><strong>存储形式</strong>：按照<strong>最右边的下标</strong>率先变化，比如<code>int *b = &amp;a[1][3]</code>,<code>b++</code>为<code>a[2][0]</code></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/C_1.png" alt="多维数组的存储"></p>
+<p><strong>②数组名</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 类比一维数组，将n维数组看为一个元素是n-1维数组的一维数组，数组名即指向第一个n-1维数组的指针</div>
+<blockquote>
+<p><code>a</code>：指向第一个包含<strong>四个整型元素的数组</strong></p>
+</blockquote>
+<blockquote>
+<p><code>a+1</code>:指向的<strong>第二个四元素一维数组</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 指针的加减法根据指针的类型决定</div>
+
+<blockquote>
+<p><code>*(a+1)</code>：指向<strong>第二个四个元素数组</strong>的<strong>第一个整型元素的指针</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意这还不是其中所包含的数据，而是一个指针常量</div>
+<blockquote>
+<p><code>*a+1</code>:指向<strong>第一个四个元素数</strong>组的<strong>第二个元素</strong></p>
+</blockquote>
+<blockquote>
+<p><code>*(*a+1)</code>：为<strong>第一个四个元素数组</strong>的<strong>第二个元素</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 一层一层解引用，n维数组要解引用n次，才能获得数据</div>
+<p><strong>③初始化</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 以二维数组a为例</div>
+<blockquote>
+<p><code>int a[][] = {元素1、元素2…};</code>，元素按照其<strong>存储顺序</strong>排列</p>
+</blockquote>
+<blockquote>
+<p><code>int a[][] = {{数组1}，{数组2}…};</code></p>
+</blockquote>
+<blockquote>
+<p>通过<code>a[i][j] = 值ij;</code>，<strong>一个个赋值</strong></p>
+</blockquote>
+<p><strong>④多维数组与指针</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 以二维数组a为例</div>
+<blockquote>
+<p><strong>多维数组的指针</strong>：<code>数组元素数据类型 (*p)[数组元素个数] = 二维数组名</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 对*p进行下标引用，得到一个数据，所以*p是一个一维数组，故p为一个指向一维数组的指针，也就是二维数组名</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 这里的数组元素个数与之对应，如int (*p)[4] = a;，且要记得加上括号，因为下标引用的优先级高于引用</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将数组传递给一个函数，本质上是传递其元素类型的指针，对于多维数组，就是传递一个指向数组的指针</div>
+<blockquote>
+<p><strong>接收二维数组的形参</strong>应写为<code>void func1(int (*a)[4])</code>或者<code>void func1(int a[][4])</code></p>
+</blockquote>
+<blockquote>
+<p><strong>指向元素的指针</strong>：<code>数组元素数据类型 *p = &amp;数组名[0][0]</code>或者<code>数组元素数据类型 *p = 数组名[0]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 注意后者是没有&amp;符号的，因为后者就是一个指向元素的指针！</div>
+<blockquote>
+<p><strong>指针数组</strong>：<code>数据类型* 数组名[元素个数]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 与指向数组的指针仅仅只有一个括号之差</div>
+
+<h4 id="3-4字符串"><a href="#3-4字符串" class="headerlink" title="3.4字符串"></a>3.4字符串</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>以<code>'/0'</code><strong>结尾</strong>的<strong>字符数组</strong> </p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> '/0'的位模式全为0，也叫NUL字节，是字符串的终止符，字符串长度不包括终止符的长度</div>
+
+<p><strong>②基本操作</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 需要包含string.h头文件</div>
+<blockquote>
+<p><code>strlen()</code>：<strong>测量字符串长度</strong>，即字符串包含的<strong>字符个数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该函数返回的长度的数据类型为size_t，是一个无符号数</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 大部分字符串相关函数都是根据终止符判断字符串长度，故要确保操作后字符串不会溢出，否则会缺少终止符</div>
+<blockquote>
+<p><code>strcpy()</code>：<strong>复制字符串</strong>，若其长度<strong>超出了容器的限度</strong>，则会<strong>覆盖其后面的内存空间</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 大部分字符串函数不允许两个字符数组参数重叠，否则函数的返回值是未定义的</div>
+<blockquote>
+<p><code>strcat()</code>：<strong>连接字符串</strong>，将<strong>一个字符串</strong>添加到<strong>另一个字符串后面</strong></p>
+</blockquote>
+<blockquote>
+<p><code>strcmp()</code>：<strong>字符串比较</strong>，进行的是<strong>字典比较</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 字典比较：对两个字符串的逐个字符从头进行比较，只要比较出一个字符大小即可判断结果，'/0'小于任何字符</div>
+
+<blockquote>
+<p><strong>长度受限的字符串函数</strong>：为了<strong>防止目标数组溢出</strong>，定义了<strong>对应函数</strong>的<strong>长度受限版本</strong>，接受一个<strong>长度参数</strong>，用于<strong>限制操作的字符个数</strong>，如<code>strncpy()</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 但是这些函数可能导致目标数组不是以'/0'结尾，可能会导致程序崩溃</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以在函数调用完后将字符数组的最后一个元素改为NUL</div>
+
+<p><strong>③字符查找</strong></p>
+<blockquote>
+<p><code>strchr()</code>：返回对应字符<strong>第一次</strong>出现的下标</p>
+</blockquote>
+<blockquote>
+<p><code>strrchr()</code>：返回对应字符<strong>最后一次</strong>出现的下标</p>
+</blockquote>
+<blockquote>
+<p><code>strpbrk()</code>：返回<strong>一组字符中任意一个字符第一次</strong>出现的下标</p>
+</blockquote>
+<p><strong>④字串查找</strong></p>
+<blockquote>
+<p><code>strstr()</code>：返回<strong>子串</strong>第一次出现的<strong>起始位置</strong></p>
+</blockquote>
+<blockquote>
+<p><code>strtok()</code>：<strong>删除</strong>字符串中的所有<strong>标记字符</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 通常以字符串形式传递多个标记字符</div>
+
+<blockquote>
+<p><code>strcspn()</code>:检索<strong>字符串中标记字符第一次出现</strong>的下标</p>
+</blockquote>
+<p><strong>⑤字符操作</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 需要包含ctype.h头文件</div>
+<blockquote>
+<p><strong>字符分类</strong>：根据对应<strong>分类函数</strong>定义，判断<strong>字符</strong>是否为<strong>该类型</strong>，如<code>isspace()</code>判断其是否为<strong>空白字符</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>字符转换</strong>：转换<strong>字符</strong>的<strong>大小写</strong>等形式，如<code>tolower()</code>将<strong>字符</strong>转化为<strong>小写形式</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 直接测试或者操纵字符可能会影响程序的移植性，推荐使用对应的字符操作函数</div>
+<blockquote>
+<p>比如<code>if(ch&gt;='A' &amp;&amp; ch&lt;='Z')</code>判断<code>ch</code>是否为<strong>大写字母</strong>，在使用<strong>EBCDIC字符集</strong>上的机器上将<strong>失败</strong></p>
+</blockquote>
+<h3 id="4-结构"><a href="#4-结构" class="headerlink" title="4.结构"></a>4.结构</h3><h4 id="4-1格式"><a href="#4-1格式" class="headerlink" title="4.1格式"></a>4.1格式</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p><strong>声明格式</strong>：<code>struct 结构类型名称 结构名</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 结构变量是标量类型，所以相同的结构变量可以相互赋值</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将结构定义在一个头文件中，使用include包含即可</div>
+<pre class="line-numbers language-none"><code class="language-none">struct [结构类型名称]
+{
+	/*每个成员的类型和名字*/
+	结构成员表;
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以使用typedef关键字为结构定义新的名字</div>
+<blockquote>
+<p><strong>声明格式</strong>：<code>结构类型名称 结构名</code></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">typedef struct
+{
+	结构成员表(每个成员的类型和名字);
+}[结构类型名称];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②结构的访问</strong></p>
+<blockquote>
+<p><strong><code>.</code>操作符</strong>：<code>结构名.成员名</code></p>
+</blockquote>
+<blockquote>
+<p><strong><code>-&gt;</code>操作符</strong>：<code>对应结构指针-&gt;成员名</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 这两个操作符优先级相同，比*和[]高，结合性从左向右</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当结构需要作为函数参数时，可以传递该结构的指针，并使用-&gt;访问成员，效率较高</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 假设px是结构x的指针，px指向的地址和结构第一个成员的地址是一样的，但是*px代表的是整个结构</div>
+<p><strong>③初始化</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 结构体的初始化也分为静态变量和动态变量两种，各个成员按照对应的规则初始化</div>
+<blockquote>
+<p><strong>整体赋值</strong>：<code>x1.a = {10,'x',1.0}</code></p>
+</blockquote>
+<blockquote>
+<p><strong>成员赋值</strong>：<code>x1.a = 10</code></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">typedef struct 
+{
+	int a;
+	char b;
+	float c;
+}X;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>④结构体的内存分配</strong></p>
+<blockquote>
+<p><strong>编译器</strong>按照<strong>成员列表顺序</strong>给<strong>每个成员</strong>分配内存</p>
+</blockquote>
+<blockquote>
+<p><code>sizeof()</code>可以得到一个结构的<strong>整体长度</strong>，<code>offsetof</code>可以确定<strong>结构中某个成员</strong>的<strong>偏离结构存储起始位置的字节数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当成员的存储需要满足正确的边界对齐条件，结构的起始位置必须满足成员中边界要求最严格的对齐条件</div>
+<blockquote>
+<p>假设<strong>一台机器</strong>的<strong>整型值长度</strong>为<strong>4字节</strong>，且要求其<strong>起始存储位置</strong>必须能<strong>被4整除</strong>，则<strong>结构</strong><code>X</code>在<strong>内存中</strong>的<strong>存储情况</strong>如下</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">struct X1
+{
+	char a;
+	int b;
+	char c;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 成员之间会出现未填充的内存空间</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 对边界要求最严格的成员应该首先出现，这样可以节省内存</div>
+<pre class="line-numbers language-none"><code class="language-none">struct X2
+{
+	int b;
+	char a;
+	char c;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/C_3.png" alt="结构的存储"></p>
+<h4 id="4-2结构的引用"><a href="#4-2结构的引用" class="headerlink" title="4.2结构的引用"></a>4.2结构的引用</h4><p><strong>①结构的自引用</strong></p>
+<blockquote>
+<p>结构<strong>内部成员为自己</strong>本身是<strong>非法</strong>的，但是可以<strong>包含自己的指针类型</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 因为结构在定义时内存大小是不确定的，而结构指针的内存大小在结构创建前就已经确定</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 不能使用之前没有定义的结构标签</div>
+<pre class="line-numbers language-none"><code class="language-none">//非法，因为在声明next成员时，Node还有没被声明
+typedef struct
+{
+  ElemType data;
+  struct Node *next;
+}Node;
+//合法
+typedef struct Node
+{
+  ElemType data;
+  struct Node *next;
+}Node;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②结构之间的引用</strong></p>
+<blockquote>
+<p>当需要定义几种之间<strong>存在联系</strong>的结构，可以采用<strong>不完整声明</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如下，A中不能以B为成员，只能以B的指针为成员，因为不完整声明导致B的大小不能确定</div>
+<pre class="line-numbers language-none"><code class="language-none">struct B; //B的不完整声明
+struct A
+{
+	struct *B;
+};
+struct B
+{
+	struct A;
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="4-3位段"><a href="#4-3位段" class="headerlink" title="4.3位段"></a>4.3位段</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>一种<strong>特殊的结构</strong>，<strong>成员</strong>必须是<code>int</code>、<code>signed</code>、<code>unsigned</code>类型，<strong>成员名后面</strong>是<strong>一个冒号</strong>和<strong>一个整数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 整数表示该成员占用的位的数目</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 位段可以将长度为奇数的数据包装在一起，并且可以访问一个整型值的部分内容</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> signed和unsigned声明位段成员比较好，如果将位段声明为int类型，被解释为有符号数还是无符号数由编译器决定</div>
+<pre class="line-numbers language-none"><code class="language-none">struct WeiDuan
+{
+	unsigned a : 7;
+	unsigned b : 6;
+	unsigned c : 19;
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②位段的移植性问题</strong></p>
+<blockquote>
+<p>很多<strong>编译器</strong>将<strong>位段成员</strong>的<strong>长度</strong>限制在<strong>一个整型值</strong>之内，<strong>32位机器可以使用</strong>的位段声明可能在<strong>16位机器无法使用</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>位段的内存</strong>是<strong>从左向右</strong>分配还是<strong>从右向左</strong>分配<strong>由机器决定</strong></p>
+</blockquote>
+<blockquote>
+<p>当位段的<strong>总位数</strong>不是<strong>8的倍数</strong>时，其<strong>内存分配</strong>是否要<strong>边界对齐</strong>取决于<strong>编译器</strong></p>
+</blockquote>
+<h4 id="4-4联合"><a href="#4-4联合" class="headerlink" title="4.4联合"></a>4.4联合</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>联合<strong>各个成员共用</strong>内存中的<strong>位置以及数据</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当联合的某个成员被访问时，则将该联合所在位置的位以该成员类型解释被访问</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当联合中各个成员具有不同的长度，联合的长度就是它最长成员的长度</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当成员之间大小相差太大时，可以将联合的成员修改为不同数据类型的指针，这样就不会造成空间浪费</div>
+<pre class="line-numbers language-none"><code class="language-none">union
+{
+	float f;
+	int i;
+}fi;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②初始化</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 联合变量的初始值只有一个，且必须是联合第一个成员类型的数据</div>
+<pre class="line-numbers language-none"><code class="language-none">union
+{
+	int a;
+	float b;
+	char c[4];
+}x = {5};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="5-内存操作"><a href="#5-内存操作" class="headerlink" title="5.内存操作"></a>5.内存操作</h3><h4 id="5-1动态内存分配"><a href="#5-1动态内存分配" class="headerlink" title="5.1动态内存分配"></a>5.1动态内存分配</h4><p><strong>①<code>malloc()</code></strong></p>
+<blockquote>
+<p><strong>概述</strong>：从<strong>堆</strong>中提取一块<strong>连续的内存</strong>，并返回一个<strong>指向这块内存的指针</strong>，如果<strong>没有合适的内存</strong>则返回<strong>NULL</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 这块内存没有被初始化</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> malloc()返回内存的起始位置始终满足边界对齐条件</div>
+<blockquote>
+<p><strong>格式</strong>：<code>p = malloc（size）;</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> malloc()返回值是void *，size为需要分配的字节数，其类型是size_t，一个无符号类型</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以将size替换为n*sizeof（数据类型），n为数量，还可以提高程序的可移植性</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> C语言中，void*可以赋值给其他类型指针，但是在其他语言如C++中不行，故最好在前面加一个强制类型转换</div>
+<p><strong>②<code>calloc()</code></strong></p>
+<blockquote>
+<p><strong>概述</strong>：和<code>malloc</code>一样用于<strong>分配内存</strong>，但是<code>calloc</code>会将内存内<strong>所有元素初始化为0</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>格式</strong>：<code>p = calloc(num,size);</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 其中num为元素的个数，size为每个元素的大小，类型均为size_t</div>
+
+<p><strong>③<code>realloc()</code></strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>修改</strong>一个<strong>已经分配</strong>的<strong>内存块的大小</strong>，<strong>新增加的内存</strong>添加到<strong>原先内存块</strong>的<strong>尾部</strong>，如果用于<strong>缩小原来的内存块</strong>，则将<strong>尾部</strong>的内存块<strong>释放</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 新增内存没有被初始化</div>
+<blockquote>
+<p><strong>格式</strong>：<code>p = realloc(ptr,size);</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 其中ptr是需要调整大小的指针，size是调整后内存的大小</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若原先的内存块大小无法改变，则realloc会重新划分一块内存，并释放原来的内存，所以要使用realloc返回的指针</div>
+
+<p><strong>④<code>free()</code></strong></p>
+<blockquote>
+<p><strong>概述</strong>：当<strong>分配的内存不再使用</strong>时，需要使用<code>free()</code>将其<strong>释放</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>格式</strong>：<code>free (p)</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 动态分配得到的指针是变量，但最好不要修改，因为最后还需要根据其释放掉对应内存块</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以构建该指针的副本对内存进行操作</div>
+<p><strong>⑤常见错误</strong></p>
+<blockquote>
+<p>对<code>NULL</code>指针/<strong>非动态分配</strong>的指针使用<code>free()</code>进行<strong>释放</strong></p>
+</blockquote>
+<blockquote>
+<p>对<strong>分配的内存</strong>操作时<strong>越界</strong></p>
+</blockquote>
+<blockquote>
+<p>释放<strong>动态内存的一部分</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>访问</strong>一块<strong>已经被释放的内存</strong>，如当<strong>内存分配指针被备份</strong>时</p>
+</blockquote>
+<blockquote>
+<p>内存释放<strong>不及时</strong>，导致<strong>内存泄漏</strong></p>
+</blockquote>
+<h4 id="5-2内存操作函数"><a href="#5-2内存操作函数" class="headerlink" title="5.2内存操作函数"></a>5.2内存操作函数</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 内存操作函数接收和返回的参数都是void*，且会以字节规定操作的内存长度</div>
+<blockquote>
+<p><code>memcpy()</code>：<strong>直接复制一块内存中</strong>数据到<strong>另一块内存</strong>中</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 操作的两块内存不能重叠</div>
+<blockquote>
+<p><code>memmove()</code>：类似于<code>memcpy()</code>，但是<code>memmove()</code>在<strong>转移时</strong>会经过一块<strong>临时内存</strong></p>
+</blockquote>
+<blockquote>
+<p><code>memcmp()</code>：按照<strong>无符号字符逐字节比较</strong>两块内存的内容</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 不能用于比较非单字节数据</div>
+<blockquote>
+<p><code>memchr()</code>：查找某块内存<strong>某个字符第一次出现</strong>的位置</p>
+</blockquote>
+<blockquote>
+<p><code>memset()</code>：将一段内存<strong>都设置</strong>为<strong>某个字符</strong></p>
+</blockquote>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/c-yu-yan-xue-xi-bi-ji-er/">http://example.com/2023/12/10/c-yu-yan-xue-xi-bi-ji-er/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                                    <span class="chip bg-color">C语言</span>
+                                </a>
+                            
+                                <a href="/tags/%E3%80%8AC%E5%92%8C%E6%8C%87%E9%92%88%E3%80%8B/">
+                                    <span class="chip bg-color">《C和指针》</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/c-yu-yan-xue-xi-bi-ji-san/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/0.webp" class="responsive-img" alt="C语言学习笔记（三）">
+                        
+                        <span class="card-title">C语言学习笔记（三）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            预处理器
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8AC%E5%92%8C%E6%8C%87%E9%92%88%E3%80%8B/">
+                        <span class="chip bg-color">《C和指针》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/c-yu-yan-xue-xi-bi-ji-yi/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/0.webp" class="responsive-img" alt="C语言学习笔记（一）">
+                        
+                        <span class="card-title">C语言学习笔记（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            C语言基础
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8AC%E5%92%8C%E6%8C%87%E9%92%88%E3%80%8B/">
+                        <span class="chip bg-color">《C和指针》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

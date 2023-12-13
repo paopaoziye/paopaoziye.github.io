@@ -1,0 +1,1896 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">算法范式（上）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">计算机基础</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                                <span class="chip bg-color">数据结构与算法</span>
+                            </a>
+                        
+                            <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
+                                <span class="chip bg-color">《hello 算法》</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                计算机基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="算法范式（上）"><a href="#算法范式（上）" class="headerlink" title="算法范式（上）"></a>算法范式（上）</h2><h3 id="1-分治"><a href="#1-分治" class="headerlink" title="1.分治"></a>1.分治</h3><h4 id="1-1概述"><a href="#1-1概述" class="headerlink" title="1.1概述"></a>1.1概述</h4><blockquote>
+<p><strong>分</strong>：<strong>递归</strong>地将<strong>原问题</strong>分解为<strong>两个或多个子问题</strong>，达到<strong>最小问题</strong>时终止</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 分解得到的子问题需要是独立的</div>
+<blockquote>
+<p><strong>治</strong>：从<strong>易知解</strong>的<strong>最小问题</strong>从底至顶地<strong>合并各个子问题</strong>，从而构建出<strong>原问题的解</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 分治通常基于递归实现</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 递归不仅能优化时间复杂度，还有利于并行计算</div>
+
+<h4 id="1-2二分查找"><a href="#1-2二分查找" class="headerlink" title="1.2二分查找"></a>1.2二分查找</h4><p><strong>①递归实现思路</strong></p>
+<blockquote>
+<p>由于是<strong>基于搜索区间</strong>进行分治，所以函数的<strong>主要参数</strong>为<strong>区间开始索引</strong>和<strong>区间结束索引</strong>，<strong>每次递归</strong>根据<strong>中点值和<code>target</code>关系</strong>修改这<strong>两个值</strong>即可</p>
+</blockquote>
+<p><strong>②代码实现</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 二分查找：问题 f(i, j) */
+int dfs(int nums[], int target, int i, int j) {
+    // 若区间为空，代表无目标元素，则返回 -1
+    if (i &gt; j) {
+        return -1;
+    }
+    // 计算中点索引 m
+    int m = (i + j) / 2;
+    if (nums[m] &lt; target) {
+        // 递归子问题 f(m+1, j)
+        return dfs(nums, target, m + 1, j);
+    } else if (nums[m] &gt; target) {
+        // 递归子问题 f(i, m-1)
+        return dfs(nums, target, i, m - 1);
+    } else {
+        // 找到目标元素，返回其索引
+        return m;
+    }
+}
+
+/* 二分查找 */
+int binarySearch(int nums[], int target, int numsSize) {
+    int n = numsSize;
+    // 求解问题 f(0, n-1)
+    return dfs(nums, target, 0, n - 1);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-3构建树问题"><a href="#1-3构建树问题" class="headerlink" title="1.3构建树问题"></a>1.3构建树问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>根据一个树的<strong>前序遍历</strong><code>preorder</code>和<strong>中序遍历</strong><code>inorder</code>构建<strong>二叉树</strong>，假设二叉树中<strong>没有重复节点</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 树的前序遍历和中序遍历都可以被划分为对应的三部分，且对应的子树同样也可以被同样划分</div>
+<blockquote>
+<p><strong>前序遍历</strong>：可<strong>按序</strong>分为<code>根节点:左子树:右子树</code></p>
+</blockquote>
+<blockquote>
+<p><strong>中序遍历</strong>：可<strong>按序</strong>分为<code>左子树:根节点:右子树</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 根据前序遍历得到的根节点划分中序遍历，总而得到左子树和右子树</div>
+<p><strong>②思路</strong></p>
+<blockquote>
+<p>根据<strong>前序遍历的根节点</strong>划分<strong>中序遍历</strong>得到<strong>左子树</strong>和<strong>右子树</strong>，连接<strong>根节点</strong>、<strong>左子树根节点</strong>和<strong>右子树根节点</strong>，随后再<strong>同样操作左子树和右子树</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 主要分治参数为根节点索引、左子树根节点索引和右子树根节点索引</div>
+<p><strong>②代码实现</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 构建二叉树：分治 */
+TreeNode *dfs(int *preorder, int *inorderMap, int i, int l, int r, int size) {
+    // 子树区间为空时终止
+    if (r - l &lt; 0)
+        return NULL;
+    // 初始化根节点
+    TreeNode *root = (TreeNode *)malloc(sizeof(TreeNode));
+    root-&gt;val = preorder[i];
+    root-&gt;left = NULL;
+    root-&gt;right = NULL;
+    // 查询 m ，从而划分左右子树
+    int m = inorderMap[preorder[i]];
+    // 子问题：构建左子树
+    root-&gt;left = dfs(preorder, inorderMap, i + 1, l, m - 1, size);
+    // 子问题：构建右子树
+    root-&gt;right = dfs(preorder, inorderMap, i + 1 + m - l, m + 1, r, size);
+    // 返回根节点
+    return root;
+}
+
+/* 构建二叉树 */
+TreeNode *buildTree(int *preorder, int preorderSize, int *inorder, int inorderSize) {
+    // 初始化哈希表，存储 inorder 元素到索引的映射
+    int *inorderMap = (int *)malloc(sizeof(int) * MAX_SIZE);
+    for (int i = 0; i &lt; inorderSize; i++) {
+        inorderMap[inorder[i]] = i;
+    }
+    TreeNode *root = dfs(preorder, inorderMap, 0, 0, inorderSize - 1, inorderSize);
+    free(inorderMap);
+    return root;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="1-4汉诺塔问题"><a href="#1-4汉诺塔问题" class="headerlink" title="1.4汉诺塔问题"></a>1.4汉诺塔问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p><strong>问题</strong>：给定<strong>三根柱子<code>A</code>、<code>B</code>、<code>C</code><strong>，其中<code>A</code>上套有</strong>n个圆盘</strong>，<strong>从上到下</strong>按照<strong>从小到大</strong>的顺序排列，将这<strong>n个圆盘</strong>移动到<code>C</code>上</p>
+</blockquote>
+<blockquote>
+<p><strong>规则</strong><br><strong>圆盘</strong>只能从<strong>一个柱子顶部</strong>拿出，从另<strong>一个柱子顶部</strong>放入<br><strong>每次</strong>只能移动<strong>一个</strong>圆盘<br><strong>小圆盘</strong>必须时刻<strong>位于大圆盘之上</strong></p>
+</blockquote>
+<p><strong>②思路</strong></p>
+<blockquote>
+<p><strong>单圆盘</strong>：<strong>直接</strong>将其从<code>A</code><strong>移动</strong>到<code>C</code>即可</p>
+</blockquote>
+<blockquote>
+<p><strong>两圆盘</strong>：将<strong>小圆盘</strong>从<code>A</code>移动到<code>B</code>，将<strong>大圆盘</strong>从<code>A</code><strong>移动</strong>到<code>C</code>，再将<strong>小圆盘</strong>从<code>B</code>移动到<code>C</code>即可</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 这里B为缓冲柱，C为目标柱</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 本质上是将其转化为两个单圆盘问题</div>
+<blockquote>
+<p><strong>三圆盘</strong>：先<strong>只</strong>考虑<strong>上面两个圆盘</strong>，将<code>B</code>作为<strong>目标柱</strong>，<code>C</code>作为<strong>缓冲柱</strong>，将<strong>上面两个圆盘</strong>移到<code>B</code>上，将<strong>最大圆盘</strong>从<code>A</code>移到<code>C</code>，随后令<code>C</code>为<strong>目标柱</strong>、<code>A</code>为<strong>缓冲柱</strong>，将<strong>两个圆盘</strong>从<code>B</code>移动至<code>C</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 本质上是将其转化为一个两圆盘问题和一个单圆盘问题</div>
+<blockquote>
+<p><strong>n个圆盘</strong>：将<strong>n-1个圆盘</strong>借助<code>C</code>移动到<code>B</code>，将<strong>剩余一个圆盘</strong>移动到<code>C</code>，将剩余<strong>n-1个圆盘</strong>借助<code>A</code>从<code>B</code>移动到<code>C</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 本质上是将其转化为一个n-1圆盘问题和一个单圆盘问题</div>
+<p><strong>③代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时间复杂度为O(2^n)，空间复杂度为O(n)</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 移动一个圆盘 */
+void move(int *src, int *srcSize, int *tar, int *tarSize) {
+    // 从 src 顶部拿出一个圆盘
+    int pan = src[*srcSize - 1];
+    src[*srcSize - 1] = 0;
+    (*srcSize)--;
+    // 将圆盘放入 tar 顶部
+    tar[*tarSize] = pan;
+    (*tarSize)++;
+}
+
+/* 求解汉诺塔：问题 f(i) */
+void dfs(int i, int *src, int *srcSize, int *buf, int *bufSize, int *tar, int *tarSize) {
+    // 若 src 只剩下一个圆盘，则直接将其移到 tar
+    if (i == 1) {
+        move(src, srcSize, tar, tarSize);
+        return;
+    }
+    // 子问题 f(i-1) ：将 src 顶部 i-1 个圆盘借助 tar 移到 buf
+    dfs(i - 1, src, srcSize, tar, tarSize, buf, bufSize);
+    // 子问题 f(1) ：将 src 剩余一个圆盘移到 tar
+    move(src, srcSize, tar, tarSize);
+    // 子问题 f(i-1) ：将 buf 顶部 i-1 个圆盘借助 src 移到 tar
+    dfs(i - 1, buf, bufSize, src, srcSize, tar, tarSize);
+}
+
+/* 求解汉诺塔 */
+void solveHanota(int *A, int *ASize, int *B, int *BSize, int *C, int *CSize) {
+    // 将 A 顶部 n 个圆盘借助 B 移到 C
+    dfs(*ASize, A, ASize, B, BSize, C, CSize);
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-贪心"><a href="#2-贪心" class="headerlink" title="2.贪心"></a>2.贪心</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>在问题的<strong>每个决策阶段</strong>，都选择<strong>当前</strong>看起来<strong>最优的选择</strong>，也称为<strong>贪心策略</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 通常用来寻找最优解和近似最优解</div>
+
+<p><strong>②算法特性</strong></p>
+<blockquote>
+<p><strong>贪心选择性质</strong>：只有当<strong>局部最优选择始终</strong>可以导致<strong>全局最优解</strong>时，才能<strong>保证得到最优解</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>最优子结构</strong>：<strong>原问题的最优解</strong>包含<strong>子问题的最优解</strong></p>
+</blockquote>
+<h4 id="2-2零钱兑换问题"><a href="#2-2零钱兑换问题" class="headerlink" title="2.2零钱兑换问题"></a>2.2零钱兑换问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>给定<strong>n种硬币</strong>，<strong>第i种硬币</strong>的<strong>面值</strong>为<code>coins[i-1]</code>，<strong>目标金额</strong>为<code>amt</code>，每种硬币<strong>可以重复选取</strong>，问能<strong>凑出目标金额</strong>的<strong>最少硬币个数</strong></p>
+</blockquote>
+<p><strong>②贪心策略</strong></p>
+<blockquote>
+<p><strong>每次决策</strong>，选择<strong>不大于且最接近剩余面值</strong>的硬币</p>
+</blockquote>
+<p><strong>③代码实现</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 零钱兑换：贪心 */
+int coinChangeGreedy(int *coins, int size, int amt) {
+    // 假设 coins 列表有序
+    int i = size - 1;
+    int count = 0;
+    // 循环进行贪心选择，直到无剩余金额
+    while (amt &gt; 0) {
+        // 找到小于且最接近剩余金额的硬币
+        while (i &gt; 0 &amp;&amp; coins[i] &gt; amt) {
+            i--;
+        }
+        // 选择 coins[i]
+        amt -= coins[i];
+        count++;
+    }
+    // 若未找到可行方案，则返回 -1
+    return amt == 0 ? count : -1;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-3分数背包问题"><a href="#2-3分数背包问题" class="headerlink" title="2.3分数背包问题"></a>2.3分数背包问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>给定<strong>n个物品</strong>，<strong>第i个物品</strong>对应的<strong>重量</strong>为<code>wgt[i-1]</code>，<strong>价值</strong>为<code>val[i-1]</code>，有一个<strong>容量</strong>为<code>cap</code>的<strong>背包</strong>，每个物品<strong>不能重复选取</strong>，<strong>可以选取物品的一部分</strong>，<strong>价值</strong>根据选择的<strong>重量比例</strong>计算，问在<strong>不超过背包容量</strong>下能放入物品的<strong>最大价值</strong></p>
+</blockquote>
+<p><strong>②贪心策略</strong></p>
+<blockquote>
+<p>将<strong>物品</strong>按照<strong>单位价值</strong>排序，每次<strong>优先</strong>选取<strong>单位价值最高</strong>的物品，若<strong>剩余背包容量不足</strong>，则使用当前物品的<strong>一部分</strong>填满背包</p>
+</blockquote>
+<p><strong>③代码实现</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 物品 */
+typedef struct {
+    int w; // 物品重量
+    int v; // 物品价值
+} Item;
+
+/* 分数背包：贪心 */
+float fractionalKnapsack(int wgt[], int val[], int itemCount, int cap) {
+    // 创建物品列表，包含两个属性：重量、价值
+    Item *items = malloc(sizeof(Item) * itemCount);
+    for (int i = 0; i &lt; itemCount; i++) {
+        items[i] = (Item){.w = wgt[i], .v = val[i]};
+    }
+    // 按照单位价值 item.v / item.w 从高到低进行排序
+    qsort(items, (size_t)itemCount, sizeof(Item), sortByValueDensity);
+    // 循环贪心选择
+    float res = 0.0;
+    for (int i = 0; i &lt; itemCount; i++) {
+        if (items[i].w &lt;= cap) {
+            // 若剩余容量充足，则将当前物品整个装进背包
+            res += items[i].v;
+            cap -= items[i].w;
+        } else {
+            // 若剩余容量不足，则将当前物品的一部分装进背包
+            res += (float)cap / items[i].w * items[i].v;
+            cap = 0;
+            break;
+        }
+    }
+    free(items);
+    return res;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-4最大容量问题"><a href="#2-4最大容量问题" class="headerlink" title="2.4最大容量问题"></a>2.4最大容量问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>输入一个<strong>数组</strong><code>ht</code>，<strong>每个元素</strong>相当于一个<strong>挡板</strong>，数组中<strong>任意两个挡板</strong>可以形成<strong>一个容器</strong>，<strong>容器高度</strong>由<strong>最短的挡板</strong>决定，<strong>容器宽度</strong>为<strong>两挡板索引之差</strong>，选择两挡板使得<strong>容器容量最大</strong></p>
+</blockquote>
+<p><strong>②贪心策略</strong></p>
+<blockquote>
+<p>选取<strong>挡板i</strong>和<strong>挡板j</strong>位于<strong>数组两端</strong>，记为<code>[i,j]</code>，并计算<strong>当前容量</strong>，记为<strong>最大容量</strong><code>max</code>，每次决策<strong>将短板向内收缩1</strong>，计算容量，如果<strong>大于最大容量即更新</strong>，直至<strong>两者相遇</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 若长板向短板靠近，宽度一定减小，高度也只会不变或者减小，而短板向长板靠近，宽度虽然减少，但高度可能变大</div>
+<p><strong>③代码实现</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 最大容量：贪心 */
+int maxCapacity(int ht[], int htLength) {
+    // 初始化 i, j 分列数组两端
+    int i = 0;
+    int j = htLength - 1;
+    // 初始最大容量为 0
+    int res = 0;
+    // 循环贪心选择，直至两板相遇
+    while (i &lt; j) {
+        // 更新最大容量
+        int capacity = myMin(ht[i], ht[j]) * (j - i);
+        res = myMax(res, capacity);
+        // 向内移动短板
+        if (ht[i] &lt; ht[j]) {
+            i++;
+        } else {
+            j--;
+        }
+    }
+    return res;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-5最大切分乘积问题"><a href="#2-5最大切分乘积问题" class="headerlink" title="2.5最大切分乘积问题"></a>2.5最大切分乘积问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>给定一个<strong>正整数n</strong>，将其切分为<strong>至少两个正整数</strong>，求切分后<strong>所有整数的乘积</strong>最大是多少</p>
+</blockquote>
+<p><strong>②贪心策略</strong></p>
+<blockquote>
+<p>如果切分方案中有<strong>大于4的因子</strong>，应该<strong>被继续切分</strong>，且<strong>不应该</strong>存在<strong>因子1</strong>，所以最后应该都<strong>切分为一堆2和3</strong>，而<strong>3x3</strong>大于<strong>2x2x2</strong>，所以<strong>切分到最后</strong>应该是<strong>一堆3</strong>和<strong>少于两个的2</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 先考虑简单的情况，将n切分为2和n-2，只要n大于4，n(n-2)大于n</div>
+<p><strong>③代码实现</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 最大切分乘积：贪心 */
+int maxProductCutting(int n) {
+    // 当 n &lt;= 3 时，必须切分出一个 1
+    if (n &lt;= 3) {
+        return 1 * (n - 1);
+    }
+    // 贪心地切分出 3 ，a 为 3 的个数，b 为余数
+    int a = n / 3;
+    int b = n % 3;
+    if (b == 1) {
+        // 当余数为 1 时，将一对 1 * 3 转化为 2 * 2
+        return pow(3, a - 1) * 2 * 2;
+    }
+    if (b == 2) {
+        // 当余数为 2 时，不做处理
+        return pow(3, a) * 2;
+    }
+    // 当余数为 0 时，不做处理
+    return pow(3, a);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-回溯"><a href="#3-回溯" class="headerlink" title="3.回溯"></a>3.回溯</h3><h4 id="3-1引言"><a href="#3-1引言" class="headerlink" title="3.1引言"></a>3.1引言</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>从<strong>某一状态</strong>出发，根据<strong>选择</strong>不断<strong>向前推进</strong>搜索所有可能的<strong>解决方案</strong>，遇到<strong>正确的解</strong>则<strong>记录</strong>，直到<strong>找到解</strong>或者<strong>尝试了所有可能</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 状态表示问题在某一时刻的情况，包括已经做出的选择</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 本质上还是穷举法，只是向前推进的方式可能不同</div>
+
+<p><strong>②回退</strong></p>
+<blockquote>
+<p>遍历到<strong>某个状态</strong>，<strong>无法前进</strong>或者<strong>无法得到满足条件的解</strong>时，<strong>撤销</strong>上一个选择，回到<strong>之前的状态</strong>，并尝试<strong>其他可能</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 回退相当于推进的逆操作，不仅仅需要函数返回，还需要恢复状态</div>
+
+<p><strong>③剪枝</strong></p>
+<blockquote>
+<p>当遍历到<strong>某个状态</strong>，不满足<strong>约束条件</strong>，则<strong>直接回退</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 去除了不满足约束条件的搜索分治，提高了搜索效率</div>
+<p><strong>④代码框架</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 回溯算法框架 */
+void backtrack(State *state, Choice *choices, int numChoices, State *res, int numRes) {
+    // 判断是否为解
+    if (isSolution(state)) {
+        // 记录解
+        recordSolution(state, res, numRes);
+        // 停止继续搜索
+        return;
+    }
+    // 遍历所有选择
+    for (int i = 0; i &lt; numChoices; i++) {
+        // 剪枝：判断选择是否合法
+        if (isValid(state, &amp;choices[i])) {
+            // 尝试：做出选择，更新状态
+            makeChoice(state, &amp;choices[i]);
+            backtrack(state, choices, numChoices, res, numRes);
+            // 回退：撤销选择，恢复到之前的状态
+            undoChoice(state, &amp;choices[i]);
+        }
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-2全排列问题"><a href="#3-2全排列问题" class="headerlink" title="3.2全排列问题"></a>3.2全排列问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>输入一个<strong>整数数组</strong><code>nums[1A,1B,2]</code>，其中<strong>可能包含重复元素</strong>，返回<strong>所有不重复的排列</strong></p>
+</blockquote>
+<p><strong>②思路</strong></p>
+<blockquote>
+<p><strong>选择</strong>：每次<strong>添加的元素</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>状态</strong>：目前<strong>已经选择了哪些元素</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>剪枝</strong>：每个元素<strong>只能被选择一次</strong>，且<strong>相等元素是等价的</strong>，<strong>每个选择</strong>中，<strong>相同元素</strong>只能<strong>被选择一次</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个初始分支引入一数组selected，其中selected[i]表示该元素是否被选择，选择时先遍历该数组，跳过已选择元素</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每一轮选择引入一哈希表duplicated，记录该轮中已经尝试过的元素，并将重复元素剪枝</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意duplicated和selected剪枝的生效范围，duplicated是每次选择，selected是从每个初始子分支开始到结束</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_22.png" alt="全排列问题"><br><strong>③代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时间复杂度为O(nn!)，空间复杂度为O(n^2)</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 回溯算法：全排列 II */
+void backtrack(int *state, int stateSize, int *choices, int choicesSize, bool *selected, int **res, int *resSize) {
+    // 当状态长度等于元素数量时，记录解
+    if (stateSize == choicesSize) {
+        res[*resSize] = (int *)malloc(choicesSize * sizeof(int));
+        for (int i = 0; i &lt; choicesSize; i++) {
+            res[*resSize][i] = state[i];
+        }
+        (*resSize)++;
+        return;
+    }
+    // 遍历所有选择
+    bool duplicated[MAX_SIZE] = {false};
+    for (int i = 0; i &lt; choicesSize; i++) {
+        int choice = choices[i];
+        // 剪枝：不允许重复选择元素 且 不允许重复选择相等元素
+        if (!selected[i] &amp;&amp; !duplicated[choice]) {
+            // 尝试：做出选择，更新状态
+            duplicated[choice] = true; // 记录选择过的元素值
+            selected[i] = true;
+            state[stateSize] = choice;
+            // 进行下一轮选择
+            backtrack(state, stateSize + 1, choices, choicesSize, selected, res, resSize);
+            // 回退：撤销选择，恢复到之前的状态
+            selected[i] = false;
+        }
+    }
+}
+
+/* 全排列 II */
+int **permutationsII(int *nums, int numsSize, int *returnSize) {
+    int *state = (int *)malloc(numsSize * sizeof(int));
+    bool *selected = (bool *)malloc(numsSize * sizeof(bool));
+    for (int i = 0; i &lt; numsSize; i++) {
+        selected[i] = false;
+    }
+    int **res = (int **)malloc(MAX_SIZE * sizeof(int *));
+    *returnSize = 0;
+
+    backtrack(state, 0, nums, numsSize, selected, res, returnSize);
+
+    free(state);
+    free(selected);
+
+    return res;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-3子集和问题"><a href="#3-3子集和问题" class="headerlink" title="3.3子集和问题"></a>3.3子集和问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>给定一个<strong>正整数集合</strong><code>nums</code>和一个<strong>目标正整数</strong><code>target</code>，从<code>nums</code>找到<strong>所有可能的集合</strong>，使得<strong>组合中元素的和</strong>为<code>target</code>，<strong>每个元素</strong>可以被<strong>多次选择</strong>，但是<strong>集合不能重复</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 集合是不区分顺序的</div>
+
+<p><strong>②思路</strong></p>
+<blockquote>
+<p><strong>选择</strong>：每次<strong>添加的元素</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>状态</strong>：集合中已经<strong>包含了哪些元素</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>剪枝</strong>：<strong>相等元素是等价的</strong>；<strong>相同元素的集合</strong>也是<strong>等价</strong>的；当<strong>元素总和</strong>大于<code>target</code>时，<strong>剪枝</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在全排列的基础上，不使用selected并去除相同集合即可</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当做出选择xi后，设定下一轮选择从索引开始，就可以保证子集唯一，因为其一定与其他分支不相交</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_24.png" alt="子集和问题"><br><strong>②代码实现</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 回溯算法：子集和 II */
+void backtrack(int target, int *choices, int choicesSize, int start) {
+    // 子集和等于 target 时，记录解
+    if (target == 0) {
+        for (int i = 0; i &lt; stateSize; i++) {
+            res[resSize][i] = state[i];
+        }
+        resColSizes[resSize++] = stateSize;
+        return;
+    }
+    // 遍历所有选择
+    // 剪枝二：从 start 开始遍历，避免生成重复子集
+    // 剪枝三：从 start 开始遍历，避免重复选择同一元素
+    for (int i = start; i &lt; choicesSize; i++) {
+        // 剪枝一：若子集和超过 target ，则直接跳过
+        if (target - choices[i] &lt; 0) {
+            continue;
+        }
+        // 剪枝四：如果该元素与左边元素相等，说明该搜索分支重复，直接跳过
+        if (i &gt; start &amp;&amp; choices[i] == choices[i - 1]) {
+            continue;
+        }
+        // 尝试：做出选择，更新 target, start
+        state[stateSize] = choices[i];
+        stateSize++;
+        // 进行下一轮选择
+        backtrack(target - choices[i], choices, choicesSize, i + 1);
+        // 回退：撤销选择，恢复到之前的状态
+        stateSize--;
+    }
+}
+
+/* 求解子集和 II */
+void subsetSumII(int *nums, int numsSize, int target) {
+    // 对 nums 进行排序
+    qsort(nums, numsSize, sizeof(int), cmp);
+    // 开始回溯
+    backtrack(target, nums, numsSize, 0);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-4N皇后问题"><a href="#3-4N皇后问题" class="headerlink" title="3.4N皇后问题"></a>3.4N皇后问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p><strong>皇后棋子</strong>可以攻击<strong>同一行</strong>、<strong>同一列</strong>以及<strong>同一对角线</strong>的棋子，给定<code>n</code>个<strong>皇后</strong>以及<code>nxn</code>的<strong>棋盘</strong>，寻找<strong>所有</strong>可以使得<strong>皇后之间无法攻击</strong>的摆放方案</p>
+</blockquote>
+<p><strong>②思路</strong></p>
+<blockquote>
+<p><strong>选择</strong>：<strong>皇后</strong>的<strong>摆放位置</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>状态</strong>：棋盘上<strong>皇后个数</strong>以及<strong>各自摆放位置</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>剪枝</strong>：<strong>逐行放置</strong>皇后<strong>避免出现在同一行</strong>，<strong>在此基础上</strong>避免皇后出现在<strong>同一行</strong>和<strong>同一对角线</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个初始分支，使用长度为n的数组cols以及长度为2n-2长度的数组diag1和diag2记录每一列以及对角线是否有皇后</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 对角线分为主对角线和从对角线，分别对应diag1和diag2</div>
+<blockquote>
+<p>位于<strong>同一主对角线</strong>的元素，其<strong>横坐标减纵坐标的值</strong>相同，位于<strong>同一从对角线</strong>的元素，其<strong>横坐标加纵坐标的值</strong>相同，其中<strong>横纵坐标取值范围</strong>为<code>0~n-1</code>，所以<strong>横纵坐标之差/和</strong>的<strong>取值范围</strong>为<code>0~2n-2</code><strong>，每个值</strong>对应<strong>一条对角线</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_23.png" alt="N皇后问题"><br><strong>③代码实现</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 回溯算法：N 皇后 */
+void backtrack(int row, int n, char state[MAX_SIZE][MAX_SIZE], char ***res, int *resSize, bool cols[MAX_SIZE],
+               bool diags1[2 * MAX_SIZE - 1], bool diags2[2 * MAX_SIZE - 1]) {
+    // 当放置完所有行时，记录解
+    if (row == n) {
+        res[*resSize] = (char **)malloc(sizeof(char *) * n);
+        for (int i = 0; i &lt; n; ++i) {
+            res[*resSize][i] = (char *)malloc(sizeof(char) * (n + 1));
+            strcpy(res[*resSize][i], state[i]);
+        }
+        (*resSize)++;
+        return;
+    }
+    // 遍历所有列
+    for (int col = 0; col &lt; n; col++) {
+        // 计算该格子对应的主对角线和副对角线
+        int diag1 = row - col + n - 1;
+        int diag2 = row + col;
+        // 剪枝：不允许该格子所在列、主对角线、副对角线存在皇后
+        if (!cols[col] &amp;&amp; !diags1[diag1] &amp;&amp; !diags2[diag2]) {
+            // 尝试：将皇后放置在该格子
+            state[row][col] = 'Q';
+            cols[col] = diags1[diag1] = diags2[diag2] = true;
+            // 放置下一行
+            backtrack(row + 1, n, state, res, resSize, cols, diags1, diags2);
+            // 回退：将该格子恢复为空位
+            state[row][col] = '#';
+            cols[col] = diags1[diag1] = diags2[diag2] = false;
+        }
+    }
+}
+
+/* 求解 N 皇后 */
+char ***nQueens(int n, int *returnSize) {
+    char state[MAX_SIZE][MAX_SIZE];
+    // 初始化 n*n 大小的棋盘，其中 'Q' 代表皇后，'#' 代表空位
+    for (int i = 0; i &lt; n; ++i) {
+        for (int j = 0; j &lt; n; ++j) {
+            state[i][j] = '#';
+        }
+        state[i][n] = '\0';
+    }
+    bool cols[MAX_SIZE] = {false};           // 记录列是否有皇后
+    bool diags1[2 * MAX_SIZE - 1] = {false}; // 记录主对角线是否有皇后
+    bool diags2[2 * MAX_SIZE - 1] = {false}; // 记录副对角线是否有皇后
+
+    char ***res = (char ***)malloc(sizeof(char **) * MAX_SIZE);
+    *returnSize = 0;
+    backtrack(0, n, state, res, returnSize, cols, diags1, diags2);
+    return res;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-动态规划"><a href="#4-动态规划" class="headerlink" title="4.动态规划"></a>4.动态规划</h3><h4 id="4-1引言"><a href="#4-1引言" class="headerlink" title="4.1引言"></a>4.1引言</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>将问题<strong>分解</strong>为<strong>一系列子问题</strong>，并<strong>通过dp表存储子问题的解</strong>避免<strong>重复计算</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 常用于解决最优化问题</div>
+
+<p><strong>②DP问题特性</strong></p>
+<blockquote>
+<p><strong>重叠子问题</strong>：<strong>原问题</strong>可以分解为<strong>类似的子问题</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 与分治不同，动态规划的子问题是相互依赖的</div>
+<blockquote>
+<p><strong>最优子结构</strong>：<strong>原问题的最优解</strong>是从<strong>子问题的最优解</strong>构建得来的</p>
+</blockquote>
+<blockquote>
+<p><strong>无后效性</strong>：问题的<strong>未来发展</strong>只与<strong>当前状态</strong>有关，与<strong>过去所经历过</strong>的所有状态<strong>无关</strong></p>
+</blockquote>
+<p><strong>③求解步骤</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 动态规划实质上就是根据状态转移方程在状态转移过程中填充dp表</div>
+<blockquote>
+<p><strong>定义状态</strong>：<strong>描述</strong>与问题<strong>有关的决策变量</strong>，足以<strong>推导出下一个状态</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>描述决策</strong>：<strong>一个状态</strong>如何变成<strong>另一个状态</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>推导状态转移方程</strong>：<strong>原问题</strong>和<strong>子问题</strong>的<strong>数值关系</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 根据原问题对应状态和子问题对应状态的关系推导</div>
+<blockquote>
+<p><strong>构建dp表</strong>：<strong>dp表</strong>即<strong>状态</strong>和<strong>对应子问题的解</strong>之间的<strong>映射</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> dp表的大小取决于状态的多少</div>
+<blockquote>
+<p><strong>确定边界条件</strong>：<strong>状态</strong>中各个<strong>变量的范围</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 根据边界条件初始化dp表</div>
+
+<h4 id="4-2爬楼梯问题"><a href="#4-2爬楼梯问题" class="headerlink" title="4.2爬楼梯问题"></a>4.2爬楼梯问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>有一个<strong>n阶</strong>的<strong>楼梯</strong>，<strong>每步</strong>可以上<strong>1阶</strong>或者<strong>2阶</strong>，<strong>每一阶楼梯</strong>都有一个<strong>非负整数</strong>，表示在<strong>该台阶</strong>要付出的<strong>代价</strong><code>cost[i]</code>，计算<strong>最少要付出多少代价</strong>才能到达<strong>顶部</strong></p>
+</blockquote>
+<p><strong>②思路</strong></p>
+<blockquote>
+<p>假设<strong>爬到第i阶</strong>需要<strong>付出的代</strong>价为<code>dp[i]</code>，由于<strong>第i阶</strong>只能从<strong>第i-1阶</strong>和<strong>第i-2阶</strong>到达，所以<code>dp[i]=min(dp[i-1]+dp[i-2])+cost[i]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 本质上就是斐波那契数列的变种</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果使用递归的方法求解，时间复杂度为指数级，主要是由于子问题被计算了很多次造成的</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 使用dp数组保存子问题的结果，在需要的时候读取即可</div>
+<p><strong>③代码实现</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 由于dp[i]只和dp[i-1]和dp[i-2]有关，所以我们无需存储所有子问题的解，使用两个变量滚动前进即可</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 爬楼梯最小代价：动态规划 */
+int minCostClimbingStairsDP(int cost[], int costSize) {
+    int n = costSize - 1;
+    if (n == 1 || n == 2)
+        return cost[n];
+    // 初始化 dp 表，用于存储子问题的解
+    int *dp = calloc(n + 1, sizeof(int));
+    // 初始状态：预设最小子问题的解
+    dp[1] = cost[1];
+    dp[2] = cost[2];
+    // 状态转移：从较小子问题逐步求解较大子问题
+    for (int i = 3; i &lt;= n; i++) {
+        dp[i] = myMin(dp[i - 1], dp[i - 2]) + cost[i];
+    }
+    int res = dp[n];
+    // 释放内存
+    free(dp);
+    return res;
+}
+/* 爬楼梯最小代价：空间优化后的动态规划 */
+int minCostClimbingStairsDPComp(int cost[], int costSize) {
+    int n = costSize - 1;
+    if (n == 1 || n == 2)
+        return cost[n];
+    int a = cost[1], b = cost[2];
+    for (int i = 3; i &lt;= n; i++) {
+        int tmp = b;
+        b = myMin(a, tmp) + cost[i];
+        a = tmp;
+    }
+    return b;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="4-3最小路径和"><a href="#4-3最小路径和" class="headerlink" title="4.3最小路径和"></a>4.3最小路径和</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>给定一个<code>nxm</code>的<strong>网格</strong><code>grid</code>，<strong>每个单元格</strong>都有一个<strong>非负整数</strong>，表示<strong>该单元格的代价</strong>，每次只能<strong>向下</strong>或者<strong>向右</strong>移动一格，求<strong>左上角</strong>到<strong>右下角</strong>的<strong>最小路径和</strong></p>
+</blockquote>
+<p><strong>②思路</strong></p>
+<blockquote>
+<p><strong>定义状态</strong>：所在<strong>格子的坐标</strong><code>[i,j]</code></p>
+</blockquote>
+<blockquote>
+<p><strong>描述决策</strong>：<strong>向下</strong>或者<strong>向右</strong>移动一格，即<code>i+1</code>或者<code>j+1</code></p>
+</blockquote>
+<blockquote>
+<p><strong>状态转移方程</strong>：<code>dp[i，j]=min(dp[i-1,j],dp[i,j-1])+grid[i,j]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> dp[i,j]只能通过dp[i-1,j]或者dp[i,j-1]得到</div>
+<blockquote>
+<p><strong>根据边界条件初始化dp表</strong>：<strong>dp表</strong>为<code>nxm</code>的<strong>矩阵</strong>，<strong>第一列</strong>和<strong>第一行</strong>对应<strong>dp值</strong>均为<strong>所在单元格代价</strong></p>
+</blockquote>
+<p><strong>③代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时间复杂度为O(nm)，空间复杂度为O(nm)，dp表为一个nxm的矩阵</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 由于每个格子只与其左边和上边的格子有关，因此我们可以只用一个单行数组来实现dp表</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 最小路径和：动态规划 */
+int minPathSumDP(int grid[MAX_SIZE][MAX_SIZE], int n, int m) {
+    // 初始化 dp 表
+    int **dp = malloc(n * sizeof(int *));
+    for (int i = 0; i &lt; n; i++) {
+        dp[i] = calloc(m, sizeof(int));
+    }
+    dp[0][0] = grid[0][0];
+    // 状态转移：首行
+    for (int j = 1; j &lt; m; j++) {
+        dp[0][j] = dp[0][j - 1] + grid[0][j];
+    }
+    // 状态转移：首列
+    for (int i = 1; i &lt; n; i++) {
+        dp[i][0] = dp[i - 1][0] + grid[i][0];
+    }
+    // 状态转移：其余行列
+    for (int i = 1; i &lt; n; i++) {
+        for (int j = 1; j &lt; m; j++) {
+            dp[i][j] = myMin(dp[i][j - 1], dp[i - 1][j]) + grid[i][j];
+        }
+    }
+    int res = dp[n - 1][m - 1];
+    // 释放内存
+    for (int i = 0; i &lt; n; i++) {
+        free(dp[i]);
+    }
+    return res;
+}
+/* 最小路径和：空间优化后的动态规划 */
+int minPathSumDPComp(int grid[MAX_SIZE][MAX_SIZE], int n, int m) {
+    // 初始化 dp 表
+    int *dp = calloc(m, sizeof(int));
+    // 状态转移：首行
+    dp[0] = grid[0][0];
+    for (int j = 1; j &lt; m; j++) {
+        dp[j] = dp[j - 1] + grid[0][j];
+    }
+    // 状态转移：其余行
+    for (int i = 1; i &lt; n; i++) {
+        // 状态转移：首列
+        dp[0] = dp[0] + grid[i][0];
+        // 状态转移：其余列
+        for (int j = 1; j &lt; m; j++) {
+            dp[j] = myMin(dp[j - 1], dp[j]) + grid[i][j];
+        }
+    }
+    int res = dp[m - 1];
+    // 释放内存
+    free(dp);
+    return res;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="4-40-1背包问题"><a href="#4-40-1背包问题" class="headerlink" title="4.40-1背包问题"></a>4.40-1背包问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>给定<strong>n个物品</strong>，<strong>第i个物品</strong>对应的<strong>重量</strong>为<code>wgt[i-1]</code>，<strong>价值</strong>为<code>val[i-1]</code>，有一个<strong>容量</strong>为<code>cap</code>的<strong>背包</strong>，每个物品<strong>不能重复选取</strong>，问在<strong>不超过背包容量</strong>下能放入物品的<strong>最大价值</strong></p>
+</blockquote>
+<p><strong>②思路</strong></p>
+<blockquote>
+<p><strong>定义状态</strong>：<strong>当前选择的物品i</strong>、<strong>剩余的背包容量c</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>描述决策</strong>：<strong>是否</strong>将当前物品<strong>放入背包</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>状态转移方程</strong>：<code>dp[i,c]=max(dp[i-1,c],dp[i-1,c-wgt[i-1]]+val[i-1])</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果当前物品重量超过背包剩余容量，则不能选取</div>
+<blockquote>
+<p><strong>根据边界条件初始化dp表</strong>：<strong>dp表</strong>为<code>(n+1)x(cap+1)</code>的<strong>矩阵</strong>，<strong>第一列</strong>和<strong>第一行</strong>对应<strong>dp值</strong>均为<strong>0</strong><br><strong>③代码实现</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时间复杂度为O(nxcap)，空间复杂度为O(nxcap)</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 由于每个状态都只与其上一行的状态有关，所以可以将(n+1)x(cap+1)的矩阵替换为cap+1的数组存储结果</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 0-1 背包：动态规划 */
+int knapsackDP(int wgt[], int val[], int cap, int wgtSize) {
+    int n = wgtSize;
+    // 初始化 dp 表
+    int **dp = malloc((n + 1) * sizeof(int *));
+    for (int i = 0; i &lt;= n; i++) {
+        dp[i] = calloc(cap + 1, sizeof(int));
+    }
+    // 状态转移
+    for (int i = 1; i &lt;= n; i++) {
+        for (int c = 1; c &lt;= cap; c++) {
+            if (wgt[i - 1] &gt; c) {
+                // 若超过背包容量，则不选物品 i
+                dp[i][c] = dp[i - 1][c];
+            } else {
+                // 不选和选物品 i 这两种方案的较大值
+                dp[i][c] = myMax(dp[i - 1][c], dp[i - 1][c - wgt[i - 1]] + val[i - 1]);
+            }
+        }
+    }
+    int res = dp[n][cap];
+    // 释放内存
+    for (int i = 0; i &lt;= n; i++) {
+        free(dp[i]);
+    }
+    return res;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="4-5零钱兑换问题"><a href="#4-5零钱兑换问题" class="headerlink" title="4.5零钱兑换问题"></a>4.5零钱兑换问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>给定<strong>n种硬币</strong>，<strong>第i种硬币</strong>的<strong>面值</strong>为<code>coins[i-1]</code>，<strong>目标金额</strong>为<code>amt</code>，每种硬币<strong>可以重复选取</strong>，问能<strong>凑出目标金额</strong>的<strong>最少硬币个数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 本质上就是不限制选择次数的0-1背包问题，也称为完全背包问题</div>
+
+<p><strong>②思路</strong></p>
+<blockquote>
+<p><strong>定义状态</strong>：当前<strong>要选择的硬币</strong>，<strong>目前的总面额</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>描述决策</strong>：<strong>是否添加</strong>一枚<strong>当前面值的硬币i</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>状态转移方程</strong>：<code>dp[i,a]=min(dp[i-1,a],dp[i,a-coins[i-1]]+1)</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 凑出atm面值只有两种情况，即已经凑出atm面值不选择多余的硬币，以及还差coins[i-1]并选择一枚i硬币</div>
+<blockquote>
+<p><strong>根据边界条件初始化dp表</strong>：<strong>dp表</strong>为<code>(n+1)x(amt+1)</code>的<strong>矩阵</strong>，<strong>第一列</strong>均为<code>0</code>，<strong>第一行</strong>除了<code>dp[0,0]</code>均为<code>max</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> max表示凑不出来</div>
+<p><strong>③代码实现</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">/* 零钱兑换：动态规划 */
+int coinChangeDP(int coins[], int amt, int coinsSize) {
+    int n = coinsSize;
+    int MAX = amt + 1;
+    // 初始化 dp 表
+    int **dp = malloc((n + 1) * sizeof(int *));
+    for (int i = 0; i &lt;= n; i++) {
+        dp[i] = calloc(amt + 1, sizeof(int));
+    }
+    // 状态转移：首行首列
+    for (int a = 1; a &lt;= amt; a++) {
+        dp[0][a] = MAX;
+    }
+    // 状态转移：其余行列
+    for (int i = 1; i &lt;= n; i++) {
+        for (int a = 1; a &lt;= amt; a++) {
+            if (coins[i - 1] &gt; a) {
+                // 若超过目标金额，则不选硬币 i
+                dp[i][a] = dp[i - 1][a];
+            } else {
+                // 不选和选硬币 i 这两种方案的较小值
+                dp[i][a] = myMin(dp[i - 1][a], dp[i][a - coins[i - 1]] + 1);
+            }
+        }
+    }
+    int res = dp[n][amt] != MAX ? dp[n][amt] : -1;
+    // 释放内存
+    for (int i = 0; i &lt;= n; i++) {
+        free(dp[i]);
+    }
+    free(dp);
+    return res;
+}
+/* 零钱兑换：空间优化后的动态规划 */
+int coinChangeDPComp(int coins[], int amt, int coinsSize) {
+    int n = coinsSize;
+    int MAX = amt + 1;
+    // 初始化 dp 表
+    int *dp = calloc(amt + 1, sizeof(int));
+    dp[0] = 0;
+    // 状态转移
+    for (int i = 1; i &lt;= n; i++) {
+        for (int a = 1; a &lt;= amt; a++) {
+            if (coins[i - 1] &gt; a) {
+                // 若超过目标金额，则不选硬币 i
+                dp[a] = dp[a];
+            } else {
+                // 不选和选硬币 i 这两种方案的较小值
+                dp[a] = myMin(dp[a], dp[a - coins[i - 1]] + 1);
+            }
+        }
+    }
+    int res = dp[amt] != MAX ? dp[amt] : -1;
+    // 释放内存
+    free(dp);
+    return res;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="4-6编辑距离问题"><a href="#4-6编辑距离问题" class="headerlink" title="4.6编辑距离问题"></a>4.6编辑距离问题</h4><p><strong>①概述</strong></p>
+<blockquote>
+<p>输入<strong>两个字符串</strong><code>s</code>和<code>t</code>，通过<strong>插入一个字符</strong>、<strong>删除一个字符</strong>或者<strong>替换一个字符</strong>，将<code>s</code><strong>转换</strong>为<code>t</code></p>
+</blockquote>
+<p><strong>②思路</strong></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/suan-fa-fan-shi-shang/">http://example.com/2023/12/10/suan-fa-fan-shi-shang/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">计算机基础</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                                    <span class="chip bg-color">数据结构与算法</span>
+                                </a>
+                            
+                                <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
+                                    <span class="chip bg-color">《hello 算法》</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/hui-bian-yu-yan-san/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/27.webp" class="responsive-img" alt="汇编语言（三）">
+                        
+                        <span class="card-title">汇编语言（三）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            汇编语言
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E3%80%8A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E3%80%8B/">
+                        <span class="chip bg-color">《汇编语言》</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">汇编语言</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/hui-bian-yu-yan-er/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/27.webp" class="responsive-img" alt="汇编语言（二）">
+                        
+                        <span class="card-title">汇编语言（二）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            汇编语言
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E3%80%8A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E3%80%8B/">
+                        <span class="chip bg-color">《汇编语言》</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">汇编语言</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

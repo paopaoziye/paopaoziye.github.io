@@ -1,0 +1,1406 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">python学习笔记（一）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">
+                                <span class="chip bg-color">编程语言</span>
+                            </a>
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                编程语言
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="python学习笔记（一）"><a href="#python学习笔记（一）" class="headerlink" title="python学习笔记（一）"></a>python学习笔记（一）</h1><h2 id="python启蒙"><a href="#python启蒙" class="headerlink" title="python启蒙"></a>python启蒙</h2><h3 id="1-基本元素"><a href="#1-基本元素" class="headerlink" title="1.基本元素"></a>1.基本元素</h3><h4 id="1-1对象"><a href="#1-1对象" class="headerlink" title="1.1对象"></a>1.1对象</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>即<strong>被存储的数据</strong>，如<code>1</code>、<code>"cat"</code>、<code>1.23456e2</code>等</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 类似于C语言中的字面值，当一个对象被声明后，会给其分配对应的地址和内存，且数据类型不能更改</div>
+<p><strong>②基本数据类型</strong></p>
+<blockquote>
+<p><strong>整型</strong>、<strong>浮点型</strong>、<strong>字符串</strong>、<strong>布尔类型</strong>、<strong>复数类型</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 可以使用type()检查数据类型</div>
+<p><strong>③分类</strong></p>
+<blockquote>
+<p><strong>不可变类型</strong>：对象<strong>一旦创建</strong>，内容就<strong>不能被更改</strong>，只能被<strong>覆盖</strong>，<strong>基本数据类型</strong>都是<strong>不可变类型</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>可变类型</strong>：对象的<strong>值可以被更改</strong>，如<strong>列表</strong>、<strong>集合</strong>和<strong>字典</strong>等</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 在将可变数据类型传递给函数时，又不希望函数改变其值，可以在函数内部拷贝一份对应的值</div>
+<p><strong>④数据类型转换</strong></p>
+<blockquote>
+<p><strong>自动类型转换</strong>：<strong>不同类型</strong>数据<strong>混合运算</strong>，<strong>精度低</strong>的类型将自动转化为<strong>精度高</strong>的类型<strong>避免数据丢失</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 自动转换类型功能有限，如整型不能自动转化为字符串类型，需要使用强制类型转换</div>
+<blockquote>
+<p><strong>强制类型转换</strong>：使用<code>str()</code>、<code>int()</code>、<code>float()</code>将对象<strong>强制转换</strong>为<strong>对应类型</strong></p>
+</blockquote>
+<h4 id="1-2变量"><a href="#1-2变量" class="headerlink" title="1.2变量"></a>1.2变量</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>本质是<strong>对象</strong>的一个<strong>引用</strong>，<strong>本身</strong>也占用<strong>一定的内存</strong>，用于存储<strong>对象的地址</strong>，通过<strong>赋值符</strong><code>=</code>为<strong>变量</strong>指定<strong>对象</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> python变量对应的内存是变化的，是上次赋值时新对象所在的内存，而C语言变量名所代表的地址是不变的</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 没有变量指向的对象会被回收，即python的垃圾回收机制</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 变量的本质是引用，如果两个变量指向是同一个可变类型对象，改变其中一个，另一个也随之改变</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/python_7.png" alt="变量的本质"><br><strong>②取名规则</strong></p>
+<blockquote>
+<p>只能是<strong>一个词</strong>，且只包含<strong>字母、数字和下划线</strong>，<strong>不能以数字开头</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 一个好的变量名包含了数据对应的信息，常见的命名格式有my_cat和MyCat</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意和关键词冲突</div>
+
+<h4 id="1-3操作符"><a href="#1-3操作符" class="headerlink" title="1.3操作符"></a>1.3操作符</h4><p><strong>①数字操作符</strong></p>
+<blockquote>
+<p><strong>加</strong><code>+</code>、<strong>减</strong><code>-</code>、<strong>乘</strong><code>*</code>、<strong>除</strong><code>/</code>、<strong>取模</strong><code>%</code>、<strong>整除</strong><code>//</code>、<strong>指数</strong><code>**</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> C的除法结果由其操作数类型决定，而python的除法结果由其操作符决定</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> +可以用于拼接字符串，比如'a'+'b'结果是'ab'，*可以用于字符串复制，比如'a'*5结果时'aaaaa'</div>
+<p><strong>②比较操作符</strong></p>
+<blockquote>
+<p><strong>等于</strong><code>==</code>、<strong>不等于</strong><code>!=</code>、<strong>小于</strong><code>&lt;</code>、<strong>大于</strong><code>&gt;</code>、<strong>小于等于</strong><code>&lt;=</code>、<strong>大于等于</strong><code>&gt;=</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> &gt;、&lt;、≥、≤只能用于整型和浮点型</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 整型和浮点型之间是可以使用==正常比较的，但是整型、浮点型和字符串使用==只能得到False</div>
+<p><strong>③布尔操作符</strong></p>
+<blockquote>
+<p><strong>与</strong><code>and</code>、<strong>或</strong><code>or</code>、<strong>非</strong><code>not</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> not优先级最高，随后是and，最后是or</div>
+
+<h4 id="1-4格式"><a href="#1-4格式" class="headerlink" title="1.4格式"></a>1.4格式</h4><p><strong>①注释</strong></p>
+<blockquote>
+<p><strong>单行注释</strong>：以<code>#</code><strong>开头</strong>，以<strong>换行符</strong>结尾</p>
+</blockquote>
+<blockquote>
+<p><strong>多行注释</strong>：用<strong>三个单引号/双引号</strong>包围</p>
+</blockquote>
+<p><strong>②代码块</strong></p>
+<blockquote>
+<p>根据<strong>缩进</strong>划分<strong>代码块</strong>，<strong>相同缩进</strong>的<strong>连续代码</strong>为一<strong>代码块</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 代码块内部可以嵌套代码块，嵌套代码块的缩进更多</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 通常以四个空格为一个缩进，不要使用tab</div>
+<p><strong>③语句</strong></p>
+<blockquote>
+<p><strong>语句</strong>使用<strong>换行符</strong>结尾，<strong>语句关键词语句</strong>使用<strong>冒号</strong>结尾</p>
+</blockquote>
+<h4 id="1-5控制流"><a href="#1-5控制流" class="headerlink" title="1.5控制流"></a>1.5控制流</h4><p><strong>①if条件语句</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">if(expression): 
+  statement
+elif(expression):
+  statement
+else:
+  statement<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 一旦一个语句的条件为Ture，后面的语句会被忽略，所以要注意语句的顺序，或者说清晰化条件的范围，使其之间没有交集</div>
+
+<p><strong>②while循环语句</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">while(expression):
+  statement<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>③for循环语句</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">for 控制变量 in range(): 
+  statement<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 缺省情况下，控制变量被初始化为0</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 在Python中，下划线_通常用作一个无用的变量名称，常用做控制变量的名称</div>
+<p><strong>④range函数</strong></p>
+<blockquote>
+<p><code>range(a)</code>：<code>0</code>至<code>a-1</code>，<strong>步长为1</strong></p>
+</blockquote>
+<blockquote>
+<p><code>range(a,b)</code>：<code>a</code>至<code>b-1</code>，<strong>步长为1</strong></p>
+</blockquote>
+<blockquote>
+<p><code>range(a,b,i)</code>：<code>a</code>至<code>b-1</code>,<strong>步长为i</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 可以将循环中的range()换为一个列表，在每次迭代中，让变量依次设置为列表中的值</div>
+
+<p><strong>⑤循环控制语句</strong></p>
+<blockquote>
+<p><strong>break</strong>：遇到<code>break</code>语句，马上<strong>退出循环</strong><br><strong>continue</strong>：遇到<code>continue</code>语句，马上<strong>跳回到循环开始处</strong></p>
+</blockquote>
+<h4 id="1-6字符串"><a href="#1-6字符串" class="headerlink" title="1.6字符串"></a>1.6字符串</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>以<strong>单引号</strong>、<strong>双引号</strong>、<strong>三个单引号</strong>或<strong>三个双引号</strong>开始和结束，是<strong>不可变类型</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 三重引号之间的所有引号、制表符或换行，都被认为是字符串的一部分</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以看作是单个文本字符的元组（空格也算）</div>
+<blockquote>
+<p><code>name = 'cat'</code>相当于<code>name = ('c','a','t')</code></p>
+</blockquote>
+<p><strong>②原始字符串</strong></p>
+<blockquote>
+<p>在字符串<strong>开始的引号之前</strong>加上<code>r</code>，<strong>完全忽略</strong>所有的<strong>转义字符</strong>，打印出字符串中<strong>所有</strong>的<strong>倒斜杠</strong></p>
+</blockquote>
+<p><strong>③print和input</strong></p>
+<blockquote>
+<p><strong>print()<strong>：将括号内的</strong>字符串</strong>显示在<strong>屏幕</strong>上，输出<strong>其他类型变量</strong>时，需要使用<code>str()</code>将其<strong>转换为字符串类型</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 采用占位符语法灵活配置字符串</div>
+
+<blockquote>
+<p><strong>input()<strong>：等待用户</strong>输入文本</strong>，并按下<strong>回车键</strong>，将其转化为一个<strong>字符串</strong></p>
+</blockquote>
+<p><strong>④占位符语法</strong></p>
+<blockquote>
+<p><code>print('%d + %d = %d' % (a, b, a + b))</code>：其中<code>%d</code>是<strong>整数</strong>的<strong>占位符</strong>，<strong>字符串后<code>%</code>后面</strong>跟的<strong>变量值</strong>会<strong>替换掉占位符</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 带该种占位符的字符串中要表示百分号必须写成%%</div>
+
+<blockquote>
+<p><code>print('{0} * {1} = {2}'.format(a, b, a * b))</code>：其中<code>{0}</code>、<code>{1}</code>和<code>{2}</code>都是<strong>占位符</strong>，其中<strong>数字</strong>为<strong>format方法</strong>的<strong>索引</strong>，<strong>占位符</strong>最后会被<strong>替换</strong>为<strong>对应的变量</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 还可以利用语法糖简化写法，即print(f'{a} * {b} = {a * b}')</div>
+
+<h3 id="2-函数"><a href="#2-函数" class="headerlink" title="2.函数"></a>2.函数</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><p><strong>①格式</strong></p>
+<blockquote>
+<p><code>None</code>是<code>NoneType</code><strong>数据类型</strong>的<strong>唯一值</strong>，代表<strong>没有值</strong>，相当于<strong>C语言</strong>中的<code>void</code></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">def 函数名(形参n):
+  statement
+  return expression #可以是变量，也可以是表达式
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 某些函数有可选的关键字参数，在函数调用时可以指定，相当于修改函数的默认设置</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果需要传递多个同一位置的关键字参数，可以采用 | 管道命令将这些参数连接</div>
+<p><strong>②可变参数</strong></p>
+<blockquote>
+<p>使用<code>args</code><strong>关键字</strong>实现</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 函数的参数可以有默认值，也支持使用可变参数（类型、个数均可变），所以Python并不需要支持函数的重载</div>
+<pre class="line-numbers language-none"><code class="language-none"># 在参数名前面的*表示args是一个可变参数
+def add(*args):
+    total = 0
+    for val in args:
+        total += val
+    return total
+
+
+# 在调用add函数时可以传入0个或多个参数
+print(add())
+print(add(1))
+print(add(1, 2))
+print(add(1, 2, 3))
+print(add(1, 3, 5, 7, 9))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-2作用域"><a href="#2-2作用域" class="headerlink" title="2.2作用域"></a>2.2作用域</h4><p><strong>①分类</strong></p>
+<blockquote>
+<p><strong>局部作用域</strong>：在<strong>被调用函数内赋值</strong>的变量，局部作用域在<strong>函数被调用</strong>时创建，在<strong>函数返回时</strong>销毁</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果在函数内没有对其进进行赋值，则为全局变量</div>
+<blockquote>
+<p><strong>全局作用域</strong>：在<strong>所有函数之外</strong>赋值的变量，属于<strong>全局作用域</strong>，全局作用域在<strong>程序开始时</strong>创建，在<strong>程序终止时</strong>销毁</p>
+</blockquote>
+<blockquote>
+<p><strong>嵌套作用域</strong>：当一个<strong>函数内部</strong>有<strong>另一个函数</strong>时，<strong>前者</strong>的变量属于<strong>后者</strong>的<strong>嵌套作用域</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>内置作用域</strong>：<strong>Python内置</strong>的那些<strong>标识符</strong></p>
+</blockquote>
+<p><strong>②联系</strong></p>
+<blockquote>
+<p><strong>内置作用域</strong>→<strong>全局作用域</strong>→<strong>嵌套作用域</strong>→<strong>局部作用域</strong>，<strong>从左往右</strong>依次<strong>内推</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 内部的作用域可以访问外部作用域中的变量，但是外部作用域不能访问内部作用域的变量</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 局部作用域不能访问其他局部作用域的变量</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果在不同的作用域中，你可以用相同的名字命名不同的变量</div>
+<p><strong>③关键词修饰</strong></p>
+<blockquote>
+<p><code>global</code>：<strong>修饰变量</strong>使其变为<strong>全局变量</strong></p>
+</blockquote>
+<blockquote>
+<p><code>nonlocal</code>：<strong>修饰变量</strong>使其变为<strong>嵌套作用域变量</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 全局变量比局部变量拥有更长的生命周期，可能导致对象占用的内存长时间无法被垃圾回收</div>
+<h4 id="2-3模块"><a href="#2-3模块" class="headerlink" title="2.3模块"></a>2.3模块</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p>模块类似于C++中的<strong>命名空间</strong>，可以<strong>防止命名冲突</strong>，同时也<strong>封装了代码</strong></p>
+</blockquote>
+<p><strong>②使用</strong></p>
+<blockquote>
+<p><strong>导入模块</strong>：<code>import 模块名,模块名n</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> import 模块 as 新名字可以对模块进行重命名</div>
+<blockquote>
+<p><strong>调用模块中函数/方法</strong>：<code>模块名.函数名/方法名</code></p>
+</blockquote>
+<p><strong>③测试</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 模块内部有一个测试函数，直接运行该模块文件即可运行测试函数</div>
+<blockquote>
+<p><code>__name__</code>为python中的一个<strong>内置变量</strong>，当程序<strong>直接被执行</strong>时，其<code>__name__</code>的值为<code>'__main__'</code>，而<strong>作为模块导入</strong>时，其<code>__name__ </code>值为<strong>自己的模块名</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">def c2f(cel):
+    fah = cel * 1.8 + 32
+    return fah
+def f2c(fah):
+    cel = (fah - 32) / 1.8
+    return cel
+def test():
+    print("测试数据：0 摄氏度 = %.2f 华氏度" % c2f(0))
+    print("测试数据：0 华氏度 = %.2f 摄氏度" % f2c(0))
+if __name__ == '__main__':
+test()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-4异常处理"><a href="#2-4异常处理" class="headerlink" title="2.4异常处理"></a>2.4异常处理</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 本质上是试图捕捉函数内部某些语句的错误</div>
+<blockquote>
+<p><strong>try语句</strong>：将可<strong>能出错的语句</strong>放在<code>try</code>之后，当这些语句<strong>出错</strong>后，会立马<strong>跳转到</strong><code>except</code>语句</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">try:
+  statement<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong>except语句</strong>：后面常接一些<strong>错误提醒</strong>的<code>print</code>语句</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">except 错误名:
+  print()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong>finally语句</strong>：<code>finally</code>块的代码<strong>不论程序正常还是异常</strong>都会执行</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该语句不是必须的，通常用于执行一些必要的清理操作，如关闭文件、释放资源、关闭数据库连接等</div>
+
+<h3 id="3-容器"><a href="#3-容器" class="headerlink" title="3.容器"></a>3.容器</h3><h4 id="3-1列表"><a href="#3-1列表" class="headerlink" title="3.1列表"></a>3.1列表</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p><code>列表名 = [表项1,...,表项n]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 表项的数据类型可以不是一致的，也可以是列表，元素一致时，类似于C语言的数组</div>
+<p><strong>②访问</strong></p>
+<blockquote>
+<p><code>列表名[i]</code>：访问列表中<strong>第<code>i-1</code>个表项</strong>，当<code>i</code>前面有<strong>负号</strong>时，代表<strong>倒数</strong>第<code>i</code>个</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 不同于C语言，python中有对应的下标检查</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当列表某个表项是列表时，如果想要访问其中元素，需要再次使用下标，即列表名[i][j]</div>
+<blockquote>
+<p><code>列表名[i:j:n]</code>：访问列表的<strong>一部分</strong>，<strong>结果</strong>还是<strong>一个列表</strong>，也称为<strong>切片</strong>，其中<code>[i:j:n]</code>表示<strong>第i个下标</strong>到<strong>第j个下标</strong>,<strong>步长为n</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 缺省i表示列表开始处，缺省j表示列表结束处，缺省n步长为1</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当n为负数时，表示从第j个下标到第i个下标，即反向切片</div>
+<p><strong>③常用操作</strong></p>
+<blockquote>
+<p><code>+</code>：<strong>连接</strong>两个列表，<code>spam1+spam2</code></p>
+</blockquote>
+<blockquote>
+<p><code>*</code>：<strong>复制</strong>列表，<code>spam*5</code></p>
+</blockquote>
+<blockquote>
+<p><code>del</code>：<strong>删除</strong>列表项，如<code>del spam[2]</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 表中被删除值后面的所有值，都将向前移动一个下标</div>
+
+<blockquote>
+<p><code>in</code>：<strong>判断</strong>元素<strong>是否在列表中</strong>，<code>if(var in spam)</code></p>
+</blockquote>
+<blockquote>
+<p><strong>常用方法</strong>：<strong>查找</strong><code>index()</code>、<strong>添加</strong><code>append()</code>、<strong>插入</strong><code>insert()</code>、<strong>删除</strong><code>remove()</code>、<strong>排序</strong><code>sort()</code></p>
+</blockquote>
+<h4 id="3-2元组和集合"><a href="#3-2元组和集合" class="headerlink" title="3.2元组和集合"></a>3.2元组和集合</h4><p><strong>①元组</strong></p>
+<blockquote>
+<p><strong>列表</strong>的<strong>不可变数据类型</strong>版本，<strong>创建时</strong>时用<strong>圆括号()</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 元组在创建时间和占用的空间上面都优于列表</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若元组中只有一个值，在该值的后面跟上一个逗号，否则就是一个值，而不是包含一个值的元组</div>
+<p><strong>②集合</strong></p>
+<blockquote>
+<p><code>set1 = {1, 2, 3, 3, 3, 2}</code>，是<strong>无序</strong>的可变数据类型</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 不允许有重复元素，而且可以进行交集、并集、差集等运算</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 列表、元组和集合之间可以通过list()、tuple()和set()相互转化</div>
+
+<h4 id="3-3字典"><a href="#3-3字典" class="headerlink" title="3.3字典"></a>3.3字典</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p><code>字典名 = {键1:值1,...,键n:值n};</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 通过键查询对应值，且键可以是任意数据类型，但是不能重复</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 字典是无序的，只要键值对完全相同，两个字典就是完全相同的</div>
+<p><strong>②基本操作</strong></p>
+<blockquote>
+<p><code>字典名[键名]</code>：访问<strong>键对应的值</strong></p>
+</blockquote>
+<blockquote>
+<p><code>字典名[键名]=值</code>：<strong>添加/修改</strong>键值对</p>
+</blockquote>
+<blockquote>
+<p><code>del 字典名[键名]</code>：<strong>删除</strong>键值对</p>
+</blockquote>
+<blockquote>
+<p><code>键名 in 字典名</code>：判断键<strong>是否存在</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 字典中的get方法可以同时获得值并检测键是否存在</div>
+<p><strong>③常用方法</strong></p>
+<blockquote>
+<p><code>keys()</code>:返回<code>dict_keys</code>，类似<strong>键的列表</strong></p>
+</blockquote>
+<blockquote>
+<p><code>values()</code>：返回<code>dict_values</code>，类似<strong>值的列表</strong></p>
+</blockquote>
+<blockquote>
+<p><code>items()</code>：返回<code>dict_items</code>，类似<strong>键-值对的列表</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 为字典的方法</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 这些返回值不能改变，常用于for循环判定条件中如for v in spam.values()用于遍历字典</div>
+
+<blockquote>
+<p><code>get()</code>：它有<strong>两个参数</strong>，<strong>第一个</strong>参数为<strong>键</strong>，以及如果<strong>该键不存在</strong>时，返回的<strong>第二个参数</strong></p>
+</blockquote>
+<blockquote>
+<p><code>setdefault()</code>:为字典中<strong>某个键设置一个默认值</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">#计算一个字符串中每个字符出现的次数
+message = 'It was a bright cold day in April, and the clocks were striking thirteen.'
+count = {}
+#for循环语句，即将character依次设置为message列表中的值
+for character in message:
+  count.setdefault(character, 0)
+  count[character] = count[character] + 1
+print(count)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/python-xue-xi-bi-ji-yi/">http://example.com/2023/12/10/python-xue-xi-bi-ji-yi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">
+                                    <span class="chip bg-color">编程语言</span>
+                                </a>
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/ppt-zhi-zuo-jin-jie-pian/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/12.webp" class="responsive-img" alt="PPT制作（进阶篇）">
+                        
+                        <span class="card-title">PPT制作（进阶篇）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            PPT制作技巧-进阶
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E4%BD%9C%E6%B5%81/" class="post-category">
+                                    工作流
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PPT/">
+                        <span class="chip bg-color">PPT</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/">
+                        <span class="chip bg-color">软技能</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/hexo-bo-ke-kuang-jia-da-jian-yi-ji-ge-xing-hua/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/18.webp" class="responsive-img" alt="Hexo个人博客搭建">
+                        
+                        <span class="card-title">Hexo个人博客搭建</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Hexo博客框架搭建、个性化和文章写法
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E4%BD%9C%E6%B5%81/" class="post-category">
+                                    工作流
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Hexo/">
+                        <span class="chip bg-color">Hexo</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6/">
+                        <span class="chip bg-color">静态博客框架</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

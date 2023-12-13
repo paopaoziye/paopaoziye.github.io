@@ -1,0 +1,1096 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">PPT制作（进阶篇）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/PPT/">
+                                <span class="chip bg-color">PPT</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/">
+                                <span class="chip bg-color">软技能</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%B7%A5%E4%BD%9C%E6%B5%81/" class="post-category">
+                                工作流
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="PPT制作（进阶篇）"><a href="#PPT制作（进阶篇）" class="headerlink" title="PPT制作（进阶篇）"></a>PPT制作（进阶篇）</h1><h2 id="一、封面页"><a href="#一、封面页" class="headerlink" title="一、封面页"></a>一、封面页</h2><h3 id="1-标题排版"><a href="#1-标题排版" class="headerlink" title="1.标题排版"></a>1.标题排版</h3><p><strong>1.1换行有节奏</strong>：当标题过长时，可以将标题分为多行，每一行要<strong>完整且相对独立</strong>，且<strong>长短交错</strong>，否则会很呆板<br><strong>1.2对比有重点</strong>：使标题有层次感，突出重点<br>①调粗细：粗体（Bold）用于标题，标准（Regular）用于副标题、正文（比如说汇报人什么什么<br>②变大小：一般来说标题为第一层级，副标题为第二层级，正文为第三层级，不同信息层级字体大小成<strong>倍数关系</strong>，如（60-20-15）<br>③换颜色：将标题字体颜色更换为<strong>PPT主色</strong>，可以采用渐进色进行修饰<br>④改间距：调整各个层级之间的间距使其不要太拥挤<br>⑤特殊效果：如倾斜、错位排版等<br>#倾斜：选中文本框→形状格式→文本效果→转换→正方形→拖动控点控制文字的倾斜角度</p>
+<h3 id="2-背景图片"><a href="#2-背景图片" class="headerlink" title="2.背景图片"></a>2.背景图片</h3><p><strong>2.1图片网站</strong><br>①unsplash.com<br>②<a target="_blank" rel="noopener" href="http://www.pexels.com/">www.pexels.com</a><br>③pixabay.com<br><strong>2.2图片选择</strong><br>①语意关联：根据<strong>关键词</strong>寻找配图<br>②留白空间：根据标题的排版，选择一张对应位置有留白的图片<br>③色调匹配：图片色调要和PPT主色相符合</p>
+<h3 id="3-构图形式"><a href="#3-构图形式" class="headerlink" title="3.构图形式"></a>3.构图形式</h3><p><strong>3.1布局选择</strong><br>①居中构图：当图片为上下构图时，采用居中布局，图片主体占图片的1/3<br>②居左布局：图片为左右构图时，采用居左布局，图片主体占图片的1/2<br>③根据图片留白放置标题<br><strong>tips：可以通过裁剪，获得想要的留白空间</strong><br><strong>3.2图形凸显</strong>：降低图片对文字的干扰<br>①色块：使用<strong>一定颜色的形状</strong>作为图片的衬底，调整透明度使其更为自然<br>②蒙版：渐变透明的蒙版<br>#全屏蒙版：插入全屏矩形→选择<strong>线性渐变</strong>→渐变方向<strong>根据封面布局</strong>选择，比如居中布局采用自上而下，居左布局采用自左向右→光圈颜色选择背景图片的主色→将<strong>非文字区域</strong>的光圈透明度调整为100→调整光圈位置，使其更加自然<br>#局部蒙版：插入刚好能覆盖文案的形状（比较推荐椭圆）→设置为无轮廓→选择<strong>路径渐变</strong>→光圈颜色采用图片的主色→右侧光圈透明度调节为100→调整光圈位置，将<strong>图片置于底层</strong><br><strong>tips：如果觉得蒙版破坏了图片主体，可以将图片主体扣出来</strong><br><strong>等距缩放，为了让左右和上下的边距相等，可以创建一个小正方形，置于形状的左上角，按住ctrl键缩放即可</strong></p>
+<h2 id="二、排版"><a href="#二、排版" class="headerlink" title="二、排版"></a>二、排版</h2><h3 id="1-文字排版"><a href="#1-文字排版" class="headerlink" title="1.文字排版"></a>1.文字排版</h3><p><strong>1.1对齐</strong>：不要使用首行缩进，这样会导致文本不够饱满，最好采用<strong>两端对齐</strong><br><strong>1.2调整间距</strong><br>①本身：标题字号较大，采用1.0倍行距，正文字号比较小，采用1.2-1.5倍行距<br>②相互：<strong>标题和正文间距＞段落间距＞行间距＞字间距</strong><br>#可以采用<strong>分隔线</strong>突出重点段落，比如副标题<br><strong>1.3控制行长</strong>：行长最好<strong>略小于页面的二分之一</strong>，可以采用多段左右、上下分布，<strong>避免出现独字</strong></p>
+<h3 id="2-内容排版"><a href="#2-内容排版" class="headerlink" title="2.内容排版"></a>2.内容排版</h3><p><strong>2.1梳理文案信息</strong><br>①分段：将一段文字内容分为<strong>独立的几个维度</strong><br>②精简：删除<strong>连接词和重复词语</strong>，提炼核心内容<br>③凸显层级和重要内容：大小对比、颜色对比、粗细对比、距离对比、下划线、色块、字体对比<br><strong>2.2确定版式布局</strong><br>①统一版心，利用<strong>参考线</strong>确定标题区域和正文区域<br>#可以先创建一个全屏矩形，然后等比缩放，调节至合适大小，分布在ppt四角<strong>确定留白区域</strong>，随后在非留白区域确定标题位置和正文位置，标题位置和正文位置之间<strong>相隔一个标题高度</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_1.png" alt="统一版心"><br>②内容分块：利用<strong>色块、形状</strong>等根据文案信息对正文位置进行分块<br>#注意色块、形状等<strong>修饰内容可以占用留白区域</strong>，只要正文内容按照格式排版即可<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_2.png" alt="内容分块"><br><strong>2.3内容可视化</strong><br>①图标：给小标题增加合适的图标<br>#素材网站:<a target="_blank" rel="noopener" href="https://www.flaticon.com/">https://www.flaticon.com/</a> <a target="_blank" rel="noopener" href="https://iconpark.oceanengine.com/official">https://iconpark.oceanengine.com/official</a> <a target="_blank" rel="noopener" href="http://www.iconfont.cn/">www.iconfont.cn</a><br>#可以将图标截图，并将<strong>位图转化为矢量图</strong>，这样就可以在ppt中修改格式了<br>②图片：给<strong>文本块</strong>增加对应的图片背景等<br>③逻辑图示：流程图、带有<strong>关系暗示</strong>的图形等等<br>#并列、包含、流程、循环和层级<br>#素材网站：<a target="_blank" rel="noopener" href="https://www.freepik.com/">https://www.freepik.com/</a><br><strong>2.4实例</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_3.png" alt="实例一"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_4.png" alt="实例二"></p>
+<h3 id="3-多点排版"><a href="#3-多点排版" class="headerlink" title="3.多点排版"></a>3.多点排版</h3><p><strong>3.1中心环绕式布局</strong><br>①全圆式布局：段落数量为<strong>偶数</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_5.png" alt="全圆式布局"><br>②半圆式布局：段落数量为<strong>奇数</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_6.png" alt="半圆式布局"><br>#可以利用等比例缩放绘制圆辅助线，并<strong>利用对齐</strong>将段落点贴近辅助线<br><strong>3.2确定中心点样式</strong><br>①基本形状：并不一定要局限于圆形，还可以是其他多边形<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_7.png" alt="基本图形"><br>②图片素材：选取符合主题的图片<br><strong>3.3丰富层次</strong><br>①文本层次<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_9.png" alt="文本层次"><br>②图形层次<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_8.png" alt="图形层次"></p>
+<h3 id="4-多图排版"><a href="#4-多图排版" class="headerlink" title="4.多图排版"></a>4.多图排版</h3><p><strong>4.1尺寸</strong>：图片格式→裁剪→纵横比，将图片裁剪为比例一致的图片，然后再调整大小<br><strong>4.2间距</strong>：利用<strong>对齐</strong>，注意<strong>图片之间</strong>的间距要小于<strong>图片和页面之间</strong>的间距<br><strong>4.3效果</strong><br>①形状：将图片裁剪为特定形状，图片格式→裁剪→形状<br>②轮廓：给图片加上边框<br>③阴影：ctrl拖动复制图片→图片格式→艺术效果→虚化→调整虚化半径（调整为90）→柔化边缘→将该图片拖动到原图片底部<br>④映像：ctrl拖动复制图片→图片格式→映像效果→选择第一个预设→调整映像大小→增加模糊度<br>#可以设置好一张图片效果，然后采用<strong>格式</strong>刷快速复制<br><strong>4.4创意排版</strong><br>①瀑布流<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_10.png" alt="瀑布流"><br>②三维旋转<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_11.png" alt="平行预设"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_12.png" alt="角度预设"><br><strong>#要将光源改为对比</strong>，防止过曝</p>
+<p><strong>5.创意排版</strong><br><strong>5.1分栏排版</strong>：利用<strong>色块、图片等</strong>将不同维度内容分隔开<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_34.png" alt="分栏排版"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_35.png" alt="示例"><br><strong>5.2拦腰排版</strong>：用于需要突出重点内容的<strong>总分关系</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_36.png" alt="拦腰排版"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_37.png" alt="示例"><br><strong>5.3卡片排版</strong>：变种的分栏排版，注意卡片组合起来要是一个规整的矩形（可以有无内容色块），<strong>形状和间距相同</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_38.png" alt="拦腰排版"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_39.png" alt="示例"></p>
+<p>#配色可以采用主色+<strong>黑白灰</strong>/主色的梯度色<br>#当内容不够饱满时，可以插入<strong>图片</strong></p>
+<h2 id="三、特殊要素"><a href="#三、特殊要素" class="headerlink" title="三、特殊要素"></a>三、特殊要素</h2><h3 id="1-表格"><a href="#1-表格" class="headerlink" title="1.表格"></a>1.表格</h3><p><strong>1.1大小</strong><br>①整体大小：要<strong>占满版心</strong><br>②单元格大小：全选表格→<strong>布局选项卡</strong>调整单元格高度→然后双击单元格的<strong>竖边</strong>，使得<strong>单元格宽度匹配文本宽度</strong><br><strong>1.2样式</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_13.png" alt="表格样式"><br>①选择<strong>无样式</strong>的表格样式，随后自己编辑<br>②线条型表格的<strong>内部框线不宜太粗</strong>，防止喧宾夺主，<strong>表头</strong>、<strong>表尾</strong>和<strong>分割表格</strong>的框线可以适当增粗<br>③色块型表格，可以在表格<strong>底部</strong>添加<strong>对应大小颜色</strong>的色块，也可以对表格进行颜色填充，但是后者是对<strong>每个单元格</strong>进行对应填充且<strong>不能改变形状</strong>，在使用渐变色时还是使用前者<br><strong>1.3对齐</strong>：文本左对齐，数据右对齐<br>①如果遇到小数，位数要统一<br>②文本内容过多，可以分点介绍<br><strong>1.4突出重点</strong>：粗细、颜色、衬底<br><strong>1.5可视化</strong><br>①文本可视化：利用图标、图片代替文字或者作为背景<br>②数据可视化：比如百分比可以利用对应的进度条和饼状图代替<br><strong>1.6实例</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_14.png" alt="实例一"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_15.png" alt="实例二"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_16.png" alt="实例三"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_17.png" alt="实例四"></p>
+<h3 id="2-时间轴"><a href="#2-时间轴" class="headerlink" title="2.时间轴"></a>2.时间轴</h3><p><strong>2.1时间轴线</strong><br>①直线：渐变、箭头<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_18.png" alt="直线"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_21.png" alt="示例"><br>②不规则线条：曲线、折线<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_19.png" alt="曲线绘制"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_20.png" alt="示例"><br>#注意其中的技巧三，可以在<strong>ppt画面之外</strong>使其形成一个封闭图形，并进行<strong>颜色填充</strong>，如示例所示<br>③实物元素<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_22.png" alt="实物元素"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_23.png" alt="示例"><br><strong>2.2节点</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_24.png" alt="节点"><br>①还可以使用图标<br>②节点<strong>外发光</strong>效果：去除线条→<strong>偏移为中</strong>的<strong>阴影</strong>预设→透明度将为0→调整<strong>大小</strong>从而调节发光范围<br>③节点<strong>内发光</strong>效果：<strong>射线</strong>渐变→方向改为<strong>从中心</strong>→<strong>左侧</strong>光圈改为<strong>背景色</strong>，调整为<strong>完全透明</strong>→调整光圈位置即可<br><strong>2.3文案排版</strong><br>①文本层次<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_9.png" alt="文本层次"><br>②文本修饰：在节点和文案之间添加<strong>直线</strong>等元素进行<strong>联系</strong></p>
+<h3 id="3-架构图"><a href="#3-架构图" class="headerlink" title="3.架构图"></a>3.架构图</h3><p><strong>3.1确定走向</strong><br>①自上而下：适合分支较<strong>少</strong>的架构图<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_25.png" alt="示例"><br>②自左向右：适合分支较<strong>多</strong>的架构图<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_26.png" alt="示例"><br>③中心扩散：适合分支较<strong>多</strong>的架构图<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_27.png" alt="示例"><br><strong>3.2元素形状</strong><br>①衬底图形<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_28.png" alt="衬底图形"><br>#还可以将这些基本图形<strong>结合</strong>到一起形成新的衬底<br>②连接线条<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_29.png" alt="连接线条"><br>#其中曲线型连接可以采用<strong>花括号</strong>和箭头等组合而来<br>#可以在形状格式中修改箭头、花括号的<strong>末端形状</strong><br><strong>3.3区分层级</strong><br>①颜色对比：不同层级采用不同的颜色（最好<strong>梯度色</strong>），其中衬底颜色和文字颜色<strong>色调要相反</strong>，即衬底为深色，文字就要为浅色<br>②虚实对比：当层级过多，颜色对比不够用时，末端可以采用<strong>无填充、虚线框</strong>的形式<br>③形状对比<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_30.png" alt="示例"></p>
+<h3 id="4-图表"><a href="#4-图表" class="headerlink" title="4.图表"></a>4.图表</h3><p><strong>4.1确定样式</strong><br>①柱形图：大小比较，项目名较短<br>②条形图：大小比较，项目名较长<br>③饼状图：占比关系<br>④环形图表：占比关系，可以使用弧形和圆组合而成，调<strong>粗</strong>其线宽，改变其<strong>线端类型</strong>，将弧形置于顶层即可<br>⑤折线图：变化趋势</p>
+<p>#直接<strong>插入图表</strong>即可<br><strong>4.2图标优化</strong><br>①柱/条形图</p>
+<ul>
+<li>弱化或者删除<strong>网格</strong>、<strong>图例</strong>和<strong>坐标轴</strong>元素</li>
+<li>间隙宽度<strong>50%-100%</strong></li>
+<li>突出重点，利用<strong>颜色</strong>和<strong>色块衬底</strong>即可</li>
+</ul>
+<p>②饼状图</p>
+<ul>
+<li>扇面<strong>从大到小顺时针排序</strong></li>
+<li>扇面配色避免花哨，使用<strong>梯度色</strong>即可</li>
+</ul>
+<p>③折线图</p>
+<ul>
+<li>弱化或者删除<strong>网格</strong>、<strong>图例</strong>和<strong>坐标轴</strong>元素</li>
+<li>如果无需精确呈现数据时，可使用<strong>平滑线</strong>（右击→设计数据系列格式→填充与线条→勾选平滑线选项）</li>
+<li>可以将其改变为<strong>面积图</strong>，对其进行<strong>渐变填充</strong>，但是如果要使用<strong>平滑线</strong>的话，不能将其改变为面积图，应该先将其改变为<strong>平滑线</strong>→新建一页，将图表<strong>选择性粘贴</strong>为<strong>图片（增强型图元文件）</strong>→取消组合，提取曲线→利用曲线和目标颜色色块进行<strong>组合拆分</strong>，将对应颜色色块裁剪为目标形状<strong>填充回原幻灯片</strong>即可</li>
+</ul>
+<p>#图表不仅仅局限于ppt图表自带的修饰，还可以自己利用<strong>线条、形状</strong>等素材对图表进行修饰，比如说用<strong>文本框</strong>代替图表原本的<strong>标题</strong>，用色块和文本框代替图例等<br>#可以使用<strong>数据标签</strong>代替纵轴</p>
+<p><strong>4.3布局</strong><br>①单个图表：占满版心即可<br>②多个图表：利用<strong>色块</strong>对页面进行分区，将图表放在对应的色块中</p>
+<p><strong>4.4实例</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_31.png" alt="实例一"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_32.png" alt="实例二"><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/ppt_33.png" alt="实例三"></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/ppt-zhi-zuo-jin-jie-pian/">http://example.com/2023/12/10/ppt-zhi-zuo-jin-jie-pian/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/PPT/">
+                                    <span class="chip bg-color">PPT</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/">
+                                    <span class="chip bg-color">软技能</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/ppt-zhi-zuo-ji-chu-pian/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/12.webp" class="responsive-img" alt="PPT制作（基础篇）">
+                        
+                        <span class="card-title">PPT制作（基础篇）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            PPT风格确定
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E4%BD%9C%E6%B5%81/" class="post-category">
+                                    工作流
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PPT/">
+                        <span class="chip bg-color">PPT</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/python-xue-xi-bi-ji-yi/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/4.webp" class="responsive-img" alt="python学习笔记（一）">
+                        
+                        <span class="card-title">python学习笔记（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            python启蒙
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">编程语言</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

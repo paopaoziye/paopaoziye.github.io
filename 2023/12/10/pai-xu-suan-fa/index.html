@@ -1,0 +1,1513 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文章关键词">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">排序算法</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">计算机基础</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                                <span class="chip bg-color">数据结构与算法</span>
+                            </a>
+                        
+                            <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
+                                <span class="chip bg-color">《hello 算法》</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                计算机基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h3><p><strong>①排序</strong></p>
+<blockquote>
+<p>对<strong>一组数据</strong>按照<strong>特定顺序</strong>进行排列</p>
+</blockquote>
+<p><strong>②评价指标</strong></p>
+<blockquote>
+<p><strong>运行效率</strong>：<strong>时间复杂度</strong>尽量低，且<strong>总体操作量</strong>，即<strong>时间复杂度</strong>的<strong>各项系数</strong>较少，</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 对于大型数据，主要考虑时间复杂度，对于小型数据，主要考虑总体操作量</div>
+<blockquote>
+<p><strong>空间利用率</strong>：尽量不使用<strong>额外空间</strong>，而是在<strong>原数组</strong>中直接实现</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 此外还需要考虑递归产生的栈帧等</div>
+<blockquote>
+<p><strong>稳定性</strong>：<strong>完成排序</strong>后，<strong>相等元素</strong>在<strong>数组</strong>中的<strong>相对顺序</strong>不发生改变</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 因为相同的数据本质上还是不同的，如根据对象成员的值对对象进行排列</div>
+<blockquote>
+<p><strong>自适应性</strong>：是否对<strong>较差数据（如逆序数据）</strong>也有较好的<strong>处理效果</strong></p>
+</blockquote>
+<p><strong>③分类</strong></p>
+<blockquote>
+<p><strong>遍历排序</strong>：<strong>冒泡</strong>排序、<strong>插入</strong>排序、<strong>希尔</strong>排序、<strong>选择</strong>排序</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 其中插入排序常用于小型数据排序，因为其稳定，且总体操作量较小</div>
+<blockquote>
+<p><strong>递归排序</strong>：<strong>快速</strong>排序、<strong>归并</strong>排序、<strong>桶</strong>排序</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 其中快速排序的比操作的总数量最少，且出现最差情况的概率很低，常用于大型数据的排序</div>
+
+
+<h3 id="2-遍历排序"><a href="#2-遍历排序" class="headerlink" title="2.遍历排序"></a>2.遍历排序</h3><h4 id="2-1冒泡排序"><a href="#2-1冒泡排序" class="headerlink" title="2.1冒泡排序"></a>2.1冒泡排序</h4><p><strong>①思路</strong></p>
+<blockquote>
+<p><strong>从左至右</strong>遍历<code>nums</code>，每次遍历比较<strong>对应元素</strong>与其<strong>相邻右元素</strong>，若<strong>右元素大/小于该元素</strong>，则<strong>交换两者位置</strong>，这样就将<strong>未排序区间</strong>的<strong>最小/大元素</strong>放在其<strong>最右端</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 为稳定排序，因为冒泡排序每次改变的范围较小，且遇到相等元素不交换，不会改变其相对位置</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_14.png" alt="冒泡排序"><br><strong>②代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 最坏时间复杂度为O(n^2)，最好时间复杂度为O(n)，空间复杂度为O(1)</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 其中flag用于判断每次遍历中是否发生了交换，即判断是否已经排序好</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 冒泡排序（标志优化）*/
+void bubbleSortWithFlag(int nums[], int size) {
+    // 外循环：未排序区间为 [0, i]
+    for (int i = 0; i &lt; size - 1; i++) {
+        bool flag = false;
+        // 内循环：将未排序区间 [0, i] 中的最大元素交换至该区间的最右端
+        for (int j = 0; j &lt; size - 1 - i; j++) {
+            if (nums[j] &gt; nums[j + 1]) {
+                int temp = nums[j];
+                nums[j] = nums[j + 1];
+                nums[j + 1] = temp;
+                flag = true;
+            }
+        }
+        if (!flag)
+            break;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-2插入排序"><a href="#2-2插入排序" class="headerlink" title="2.2插入排序"></a>2.2插入排序</h4><p><strong>①思路</strong></p>
+<blockquote>
+<p>开始时以<code>nums[0]</code>为<strong>已排序区间</strong>，<strong>依次</strong>将<strong>剩余元素</strong>插入，<strong>加入元素</strong>依次<strong>从右向左</strong>与<strong>已排序区间元素</strong>比较，如果<strong>大于插入元素</strong>，则<strong>向后移动一位</strong>，直到找到<strong>对应位置</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 为稳定排序，因为冒泡排序每次改变的范围较小，且遇到相等元素不交换，不会改变其相对位置</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_15.png" alt="插入排序"><br><strong>②代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 最坏时间复杂度为O(n^2)，最好时间复杂度为O(n)，空间复杂度为O(1)</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 插入排序 */
+void insertionSort(int nums[], int size) {
+    // 外循环：已排序元素数量为 1, 2, ..., n
+    for (int i = 1; i &lt; size; i++) {
+        int base = nums[i], j = i - 1;
+        // 内循环：将 base 插入到已排序部分的正确位置
+        while (j &gt;= 0 &amp;&amp; nums[j] &gt; base) {
+            // 将 nums[j] 向右移动一位
+            nums[j + 1] = nums[j];
+            j--;
+        }
+        // 将 base 赋值到正确位置
+        nums[j + 1] = base;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-3希尔排序"><a href="#2-3希尔排序" class="headerlink" title="2.3希尔排序"></a>2.3希尔排序</h4><p><strong>①思路</strong></p>
+<h4 id="2-4选择排序"><a href="#2-4选择排序" class="headerlink" title="2.4选择排序"></a>2.4选择排序</h4><p><strong>①思路</strong></p>
+<blockquote>
+<p>开启一个<strong>循环</strong>，每次循环从<strong>未排序区间</strong>中选择<strong>最大/小的元素</strong>放在<strong>已排序区间的末尾</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 为非稳定性排序，将最小元素放在已排序区间末尾的过程可能会改变相等元素的相对位置</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_16.png" alt="选择排序的不稳定性"><br><strong>②代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 最好和最坏时间复杂度均为O(n^2)，空间复杂度为O(1)</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 选择排序 */
+void selectionSort(int nums[], int n) {
+    // 外循环：未排序区间为 [i, n-1]
+    for (int i = 0; i &lt; n - 1; i++) {
+        // 内循环：找到未排序区间内的最小元素
+        int k = i;
+        for (int j = i + 1; j &lt; n; j++) {
+            if (nums[j] &lt; nums[k])
+                k = j; // 记录最小元素的索引
+        }
+        // 将该最小元素与未排序区间的首个元素交换
+        int temp = nums[i];
+        nums[i] = nums[k];
+        nums[k] = temp;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-5堆排序"><a href="#2-5堆排序" class="headerlink" title="2.5堆排序"></a>2.5堆排序</h4><p><strong>①思路</strong></p>
+<blockquote>
+<p><strong>基于数组</strong>构建<strong>最大堆</strong>，将<strong>堆顶元素</strong>与<strong>堆底元素</strong>交换，<strong>堆的大小减一</strong>，<strong>已排序元素加一</strong>，随后<strong>从顶至底堆化</strong>，<strong>重复</strong>上述步骤，直到<strong>堆的大小为1</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 堆排序本质上是选择排序，只不过使用堆来实现</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 为非稳定排序，在交换堆顶元素和堆底元素时，可能会交换相等元素</div>
+<p><strong>②代码实现</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 最好最坏时间复杂度为O(nlogn)，空间复杂度为O(1)</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */
+void siftDown(int nums[], int n, int i) {
+    while (1) {
+        // 判断节点 i, l, r 中值最大的节点，记为 ma
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
+        int ma = i;
+        if (l &lt; n &amp;&amp; nums[l] &gt; nums[ma])
+            ma = l;
+        if (r &lt; n &amp;&amp; nums[r] &gt; nums[ma])
+            ma = r;
+        // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出
+        if (ma == i) {
+            break;
+        }
+        // 交换两节点
+        int temp = nums[i];
+        nums[i] = nums[ma];
+        nums[ma] = temp;
+        // 循环向下堆化
+        i = ma;
+    }
+}
+
+/* 堆排序 */
+void heapSort(int nums[], int n) {
+    // 建堆操作：堆化除叶节点以外的其他所有节点
+    for (int i = n / 2 - 1; i &gt;= 0; --i) {
+        siftDown(nums, n, i);
+    }
+    // 从堆中提取最大元素，循环 n-1 轮
+    for (int i = n - 1; i &gt; 0; --i) {
+        // 交换根节点与最右叶节点（即交换首元素与尾元素）
+        int tmp = nums[0];
+        nums[0] = nums[i];
+        nums[i] = tmp;
+        // 以根节点为起点，从顶至底进行堆化
+        siftDown(nums, i, 0);
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h3 id="3-分治排序"><a href="#3-分治排序" class="headerlink" title="3.分治排序"></a>3.分治排序</h3><h4 id="3-1快速排序"><a href="#3-1快速排序" class="headerlink" title="3.1快速排序"></a>3.1快速排序</h4><p><strong>①思路</strong></p>
+<blockquote>
+<p>从<code>nums</code>中<strong>选择一元素</strong>作为<strong>哨兵</strong>，将所有<strong>比哨兵小</strong>的元素放在其<strong>左侧</strong>，<strong>比哨兵大</strong>的放在其<strong>右侧</strong>，随后在对<strong>左右子数组</strong>进行<strong>相同的操作</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 快速排序的好坏取决于哨兵的选择，若选择的哨兵导致左右数组完全平衡，则可能退化为冒泡排序</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以将哨兵选择为数组头元素、中点元素和尾元素的中位数</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 为非稳定性排序，若相等元素被选为哨兵，则其余相等项与其相对顺序可能会改变</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_17.png" alt="快速排序"><br><strong>②代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 最坏时间复杂度为O(n^2)，最好时间复杂度为O(nlogn)，空间复杂度为O(n)，递归函数需要额外的栈帧</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 元素交换 */
+void swap(int nums[], int i, int j) {
+    int tmp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = tmp;
+}
+
+/* 快速排序类（中位基准数优化） */
+// 选取三个元素的中位数
+int medianThree(int nums[], int left, int mid, int right) {
+    // 此处使用异或运算来简化代码
+    // 异或规则为 0 ^ 0 = 1 ^ 1 = 0, 0 ^ 1 = 1 ^ 0 = 1
+    if ((nums[left] &lt; nums[mid]) ^ (nums[left] &lt; nums[right]))
+        return left;
+    else if ((nums[mid] &lt; nums[left]) ^ (nums[mid] &lt; nums[right]))
+        return mid;
+    else
+        return right;
+}
+
+// 哨兵划分（三数取中值）
+int partitionMedian(int nums[], int left, int right) {
+    // 选取三个候选元素的中位数
+    int med = medianThree(nums, left, (left + right) / 2, right);
+    // 将中位数交换至数组最左端
+    swap(nums, left, med);
+    // 以 nums[left] 作为基准数
+    int i = left, j = right;
+    while (i &lt; j) {
+        while (i &lt; j &amp;&amp; nums[j] &gt;= nums[left])
+            j--; // 从右向左找首个小于基准数的元素
+        while (i &lt; j &amp;&amp; nums[i] &lt;= nums[left])
+            i++;          // 从左向右找首个大于基准数的元素
+        swap(nums, i, j); // 交换这两个元素
+    }
+    swap(nums, i, left); // 将基准数交换至两子数组的分界线
+    return i;            // 返回基准数的索引
+}
+
+// 快速排序类-快速排序
+void quickSort(int nums[], int left, int right) {
+    // 子数组长度为 1 时终止递归
+    if (left &gt;= right) {
+        return;
+    }
+    // 哨兵划分
+    int pivot = partition(nums, left, right);
+    // 递归左子数组、右子数组
+    quickSort(nums, left, pivot - 1);
+    quickSort(nums, pivot + 1, right);
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-2归并排序"><a href="#3-2归并排序" class="headerlink" title="3.2归并排序"></a>3.2归并排序</h4><p><strong>①思路</strong></p>
+<blockquote>
+<p>将数组<code>nums</code>不断<strong>二分</strong>为<strong>两个子数组</strong>，直到<strong>子数组长度为1</strong>，<strong>从底至顶</strong>将子数组<strong>合并为有序数组</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 对于链表，归并排序相较于其他排序算法具有显著优势，空间复杂度可降为O(1)</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_18.png" alt="归并排序"><br><strong>②代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 最好最坏时间复杂度为O(nlogn)，空间复杂度为O(n)，其中栈帧为O(nlogn)，但是需要额外借助数组，故为O(n)</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 合并左子数组和右子数组 */
+void merge(int *nums, int left, int mid, int right) {
+    // 左子数组区间 [left, mid], 右子数组区间 [mid+1, right]
+    // 创建一个临时数组 tmp ，用于存放合并后的结果
+    int tmpSize = right - left + 1;
+    int *tmp = (int *)malloc(tmpSize * sizeof(int));
+    // 初始化左子数组和右子数组的起始索引
+    int i = left, j = mid + 1, k = 0;
+    // 当左右子数组都还有元素时，比较并将较小的元素复制到临时数组中
+    while (i &lt;= mid &amp;&amp; j &lt;= right) {
+        if (nums[i] &lt;= nums[j]) {
+            tmp[k++] = nums[i++];
+        } else {
+            tmp[k++] = nums[j++];
+        }
+    }
+    // 将左子数组和右子数组的剩余元素复制到临时数组中
+    while (i &lt;= mid) {
+        tmp[k++] = nums[i++];
+    }
+    while (j &lt;= right) {
+        tmp[k++] = nums[j++];
+    }
+    // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间
+    for (k = 0; k &lt; tmpSize; ++k) {
+        nums[left + k] = tmp[k];
+    }
+    // 释放内存
+    free(tmp);
+}
+
+/* 归并排序 */
+void mergeSort(int *nums, int left, int right) {
+    // 终止条件
+    if (left &gt;= right)
+        return; // 当子数组长度为 1 时终止递归
+    // 划分阶段
+    int mid = (left + right) / 2;    // 计算中点
+    mergeSort(nums, left, mid);      // 递归左子数组
+    mergeSort(nums, mid + 1, right); // 递归右子数组
+    // 合并阶段
+    merge(nums, left, mid, right);
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-3桶排序"><a href="#3-3桶排序" class="headerlink" title="3.3桶排序"></a>3.3桶排序</h4><p><strong>①思路</strong></p>
+<blockquote>
+<p>设置<code>k</code>个具有<strong>大小顺序</strong>的<strong>桶</strong>，将<strong>数据</strong>根据<strong>桶的大小范围</strong>分配到<strong>不同的桶</strong>中，<strong>分别</strong>在这些<strong>桶中对数据进行排序</strong>，排序后<strong>根据桶的顺序合并</strong>即可</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 桶排序的稳定性根据其桶内使用的算法决定</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 桶排序适用于处理体量很大的数据，桶通常使用链表实现</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_19.png" alt="桶排序"><br><strong>②代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 最好时间复杂度接近O(n+k)，最坏时间复杂度为桶使用的算法，空间复杂度为O(n+k)</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当桶的数量较多且数据均匀分布在桶内时，桶排序的速率最高</div>
+<blockquote>
+<p>可以先<strong>粗略的分</strong>，然后在此基础上将<strong>大桶再细分</strong>，直到<strong>每个桶大小相近</strong></p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">/* 桶排序 */
+void bucketSort(float nums[], int size) {
+    // 初始化 k = n/2 个桶，预期向每个桶分配 2 个元素
+    int k = size / 2;
+    float **buckets = calloc(k, sizeof(float *));
+    for (int i = 0; i &lt; k; i++) {
+        // 每个桶最多可以分配 k 个元素
+        buckets[i] = calloc(ARRAY_SIZE, sizeof(float));
+    }
+
+    // 1. 将数组元素分配到各个桶中
+    for (int i = 0; i &lt; size; i++) {
+        // 输入数据范围 [0, 1)，使用 num * k 映射到索引范围 [0, k-1]
+        int bucket_idx = nums[i] * k;
+        int j = 0;
+        // 如果桶中有数据且数据小于当前值 nums[i], 要将其放到当前桶的后面，相当于 cpp 中的 push_back
+        while (buckets[bucket_idx][j] &gt; 0 &amp;&amp; buckets[bucket_idx][j] &lt; nums[i]) {
+            j++;
+        }
+        float temp = nums[i];
+        while (j &lt; ARRAY_SIZE &amp;&amp; buckets[bucket_idx][j] &gt; 0) {
+            swap(&amp;temp, &amp;buckets[bucket_idx][j]);
+            j++;
+        }
+        buckets[bucket_idx][j] = temp;
+    }
+
+    // 2. 对各个桶执行排序
+    for (int i = 0; i &lt; k; i++) {
+        qsort(buckets[i], ARRAY_SIZE, sizeof(float), compare_float);
+    }
+
+    // 3. 遍历桶合并结果
+    for (int i = 0, j = 0; j &lt; k; j++) {
+        for (int l = 0; l &lt; ARRAY_SIZE; l++) {
+            if (buckets[j][l] &gt; 0) {
+                nums[i++] = buckets[j][l];
+            }
+        }
+    }
+
+    // 释放上述分配的内存
+    for (int i = 0; i &lt; k; i++) {
+        free(buckets[i]);
+    }
+    free(buckets);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-4计数排序"><a href="#3-4计数排序" class="headerlink" title="3.4计数排序"></a>3.4计数排序</h4><p><strong>①思想</strong></p>
+<blockquote>
+<p><strong>遍历</strong>数组，找到其<strong>最大值</strong><code>m</code>，创建一个<strong>长度</strong>为<code>m+1</code>的<strong>辅助数组</strong><code>counter</code>，再次<strong>遍历数组</strong>，遇到<strong>数字</strong><code>num</code>，则<strong>辅助数组对应位置</strong><code>counter[num]</code><strong>加一</strong>，<strong>遍历完</strong>后，再遍历<strong>辅助数组</strong>，将元素<strong>依次按照对应位置的值取出</strong>即可</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 本质上还是桶排序，桶的个数为m+1，且只能非负整数元素进行排序，且仅适用于数据量大且数据范围小的情况</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以将对应元素转化为非负整数再使用该方法，如给负数加上一个大的偏移量</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 上述计数排序实现是不稳定的，且无法根据对象的某个成员对对象进行排列</div>
+<blockquote>
+<p>引入<strong>结果数组</strong><code>res</code>，<strong>得到<code>counter</code>数组</strong>后，再<strong>倒序遍历</strong><code>nums</code>数组，<strong>每次遍历</strong>，根据<code>premix[num]-1</code>，得到其<strong>在结果数组的索引</strong>，随后<code>counter[num]</code><strong>减一</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> premix为前缀和，premix-1代表元素num在结果数组res中最后一次出现的索引</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_21.png" alt="计数排序"><br><strong>②代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时间复杂度为O(n+m)，空间复杂度为O(n+m)，其中m为辅助数组的长度</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 计数排序 */
+// 完整实现，可排序对象，并且是稳定排序
+void countingSort(int nums[], int size) {
+    // 1. 统计数组最大元素 m
+    int m = 0;
+    for (int i = 0; i &lt; size; i++) {
+        if (nums[i] &gt; m) {
+            m = nums[i];
+        }
+    }
+    // 2. 统计各数字的出现次数
+    // counter[num] 代表 num 的出现次数
+    int *counter = malloc(sizeof(int) * m);
+    for (int i = 0; i &lt; size; i++) {
+        counter[nums[i]]++;
+    }
+    // 3. 求 counter 的前缀和，将“出现次数”转换为“尾索引”
+    // 即 counter[num]-1 是 num 在 res 中最后一次出现的索引
+    for (int i = 0; i &lt; m; i++) {
+        counter[i + 1] += counter[i];
+    }
+    // 4. 倒序遍历 nums ，将各元素填入结果数组 res
+    // 初始化数组 res 用于记录结果
+    int *res = malloc(sizeof(int) * size);
+    for (int i = size - 1; i &gt;= 0; i--) {
+        int num = nums[i];
+        res[counter[num] - 1] = num; // 将 num 放置到对应索引处
+        counter[num]--;              // 令前缀和自减 1 ，得到下次放置 num 的索引
+    }
+    // 使用结果数组 res 覆盖原数组 nums
+    memcpy(nums, res, size * sizeof(int));
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-5基数排序"><a href="#3-5基数排序" class="headerlink" title="3.5基数排序"></a>3.5基数排序</h4><p><strong>①思想</strong></p>
+<blockquote>
+<p><strong>先根据</strong>元素的<strong>某一关键字</strong>进行<strong>桶排序</strong>，<strong>在此基础上</strong>，再根据<strong>另一关键字</strong>进行<strong>桶排序</strong>，直到遍历完<strong>所有关键字</strong>，如一堆<strong>三位数</strong>，依次对<strong>个位数</strong>、<strong>十位数</strong>和<strong>百位数</strong>进行<strong>计数排序</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 稳定性取决于所用的计数排序</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 通过排序次数减少桶的数量</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 后一轮排序会覆盖前一轮排序的结果，不同的关键词顺序会造成不同的结果，通常优先排列优先级低的关键字</div>
+<p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_20.png" alt="基数排序"><br><strong>②代码实现</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时间复杂度为O(n+m)，空间复杂度为O(n+m)，m为辅助数组的长度</div>
+<pre class="line-numbers language-none"><code class="language-none">/* 获取元素 num 的第 k 位，其中 exp = 10^(k-1) */
+int digit(int num, int exp) {
+    // 传入 exp 而非 k 可以避免在此重复执行昂贵的次方计算
+    return (num / exp) % 10;
+}
+/* 计数排序（根据 nums 第 k 位排序） */
+void countingSortDigit(int nums[], int size, int exp) {
+    // 十进制的位范围为 0~9 ，因此需要长度为 10 的桶
+    int *counter = (int *)malloc((sizeof(int) * 10));
+    // 统计 0~9 各数字的出现次数
+    for (int i = 0; i &lt; size; i++) {
+        // 获取 nums[i] 第 k 位，记为 d
+        int d = digit(nums[i], exp);
+        // 统计数字 d 的出现次数
+        counter[d]++;
+    }
+    // 求前缀和，将“出现个数”转换为“数组索引”
+    for (int i = 1; i &lt; 10; i++) {
+        counter[i] += counter[i - 1];
+    }
+    // 倒序遍历，根据桶内统计结果，将各元素填入 res
+    int *res = (int *)malloc(sizeof(int) * size);
+    for (int i = size - 1; i &gt;= 0; i--) {
+        int d = digit(nums[i], exp);
+        int j = counter[d] - 1; // 获取 d 在数组中的索引 j
+        res[j] = nums[i];       // 将当前元素填入索引 j
+        counter[d]--;           // 将 d 的数量减 1
+    }
+    // 使用结果覆盖原数组 nums
+    for (int i = 0; i &lt; size; i++) {
+        nums[i] = res[i];
+    }
+}
+/* 基数排序 */
+void radixSort(int nums[], int size) {
+    // 获取数组的最大元素，用于判断最大位数
+    int max = INT32_MIN;
+    for (size_t i = 0; i &lt; size - 1; i++) {
+        if (nums[i] &gt; max) {
+            max = nums[i];
+        }
+    }
+    // 按照从低位到高位的顺序遍历
+    for (int exp = 1; max &gt;= exp; exp *= 10)
+        // 对数组元素的第 k 位执行计数排序
+        // k = 1 -&gt; exp = 1
+        // k = 2 -&gt; exp = 10
+        // 即 exp = 10^(k-1)
+        countingSortDigit(nums, size, exp);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-其他排序方法"><a href="#4-其他排序方法" class="headerlink" title="4.其他排序方法"></a>4.其他排序方法</h3><h4 id="4-1表排序"><a href="#4-1表排序" class="headerlink" title="4.1表排序"></a>4.1表排序</h4><blockquote>
+<p><strong>不</strong>直接排序<strong>元素本身</strong>，而是<strong>排序其指针</strong>，需要一个<strong>辅助数组</strong>存储<strong>排序后的指针</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 这里的指针是广义的，包含元素的位置信息即可</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 上述排序方法都需要交换元素的位置，若元素过大，则交换元素的代价较大，通过排序元素的指针间接排序元素</div>
+
+
+
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/12/10/pai-xu-suan-fa/">http://example.com/2023/12/10/pai-xu-suan-fa/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">计算机基础</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                                    <span class="chip bg-color">数据结构与算法</span>
+                                </a>
+                            
+                                <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
+                                    <span class="chip bg-color">《hello 算法》</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/10/xiao-ji-neng-da-zuo-yong/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/38.webp" class="responsive-img" alt="小技能大作用">
+                        
+                        <span class="card-title">小技能大作用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            信息检索
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E4%BD%9C%E6%B5%81/" class="post-category">
+                                    工作流
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/">
+                        <span class="chip bg-color">信息检索</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/10/cao-zuo-xi-tong-yi/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/2.webp" class="responsive-img" alt="操作系统（一）">
+                        
+                        <span class="card-title">操作系统（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            操作系统概述
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">计算机基础</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E3%80%8B/">
+                        <span class="chip bg-color">《操作系统导论》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>
