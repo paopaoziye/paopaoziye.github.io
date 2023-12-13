@@ -425,7 +425,7 @@
 </ul>
 <p>#如果创建的是线程的话，每个线程都有<strong>各自的进程描述符</strong>，描述<strong>地址空间</strong>、<strong>文件资源系统</strong>等<strong>共享资源</strong>，<strong>线程本身</strong>再去描述其<strong>独占</strong>的资源，需要传递参数标志给clone()指明需要共享的资源（查阅相关表格）<br>#<br>③vfork():除了不拷贝父进程的页表项外，其余和<code>fork()</code>功能一致，可以通过向<code>clone()</code>传递特殊标志实现<code>vfork()</code></p>
 <h3 id="4-进程的终结"><a href="#4-进程的终结" class="headerlink" title="4.进程的终结"></a>4.进程的终结</h3><p><strong>4.1终结的产生</strong>：进程调用exit()系统调用<br>①主动调用<br>②程序主函数返回：C语言会在函数的返回点后调用<br>③接收到不能处理与忽略的信号和异常<br><strong>4.2exit()</strong><br>①概述：调用exit（）后，只与该进程相关的所有资源全部被释放，成为僵死进程，只剩下内存栈、thread_info结构和task_struct结构，等待父进程调用wait（）将其释放，父进程退出后，需要给子进程在当前线程组或者找一个线程或者init作为父进程<br>②详细过程：LKD P31页<br>父进程退出后，需要给子进程在当前线程组或者找一个线程或者init作为父进程</p>
-<h3 id="5-进程调度"><a href="#5-进程调度" class="headerlink" title="5.进程调度"></a>5.进程调度</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+<h3 id="5-进程调度"><a href="#5-进程调度" class="headerlink" title="5.进程调度"></a>5.进程调度</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
             <hr/>
@@ -538,18 +538,18 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/10/git-ji-qi-ying-yong/">
+                <a href="/2023/12/10/linux-nei-he-she-ji-yu-shi-xian-yi/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/22.webp" class="responsive-img" alt="Git及其应用">
+                        <img src="/medias/featureimages/3.webp" class="responsive-img" alt="Linux内核设计与实现（一）">
                         
-                        <span class="card-title">Git及其应用</span>
+                        <span class="card-title">Linux内核设计与实现（一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            git和github
+                            Linux内核基础
                         
                     </div>
                     <div class="publish-info">
@@ -560,8 +560,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7%E9%93%BE/" class="post-category">
-                                    工具链
+                            <a href="/categories/Linux%E5%86%85%E6%A0%B8/" class="post-category">
+                                    Linux内核
                                 </a>
                             
                             
@@ -571,12 +571,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BB%A3%E7%A0%81%E5%B7%A5%E5%85%B7/">
-                        <span class="chip bg-color">代码工具</span>
-                    </a>
-                    
-                    <a href="/tags/Git/">
-                        <span class="chip bg-color">Git</span>
+                    <a href="/tags/Linux%E5%86%85%E6%A0%B8/">
+                        <span class="chip bg-color">Linux内核</span>
                     </a>
                     
                 </div>
@@ -590,12 +586,12 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/12/10/linux-gong-zuo-liu-san/">
+                <a href="/2023/12/10/linux-gong-zuo-liu-yi/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/41.webp" class="responsive-img" alt="Linux工作流（三）">
+                        <img src="/medias/featureimages/41.webp" class="responsive-img" alt="Linux工作流（一）">
                         
-                        <span class="card-title">Linux工作流（三）</span>
+                        <span class="card-title">Linux工作流（一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

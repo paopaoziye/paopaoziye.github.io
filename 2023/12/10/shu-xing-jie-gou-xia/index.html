@@ -580,7 +580,7 @@ MaxHeap *newMaxHeap(int nums[], int size) {
 <p>从<strong>第k+1个元素</strong>开始，若当前元素<strong>大于堆顶元素</strong>，则将<strong>堆顶元素出堆</strong>，并将<strong>当前元素入堆</strong></p>
 </blockquote>
 <h3 id="3-哈夫曼树"><a href="#3-哈夫曼树" class="headerlink" title="3.哈夫曼树"></a>3.哈夫曼树</h3><p><strong>3.1定义</strong>：最优二叉树，即每个<strong>叶子结点</strong>到根节点的带权路径长度之和最小<br><strong>3.2构造</strong><br><strong>①总体思想</strong>：将所有节点按照大小排序（可以用堆的方法），每次把权值最小的两棵二叉树合并，比如说1、2、3、4、5，合并一次变为3（1、2）、3、4、5，然后变为6（3（1、2）、3）、4、5，以此类推<br><strong>②代码实现</strong><br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/sjjg_14.png" alt="哈夫曼树的构造"><br><strong>3.3哈夫曼编码</strong>:为了使得出现频率高的字符编码短些，出现频率低的字符编码长些，可以将哈夫曼树的节点路径看作为1和0，左节点为0，右节点为1，<strong>编码长度就是路径长度</strong>，按照字符出现频率构造哈夫曼树即可<br><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/sjjg_13.png" alt="哈夫曼编码"></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
             <hr/>

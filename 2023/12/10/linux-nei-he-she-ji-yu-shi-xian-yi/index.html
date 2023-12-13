@@ -417,7 +417,7 @@
 <h3 id="3-Linux版本"><a href="#3-Linux版本" class="headerlink" title="3.Linux版本"></a>3.Linux版本</h3><p><strong>[主版本号].[从版本号].[修订版本号].[稳定版本号]</strong><br>#稳定版本号是偶数则是稳定版，反之为开发版</p>
 <h3 id="4-简述编译内核"><a href="#4-简述编译内核" class="headerlink" title="4.简述编译内核"></a>4.简述编译内核</h3><p><strong>4.1获得内核源码</strong>：在<a target="_blank" rel="noopener" href="http://www.kernel.org/">Linux内核官网</a>下载<br>①使用git clone和git pull获得内核源码<br>②自行下载安装，有bzip2和gzip两种形式，其中bzip2是默认和首选下载格式，采用tar命令解压，解压后的源码在linux-x.y.z.目录下（x.y.z.为Linux版本号）<br>③安装内核补丁进行版本的更迭<br><strong>4.2安装内核源码</strong>：系统本身的内核源码<strong>位于/usr/src/linux目录</strong>下，但是<strong>不能将该源码树用于开发</strong>，因为<strong>编译C库</strong>所用的内核版本链接到该棵树。应该建立<strong>自己的主目录</strong>，仅仅以<strong>root身份</strong>安装新内核到该目录，系统本身目录不进行任何更改<br><strong>4.3配置内核</strong>：将自己需要的<strong>特定功能和驱动程序</strong>编进内核（根目录下.config文件），常见内核配置工具如下<br>①make config<br>#遍历所有配置项，要求用户选择选项，耗时长，不推荐<br>②make menuconfig或者make gconfig<br>#图形界面，推荐<br>③make defconfig<br>#基于默认配置为你的体系结构创建一个配置<br>④make oldconfig<br>#根据.config文件生成/更新配置<br>#配置选项CONFIG_IKCONFIG_PROC将<strong>完整压缩</strong>的配置文件存放在/proc/config.gz下，可以采用zcat /proc/config.gz &gt; .config及make oldconfig克隆当前配置<br><strong>4.4编译内核</strong><br>①编译内核：make<br>②减少编译垃圾信息：make &gt; ../detritus或者make &gt; dev/null<br>#前者将编译信息重定向到该文件中，后者的/dev/null是个永无返回值的黑洞，但是警告和错误信息还是会打印出来<br>③将编译过程拆分为多个并行的作业：make -jn<br>#其中n为作业数，一般<strong>每个处理器上衍生出一两个作业</strong><br><strong>4.5安装新内核</strong>：根据启动引导工具的说明操作即可</p>
 <h3 id="5-内核开发的特点"><a href="#5-内核开发的特点" class="headerlink" title="5.内核开发的特点"></a>5.内核开发的特点</h3><p><strong>5.1不能访问C库及标准C头文件</strong>:对于内核来说，C库<strong>太大且低效</strong>了<br>#不过大部分常用的C库函数在内核中已经得到了实现，比如string库对应&lt;linux/string.h&gt;<br>#基本的头文件位于内核源码树<strong>顶级目录的include目录</strong>下<br>#体系结构相关头文件位于arch/[architecture]/include/asm目录下,以asm为前缀，如&lt;asm/ioctl.h&gt;<br><strong>5.2必须使用GUN C</strong><br><strong>5.3没有内存保护机制</strong>：当内核自身发生了内存错误会导致oops<br>#内核中的内存<strong>不分页</strong><br><strong>5.4不要轻易使用浮点数</strong>：在内核中使用浮点数，不仅仅要人工保存和回复浮点寄存器，还需要一些繁琐的操作<br><strong>5.5容积小且固定的栈</strong>：内核栈大小随体系结构改变<br><strong>5.6同步和并发</strong>：内核的许多特性要求可以并发的访问共享数据，这就可能产生竞争<br><strong>5.7可移植性的重要性</strong></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async=""></script>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
             <hr/>
@@ -530,18 +530,18 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/10/c-yu-yan-xue-xi-bi-ji-yi/">
+                <a href="/2023/12/10/c-yu-yan-xue-xi-bi-ji-er/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/0.webp" class="responsive-img" alt="C语言学习笔记（一）">
+                        <img src="/medias/featureimages/0.webp" class="responsive-img" alt="C语言学习笔记（二）">
                         
-                        <span class="card-title">C语言学习笔记（一）</span>
+                        <span class="card-title">C语言学习笔记（二）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            C语言基础
+                            指针
                         
                     </div>
                     <div class="publish-info">
@@ -582,18 +582,18 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/12/10/git-ji-qi-ying-yong/">
+                <a href="/2023/12/10/linux-nei-he-she-ji-yu-shi-xian-er/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/22.webp" class="responsive-img" alt="Git及其应用">
+                        <img src="/medias/featureimages/3.webp" class="responsive-img" alt="linux内核设计与实现（二）">
                         
-                        <span class="card-title">Git及其应用</span>
+                        <span class="card-title">linux内核设计与实现（二）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            git和github
+                            进程管理和进程调度
                         
                     </div>
                     <div class="publish-info">
@@ -604,8 +604,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7%E9%93%BE/" class="post-category">
-                                    工具链
+                            <a href="/categories/Linux%E5%86%85%E6%A0%B8/" class="post-category">
+                                    Linux内核
                                 </a>
                             
                             
@@ -615,12 +615,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BB%A3%E7%A0%81%E5%B7%A5%E5%85%B7/">
-                        <span class="chip bg-color">代码工具</span>
-                    </a>
-                    
-                    <a href="/tags/Git/">
-                        <span class="chip bg-color">Git</span>
+                    <a href="/tags/Linux%E5%86%85%E6%A0%B8/">
+                        <span class="chip bg-color">Linux内核</span>
                     </a>
                     
                 </div>
