@@ -473,17 +473,34 @@
 <blockquote>
 <p><strong>概述</strong>：<strong>一级结构</strong>的原理<strong>如下图</strong>所示，可见总共有<code>2^44</code>页，<strong>每一页的大小</strong>为<code>2^12</code>位</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 实际上xv6采用的是三级结构，即27位的页表索引分为三个9位的页表索引，可以用于节省空间</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 由硬件实现，实际上xv6采用的是三级结构，即27位的页表索引分为三个9位的页表索引，可以用于节省空间</div>
 <blockquote>
 <p>如果采用<strong>一级结构</strong>，需要<code>2^27</code>条<strong>页表项</strong>，而<strong>三级结构</strong>，只需要<code>3*2^9</code>条<strong>页表项</strong></p>
 </blockquote>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 每个CPU都有一个satp寄存器指向根页表页的物理地址以及指向的页表转换后续指令生成的所有地址</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 易知虚拟地址大小为2^39位，而物理地址大小位2^56位，其中多余的物理地址用于存放I/O 设备和 DRAM 芯片</div>
 <blockquote>
 <p><strong>标志位</strong>：每个<strong>页表项</strong>都有其<strong>标志位</strong>，告诉<strong>分页硬件</strong>允许<strong>如何使用</strong>关联的虚拟地址</p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如是否存在和允许读写等，详细可查看riscv.h头文件</div>
 
-<p><strong>②地址空间</strong><br>为了减少从物理内存加载 PTE 的开销，RISC-V CPU 将页表条目缓存在 Translation Look-aside Buffer </p>
+<p><strong>②地址空间</strong></p>
+<blockquote>
+<p><strong>进程地址空间</strong>：<strong>每个进程</strong>都有一个<strong>单独的页表</strong>，从<strong>虚拟地址零</strong>开始增长到<strong>MAXVA（256G）</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>内核地址空间</strong>：可以将<strong>内核</strong>看作为一个<strong>特殊的进程</strong>，XV6有一个<strong>单独描述内核地址空间</strong>的页表</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> kernel/memlayout.h中声明了描述内核分布的常量，其中0x80000000:0x86400000为内核代码</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> XV6内核地址空间大部分采用的是直接映射，可以简化内核代码，省去虚拟地址的转化</div>
+<p><strong>③源码概述</strong></p>
+<blockquote>
+<p><code>main()</code>调用<code>kvminit()</code>,<code>kvminit()</code>调用<code>kvmmake()</code>创建<strong>内核页表</strong>，此时<strong>还没有分页</strong>，使用<strong>物理地址</strong></p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>pagetable_t为指向根页表页的指针，可以是一个内核页表，也可以是一个进程页表</p>
+<p>为了减少从物理内存加载 PTE 的开销，RISC-V CPU 将页表条目缓存在 Translation Look-aside Buffer<br>为了减少从物理内存加载 PTE 的开销，RISC-V CPU 将页表条目缓存在 Translation Look-aside Buffer (TLB) 中。</p>
 <p>RISC-V上的指针有64位宽；硬件在页表中查找虚拟地址时只使用低39位；xv6只使用这39位中的38位<br>每个进程有一个单独的页表，映射其地址空间，进程最大地址空间受到限制，MAXVA，kernel/riscv.h:348</p>
 <p>xv6为trampoline（用于在用户和内核之间切换）和映射进程切换到内核的trapframe分别保留了一个页面，正如我们将在第4章中解释的那样。</p>
 <p>proc结构保存了每个进程的状态，页表、内核栈区和运行状态</p>
@@ -623,8 +640,8 @@ argv<span class="token punctuation">[</span><span class="token number">1</span><
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当文件的链接数为零且没有文件描述符引用时，文件的inode和包含其内容的磁盘空间会被释放</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以利用unlink创建临时文件</div>
-<pre class="line-numbers language-none"><code class="language-none">fd = open("/tmp/xyz", O_CREATE | O_RDWR);
-unlink("/tmp/xyz");<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">fd <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"/tmp/xyz"</span><span class="token punctuation">,</span> O_CREATE <span class="token operator">|</span> O_RDWR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">unlink</span><span class="token punctuation">(</span><span class="token string">"/tmp/xyz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
@@ -743,18 +760,18 @@ unlink("/tmp/xyz");<span aria-hidden="true" class="line-numbers-rows"><span></sp
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/10/linux-gong-zuo-liu-er/">
+                <a href="/2023/12/10/linux-gong-zuo-liu-san/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/41.webp" class="responsive-img" alt="Linux工作流（二）">
+                        <img src="/medias/featureimages/41.webp" class="responsive-img" alt="Linux工作流（三）">
                         
-                        <span class="card-title">Linux工作流（二）</span>
+                        <span class="card-title">Linux工作流（三）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            实用工具
+                            Linux常见命令
                         
                     </div>
                     <div class="publish-info">

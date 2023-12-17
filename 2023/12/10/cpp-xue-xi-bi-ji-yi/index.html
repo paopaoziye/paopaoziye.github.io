@@ -416,104 +416,187 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Cpp学习笔记"><a href="#Cpp学习笔记" class="headerlink" title="Cpp学习笔记"></a>Cpp学习笔记</h1><h2 id="Cpp学习笔记（一）"><a href="#Cpp学习笔记（一）" class="headerlink" title="Cpp学习笔记（一）"></a>Cpp学习笔记（一）</h2><h3 id="1-Cpp基础编程"><a href="#1-Cpp基础编程" class="headerlink" title="1.Cpp基础编程"></a>1.Cpp基础编程</h3><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Cpp基础部分和C语言大部分一致，只介绍不同的部分</div>
-<h4 id="1-1命名空间"><a href="#1-1命名空间" class="headerlink" title="1.1命名空间"></a>1.1命名空间</h4><p><strong>①定义</strong></p>
+                <h1 id="Cpp学习笔记（一）"><a href="#Cpp学习笔记（一）" class="headerlink" title="Cpp学习笔记（一）"></a>Cpp学习笔记（一）</h1><h2 id="Cpp基础编程"><a href="#Cpp基础编程" class="headerlink" title="Cpp基础编程"></a>Cpp基础编程</h2><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Cpp基础部分和C语言大部分一致，只介绍不同的部分</div>
+<h3 id="1-变量"><a href="#1-变量" class="headerlink" title="1.变量"></a>1.变量</h3><h4 id="1-1引言"><a href="#1-1引言" class="headerlink" title="1.1引言"></a>1.1引言</h4><p><strong>①声明与定义</strong></p>
 <blockquote>
-<p><strong>概述</strong>：<strong>每个库</strong>都有其<strong>命名空间</strong>，可以<strong>避免</strong>程序发生<strong>命名冲突</strong>，需要<strong>曝光</strong>或者<strong>解析</strong>才能使用</p>
+<p><strong>声明</strong>：使得<strong>变量名</strong>为程序所知，一个程序如果<strong>想使用一个变量</strong>，必须包含其<strong>声明</strong></p>
 </blockquote>
-<p><strong>②曝光</strong></p>
 <blockquote>
-<p><code>using namespace [命名空间];</code>：<strong>曝光</strong>命名空间，通常会采用<code>using namespace std;</code>曝光<strong>标准库</strong>命名空间</p>
+<p><strong>定义</strong>：创建与<strong>变量名</strong>相关的<strong>实体</strong>，为其申请<strong>存储空间</strong>，还可能会对其<strong>进行初始化</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 定义变量即创建了一个对象，对象指拥有某种数据类型的内存空间</div>
+<blockquote>
+<p><strong>格式</strong>：<code>[基本数据类型] [声明符]</code>，其中<strong>数据类型</strong>大部分和C一致，主要多出了<code>bool</code>和<code>long long</code>类型</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 变量取名规则与C语言一致，通常对于自定义类采用My_class，自定义变量采用my_value</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 该语句为定义语句，如果想要该语句为声明，则使用extern修饰且不能显式初始化该变量</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 通常情况下，只能定义一次，而可以声明多次</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 在函数体内部初始化一个extern修饰的变量，是错误的</div>
+<p><strong>②赋值和初始化</strong></p>
+<blockquote>
+<p><strong>赋值</strong>：将<strong>旧值</strong>擦去，用一<strong>新值</strong>替代</p>
+</blockquote>
+<blockquote>
+<p><strong>初始化</strong>：对象在<strong>创建时</strong>获得一个<strong>特定的值</strong>，</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 缺省初始化与C一致，其中类的初始化由其定义者决定</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Cpp提供多种格式进行初始化，以int为例</div>
+<blockquote>
+<p><code>int a = 0;</code>、<code>int a = {0};</code>、<code>int a(0)</code>和<code>int a{0}</code>，前两个为<strong>赋值初始化</strong>，后两个为<strong>直接初始化</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 对于类，直接初始化的符号不同，含义也不同，其中()表示构造函数初始化，{}表示优先采用列表初始化</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若{}中的参数不能进行列表初始化，则会用参数调用构造函数</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vector<span class="token operator">&lt;</span>string<span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">//正常</span>
+vector<span class="token operator">&lt;</span>string<span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token number">10</span>，<span class="token string">"a"</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">//退化为vector&lt;string&gt; (10，"a");</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 当使用{}进行初始化时，若存在信息丢失的风险，则编译器会报错，如int a{1.1}</div>
+
+<p><strong>③命名空间</strong></p>
+<blockquote>
+<p><strong>定义</strong>：<strong>每个库</strong>都有其<strong>命名空间</strong>，可以<strong>避免</strong>程序发生<strong>命名冲突</strong>，需要<strong>曝光</strong>或者<strong>解析</strong>才能使用</p>
+</blockquote>
+<blockquote>
+<p><strong>曝光</strong>：<code>using namespace [命名空间];</code>，通常会采用<code>using namespace std;</code>曝光<strong>标准库</strong>命名空间</p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 曝光一命名空间后，若遇到属于该命名空间的对象，如之后的cout和cin，则默认其属于该命名空间</div>
 <blockquote>
 <p>如之后常用的<code>cout</code>和<code>cin</code>，为<strong>标准库</strong>定义的对象，若<strong>标准库没有曝光</strong>，则需要写为<code>std::cout</code>和<code>std::cin</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ::为作用域运算符</div>
-<p><strong>③解析</strong></p>
-<blockquote>
-<p><code>命名空间::变量名</code>：<strong>解析</strong>变量名，指明其<strong>所属命名空间</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 当发生命名冲突时，需要解析才能继续执行</div>
-<h4 id="1-2输入输出"><a href="#1-2输入输出" class="headerlink" title="1.2输入输出"></a>1.2输入输出</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 要包含iostream头文件，注意标准库头文件不带后缀</div>
-<p><strong>①输出</strong></p>
-<blockquote>
-<p><strong>格式</strong>：<code>[输出对象]&lt;&lt;内容1&lt;&lt;内容2...&lt;&lt;endl;</code>，常用的<strong>输出对象</strong>为<code>cout</code></p>
-</blockquote>
-<blockquote>
-<p><code>cout</code>：<code>iostream</code>类的一个实例，表示<strong>标准输出</strong>，通常连接到<strong>显示屏</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 标准库还定义了两个输出对象cerr和clog，分别为标准错误和标准日志，通常连接到显示屏</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ::为作用域运算符，提示编译器从左侧名字中寻找右侧对象</div>
 
 <blockquote>
-<p><code>&lt;&lt;</code>：<strong>输出流运算符</strong>，<strong>左侧</strong>必须是一个<code>ostream</code><strong>对象</strong>，<strong>右侧</strong>是<strong>输出的值</strong>，<strong>计算结果</strong>为<code>ostream</code><strong>对象</strong></p>
+<p><strong>解析</strong>：<code>命名空间::变量名</code>，指明其<strong>所属命名空间</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如cout&lt;&lt;内容1的计算结果为cout，这也是可以连续输出到cout的原因</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 当发生命名冲突时，需要解析才能继续执行</div>
+
+<h4 id="1-2复合类型"><a href="#1-2复合类型" class="headerlink" title="1.2复合类型"></a>1.2复合类型</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 之前的声明符只有变量名，若添加一定修饰符，则使其变为复合类型，常见的复合类型如下</div>
+<p><strong>①指针</strong></p>
 <blockquote>
-<p><code>endl</code>：输出一个<strong>换行符</strong>，并<strong>清空输出缓冲区</strong></p>
+<p><strong>格式</strong>：<code>[数据类型] *[指针名] = &amp;[指向对象]</code>，如<code>int* my_p = &amp;a_int</code></p>
 </blockquote>
-<p><strong>②输入</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 基本与C语言一致，Cpp常用空指针为nullptr</div>
 <blockquote>
-<p><strong>格式</strong>：<code>[输入对象]&gt;&gt;容器1...&gt;&gt;容器N;</code>，常用的<strong>输入对象</strong>为<code>cin</code>，输入<strong>文件结束符</strong>表示<strong>输入终止</strong></p>
+<p><code>void *</code>：一种<strong>特殊的指针</strong>，可以存放<strong>任意对象</strong>的地址</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在Unix系统中，文件结束符可采用ctrl+D输入，windows系统中则是ctrl+z，再输入enter</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 由于void *可以存放任意数据类型，导致编译器不知道其指向类型，所以不能直接操作其指向对象</div>
+
+<p><strong>②引用</strong></p>
 <blockquote>
-<p><code>cin</code>：同<code>cout</code>，表示<strong>标准输入</strong>，通常连接到<strong>键盘</strong></p>
+<p><strong>格式</strong>：<code>[数据类型] &amp;[引用名] = [指向对象]</code>，如<code>int&amp; my_ref = a_int</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 输入对象还可以是一打开的文件</div>
-<blockquote>
-<p><code>&gt;&gt;</code>：<strong>输入流运算符</strong>，和<code>&lt;&lt;</code>类似，将<strong>标准输入设备的数据</strong>保存到<strong>右边的容器</strong>中</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 同理cin&gt;&gt;容器的返回值也是cin，当读入有效数据，cin状态为真，若遇到文件结束符或无效数据，状态为假</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以采用cin&gt;&gt;tmp作为判断条件，结合条件语句和循环语句使用</div>
-<blockquote>
-<p>如<code>while(cin&gt;&gt;tmp)</code>可以读取<strong>多个数据</strong>，直到<strong>终止</strong>或者<strong>读取数据不合理</strong></p>
-</blockquote>
-<h4 id="1-3引用和指针"><a href="#1-3引用和指针" class="headerlink" title="1.3引用和指针"></a>1.3引用和指针</h4><p><strong>①引用</strong></p>
-<blockquote>
-<p><strong>格式</strong>：<code>[数据类型]&amp; [引用名] = [指向对象]</code>，如<code>int&amp; my_ref = a_int</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 引用相当于指向对象的别名，对引用的任何操作都相当于直接操作指向对象</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 与指针不同，引用并不是一个对象，而是指向对象的别名，对引用的任何操作都相当于直接操作指向对象</div>
 <blockquote>
 <p><code>int* my_p = &amp;my_ref</code>是将<strong>指针</strong>指向<code>a_int</code>，<code>const</code>修饰也类似</p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 引用必须被初始化（指向一个对象），且不能修改</div>
-<p><strong>②指针</strong></p>
-<blockquote>
-<p><strong>格式</strong>：<code>[数据类型]&amp; [指针名] = &amp;[指向对象]</code>，如<code>int* my_p = &amp;a_int</code></p>
-</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 引用必须被初始化，不能修改，且引用必须指向一个对象，所以无法定义指向引用、引用和指针和引用类型的容器</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 传递指针和引用可以降低复制大型对象的负担</div>
 <div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 对于函数中定义的非静态数据，不能返回其引用和指针</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 指针如果不使用可以初始化为空指针（NULL或0），使用前需要检查其是否为空指针</div>
+<p><strong>③指向指针的引用</strong></p>
 <blockquote>
-<p>其中<code>NULL</code>是一个<code>宏</code>，定义如下</p>
+<p><strong>格式</strong>：<code>[数据类型] *&amp;[指针名] = [引用对象]</code>，如<code>int *&amp;ref_to_ptr = a_ptr</code></p>
 </blockquote>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token function">defined</span><span class="token punctuation">(</span>__cplusplus<span class="token punctuation">)</span></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">define</span> <span class="token macro-name">NULL</span> <span class="token expression"><span class="token number">0</span>              </span><span class="token comment">// C++中使用0作为NULL的值</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">define</span> <span class="token macro-name">NULL</span> <span class="token expression"><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">)</span>    </span><span class="token comment">// C中使用((void *)0)作为NULL的值</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="1-4函数特性"><a href="#1-4函数特性" class="headerlink" title="1.4函数特性"></a>1.4函数特性</h4><p><strong>①默认参数</strong></p>
+<h4 id="1-3常量限定符"><a href="#1-3常量限定符" class="headerlink" title="1.3常量限定符"></a>1.3常量限定符</h4><p><strong>①引言</strong></p>
 <blockquote>
-<p><strong>概述</strong>：<strong>与C语言不同</strong>，C++可以给函数设置<strong>缺省情况</strong>下的<strong>默认参数</strong></p>
+<p><strong>格式</strong>：在<strong>变量定义前</strong>添加<code>const</code>修饰符即可，不能对<code>const</code><strong>变量</strong>执行<strong>改变其内容</strong>的操作</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 只能在函数定义或者函数声明默认值，但是不能在两个地方都声明，通常放在函数声明处</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果为某一参数设定默认值，则该参数右侧所有参数都需要有默认值</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在不改变其内容前提下，甚至可以进行类型转化，如const int转化为bool</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> const对象必须被初始化，且仅仅在文件内有效，所以可以在多个文件中定义</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 若想要在多个文件之间共享const对象，则其定义需要用extern修饰</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//file_1.cc中定义并初始化一个const常量</span>
+<span class="token keyword">extern</span> <span class="token keyword">const</span> <span class="token keyword">int</span> buf_size <span class="token operator">=</span> <span class="token function">size_of_buf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<p><strong>②inline函数</strong></p>
+<span class="token comment">//file_1.h头文件</span>
+<span class="token keyword">extern</span> <span class="token keyword">const</span> <span class="token keyword">int</span> buf_size<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②const与引用</strong></p>
 <blockquote>
-<p><strong>概述</strong>：在<strong>函数定义之前</strong>添加<code>inline</code>关键字即可，通常是一些<strong>简单的函数</strong></p>
+<p><strong>概述</strong>：当<strong>一个引用</strong>指向<strong>const对象</strong>时，其必须也<strong>使用</strong><code>const</code>限定符置于其<strong>定义前</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 对于`inline`函数，编译器在每个函数调用节点上将其展开为函数代码副本（类似于C语言宏函数）</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 内联函数的定义通常放在头文件中（和普通的函数不同，inline函数可以定义多次）</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> inline函数只是对编译器的一种的请求，编译器不一定会按照inline函数定义处理</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 虽不允许非常量引用指向一常量，但允许一常量引用指向一非常量，且常量引用可以指向能转换成引用类型的表达式</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若使用一常量引用指向一个非常量对象，该对象还是可以被修改的，只是不能通过引用修改</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//常量引用指向非常量</span>
+<span class="token keyword">int</span> a_int<span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> a_const_int <span class="token operator">=</span> <span class="token number">384</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>a_ref_to_const1 <span class="token operator">=</span> a_const_int<span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>a_ref_to_const2 <span class="token operator">=</span> a_int<span class="token punctuation">;</span>
+<span class="token comment">//常量引用指向可转化的表达式</span>
+<span class="token keyword">double</span> a_double <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span>a_ref <span class="token operator">=</span> a_double<span class="token punctuation">;</span> <span class="token comment">//错误</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>a_ref_to_const3 <span class="token operator">=</span> a_double<span class="token punctuation">;</span><span class="token comment">//正确</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③指针与常量</strong></p>
+<blockquote>
+<p><strong>常量指针</strong>：当<strong>一个指针</strong>指向<strong>const对象</strong>时，其必须也<strong>使用</strong><code>const</code>限定符置于其<strong>定义前</strong>，称为<strong>底层const</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 同引用，指向常量的指针也可以接收一个非常量对象的地址，只是不能通过指针修改该对象</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 指向常量的指针不能赋值给同类型的非指向常量的指针</div>
+<blockquote>
+<p><strong>指针常量</strong>：<code>[数据类型] *const [指针名] = &amp;[指向对象]</code>，称为<strong>顶层const</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 指针常量同一般的const变量一样，需要初始化</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 指针可以同时为顶层和底层const，即const [数据类型] *const [指针名] = &amp;[指向对象]</div>
 
-<p><strong>③函数重载</strong></p>
+<p><strong>④常量表达式</strong></p>
 <blockquote>
-<p><strong>概述</strong>：<strong>参数列表</strong>或<strong>常量性不同</strong>但是<strong>名称相同</strong>的一系列函数，<strong>编译器</strong>根据<strong>调用时</strong>提供的<strong>参数</strong>判断调用哪一个</p>
+<p><strong>定义</strong>：<strong>值不会改变</strong>且在<strong>编译过程</strong>就能得到<strong>计算结果</strong>的表达式，如<strong>字面值</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若传入的参数被const修饰，则调用const版本</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 不能仅仅依靠返回类型的不同实现函数重载，因为编译器无法根据返回类型判断你想调用那个函数</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当一个const变量被一个常量表达式初始化，则该变量也是一个常量表达式</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 两个条件缺一不可，若一个const对象的值为一个普通函数的返回值，即const int a = fun();，a也不是常量表达式</div>
+<blockquote>
+<p><code>constexpr</code>：置于<strong>变量定义前</strong>，表明该变量是一个<strong>常量</strong>，且必须用<strong>常量表达式初始化</strong>，否则会<strong>编译报错</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 只有算术类型、指针和引用这种简单类型能被constexpr修饰</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> constexpr修饰的指针的初始值必须是nullptr/0，或指向某个处于固定地址的对象，如函数体外的变量以及static变量</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">*</span>a_ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span><span class="token comment">//底层const</span>
+<span class="token keyword">constexpr</span> <span class="token keyword">int</span> <span class="token operator">*</span>a_ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span><span class="token comment">//顶层const</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="1-4类型指示符"><a href="#1-4类型指示符" class="headerlink" title="1.4类型指示符"></a>1.4类型指示符</h4><p><strong>①类型别名</strong></p>
+<blockquote>
+<p><code>typedef</code>：继承于C，置于<strong>变量定义前</strong>，将<strong>变量名</strong>定义为<strong>数据类型的别名</strong></p>
+</blockquote>
+<blockquote>
+<p><code>using [新名称] = [数据类型]</code>：给数据类型赋予<strong>新名称</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 注意这两种方式和宏定义是不同的，并不是简单的替换，比如以下的rename_to_doubleptr，*已经成为类型的一部分</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//其中rename_to_double1/2/3都相当于couble，rename_to_doubleptr相当于double*</span>
+<span class="token keyword">typedef</span> <span class="token keyword">double</span> rename_to_double<span class="token punctuation">;</span>
+<span class="token keyword">using</span> rename_to_double3 <span class="token operator">=</span> rename_to_double2<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> rename_to_double rename_to_double2<span class="token punctuation">,</span> <span class="token operator">*</span>rename_to_doubleptr<span class="token punctuation">;</span>
+<span class="token comment">//a_doubleptr为一常量指针，而不是指向常量的指针</span>
+<span class="token keyword">const</span> rename_to_doubleptr a_doubleptr <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②<code>auto</code></strong></p>
+<blockquote>
+<p><strong>概述</strong>：使用<code>auto</code>取代变量<strong>类型说明符</strong>，<strong>编译器</strong>自动分析<strong>初始值的类型</strong>并将变量定义为<strong>该类型</strong>，并<strong>将其值赋予变量</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> auto变量必须有初始值，通常为一函数的返回值，不允许使用auto作为数组的数据类型</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 有些初始值的类型会被编译器改写后再赋予变量</div>
+<blockquote>
+<p>如接收一个<strong>引用</strong>，编译器会返回<strong>引用指向对象的类型</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若auto修饰的不是引用，会忽略顶层const，保留底层const，若修饰的是复合类型，则会保留顶层const</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//a_auto1为一个整数，常量性被忽略，a_auto2为一个指向常量的指针，因为a_auto2为底层const才能接收</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> a_const_int <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>ref_to_const_int <span class="token operator">=</span> a<span class="token punctuation">;</span>
+<span class="token keyword">auto</span> a_auto1 <span class="token operator">=</span> a_const_int<span class="token punctuation">;</span>
+<span class="token keyword">auto</span> a_auto2 <span class="token operator">=</span> <span class="token operator">&amp;</span>a_const_int<span class="token punctuation">;</span>
+<span class="token comment">//auto与引用</span>
+<span class="token comment">//a_auto_ref1为一引用常量，a_auto_ptr为一指向常量的指针</span>
+<span class="token keyword">auto</span> <span class="token operator">&amp;</span>a_auto_ref1 <span class="token operator">=</span> a_const_int<span class="token punctuation">;</span>
+<span class="token keyword">auto</span> <span class="token operator">&amp;</span>a_auto_ref2 <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">//错误，不能给非常量引用绑定字面值</span>
+<span class="token keyword">auto</span> <span class="token operator">*</span>a_auto_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>a_const_int<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> auto关键字不能用于内置数组</div>
+<p><strong>③<code>decltype()</code></strong></p>
+<blockquote>
+<p><strong>概述</strong>：类似于<code>auto</code>，但是<strong>不会</strong>使用<strong>初始值</strong>给变量<strong>赋值</strong>，只是<strong>推断类型</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 不同于auto，decltype不会对类型进行改写，也不会忽略其常量性</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若decltype()中为表达式，则情况会有所不同，将返回表达式的返回类型</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//变量名</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> a_const_int <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>ref_to_const_int <span class="token operator">=</span> a<span class="token punctuation">;</span>
+<span class="token keyword">decltype</span><span class="token punctuation">(</span>a_const_int<span class="token punctuation">)</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">//其中x为一个整型常量</span>
+<span class="token keyword">decltype</span><span class="token punctuation">(</span>ref_to_const_int<span class="token punctuation">)</span> y <span class="token operator">=</span> x<span class="token punctuation">;</span><span class="token comment">//y为一个整型引用，若不初始化，会报错</span>
+<span class="token comment">//表达式</span>
+<span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">384</span><span class="token punctuation">,</span><span class="token operator">*</span>a_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">,</span><span class="token operator">&amp;</span>a_ref <span class="token operator">=</span> i<span class="token punctuation">;</span>
+
+<span class="token keyword">decltype</span><span class="token punctuation">(</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> a <span class="token operator">=</span> i<span class="token punctuation">;</span><span class="token comment">//a为一个整型引用，若不加()，a为一整型</span>
+<span class="token keyword">decltype</span><span class="token punctuation">(</span><span class="token operator">*</span>a_ptr<span class="token punctuation">)</span> b <span class="token operator">=</span> i<span class="token punctuation">;</span><span class="token comment">//*a_ptr为左值，b为一个整型引用</span>
+<span class="token keyword">decltype</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>a_ref<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> c<span class="token punctuation">;</span><span class="token comment">//&amp;a_ref+1为右值，c为一个整型指针</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>int ia[10];<br>auto ia2[ia] = ia;ia2为一指针<br>decltype(ia) ia3;ia3为一数组<br>不能对尾后指针执行解引用和递增<br>int *beg = begin(ia)<br>int *a_<br>end = end(ia)<br>两指针相减得到ptrdiff_t类型，一种带符号类型<br>比较两个字符数组名是错误的，实际上比较的是两个指针的大小，而这两个指针并不处于同一容器</p>
 <h4 id="1-5动态内存分配"><a href="#1-5动态内存分配" class="headerlink" title="1.5动态内存分配"></a>1.5动态内存分配</h4><p><strong>①引言</strong></p>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 变量的创建方式，其生命周期不同，以string类为例</div>
 <blockquote>
@@ -552,21 +635,112 @@
 </blockquote>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> delete[]会取出new[]保存的数组大小，并调用对应次数的析构函数</div>
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> new[]需要和delete[]配套使用，否则可能会造成内存泄漏</div>
-<hr>
-<h3 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><p><strong>①概述</strong></p>
+
+<h3 id="2-语句"><a href="#2-语句" class="headerlink" title="2.语句"></a>2.语句</h3><h4 id="2-1表达式语句"><a href="#2-1表达式语句" class="headerlink" title="2.1表达式语句"></a>2.1表达式语句</h4><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 大部分基本与C语言一致，简单介绍一些Cpp专属的特性</div>
+<p><strong>①引言</strong></p>
 <blockquote>
-<p>变量指明一个可供程序操控的存储空间，其数据类型决定该内存空间的大小、布局方式以及能参与什么类型的运算等特性</p>
+<p><strong>概述</strong>：由<strong>运算对象</strong>和<strong>操作符</strong>组成，返回一个<strong>结果</strong>，<strong>运算对象</strong>有<strong>变量</strong>和<strong>字面值</strong></p>
 </blockquote>
-<p>类型说明符 变量名<br>对象指具有某种数据类型的存储空间</p>
-<p>初始化：对象在创建时获得一个特定的值<br>初始化和赋值需要严格区分，赋值是将旧值擦去，用一新值替代</p>
-<p>初始化方法</p>
-<p>int a = 0;<br>int a = {0};<br>int a{0}<br>int a(0)<br>当使用{}进行初始化时，若初始化过程中存在信息丢失的风险，则编译器会报错，如int a{1.1}</p>
-<p>缺省初始化，内置类型，定义在函数体内部的变量不会被初始化，其值为一不确定值，函数体外被初始化为0，减一初始化每一个内置类型的变量</p>
-<p>类对象的初始化由其定义者定义</p>
-<p>声明使得名字为程序所知，一个文件如果想使用别处定义的名字，必须包含对应的声明，类型和名字<br>定义创建了与名字相关联的实体，申请存储空间，赋初始值<br>extern使得一个定义变为声明<br>函数体内部，初始化一个由extern关键字标记的变量会引发错误</p>
-<p>只能定义在同一个文件中<br>编译阶段检查类型</p>
-<p>用户自定义类一般以大写字母开头My_class<br>my_value</p>
-<p>作用域<br>函数之外全局作用域<br>::使用全局变量</p>
+<blockquote>
+<p><strong>左/右值</strong>：继承自<strong>C语言</strong>，<strong>左值</strong>可以出现在<strong>赋值语句</strong>的<strong>右边和左边</strong>，<strong>右值</strong>只能在<strong>赋值语句</strong>的<strong>右边</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Cpp中，左值和右值还会影响一些关键字获得的结果，如decltype关键字</div>
+
+<p><strong>②操作符</strong></p>
+<blockquote>
+<p><code>sizeof()</code>：当计算<strong>一个类类型</strong>所占字节数时，只会返回其<strong>固定部分的大小</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如vector，sizeof()并不会因为数组大小不同返回不同的结果</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 其余特性，如优先级、结合性和求值顺序也和C语言一致</div>
+<p><strong>③类型转换</strong></p>
+<blockquote>
+<p><strong>隐式转换</strong>：和<strong>C语言</strong>基本一致，注意<code>bool</code><strong>类型</strong>和<strong>其他类型</strong>的相互转换即可</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> bool类型转化为整型值，true为1，false为0，整型转化为bool，非零转化为true，零转化为false</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 还有一些类自定义的类型转换，如字符数组可以转化为string</div>
+<blockquote>
+<p><strong><code>static_cast&lt;type&gt;()</code><strong>：只要对象</strong>不包含底层<code>const</code><strong>，</strong>且合理的情况</strong>下，就可以将其<strong>转化为<code>type</code>类型</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 常常用于转换void指针</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">double</span> a_double<span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token operator">*</span>a_void_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>a_double<span class="token punctuation">;</span>
+<span class="token keyword">double</span> <span class="token operator">*</span>a_double_ptr <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">double</span> <span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>a_void_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong><code>const_cast&lt;type&gt;()</code><strong>：只能修改对象的</strong>底层const属性</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 常常用于函数重载中</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>p <span class="token operator">=</span> a_char_nums<span class="token punctuation">;</span>
+<span class="token keyword">char</span> <span class="token operator">*</span>no_const_p <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//错误，只有const_cast能修改底层const</span>
+<span class="token keyword">char</span> <span class="token operator">*</span>no_const_p <span class="token operator">=</span> <span class="token generic-function"><span class="token function">const_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//在该表达式中去除了p的底层const并赋予no_const_p</span>
+<span class="token comment">//将一个常量字符数组转化为string，没有修改其内容，不破坏其常量性</span>
+string a_string <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p><strong><code>reinterpret_cast&lt;type&gt;()</code><strong>：</strong>强制</strong>转换类型，<strong>无论其是否合理</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 这种显示转换是十分危险的，如下，虽然是合法的，但是a_ptr_to_char本质上还是指向一个整型</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>a_ptr_to_int <span class="token operator">=</span> <span class="token operator">&amp;</span>a_int<span class="token punctuation">;</span>
+<span class="token keyword">char</span> <span class="token operator">*</span>a_ptr_to_char <span class="token operator">=</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>a_ptr_to_int<span class="token punctuation">)</span>；<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="2-2控制流"><a href="#2-2控制流" class="headerlink" title="2.2控制流"></a>2.2控制流</h4><h4 id="2-3异常处理"><a href="#2-3异常处理" class="headerlink" title="2.3异常处理"></a>2.3异常处理</h4><h3 id="3-函数"><a href="#3-函数" class="headerlink" title="3.函数"></a>3.函数</h3><h4 id="1-2输入输出"><a href="#1-2输入输出" class="headerlink" title="1.2输入输出"></a>1.2输入输出</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 要包含iostream头文件，注意标准库头文件不带后缀</div>
+<p><strong>①输出</strong></p>
+<blockquote>
+<p><strong>格式</strong>：<code>[输出对象]&lt;&lt;内容1&lt;&lt;内容2...&lt;&lt;endl;</code>，常用的<strong>输出对象</strong>为<code>cout</code></p>
+</blockquote>
+<blockquote>
+<p><code>cout</code>：<code>iostream</code>类的一个实例，表示<strong>标准输出</strong>，通常连接到<strong>显示屏</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 标准库还定义了两个输出对象cerr和clog，分别为标准错误和标准日志，通常连接到显示屏</div>
+
+<blockquote>
+<p><code>&lt;&lt;</code>：<strong>输出流运算符</strong>，<strong>左侧</strong>必须是一个<code>ostream</code><strong>对象</strong>，<strong>右侧</strong>是<strong>输出的值</strong>，<strong>计算结果</strong>为<code>ostream</code><strong>对象</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如cout&lt;&lt;内容1的计算结果为cout，这也是可以连续输出到cout的原因</div>
+<blockquote>
+<p><code>endl</code>：输出一个<strong>换行符</strong>，并<strong>清空输出缓冲区</strong></p>
+</blockquote>
+<p><strong>②输入</strong></p>
+<blockquote>
+<p><strong>格式</strong>：<code>[输入对象]&gt;&gt;容器1...&gt;&gt;容器N;</code>，常用的<strong>输入对象</strong>为<code>cin</code>，输入<strong>文件结束符</strong>表示<strong>输入终止</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在Unix系统中，文件结束符可采用ctrl+D输入，windows系统中则是ctrl+z，再输入enter</div>
+<blockquote>
+<p><code>cin</code>：同<code>cout</code>，表示<strong>标准输入</strong>，通常连接到<strong>键盘</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 输入对象还可以是一打开的文件</div>
+<blockquote>
+<p><code>&gt;&gt;</code>：<strong>输入流运算符</strong>，和<code>&lt;&lt;</code>类似，将<strong>标准输入设备的数据</strong>保存到<strong>右边的容器</strong>中</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 同理cin&gt;&gt;容器的返回值也是cin，当读入有效数据，cin状态为真，若遇到文件结束符或无效数据，状态为假</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以采用cin&gt;&gt;tmp作为判断条件，结合条件语句和循环语句使用</div>
+<blockquote>
+<p>如<code>while(cin&gt;&gt;tmp)</code>可以读取<strong>多个数据</strong>，直到<strong>终止</strong>或者<strong>读取数据不合理</strong></p>
+</blockquote>
+<h4 id="1-4函数特性"><a href="#1-4函数特性" class="headerlink" title="1.4函数特性"></a>1.4函数特性</h4><p><strong>①默认参数</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>与C语言不同</strong>，C++可以给函数设置<strong>缺省情况</strong>下的<strong>默认参数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 只能在函数定义或者函数声明默认值，但是不能在两个地方都声明，通常放在函数声明处</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果为某一参数设定默认值，则该参数右侧所有参数都需要有默认值</div>
+
+<p><strong>②inline函数</strong></p>
+<blockquote>
+<p><strong>概述</strong>：在<strong>函数定义之前</strong>添加<code>inline</code>关键字即可，通常是一些<strong>简单的函数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 对于`inline`函数，编译器在每个函数调用节点上将其展开为函数代码副本（类似于C语言宏函数）</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 内联函数的定义通常放在头文件中（和普通的函数不同，inline函数可以定义多次）</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> inline函数只是对编译器的一种的请求，编译器不一定会按照inline函数定义处理</div>
+
+<p><strong>③函数重载</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<strong>参数列表</strong>或<strong>常量性不同</strong>但是<strong>名称相同</strong>的一系列函数，<strong>编译器</strong>根据<strong>调用时</strong>提供的<strong>参数</strong>判断调用哪一个</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若传入的参数被const修饰，则调用const版本</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 不能仅仅依靠返回类型的不同实现函数重载，因为编译器无法根据返回类型判断你想调用那个函数</div>
+
+
+
+
+
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>

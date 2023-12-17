@@ -420,12 +420,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="线性结构"><a href="#线性结构" class="headerlink" title="线性结构"></a>线性结构</h2><h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h3><h4 id="1-1数组和链表"><a href="#1-1数组和链表" class="headerlink" title="1.1数组和链表"></a>1.1数组和链表</h4><p><strong>①数组</strong></p>
+                <h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="线性结构（上）"><a href="#线性结构（上）" class="headerlink" title="线性结构（上）"></a>线性结构（上）</h2><h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h3><h4 id="1-1数组和链表"><a href="#1-1数组和链表" class="headerlink" title="1.1数组和链表"></a>1.1数组和链表</h4><p><strong>①数组</strong></p>
 <blockquote>
 <p><strong>概述</strong>：一段<strong>连续的内存空间</strong>，其<strong>数组名</strong>记录了其<strong>起始位置</strong>，可以通过<strong>索引</strong>访问<strong>对应位置</strong>的内存单元</p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 数组的大小通常是一开始就确定的，但也可以通过一些手段构成动态数组，如C语言的malloc()以及C++的vector</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 数组的元素访问非常块，元素地址=起始地址+元素长度x元素索引，且由于其是连续存放，所以对缓存的利用率较高</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 数组的元素访问非常块，元素地址=起始地址+元素长度x元素索引，且由于是连续存放，所以对缓存的利用率较高</div>
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 由于数组是一段连续的内存空间，所以是有限的，可能会出现扩容问题，且修改一个元素会影响其后所有元素</div>
 <p><strong>②链表</strong></p>
 <blockquote>
@@ -818,8 +818,6 @@ LinkedListStack <span class="token operator">*</span><span class="token function
     s<span class="token operator">-&gt;</span>size<span class="token operator">--</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> val<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
 <hr>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
@@ -942,30 +940,30 @@ LinkedListStack <span class="token operator">*</span><span class="token function
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/11/unix-huan-jing-bian-cheng-shang/">
+                <a href="/2023/12/14/cpp-xue-xi-bi-ji-er/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/13.webp" class="responsive-img" alt="Unix环境编程（上）">
+                        <img src="/medias/featureimages/11.webp" class="responsive-img" alt="Cpp学习笔记（二）">
                         
-                        <span class="card-title">Unix环境编程（上）</span>
+                        <span class="card-title">Cpp学习笔记（二）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Unix环境介绍
+                            面向对象编程
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-11
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-14
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7%E9%93%BE/" class="post-category">
-                                    工具链
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
                                 </a>
                             
                             
@@ -975,12 +973,12 @@ LinkedListStack <span class="token operator">*</span><span class="token function
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E3%80%8AUnix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B/">
-                        <span class="chip bg-color">《Unix环境高级编程》</span>
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
                     </a>
                     
-                    <a href="/tags/Unix/">
-                        <span class="chip bg-color">Unix</span>
+                    <a href="/tags/%E3%80%8AC-primer%E3%80%8B/">
+                        <span class="chip bg-color">《C++ primer》</span>
                     </a>
                     
                 </div>

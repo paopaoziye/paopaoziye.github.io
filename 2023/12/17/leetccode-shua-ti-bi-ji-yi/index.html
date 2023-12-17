@@ -237,12 +237,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/41.webp')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.webp')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Linux工作流（三）</h1>
+                    <h1 class="description center-align post-title">LeetcCode刷题笔记（一）</h1>
                 </div>
             </div>
         </div>
@@ -358,12 +358,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Linux/">
-                                <span class="chip bg-color">Linux</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/">
-                                <span class="chip bg-color">工作流</span>
+                            <a href="/tags/%E3%80%8A%E5%89%91%E6%8C%87offer%E3%80%8B/">
+                                <span class="chip bg-color">《剑指offer》</span>
                             </a>
                         
                     </div>
@@ -374,8 +370,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%B7%A5%E5%85%B7%E9%93%BE/" class="post-category">
-                                工具链
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="post-category">
+                                项目实战
                             </a>
                         
                     </div>
@@ -387,7 +383,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-12-10
+                    2023-12-17
                 </div>
                 
 
@@ -416,244 +412,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Linux工作流"><a href="#Linux工作流" class="headerlink" title="Linux工作流"></a>Linux工作流</h1><h2 id="Linux进阶操作"><a href="#Linux进阶操作" class="headerlink" title="Linux进阶操作"></a>Linux进阶操作</h2><h3 id="1-辅助功能"><a href="#1-辅助功能" class="headerlink" title="1.辅助功能"></a>1.辅助功能</h3><h4 id="1-1定时调度"><a href="#1-1定时调度" class="headerlink" title="1.1定时调度"></a>1.1定时调度</h4><div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 指定系统在指定时间执行指定脚本/指令，脚本文件需要有执行权限</div>
-<p><strong>①<code>crontab</code>命令</strong></p>
-<blockquote>
-<p><code>crontab [选项]</code>：<code>-e/l/r</code>选项<strong>打开/查询/删除</strong>任务列表，<code>-r</code>选项后跟<strong>任务号</strong>删除<strong>特定任务</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 先打开任务列表，在其中按照特定格式输入任务即可</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 使用前使用service crond restart保证crond正在启动</div>
-<blockquote>
-<p><strong>任务格式</strong>：<code>[] [] [] [] [] [指令]/[脚本文件路径]</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个占位符都有其特殊含义，组合起来表示任务执行的频率</div>
-<blockquote>
-<p><code>第一个</code>：表示<strong>一个小时</strong>的<strong>第几分钟</strong>，<strong>取值范围</strong>为<code>0-59</code></p>
-</blockquote>
-<blockquote>
-<p><code>第二个</code>：表示<strong>一天</strong>中的<strong>第几个小时</strong>，<strong>取值范围</strong>为<code>0-23</code></p>
-</blockquote>
-<blockquote>
-<p><code>第三个</code>：表示<strong>一个月</strong>中的<strong>第几天</strong>，<strong>取值范围</strong>为<code>1-31</code></p>
-</blockquote>
-<blockquote>
-<p><code>第四个</code>：表示<strong>一年</strong>中的<strong>第几个月</strong>，<strong>取值范围</strong>为<code>1-12</code></p>
-</blockquote>
-<blockquote>
-<p><code>第五个</code>：表示<strong>一周</strong>中的<strong>星期几</strong>，<strong>取值范围</strong>为<code>1-7</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个占位符都有其特殊格式，表示特殊意义</div>
-<blockquote>
-<p><code>*</code>：表示<strong>任何时间</strong>，如第一个<code>*</code>表示<strong>一小时的每分钟</strong></p>
-</blockquote>
-<blockquote>
-<p><code>,</code>：表示<strong>不连续的时间</strong>，<code>0,30 1 * * *</code>表示<strong>每天的一点和一点半</strong></p>
-</blockquote>
-<blockquote>
-<p><code>-</code>：表示<strong>连续的时间</strong>，如<code>0-30 1 * * *</code>，表示<strong>每天的一点到一点半</strong></p>
-</blockquote>
-<blockquote>
-<p><code>*/n</code>：表示<strong>每隔多久执行一次</strong>，如<code>*/10 1 * * *</code>，表示<strong>每天的一点到两点每隔十分钟执行一次</strong></p>
-</blockquote>
-<p><strong>②<code>at</code>命令</strong></p>
-<blockquote>
-<p><code>at [时间]</code>：回车后输入<strong>指令</strong>或者<strong>脚本路径</strong>，随后输入<strong>两次</strong><code>ctrl+D</code><strong>结束输入</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 可以使用atq查看未执行的任务队列，并采用atrm 任务编号删除对应任务</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 需要保证atd正在执行，可以使用ps -ef|grep atd检查</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 一次性定时任务,时间格式如下</div>
-<blockquote>
-<p><code>小时:分钟 日/月/年</code>：在<strong>对应时间</strong>执行，若<strong>只有</strong><code>小时:分钟</code>，则在<strong>当天对应时间</strong>执行</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若当天的对应时间过去，则会在第二天的对应时间执行</div>
-<blockquote>
-<p><code>now+n 时间单位</code> ：<strong>多久之后</strong>执行</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时间单位有minutes、hours、days和weeks</div>
-
-<h4 id="1-2磁盘管理"><a href="#1-2磁盘管理" class="headerlink" title="1.2磁盘管理"></a>1.2磁盘管理</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 磁盘可分为硬盘和软盘，现在软盘已经被淘汰了，所以磁盘相当于就是硬盘</div>
-<p><strong>①硬盘信息</strong></p>
-<blockquote>
-<p><strong><code>lsblk</code><strong>：查看</strong>硬盘分区</strong>情况，可以添加<code>-f</code>选项查看<strong>详细信息</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> NAME、FSTYPE、FSUSE%、MOUNTPOINT分别为磁盘/分区编号、文件系统类型、使用百分比、挂载目录</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 磁盘的每个分区都可以通过挂载和某个目录联系到一起，访问这个目录相当于访问该分区</div>
-
-<p><strong>②硬盘分区</strong></p>
-<blockquote>
-<p><code>fdisk [硬盘路径]</code>：进入<strong>界面</strong>后，输入<code>n</code>、选择<strong>分区类型</strong>、选择<strong>分区数目</strong>即可完成<strong>分区</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> linux中硬盘也是文件，存储在/dev目录下，所以磁盘路径通常为/dev/[磁盘编号]</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 分区后需要书去w进行保存，不保存则按q退出</div>
-
-<p><strong>③磁盘格式化</strong></p>
-<blockquote>
-<p><code>mkfs -t [文件系统类型] [分区路径]</code>：将<strong>对应分区</strong>格式化为对应<strong>文件系统</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 硬盘分区也是/dev下的一个文件，通常路径为/dev/[分区编号]</div>
-
-<p><strong>④磁盘挂载</strong></p>
-<blockquote>
-<p><code>mount [分区路径] [目录路径]</code>：将对应分区<strong>挂载</strong>到对应目录下</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在该目录创建文件后，文件写入到该分区中</div>
-<blockquote>
-<p><code>umount [分区路径]/[目录路径]</code>：<strong>撤销</strong>对应分区/目录的<strong>挂载映射关系</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 撤销挂载映射关系后，该目录文件消失，但是分区中文件不会消失</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在命令行中挂载/撤销挂载，重启后会失效</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可通过修改/etc/fstab文件实现永久挂载，其中UUID可以使用分区路径替代，执行mount -a/重启即可生效</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 不能在卸载的目录中执行撤销指令</div>
-<p><strong>⑤硬盘使用情况</strong></p>
-<blockquote>
-<p><code>df -h</code>：显示硬盘的<strong>整体使用情况</strong></p>
-</blockquote>
-<blockquote>
-<p><code>du -h [目录路径]</code>：显示该目录下<strong>所有文件的大小</strong>，不指定是<strong>当前目录</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> -s选项仅仅显示汇总，-c选项同时显示汇总和明细，--max-depth=n指定n为子目录深度</div>
-
-<h4 id="1-3网络管理"><a href="#1-3网络管理" class="headerlink" title="1.3网络管理"></a>1.3网络管理</h4><p><strong>①IP获取</strong></p>
-<blockquote>
-<p><strong>自动获取</strong>：<strong>启动后</strong>自动获取IP，可以<strong>避免IP冲突</strong>，但是每次的<strong>地址不同</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在setting的network选项卡中修改</div>
-<blockquote>
-<p><strong>指定IP</strong>：修改对应<strong>配置文件</strong>，修改<code>BOOTPROTO="static"</code>，并新增<code>IPADDR</code>、<code>GATEWAY</code>、<code>DNS1</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 新增项分别为IP地址、网关地址和域名解析器地址，network restart重启网络服务即可生效</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果使用的是虚拟机，则还需要通过虚拟网络编辑器修改虚拟机的子网和网关等信息</div>
-<p><strong>②主机名映射</strong></p>
-<blockquote>
-<p><code>hostname</code>：<strong>查看</strong>主机名，可以在<code>/etc/hostname</code>中<strong>修改主机名</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 修改etc/hosts，设置主机名和IP地址的映射，输入主机名相当于输入对应IP地址</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 只是简单的替代关系，所以可以在etc/hosts中随意新增映射关系</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> host文件中的映射关系不能乱写，否则很可能找不到正确的IP地址</div>
-<blockquote>
-<p>在浏览器中<strong>输入网址</strong>后，浏览器依次从<strong>浏览器缓存</strong>、<strong>本地DNS解析缓存</strong>、<strong>hosts文件</strong>、<strong>DNS服务器</strong>查找IP地址</p>
-</blockquote>
-<p><strong>③网络状态</strong></p>
-<blockquote>
-<p><code>ping [IP地址]</code>：测试<strong>能否访问</strong>对应网络地址</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ping后可以跟任何可以映射为IP地址的东西，如主机名和URL</div>
-<blockquote>
-<p><code>ifconfig</code>：查看<strong>网络详细信息</strong>，如<strong>IP地址</strong>、<strong>子网掩码</strong>等</p>
-</blockquote>
-<blockquote>
-<p><code>netstat -anp</code>：查看系统<strong>网络连接</strong>状态</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Proto网络协议、Local Address本地监听端口、Foreign Address外地请求端口，State端口状态</div>
-
-<h4 id="1-4进程管理"><a href="#1-4进程管理" class="headerlink" title="1.4进程管理"></a>1.4进程管理</h4><p><strong>①进程信息</strong></p>
-<blockquote>
-<p><code>ps -aux</code>：显示<strong>进程信息</strong>，<code>-a</code>选项显示<strong>所有进程</strong>，<code>-u</code>以<strong>用户格式</strong>显示 <code>-x</code>显示<strong>后台进程</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> %CPU、%MEM、STAT和COMMAND分别表示CPU占用、物理内存占用、进程状态和启动进程的命令</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以配合管道命令和more或者grep，ps -aux | more，ps -aux | grep xxx</div>
-<blockquote>
-<p><code>ps -ef</code>：<strong>全格式</strong>显示所有进程，主要用于查看<code>PPID</code><strong>父进程</strong>、<code>C</code>执行<strong>优先级</strong></p>
-</blockquote>
-<blockquote>
-<p><code>pstree</code>：查看<strong>进程树</strong></p>
-</blockquote>
-<p><strong>②进程管理</strong></p>
-<blockquote>
-<p><code>kill [选项] [进程号]</code>：<strong>终止</strong>进程，但是该请求<strong>可能会被屏蔽</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> -9选项强制终止进程</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> kill对应用户使用的ssh进程，从而阻止该用户远程登录</div>
-<blockquote>
-<p><code>killall [进程名称]</code>：<strong>终止</strong>进程以及<strong>其子进程</strong></p>
-</blockquote>
-<blockquote>
-<p><code>top [选项]</code>：<strong>动态</strong>显示进程，以及<strong>概述信息</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> -dn设置隔n秒更新，默认是3秒，-i不显示闲置和僵死进程，-p [进程号]监控某个进程</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 进入界面后，可按下某键进行交互</div>
-<blockquote>
-<p><code>M/N/P</code>：按照<strong>内存占用率/PID/CPU占用率</strong>排序</p>
-</blockquote>
-<blockquote>
-<p><code>u</code>：<strong>回车</strong>后输入<strong>用户名</strong>，即可仅查看<strong>某用户进程</strong></p>
-</blockquote>
-<blockquote>
-<p><code>k</code>：<strong>回车</strong>后输入<strong>PID</strong>，<strong>回车</strong>后再输入<strong>信号量如9</strong>，即可<strong>终止</strong>对应进程</p>
-</blockquote>
-<blockquote>
-<p><code>q</code>：<strong>退出</strong></p>
-</blockquote>
-<h4 id="1-5服务管理"><a href="#1-5服务管理" class="headerlink" title="1.5服务管理"></a>1.5服务管理</h4><p><strong>①引言</strong></p>
-<blockquote>
-<p><strong>服务</strong>：一个<strong>后台进程</strong>，<strong>监听</strong>某个<strong>端口</strong>，<strong>等待</strong>其他程序的<strong>请求</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>运行级别</strong>：系统的<strong>运行状态</strong>，常用的有<code>3</code><strong>有网络的多用户状态</strong>、<code>5</code><strong>图形界面</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 不同的运行级别，会有不同的服务开机时自启动</div>
-<blockquote>
-<p><code>systemctl get-default</code>：<strong>获取</strong>运行级别</p>
-</blockquote>
-<blockquote>
-<p><code>systemctl set-default [运行级别对应字符串]</code>：<strong>修改</strong>运行级别，<strong>重启生效</strong></p>
-</blockquote>
-<blockquote>
-<p><code>systemctl list-unit-files</code>：查看<strong>当前运行级别</strong>各个服务进程的<strong>自启动状态</strong></p>
-</blockquote>
-<blockquote>
-<p><code>systemctl [start/stop/restart/status] [服务名]</code>：<strong>开始/停止/重启/查看</strong>对应服务</p>
-</blockquote>
-<blockquote>
-<p><code>systemctl [enable/disable/is-enabled] [服务名]</code>：<strong>设置</strong>服务进程开机<strong>是/否自启动</strong>，<strong>查询</strong>自启动状态</p>
-</blockquote>
-<p><strong>②防火墙</strong></p>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 用于管理端口，外界只能访问防火墙允许访问的端口</div>
-<blockquote>
-<p><code>telnet [ip地址] [端口号]</code>：从<strong>某个端口</strong>连接<strong>对应IP地址</strong></p>
-</blockquote>
-<blockquote>
-<p><code>sudo ufw allow [端口号]</code>：<strong>打开</strong>端口</p>
-</blockquote>
-<blockquote>
-<p><code>sudo ufw delete allow [端口号]</code>：<strong>关闭</strong>端口</p>
-</blockquote>
-<blockquote>
-<p><code>sudo ufw status</code>：查看<strong>已经开启</strong>的端口</p>
-</blockquote>
-<blockquote>
-<p><code>sudo ufw reload</code>：防火墙<strong>重启</strong></p>
-</blockquote>
-<p><strong>③SSH</strong></p>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一种建立在应用层和运输层基础上的安全协议，常用于远程登录，分为客户端和服务端，服务端在22号端口监听</div>
-<blockquote>
-<p><code>sudo apt-get install openssh-server</code>：安装SSH<strong>服务端与客户端</strong>，Ubuntu需要要<strong>手动安装</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 安装后使用systemctl重启并设置自启动即可</div>
-<blockquote>
-<p><code>ssh [用户名]@[IP地址]</code>：以<strong>某个用户</strong>连接<strong>对应IP地址主机</strong>，需要输入<strong>该用户密码</strong></p>
-</blockquote>
-<blockquote>
-<p><code>exit/logout</code>：<strong>退出</strong>远程连接</p>
-</blockquote>
-<p><strong>④apt</strong></p>
-<blockquote>
-<p><strong>概述</strong>：一种<strong>包管理器</strong>，可以从对应<strong>apt服务器</strong>下载安装软件</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> /etc/apt/sources.list中存放使用的apt服务器地址，可以将其修改为镜像源，如清华大学开源软件镜像站</div>
-<blockquote>
-<p><code>sudo apt-get update</code>：<strong>更新</strong>apt源</p>
-</blockquote>
-<blockquote>
-<p><code>sudo apt-get install [包名称]</code>：<strong>安装</strong>软件包</p>
-</blockquote>
-<blockquote>
-<p><code>sudo apt-get source [包名称]</code>：获取<strong>源代码</strong></p>
-</blockquote>
-<blockquote>
-<p><code>sudo apt-get remove [包名称]</code>：删除包</p>
-</blockquote>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                <h1 id="LeetcCode刷题笔记"><a href="#LeetcCode刷题笔记" class="headerlink" title="LeetcCode刷题笔记"></a>LeetcCode刷题笔记</h1><h2 id="LeetcCode刷题笔记（一）"><a href="#LeetcCode刷题笔记（一）" class="headerlink" title="LeetcCode刷题笔记（一）"></a>LeetcCode刷题笔记（一）</h2><h3 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h3><h4 id="1-1整数"><a href="#1-1整数" class="headerlink" title="1.1整数"></a>1.1整数</h4><p>①</p>
+<h4 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h4><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
             <hr/>
@@ -679,7 +439,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/12/10/linux-gong-zuo-liu-san/">http://example.com/2023/12/10/linux-gong-zuo-liu-san/</a>
+                    <a href="http://example.com/2023/12/17/leetccode-shua-ti-bi-ji-yi/">http://example.com/2023/12/17/leetccode-shua-ti-bi-ji-yi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -717,12 +477,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Linux/">
-                                    <span class="chip bg-color">Linux</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/">
-                                    <span class="chip bg-color">工作流</span>
+                                <a href="/tags/%E3%80%8A%E5%89%91%E6%8C%87offer%E3%80%8B/">
+                                    <span class="chip bg-color">《剑指offer》</span>
                                 </a>
                             
                         </div>
@@ -766,28 +522,78 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/12/10/linux-gong-zuo-liu-yi/">
+                <a href="/2023/12/17/leetccode-shua-ti-bi-ji-yi/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/41.webp" class="responsive-img" alt="Linux工作流（一）">
+                        <img src="/medias/featureimages/9.webp" class="responsive-img" alt="LeetcCode刷题笔记（一）">
                         
-                        <span class="card-title">Linux工作流（一）</span>
+                        <span class="card-title">LeetcCode刷题笔记（一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Linux常见命令
+                            LeetCode刷题
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="post-category">
+                                    项目实战
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E3%80%8A%E5%89%91%E6%8C%87offer%E3%80%8B/">
+                        <span class="chip bg-color">《剑指offer》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/14/unix-huan-jing-bian-cheng-shang/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/13.webp" class="responsive-img" alt="Unix环境编程（上）">
+                        
+                        <span class="card-title">Unix环境编程（上）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Unix环境介绍
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -803,64 +609,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
+                    <a href="/tags/%E3%80%8AUnix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B/">
+                        <span class="chip bg-color">《Unix环境高级编程》</span>
                     </a>
                     
-                    <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/">
-                        <span class="chip bg-color">工作流</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/12/10/mit6.1810-yi/">
-                    <div class="card-image">
-                        
-                        <img src="/medias/featureimages/40.webp" class="responsive-img" alt="MIT6.1810（一）">
-                        
-                        <span class="card-title">MIT6.1810（一）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            手搓操作系统
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-10
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="post-category">
-                                    项目实战
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">操作系统</span>
-                    </a>
-                    
-                    <a href="/tags/MIT6-1810/">
-                        <span class="chip bg-color">MIT6.1810</span>
+                    <a href="/tags/Unix/">
+                        <span class="chip bg-color">Unix</span>
                     </a>
                     
                 </div>

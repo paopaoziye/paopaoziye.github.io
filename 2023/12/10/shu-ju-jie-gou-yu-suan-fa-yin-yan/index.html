@@ -445,7 +445,7 @@
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 逻辑结构可分为线性结构和非线性结构，物理存储结构分为连续存储和链式存储（零星分布）</div>
 <blockquote>
-<p>常见的<strong>线性结构</strong>有<strong>线性表</strong>，<strong>非线性结构</strong>有<strong>树</strong>、<strong>图</strong>等</p>
+<p>常见的<strong>线性结构</strong>有<strong>线性表</strong>、<strong>堆</strong>和<strong>栈</strong>等，<strong>非线性结构</strong>有<strong>树</strong>、<strong>图</strong>等</p>
 </blockquote>
 <blockquote>
 <p><strong>线性表</strong>采用<strong>数组</strong>实现，即为<strong>连续存储</strong>，采用<strong>链表</strong>实现，则为<strong>链式存储</strong></p>
@@ -552,53 +552,53 @@
 <blockquote>
 <p><code>O(n^2)</code>：<strong>两层嵌套循环</strong></p>
 </blockquote>
-<pre class="line-numbers language-none"><code class="language-none">int quadratic(int n)
-{
-    int count = 0;
-    // 循环次数与数组长度成平方关系
-    for (int i = 0; i &lt; n; i++) {
-        for (int j = 0; j &lt; n; j++) {
-            count++;
-        }
-    }
-    return count;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">quadratic</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">// 循环次数与数组长度成平方关系</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            count<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> count<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p><code>O(2^n)</code>：以下<strong>递归次数为n</strong>，每次递归都将<strong>一分为二</strong></p>
 </blockquote>
-<pre class="line-numbers language-none"><code class="language-none">/* 指数阶（递归实现） */
-int expRecur(int n)
-{
-    if (n == 1)
-        return 1;
-    return expRecur(n - 1) + expRecur(n - 1) + 1;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 指数阶（递归实现） */</span>
+<span class="token keyword">int</span> <span class="token function">expRecur</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">expRecur</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">expRecur</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p><code>O(logn)</code>：以下只需要<strong>迭代logn次</strong></p>
 </blockquote>
-<pre class="line-numbers language-none"><code class="language-none">int logarithmic(float n)
-{
-    int count = 0;
-    while (n &gt; 1) {
-        n = n / 2;
-        count++;
-    }
-    return count;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">logarithmic</span><span class="token punctuation">(</span><span class="token keyword">float</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>n <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        n <span class="token operator">=</span> n <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        count<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> count<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p><code>O(n!)</code>：以下<strong>循环n次</strong>，<strong>第一次</strong>循环<strong>分裂出n个</strong>，<strong>第二次</strong>循环<strong>每个都分裂出n-1个</strong>，依次类推</p>
 </blockquote>
-<pre class="line-numbers language-none"><code class="language-none">/* 阶乘阶（递归实现） */
-int factorialRecur(int n) 
-{
-    if (n == 0)
-        return 1;
-    int count = 0;
-    for (int i = 0; i &lt; n; i++) {
-        count += factorialRecur(n - 1);
-    }
-    return count;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 阶乘阶（递归实现） */</span>
+<span class="token keyword">int</span> <span class="token function">factorialRecur</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        count <span class="token operator">+=</span> <span class="token function">factorialRecur</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> count<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="2-3空间复杂度"><a href="#2-3空间复杂度" class="headerlink" title="2.3空间复杂度"></a>2.3空间复杂度</h4><p><strong>①估算思路</strong></p>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 通常只关心最差空间复杂度，其中最差指最差输入数据和峰值内存占用</div>
 <blockquote>
@@ -954,18 +954,18 @@ int factorialRecur(int n)
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/12/10/shu-xing-jie-gou-shang/">
+                <a href="/2023/12/10/shu-xing-jie-gou-xia/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="树形结构（上）">
+                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="树形结构（下）">
                         
-                        <span class="card-title">树形结构（上）</span>
+                        <span class="card-title">树形结构（下）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            树形结构
+                            堆
                         
                     </div>
                     <div class="publish-info">

@@ -391,7 +391,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-12-13
+                    2023-12-14
                 </div>
                 
 
@@ -420,7 +420,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-队列"><a href="#1-队列" class="headerlink" title="1.队列"></a>1.队列</h3><h4 id="1-1数组实现"><a href="#1-1数组实现" class="headerlink" title="1.1数组实现"></a>1.1数组实现</h4><p><strong>①结构代码</strong></p>
+                <h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="线性结构（下）"><a href="#线性结构（下）" class="headerlink" title="线性结构（下）"></a>线性结构（下）</h2><h3 id="1-队列"><a href="#1-队列" class="headerlink" title="1.队列"></a>1.队列</h3><h4 id="1-1数组实现"><a href="#1-1数组实现" class="headerlink" title="1.1数组实现"></a>1.1数组实现</h4><p><strong>①结构代码</strong></p>
 <blockquote>
 <p><code>rear</code>：指向<strong>队尾的“指针”</strong>，<strong>插入</strong>一个元素时，<code>rear</code><strong>加一</strong></p>
 </blockquote>
@@ -430,424 +430,424 @@
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当“指针”可以在超过MaxSize且列表未满时，对MaxSize取余再次从0开始，需要一个状态标签判断队列是否已满</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 山不转水转！</div>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 基于环形数组实现的队列 */</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> <span class="token operator">*</span>nums<span class="token punctuation">;</span>       <span class="token comment">// 用于存储队列元素的数组</span>
     <span class="token keyword">int</span> front<span class="token punctuation">;</span>       <span class="token comment">// 队首指针，指向队首元素</span>
     <span class="token keyword">int</span> queSize<span class="token punctuation">;</span>     <span class="token comment">// 尾指针，指向队尾 + 1</span>
     <span class="token keyword">int</span> queCapacity<span class="token punctuation">;</span> <span class="token comment">// 队列容量</span>
-<span class="token punctuation">}</span> ArrayQueue<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span> ArrayQueue<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②构造与析构</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 构造函数 */</span>
-ArrayQueue <span class="token operator">*</span><span class="token function">newArrayQueue</span><span class="token punctuation">(</span><span class="token keyword">int</span> capacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ArrayQueue <span class="token operator">*</span><span class="token function">newArrayQueue</span><span class="token punctuation">(</span><span class="token keyword">int</span> capacity<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     ArrayQueue <span class="token operator">*</span>queue <span class="token operator">=</span> <span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>ArrayQueue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 初始化数组</span>
-    queue<span class="token operator">-&gt;</span>queCapacity <span class="token operator">=</span> capacity<span class="token punctuation">;</span>
-    queue<span class="token operator">-&gt;</span>nums <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> queue<span class="token operator">-&gt;</span>queCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    queue<span class="token operator">-&gt;</span>front <span class="token operator">=</span> queue<span class="token operator">-&gt;</span>queSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    queue<span class="token operator">-></span>queCapacity <span class="token operator">=</span> capacity<span class="token punctuation">;</span>
+    queue<span class="token operator">-></span>nums <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> queue<span class="token operator">-></span>queCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    queue<span class="token operator">-></span>front <span class="token operator">=</span> queue<span class="token operator">-></span>queSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> queue<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 析构函数 */</span>
-<span class="token keyword">void</span> <span class="token function">delArrayQueue</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">free</span><span class="token punctuation">(</span>queue<span class="token operator">-&gt;</span>nums<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">delArrayQueue</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>queue<span class="token operator">-></span>nums<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">free</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>③操作集</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 获取队列的容量 */</span>
-<span class="token keyword">int</span> <span class="token function">capacity</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> queue<span class="token operator">-&gt;</span>queCapacity<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">capacity</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> queue<span class="token operator">-></span>queCapacity<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 获取队列的长度 */</span>
-<span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> queue<span class="token operator">-&gt;</span>queSize<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> queue<span class="token operator">-></span>queSize<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 判断队列是否为空 */</span>
-bool <span class="token function">empty</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> queue<span class="token operator">-&gt;</span>queSize <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+bool <span class="token function">empty</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> queue<span class="token operator">-></span>queSize <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 访问队首元素 */</span>
-<span class="token keyword">int</span> <span class="token function">peek</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">peek</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> queue<span class="token operator">-&gt;</span>nums<span class="token punctuation">[</span>queue<span class="token operator">-&gt;</span>front<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    <span class="token keyword">return</span> queue<span class="token operator">-></span>nums<span class="token punctuation">[</span>queue<span class="token operator">-></span>front<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 入队 */</span>
-<span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">capacity</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">capacity</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"队列已满\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token punctuation">&#125;</span>
     <span class="token comment">// 计算队尾指针，指向队尾索引 + 1</span>
     <span class="token comment">// 通过取余操作，实现 rear 越过数组尾部后回到头部</span>
-    <span class="token keyword">int</span> rear <span class="token operator">=</span> <span class="token punctuation">(</span>queue<span class="token operator">-&gt;</span>front <span class="token operator">+</span> queue<span class="token operator">-&gt;</span>queSize<span class="token punctuation">)</span> <span class="token operator">%</span> queue<span class="token operator">-&gt;</span>queCapacity<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rear <span class="token operator">=</span> <span class="token punctuation">(</span>queue<span class="token operator">-></span>front <span class="token operator">+</span> queue<span class="token operator">-></span>queSize<span class="token punctuation">)</span> <span class="token operator">%</span> queue<span class="token operator">-></span>queCapacity<span class="token punctuation">;</span>
     <span class="token comment">// 将 num 添加至队尾</span>
-    queue<span class="token operator">-&gt;</span>nums<span class="token punctuation">[</span>rear<span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
-    queue<span class="token operator">-&gt;</span>queSize<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    queue<span class="token operator">-></span>nums<span class="token punctuation">[</span>rear<span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    queue<span class="token operator">-></span>queSize<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 出队 */</span>
-<span class="token keyword">void</span> <span class="token function">pop</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">pop</span><span class="token punctuation">(</span>ArrayQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token function">peek</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 队首指针向后移动一位，若越过尾部则返回到数组头部</span>
-    queue<span class="token operator">-&gt;</span>front <span class="token operator">=</span> <span class="token punctuation">(</span>queue<span class="token operator">-&gt;</span>front <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> queue<span class="token operator">-&gt;</span>queCapacity<span class="token punctuation">;</span>
-    queue<span class="token operator">-&gt;</span>queSize<span class="token operator">--</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    queue<span class="token operator">-></span>front <span class="token operator">=</span> <span class="token punctuation">(</span>queue<span class="token operator">-></span>front <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> queue<span class="token operator">-></span>queCapacity<span class="token punctuation">;</span>
+    queue<span class="token operator">-></span>queSize<span class="token operator">--</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="1-2链表实现"><a href="#1-2链表实现" class="headerlink" title="1.2链表实现"></a>1.2链表实现</h4><p><strong>①结构代码</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 基于链表实现的队列 */</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
     ListNode <span class="token operator">*</span>front<span class="token punctuation">,</span> <span class="token operator">*</span>rear<span class="token punctuation">;</span>
     <span class="token keyword">int</span> queSize<span class="token punctuation">;</span>
-<span class="token punctuation">}</span> LinkedListQueue<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span> LinkedListQueue<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②构造与析构</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 构造函数 */</span>
-LinkedListQueue <span class="token operator">*</span><span class="token function">newLinkedListQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+LinkedListQueue <span class="token operator">*</span><span class="token function">newLinkedListQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     LinkedListQueue <span class="token operator">*</span>queue <span class="token operator">=</span> <span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>LinkedListQueue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    queue<span class="token operator">-&gt;</span>front <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    queue<span class="token operator">-&gt;</span>rear <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    queue<span class="token operator">-&gt;</span>queSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    queue<span class="token operator">-></span>front <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    queue<span class="token operator">-></span>rear <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    queue<span class="token operator">-></span>queSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> queue<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 析构函数 */</span>
-<span class="token keyword">void</span> <span class="token function">delLinkedListQueue</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">delLinkedListQueue</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// 释放所有节点</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> queue<span class="token operator">-&gt;</span>queSize <span class="token operator">&amp;&amp;</span> queue<span class="token operator">-&gt;</span>front <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        ListNode <span class="token operator">*</span>tmp <span class="token operator">=</span> queue<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
-        queue<span class="token operator">-&gt;</span>front <span class="token operator">=</span> queue<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> queue<span class="token operator">-></span>queSize <span class="token operator">&amp;&amp;</span> queue<span class="token operator">-></span>front <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        ListNode <span class="token operator">*</span>tmp <span class="token operator">=</span> queue<span class="token operator">-></span>front<span class="token punctuation">;</span>
+        queue<span class="token operator">-></span>front <span class="token operator">=</span> queue<span class="token operator">-></span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
         <span class="token function">free</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token punctuation">&#125;</span>
     <span class="token comment">// 释放 queue 结构体</span>
     <span class="token function">free</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②操作集实现</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 访问队首元素 */</span>
-<span class="token keyword">int</span> <span class="token function">peek</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> queue<span class="token operator">-&gt;</span>front<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> queue<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>val<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">peek</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> queue<span class="token operator">-></span>front<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> queue<span class="token operator">-></span>front<span class="token operator">-></span>val<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 <span class="token comment">/* 获取队列的长度 */</span>
-<span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> queue<span class="token operator">-&gt;</span>queSize<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> queue<span class="token operator">-></span>queSize<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 判断队列是否为空 */</span>
-bool <span class="token function">empty</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+bool <span class="token function">empty</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 访问队首元素 */</span>
-<span class="token keyword">int</span> <span class="token function">peek</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> queue<span class="token operator">-&gt;</span>front<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> queue<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>val<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">peek</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> queue<span class="token operator">-></span>front<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> queue<span class="token operator">-></span>front<span class="token operator">-></span>val<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 入队 */</span>
-<span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// 尾节点处添加 node</span>
     ListNode <span class="token operator">*</span>node <span class="token operator">=</span> <span class="token function">newListNode</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 如果队列为空，则令头、尾节点都指向该节点</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>queue<span class="token operator">-&gt;</span>front <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        queue<span class="token operator">-&gt;</span>front <span class="token operator">=</span> node<span class="token punctuation">;</span>
-        queue<span class="token operator">-&gt;</span>rear <span class="token operator">=</span> node<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>queue<span class="token operator">-></span>front <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        queue<span class="token operator">-></span>front <span class="token operator">=</span> node<span class="token punctuation">;</span>
+        queue<span class="token operator">-></span>rear <span class="token operator">=</span> node<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
     <span class="token comment">// 如果队列不为空，则将该节点添加到尾节点后</span>
-    <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        queue<span class="token operator">-&gt;</span>rear<span class="token operator">-&gt;</span>next <span class="token operator">=</span> node<span class="token punctuation">;</span>
-        queue<span class="token operator">-&gt;</span>rear <span class="token operator">=</span> node<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    queue<span class="token operator">-&gt;</span>queSize<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        queue<span class="token operator">-></span>rear<span class="token operator">-></span>next <span class="token operator">=</span> node<span class="token punctuation">;</span>
+        queue<span class="token operator">-></span>rear <span class="token operator">=</span> node<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    queue<span class="token operator">-></span>queSize<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 出队 */</span>
-<span class="token keyword">void</span> <span class="token function">pop</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">pop</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token function">peek</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    ListNode <span class="token operator">*</span>tmp <span class="token operator">=</span> queue<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
-    queue<span class="token operator">-&gt;</span>front <span class="token operator">=</span> queue<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    ListNode <span class="token operator">*</span>tmp <span class="token operator">=</span> queue<span class="token operator">-></span>front<span class="token punctuation">;</span>
+    queue<span class="token operator">-></span>front <span class="token operator">=</span> queue<span class="token operator">-></span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
     <span class="token function">free</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    queue<span class="token operator">-&gt;</span>queSize<span class="token operator">--</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    queue<span class="token operator">-></span>queSize<span class="token operator">--</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 打印队列 */</span>
-<span class="token keyword">void</span> <span class="token function">printLinkedListQueue</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> <span class="token operator">*</span>arr <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> queue<span class="token operator">-&gt;</span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">printLinkedListQueue</span><span class="token punctuation">(</span>LinkedListQueue <span class="token operator">*</span>queue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>arr <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> queue<span class="token operator">-></span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 拷贝链表中的数据到数组</span>
     <span class="token keyword">int</span> i<span class="token punctuation">;</span>
     ListNode <span class="token operator">*</span>node<span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> node <span class="token operator">=</span> queue<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> queue<span class="token operator">-&gt;</span>queSize<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> node<span class="token operator">-&gt;</span>val<span class="token punctuation">;</span>
-        node <span class="token operator">=</span> node<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> queue<span class="token operator">-&gt;</span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> node <span class="token operator">=</span> queue<span class="token operator">-></span>front<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> queue<span class="token operator">-></span>queSize<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> node<span class="token operator">-></span>val<span class="token punctuation">;</span>
+        node <span class="token operator">=</span> node<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> queue<span class="token operator">-></span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">free</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="2-双向队列"><a href="#2-双向队列" class="headerlink" title="2.双向队列"></a>2.双向队列</h3><h4 id="2-1数组实现"><a href="#2-1数组实现" class="headerlink" title="2.1数组实现"></a>2.1数组实现</h4><p><strong>①结构代码</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 基于环形数组实现的双向队列 */</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> <span class="token operator">*</span>nums<span class="token punctuation">;</span>       <span class="token comment">// 用于存储队列元素的数组</span>
     <span class="token keyword">int</span> front<span class="token punctuation">;</span>       <span class="token comment">// 队首指针，指向队首元素</span>
     <span class="token keyword">int</span> queSize<span class="token punctuation">;</span>     <span class="token comment">// 尾指针，指向队尾 + 1</span>
     <span class="token keyword">int</span> queCapacity<span class="token punctuation">;</span> <span class="token comment">// 队列容量</span>
-<span class="token punctuation">}</span> ArrayDeque<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span> ArrayDeque<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②构造与析构</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 构造函数 */</span>
-ArrayDeque <span class="token operator">*</span><span class="token function">newArrayDeque</span><span class="token punctuation">(</span><span class="token keyword">int</span> capacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ArrayDeque <span class="token operator">*</span><span class="token function">newArrayDeque</span><span class="token punctuation">(</span><span class="token keyword">int</span> capacity<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     ArrayDeque <span class="token operator">*</span>deque <span class="token operator">=</span> <span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>ArrayDeque<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 初始化数组</span>
-    deque<span class="token operator">-&gt;</span>queCapacity <span class="token operator">=</span> capacity<span class="token punctuation">;</span>
-    deque<span class="token operator">-&gt;</span>nums <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> deque<span class="token operator">-&gt;</span>queCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    deque<span class="token operator">-&gt;</span>front <span class="token operator">=</span> deque<span class="token operator">-&gt;</span>queSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>queCapacity <span class="token operator">=</span> capacity<span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>nums <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> deque<span class="token operator">-></span>queCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>front <span class="token operator">=</span> deque<span class="token operator">-></span>queSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> deque<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 析构函数 */</span>
-<span class="token keyword">void</span> <span class="token function">delArrayDeque</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">free</span><span class="token punctuation">(</span>deque<span class="token operator">-&gt;</span>nums<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">delArrayDeque</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>deque<span class="token operator">-></span>nums<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">free</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>③操作集</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 获取双向队列的容量 */</span>
-<span class="token keyword">int</span> <span class="token function">capacity</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> deque<span class="token operator">-&gt;</span>queCapacity<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">capacity</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> deque<span class="token operator">-></span>queCapacity<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 获取双向队列的长度 */</span>
-<span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> deque<span class="token operator">-&gt;</span>queSize<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> deque<span class="token operator">-></span>queSize<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 判断双向队列是否为空 */</span>
-bool <span class="token function">empty</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> deque<span class="token operator">-&gt;</span>queSize <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+bool <span class="token function">empty</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> deque<span class="token operator">-></span>queSize <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 计算环形数组索引 */</span>
-<span class="token keyword">int</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// 通过取余操作实现数组首尾相连</span>
     <span class="token comment">// 当 i 越过数组尾部时，回到头部</span>
     <span class="token comment">// 当 i 越过数组头部后，回到尾部</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token function">capacity</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token function">capacity</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 队首入队 */</span>
-<span class="token keyword">void</span> <span class="token function">pushFirst</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>deque<span class="token operator">-&gt;</span>queSize <span class="token operator">==</span> <span class="token function">capacity</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">pushFirst</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>deque<span class="token operator">-></span>queSize <span class="token operator">==</span> <span class="token function">capacity</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"双向队列已满\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token punctuation">&#125;</span>
     <span class="token comment">// 队首指针向左移动一位</span>
     <span class="token comment">// 通过取余操作，实现 front 越过数组头部回到尾部</span>
-    deque<span class="token operator">-&gt;</span>front <span class="token operator">=</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> deque<span class="token operator">-&gt;</span>front <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>front <span class="token operator">=</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> deque<span class="token operator">-></span>front <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 将 num 添加到队首</span>
-    deque<span class="token operator">-&gt;</span>nums<span class="token punctuation">[</span>deque<span class="token operator">-&gt;</span>front<span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
-    deque<span class="token operator">-&gt;</span>queSize<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    deque<span class="token operator">-></span>nums<span class="token punctuation">[</span>deque<span class="token operator">-></span>front<span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>queSize<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 队尾入队 */</span>
-<span class="token keyword">void</span> <span class="token function">pushLast</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>deque<span class="token operator">-&gt;</span>queSize <span class="token operator">==</span> <span class="token function">capacity</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">pushLast</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>deque<span class="token operator">-></span>queSize <span class="token operator">==</span> <span class="token function">capacity</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"双向队列已满\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token punctuation">&#125;</span>
     <span class="token comment">// 计算尾指针，指向队尾索引 + 1</span>
-    <span class="token keyword">int</span> rear <span class="token operator">=</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> deque<span class="token operator">-&gt;</span>front <span class="token operator">+</span> deque<span class="token operator">-&gt;</span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rear <span class="token operator">=</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> deque<span class="token operator">-></span>front <span class="token operator">+</span> deque<span class="token operator">-></span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 将 num 添加至队尾</span>
-    deque<span class="token operator">-&gt;</span>nums<span class="token punctuation">[</span>rear<span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
-    deque<span class="token operator">-&gt;</span>queSize<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    deque<span class="token operator">-></span>nums<span class="token punctuation">[</span>rear<span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>queSize<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 访问队首元素 */</span>
-<span class="token keyword">int</span> <span class="token function">peekFirst</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">peekFirst</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// 访问异常：双向队列为空</span>
     <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">empty</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> deque<span class="token operator">-&gt;</span>nums<span class="token punctuation">[</span>deque<span class="token operator">-&gt;</span>front<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    <span class="token keyword">return</span> deque<span class="token operator">-></span>nums<span class="token punctuation">[</span>deque<span class="token operator">-></span>front<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 访问队尾元素 */</span>
-<span class="token keyword">int</span> <span class="token function">peekLast</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">peekLast</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// 访问异常：双向队列为空</span>
     <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">empty</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> last <span class="token operator">=</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> deque<span class="token operator">-&gt;</span>front <span class="token operator">+</span> deque<span class="token operator">-&gt;</span>queSize <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> deque<span class="token operator">-&gt;</span>nums<span class="token punctuation">[</span>last<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    <span class="token keyword">int</span> last <span class="token operator">=</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> deque<span class="token operator">-></span>front <span class="token operator">+</span> deque<span class="token operator">-></span>queSize <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> deque<span class="token operator">-></span>nums<span class="token punctuation">[</span>last<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 队首出队 */</span>
-<span class="token keyword">int</span> <span class="token function">popFirst</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">popFirst</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token function">peekFirst</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 队首指针向后移动一位</span>
-    deque<span class="token operator">-&gt;</span>front <span class="token operator">=</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> deque<span class="token operator">-&gt;</span>front <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    deque<span class="token operator">-&gt;</span>queSize<span class="token operator">--</span><span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>front <span class="token operator">=</span> <span class="token function">dequeIndex</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> deque<span class="token operator">-></span>front <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>queSize<span class="token operator">--</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> num<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 队尾出队 */</span>
-<span class="token keyword">int</span> <span class="token function">popLast</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">popLast</span><span class="token punctuation">(</span>ArrayDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token function">peekLast</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    deque<span class="token operator">-&gt;</span>queSize<span class="token operator">--</span><span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>queSize<span class="token operator">--</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> num<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="2-2链表实现"><a href="#2-2链表实现" class="headerlink" title="2.2链表实现"></a>2.2链表实现</h4><p><strong>①结构代码</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 双向链表节点 */</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">DoublyListNode</span> <span class="token punctuation">{</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">DoublyListNode</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> val<span class="token punctuation">;</span>                     <span class="token comment">// 节点值</span>
     <span class="token keyword">struct</span> <span class="token class-name">DoublyListNode</span> <span class="token operator">*</span>next<span class="token punctuation">;</span> <span class="token comment">// 后继节点</span>
     <span class="token keyword">struct</span> <span class="token class-name">DoublyListNode</span> <span class="token operator">*</span>prev<span class="token punctuation">;</span> <span class="token comment">// 前驱节点</span>
-<span class="token punctuation">}</span> DoublyListNode<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span> DoublyListNode<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②构造与析构</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 构造函数 */</span>
-DoublyListNode <span class="token operator">*</span><span class="token function">newDoublyListNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+DoublyListNode <span class="token operator">*</span><span class="token function">newDoublyListNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     DoublyListNode <span class="token operator">*</span>new <span class="token operator">=</span> <span class="token punctuation">(</span>DoublyListNode <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>DoublyListNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    new<span class="token operator">-&gt;</span>val <span class="token operator">=</span> num<span class="token punctuation">;</span>
-    new<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    new<span class="token operator">-&gt;</span>prev <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    new<span class="token operator">-></span>val <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    new<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    new<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> new<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 析构函数 */</span>
-<span class="token keyword">void</span> <span class="token function">delDoublyListNode</span><span class="token punctuation">(</span>DoublyListNode <span class="token operator">*</span>node<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">delDoublyListNode</span><span class="token punctuation">(</span>DoublyListNode <span class="token operator">*</span>node<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token function">free</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>③操作集</strong></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 基于双向链表实现的双向队列 */</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
     DoublyListNode <span class="token operator">*</span>front<span class="token punctuation">,</span> <span class="token operator">*</span>rear<span class="token punctuation">;</span> <span class="token comment">// 头节点 front ，尾节点 rear</span>
     <span class="token keyword">int</span> queSize<span class="token punctuation">;</span>                  <span class="token comment">// 双向队列的长度</span>
-<span class="token punctuation">}</span> LinkedListDeque<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> LinkedListDeque<span class="token punctuation">;</span>
 
 <span class="token comment">/* 构造函数 */</span>
-LinkedListDeque <span class="token operator">*</span><span class="token function">newLinkedListDeque</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+LinkedListDeque <span class="token operator">*</span><span class="token function">newLinkedListDeque</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     LinkedListDeque <span class="token operator">*</span>deque <span class="token operator">=</span> <span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>LinkedListDeque<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    deque<span class="token operator">-&gt;</span>front <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    deque<span class="token operator">-&gt;</span>rear <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    deque<span class="token operator">-&gt;</span>queSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>front <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>rear <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    deque<span class="token operator">-></span>queSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> deque<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 析构函数 */</span>
-<span class="token keyword">void</span> <span class="token function">delLinkedListdeque</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">delLinkedListdeque</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// 释放所有节点</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> deque<span class="token operator">-&gt;</span>queSize <span class="token operator">&amp;&amp;</span> deque<span class="token operator">-&gt;</span>front <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        DoublyListNode <span class="token operator">*</span>tmp <span class="token operator">=</span> deque<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
-        deque<span class="token operator">-&gt;</span>front <span class="token operator">=</span> deque<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> deque<span class="token operator">-></span>queSize <span class="token operator">&amp;&amp;</span> deque<span class="token operator">-></span>front <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        DoublyListNode <span class="token operator">*</span>tmp <span class="token operator">=</span> deque<span class="token operator">-></span>front<span class="token punctuation">;</span>
+        deque<span class="token operator">-></span>front <span class="token operator">=</span> deque<span class="token operator">-></span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
         <span class="token function">free</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token punctuation">&#125;</span>
     <span class="token comment">// 释放 deque 结构体</span>
     <span class="token function">free</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 获取队列的长度 */</span>
-<span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> deque<span class="token operator">-&gt;</span>queSize<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> deque<span class="token operator">-></span>queSize<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 判断队列是否为空 */</span>
-bool <span class="token function">empty</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+bool <span class="token function">empty</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 入队 */</span>
-<span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">,</span> bool isFront<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">,</span> bool isFront<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     DoublyListNode <span class="token operator">*</span>node <span class="token operator">=</span> <span class="token function">newDoublyListNode</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 若链表为空，则令 front 和 rear 都指向node</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">empty</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        deque<span class="token operator">-&gt;</span>front <span class="token operator">=</span> deque<span class="token operator">-&gt;</span>rear <span class="token operator">=</span> node<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">empty</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        deque<span class="token operator">-></span>front <span class="token operator">=</span> deque<span class="token operator">-></span>rear <span class="token operator">=</span> node<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
     <span class="token comment">// 队首入队操作</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>isFront<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>isFront<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token comment">// 将 node 添加至链表头部</span>
-        deque<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>prev <span class="token operator">=</span> node<span class="token punctuation">;</span>
-        node<span class="token operator">-&gt;</span>next <span class="token operator">=</span> deque<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
-        deque<span class="token operator">-&gt;</span>front <span class="token operator">=</span> node<span class="token punctuation">;</span> <span class="token comment">// 更新头节点</span>
-    <span class="token punctuation">}</span>
+        deque<span class="token operator">-></span>front<span class="token operator">-></span>prev <span class="token operator">=</span> node<span class="token punctuation">;</span>
+        node<span class="token operator">-></span>next <span class="token operator">=</span> deque<span class="token operator">-></span>front<span class="token punctuation">;</span>
+        deque<span class="token operator">-></span>front <span class="token operator">=</span> node<span class="token punctuation">;</span> <span class="token comment">// 更新头节点</span>
+    <span class="token punctuation">&#125;</span>
     <span class="token comment">// 队尾入队操作</span>
-    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
         <span class="token comment">// 将 node 添加至链表尾部</span>
-        deque<span class="token operator">-&gt;</span>rear<span class="token operator">-&gt;</span>next <span class="token operator">=</span> node<span class="token punctuation">;</span>
-        node<span class="token operator">-&gt;</span>prev <span class="token operator">=</span> deque<span class="token operator">-&gt;</span>rear<span class="token punctuation">;</span>
-        deque<span class="token operator">-&gt;</span>rear <span class="token operator">=</span> node<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    deque<span class="token operator">-&gt;</span>queSize<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// 更新队列长度</span>
-<span class="token punctuation">}</span>
+        deque<span class="token operator">-></span>rear<span class="token operator">-></span>next <span class="token operator">=</span> node<span class="token punctuation">;</span>
+        node<span class="token operator">-></span>prev <span class="token operator">=</span> deque<span class="token operator">-></span>rear<span class="token punctuation">;</span>
+        deque<span class="token operator">-></span>rear <span class="token operator">=</span> node<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    deque<span class="token operator">-></span>queSize<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// 更新队列长度</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 队首入队 */</span>
-<span class="token keyword">void</span> <span class="token function">pushFirst</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">pushFirst</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token function">push</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> num<span class="token punctuation">,</span> true<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 队尾入队 */</span>
-<span class="token keyword">void</span> <span class="token function">pushLast</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">void</span> <span class="token function">pushLast</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token function">push</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> num<span class="token punctuation">,</span> false<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 访问队首元素 */</span>
-<span class="token keyword">int</span> <span class="token function">peekFirst</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> deque<span class="token operator">-&gt;</span>front<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> deque<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>val<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">peekFirst</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> deque<span class="token operator">-></span>front<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> deque<span class="token operator">-></span>front<span class="token operator">-></span>val<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 访问队尾元素 */</span>
-<span class="token keyword">int</span> <span class="token function">peekLast</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> deque<span class="token operator">-&gt;</span>rear<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> deque<span class="token operator">-&gt;</span>rear<span class="token operator">-&gt;</span>val<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">peekLast</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> deque<span class="token operator">-></span>rear<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> deque<span class="token operator">-></span>rear<span class="token operator">-></span>val<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 出队 */</span>
-<span class="token keyword">int</span> <span class="token function">pop</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> bool isFront<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">pop</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">,</span> bool isFront<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">empty</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> val<span class="token punctuation">;</span>
     <span class="token comment">// 队首出队操作</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>isFront<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isFront<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         val <span class="token operator">=</span> <span class="token function">peekFirst</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 暂存头节点值</span>
-        DoublyListNode <span class="token operator">*</span>fNext <span class="token operator">=</span> deque<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>fNext<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            fNext<span class="token operator">-&gt;</span>prev <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-            deque<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-            <span class="token function">delDoublyListNode</span><span class="token punctuation">(</span>deque<span class="token operator">-&gt;</span>front<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        deque<span class="token operator">-&gt;</span>front <span class="token operator">=</span> fNext<span class="token punctuation">;</span> <span class="token comment">// 更新头节点</span>
-    <span class="token punctuation">}</span>
+        DoublyListNode <span class="token operator">*</span>fNext <span class="token operator">=</span> deque<span class="token operator">-></span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>fNext<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            fNext<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            deque<span class="token operator">-></span>front<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token function">delDoublyListNode</span><span class="token punctuation">(</span>deque<span class="token operator">-></span>front<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        deque<span class="token operator">-></span>front <span class="token operator">=</span> fNext<span class="token punctuation">;</span> <span class="token comment">// 更新头节点</span>
+    <span class="token punctuation">&#125;</span>
     <span class="token comment">// 队尾出队操作</span>
-    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
         val <span class="token operator">=</span> <span class="token function">peekLast</span><span class="token punctuation">(</span>deque<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 暂存尾节点值</span>
-        DoublyListNode <span class="token operator">*</span>rPrev <span class="token operator">=</span> deque<span class="token operator">-&gt;</span>rear<span class="token operator">-&gt;</span>prev<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>rPrev<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            rPrev<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-            deque<span class="token operator">-&gt;</span>rear<span class="token operator">-&gt;</span>prev <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-            <span class="token function">delDoublyListNode</span><span class="token punctuation">(</span>deque<span class="token operator">-&gt;</span>rear<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        deque<span class="token operator">-&gt;</span>rear <span class="token operator">=</span> rPrev<span class="token punctuation">;</span> <span class="token comment">// 更新尾节点</span>
-    <span class="token punctuation">}</span>
-    deque<span class="token operator">-&gt;</span>queSize<span class="token operator">--</span><span class="token punctuation">;</span> <span class="token comment">// 更新队列长度</span>
+        DoublyListNode <span class="token operator">*</span>rPrev <span class="token operator">=</span> deque<span class="token operator">-></span>rear<span class="token operator">-></span>prev<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>rPrev<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            rPrev<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            deque<span class="token operator">-></span>rear<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token function">delDoublyListNode</span><span class="token punctuation">(</span>deque<span class="token operator">-></span>rear<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        deque<span class="token operator">-></span>rear <span class="token operator">=</span> rPrev<span class="token punctuation">;</span> <span class="token comment">// 更新尾节点</span>
+    <span class="token punctuation">&#125;</span>
+    deque<span class="token operator">-></span>queSize<span class="token operator">--</span><span class="token punctuation">;</span> <span class="token comment">// 更新队列长度</span>
     <span class="token keyword">return</span> val<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 队首出队 */</span>
-<span class="token keyword">int</span> <span class="token function">popFirst</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">popFirst</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token function">pop</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> true<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 队尾出队 */</span>
-<span class="token keyword">int</span> <span class="token function">popLast</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">popLast</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token function">pop</span><span class="token punctuation">(</span>deque<span class="token punctuation">,</span> false<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token comment">/* 打印队列 */</span>
-<span class="token keyword">void</span> <span class="token function">printLinkedListDeque</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> <span class="token operator">*</span>arr <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> deque<span class="token operator">-&gt;</span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">printLinkedListDeque</span><span class="token punctuation">(</span>LinkedListDeque <span class="token operator">*</span>deque<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>arr <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> deque<span class="token operator">-></span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 拷贝链表中的数据到数组</span>
     <span class="token keyword">int</span> i<span class="token punctuation">;</span>
     DoublyListNode <span class="token operator">*</span>node<span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> node <span class="token operator">=</span> deque<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> deque<span class="token operator">-&gt;</span>queSize<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> node<span class="token operator">-&gt;</span>val<span class="token punctuation">;</span>
-        node <span class="token operator">=</span> node<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> deque<span class="token operator">-&gt;</span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> node <span class="token operator">=</span> deque<span class="token operator">-></span>front<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> deque<span class="token operator">-></span>queSize<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> node<span class="token operator">-></span>val<span class="token punctuation">;</span>
+        node <span class="token operator">=</span> node<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> deque<span class="token operator">-></span>queSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">free</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
@@ -878,7 +878,7 @@ bool <span class="token function">empty</span><span class="token punctuation">(<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/12/13/xian-xing-jie-gou-xia/">http://example.com/2023/12/13/xian-xing-jie-gou-xia/</a>
+                    <a href="http://example.com/2023/12/14/xian-xing-jie-gou-xia/">http://example.com/2023/12/14/xian-xing-jie-gou-xia/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -969,55 +969,49 @@ bool <span class="token function">empty</span><span class="token punctuation">(<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/13/xian-xing-jie-gou-xia/">
+                <a href="/2023/12/14/unix-huan-jing-bian-cheng-shang/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="线性结构（下）">
+                        <img src="/medias/featureimages/13.webp" class="responsive-img" alt="Unix环境编程（上）">
                         
-                        <span class="card-title">线性结构（下）</span>
+                        <span class="card-title">Unix环境编程（上）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            队列
+                            Unix环境介绍
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-13
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-14
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    计算机基础
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E9%93%BE/" class="post-category">
+                                    工具链
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">计算机基础</span>
+                    <a href="/tags/%E3%80%8AUnix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B/">
+                        <span class="chip bg-color">《Unix环境高级编程》</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">数据结构与算法</span>
-                    </a>
-                    
-                    <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
-                        <span class="chip bg-color">《hello 算法》</span>
+                    <a href="/tags/Unix/">
+                        <span class="chip bg-color">Unix</span>
                     </a>
                     
                 </div>
@@ -1031,7 +1025,7 @@ bool <span class="token function">empty</span><span class="token punctuation">(<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/12/12/cpp-xue-xi-bi-ji-er/">
+                <a href="/2023/12/14/cpp-xue-xi-bi-ji-er/">
                     <div class="card-image">
                         
                         <img src="/medias/featureimages/11.webp" class="responsive-img" alt="Cpp学习笔记（二）">
@@ -1047,7 +1041,7 @@ bool <span class="token function">empty</span><span class="token punctuation">(<
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-14
                             </span>
                         <span class="publish-author">
                             

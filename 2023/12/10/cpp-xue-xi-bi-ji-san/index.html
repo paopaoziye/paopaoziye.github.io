@@ -500,15 +500,18 @@ IteratorType
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②格式</strong></p>
 <blockquote>
-<p><code>[类名]::iterator [泛型指针名]</code>：定义了一个<strong>对应类</strong>的泛型指针</p>
+<p><code>[类名]::iterator [泛型指针名]</code>：定义了一个<strong>对应类</strong>的泛型指针，其<strong>常量指针</strong>形式为<code>const_iterator</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个标准容器都有对应的泛型指针类，且都统一为iterator，需要使用[类名]::限定，并定义了取得泛型指针的函数</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个标准容器都有对应的泛型指针类，统一为iterator，需要使用[类名]::限定</div>
+
 <blockquote>
 <p><code>begin()</code>：返回指向该容器对象<strong>第一个元素</strong>的<code>iterator</code>，如<code>my_vec.begin()</code></p>
 </blockquote>
 <blockquote>
 <p><code>end()</code>：返回指向该容器对象<strong>最后一个元素下一个位置</strong>的<code>iterator</code>，如<code>my_vec.end()</code></p>
 </blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> begin/end()根据容器对象返回iterator/const_iterator，如果需要专门返回const_iterator，可以使用cbegin/cend()</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 所有容器为泛型指针定义了==和!=操作符，有些容器没有定义比较操作符，所以使用first != last而不是first &lt; last</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 使用模板，使得函数既能接收指针，也能接收泛型指针</div>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> <span class="token class-name">Iterator_Type</span><span class="token punctuation">,</span><span class="token keyword">typename</span> <span class="token class-name">Elem_Type</span><span class="token operator">&gt;</span>
 Iterator_Type
@@ -568,38 +571,46 @@ Iterator_Type
 <hr>
 <h3 id="2-标准容器"><a href="#2-标准容器" class="headerlink" title="2.标准容器"></a>2.标准容器</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><p><strong>①定义</strong></p>
 <blockquote>
-<p><strong>概述</strong>：本质上是<strong>标准库</strong>的<strong>模板类</strong>，使用对应容器需要包含<strong>对应头文件</strong></p>
+<p><strong>概述</strong>：本质上是<strong>标准库</strong>的<strong>模板类</strong>，常用的<strong>Cpp容器</strong>有<strong>动态数组</strong><code>vector</code>和<strong>字符串</strong><code>string</code></p>
 </blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 使用对应容器需要包含对应头文件</div>
 <p><strong>②统一接口</strong></p>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个容器都有以下接口的实现</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个容器都有以下实现</div>
 <blockquote>
-<p><code>empty()</code>：判断容器<strong>是否为空</strong>，是则返回<code>ture</code>，反之<code>false</code></p>
+<p><strong><code>empty()</code><strong>：判断容器</strong>是否为空</strong>，是则返回<code>ture</code>，反之<code>false</code></p>
 </blockquote>
 <blockquote>
-<p><code>size()</code>：返回容器的<strong>元素个数</strong></p>
+<p><strong><code>size()</code><strong>：返回容器的</strong>元素个数</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个容器的size返回值是每个类中的size_type，本质上还是一种无符号类型</div>
+<blockquote>
+<p>如<code>string::size_type</code>和<code>vector&lt;type&gt;::size_type</code></p>
 </blockquote>
 <blockquote>
-<p><code>clear()</code>：<strong>清除</strong>容器<strong>所有元素</strong></p>
+<p><strong><code>clear()</code><strong>：</strong>清除</strong>容器<strong>所有元素</strong></p>
 </blockquote>
 <blockquote>
-<p><code>insert()/erase()</code>：<strong>插入/删除</strong>元素</p>
+<p><strong><code>insert()/erase()</code><strong>：</strong>插入/删除</strong>元素</p>
+</blockquote>
+<blockquote>
+<p><strong>比较操作符</strong>：如<code>==</code>、<code>!=</code>、<code>&gt;</code>、<code>&lt;</code>等，按照<strong>字典顺序</strong>比较</p>
 </blockquote>
 <p><strong>③泛型算法</strong></p>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 需要包含functional头文件</div>
 <blockquote>
-<p><code>find()/binary_search()</code>：<strong>线性/二分</strong>查找对应元素</p>
+<p><strong><code>find()/binary_search()</code><strong>：</strong>线性/二分</strong>查找对应元素</p>
 </blockquote>
 <blockquote>
-<p><code>count()</code>：返回与数值相符的<strong>元素数目</strong></p>
+<p><strong><code>count()</code><strong>：返回与数值相符的</strong>元素数目</strong></p>
 </blockquote>
 <blockquote>
-<p><code>search()</code>：查找<strong>子序列</strong>，返回其<strong>起始位置的泛型指针</strong></p>
+<p><strong><code>search()</code><strong>：查找</strong>子序列</strong>，返回其<strong>起始位置的泛型指针</strong></p>
 </blockquote>
 <blockquote>
-<p><code>sort()</code>：<strong>排序</strong>，<strong>缺省情况</strong>下为<strong>升序排列</strong>，可以传入<code>function object</code>修改</p>
+<p><strong><code>sort()</code><strong>：</strong>排序</strong>，<strong>缺省情况</strong>下为<strong>升序排列</strong>，可以传入<code>function object</code>修改</p>
 </blockquote>
 <blockquote>
-<p><code>copy()</code>：<strong>复制</strong>一个容器内容</p>
+<p><strong><code>copy()</code><strong>：</strong>复制</strong>一个容器内容</p>
 </blockquote>
 <h4 id="2-2动态数组"><a href="#2-2动态数组" class="headerlink" title="2.2动态数组"></a>2.2动态数组</h4><p><strong>①定义</strong></p>
 <blockquote>
@@ -629,14 +640,55 @@ Iterator_Type
 <p><code>vector&lt;int&gt; my_vec(my_vec2)</code>/<code>vector&lt;int&gt; my_vec = my_vec2</code>：<strong>复制一份</strong>传入的动态数组</p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 同样还可以通过my_vec == my_vec2/my_vec != my_vec2判断两者是否相同</div>
+<blockquote>
+<p><code>vector&lt;int&gt; my_vec{1,2,3}/vector&lt;int&gt; my_vec = {1,2,3}</code>：类似于<strong>C语言数组</strong>的初始化</p>
+</blockquote>
 <p><strong>③常用方法</strong></p>
 <blockquote>
-<p><code>push_back()</code>：在<strong>末端插入</strong>元素</p>
+<p><strong><code>push_back()</code><strong>：在</strong>末端插入</strong>元素</p>
 </blockquote>
 <blockquote>
-<p><code>pop_back()</code>：<strong>删除</strong>末端元素</p>
+<p><strong><code>pop_back()</code><strong>：</strong>删除</strong>末端元素</p>
 </blockquote>
-<h4 id="2-3线性容器"><a href="#2-3线性容器" class="headerlink" title="2.3线性容器"></a>2.3线性容器</h4><p><strong>①栈</strong></p>
+<h4 id="2-3字符串"><a href="#2-3字符串" class="headerlink" title="2.3字符串"></a>2.3字符串</h4><p><strong>①定义</strong></p>
+<blockquote>
+<p><strong>格式</strong>：<code>string [字符串名]</code>，可以采用<strong>下标访问</strong>其中<strong>字符元素</strong>，从<code>0</code>开始</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Cpp的string是类，同时Cpp也可以使用传统C语言的字符数组</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 当采用&gt;&gt;写入一个字符串时，所有空白字符（空格、换行和制表符）会被忽略</div>
+<blockquote>
+<p>如<code>cin&gt;&gt;a_string</code>，若输入的<strong>全是空白字符</strong>，<code>a_string</code>为一<strong>空字符串</strong></p>
+</blockquote>
+<p><strong>②初始化</strong></p>
+<blockquote>
+<p><code>string a_string;</code>：创建一个<strong>空字符串</strong></p>
+</blockquote>
+<blockquote>
+<p><code>string a_string1(a_string2);</code>/<code>string a_string1 = a_string2;</code>：<strong>拷贝</strong>初始化</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 这里的a_string2也可以是一个字符串字面量，编译器将其自动转化为string</div>
+<blockquote>
+<p><code>string a_string1(n,'a_char');</code>：<strong>长度</strong>为<code>n</code>，<strong>元素</strong>均为<code>'a_char'</code></p>
+</blockquote>
+<p><strong>③常用操作</strong></p>
+<blockquote>
+<p><strong><code>getline()</code><strong>：保留</strong>输入</strong>中的<strong>空白字符</strong>，直到遇到<strong>换行符</strong>，如<code>getline(cin，a_string)</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 该函数会读取换行符，但是不会保留换行符</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 与&gt;&gt;一样，该函数的返回值也表示了流的状态</div>
+<blockquote>
+<p><strong><code>+</code><strong>：</strong>拼接</strong>字符串，其中还可以进行<code>string</code>和<strong>字符串字面量</strong>的拼接，如<code>s2 = s1+"!"</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 注意+两边不能都为字符串常量，也为字符串常量本质上还是字符数组，无法拼接</div>
+<blockquote>
+<p><strong><code>c_str()</code><strong>：将<code>string</code>实例转化为一个</strong>C风格的字符串</strong>，<strong>返回类型</strong>为<code>const char *</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Cpp允许字符数组转化为string对象，但是string对象需要通过该函数转化为字符数组</div>
+<blockquote>
+<p><strong><code>cctype</code>头文件</strong>：继承自<strong>C语言</strong>的<code>ctype.h</code>，用与判断<strong>字符类型</strong>，如<code>isalnum()</code>判断字符是否为<strong>字母/数字</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Cpp继承了C语言的标准库，但是将对应name.h改写为cname</div>
+<h4 id="2-4线性容器"><a href="#2-4线性容器" class="headerlink" title="2.4线性容器"></a>2.4线性容器</h4><p><strong>①栈</strong></p>
 <blockquote>
 <p><strong>定义</strong>：<code>stack&lt;type&gt; [栈名]</code>，创建一个<strong>空栈</strong>，如<code>stack&lt;int&gt; my_stack</code></p>
 </blockquote>
@@ -669,7 +721,6 @@ Iterator_Type
 <blockquote>
 <p><code>front/back()</code>：<strong>访问队首/尾</strong>元素，如<code>int front = my_deque.front();</code></p>
 </blockquote>
-<hr>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
@@ -839,18 +890,18 @@ Iterator_Type
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/12/10/c-yu-yan-xue-xi-bi-ji-yi/">
+                <a href="/2023/12/10/git-ji-qi-ying-yong/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/0.webp" class="responsive-img" alt="C语言学习笔记（一）">
+                        <img src="/medias/featureimages/22.webp" class="responsive-img" alt="Git及其应用">
                         
-                        <span class="card-title">C语言学习笔记（一）</span>
+                        <span class="card-title">Git及其应用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            C语言基础
+                            git和github
                         
                     </div>
                     <div class="publish-info">
@@ -861,8 +912,8 @@ Iterator_Type
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    编程语言
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E9%93%BE/" class="post-category">
+                                    工具链
                                 </a>
                             
                             
@@ -872,12 +923,12 @@ Iterator_Type
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">C语言</span>
+                    <a href="/tags/%E4%BB%A3%E7%A0%81%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">代码工具</span>
                     </a>
                     
-                    <a href="/tags/%E3%80%8AC%E5%92%8C%E6%8C%87%E9%92%88%E3%80%8B/">
-                        <span class="chip bg-color">《C和指针》</span>
+                    <a href="/tags/Git/">
+                        <span class="chip bg-color">Git</span>
                     </a>
                     
                 </div>

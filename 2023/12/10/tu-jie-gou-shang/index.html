@@ -420,9 +420,15 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="数据结构与算法—图结构（上）"><a href="#数据结构与算法—图结构（上）" class="headerlink" title="数据结构与算法—图结构（上）"></a>数据结构与算法—图结构（上）</h1><h2 id="图结构"><a href="#图结构" class="headerlink" title="图结构"></a>图结构</h2><h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h3><h4 id="1-1图"><a href="#1-1图" class="headerlink" title="1.1图"></a>1.1图</h4><p><strong>①定义</strong></p>
+                <h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="图结构（上）"><a href="#图结构（上）" class="headerlink" title="图结构（上）"></a>图结构（上）</h2><h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h3><h4 id="1-1图"><a href="#1-1图" class="headerlink" title="1.1图"></a>1.1图</h4><p><strong>①定义</strong></p>
 <blockquote>
 <p><strong>图</strong>：由一个<strong>非空</strong>的<strong>有限顶点集合</strong><code>V</code>和一个<strong>有限边集合</strong><code>E</code>组成</p>
+</blockquote>
+<blockquote>
+<p><strong>路径</strong>：从<strong>一顶点</strong>到<strong>另一顶点</strong>经过的<strong>边构成的序列</strong>称为两点之间的路径</p>
+</blockquote>
+<blockquote>
+<p><strong>度</strong>：一个<strong>顶点</strong>拥有的<strong>边数</strong></p>
 </blockquote>
 <p><strong>②分类</strong></p>
 <blockquote>
@@ -436,7 +442,7 @@
 </blockquote>
 <h4 id="1-2图的表示"><a href="#1-2图的表示" class="headerlink" title="1.2图的表示"></a>1.2图的表示</h4><p><strong>①邻接矩阵</strong></p>
 <blockquote>
-<p>若<strong>顶点数</strong>为<code>n</code>，则<strong>邻接矩阵</strong>为一<code>nxn</code>的<strong>矩阵G</strong>，若<code>G[i][j]</code><strong>非零</strong>，表示<strong>有边从顶点i指向顶点j</strong></p>
+<p><strong>概述</strong>：若<strong>顶点数</strong>为<code>n</code>，则<strong>邻接矩阵</strong>为一<code>nxn</code>的<strong>矩阵G</strong>，若<code>G[i][j]</code><strong>非零</strong>，表示<strong>有边从顶点i指向顶点j</strong></p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 若边无权重，用1表示，若边有权重，修改对应数值即可</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 若图为无向图，对应邻接矩阵为对角线为0的对称矩阵，可以使用数组存储矩阵对角线以下元素，节省空间</div>
@@ -445,266 +451,270 @@
 </blockquote>
 <p><strong>②邻接表</strong></p>
 <blockquote>
-<p>若<strong>顶点数</strong>为<code>n</code>，则<strong>邻接表</strong>为<strong>长度为n的数组</strong>，<strong>每个元素</strong>存储一<strong>链表</strong>，存储了<strong>该顶点</strong>的<strong>所有邻接顶点</strong></p>
+<p><strong>概述</strong>：若<strong>顶点数</strong>为<code>n</code>，则<strong>邻接表</strong>为<strong>长度为n的数组</strong>，<strong>每个元素</strong>存储一<strong>链表</strong>，存储了<strong>该顶点</strong>的<strong>所有邻接顶点</strong></p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 相比邻接矩阵，邻接表节省了内存空间，但是增删查改的效率不如邻接矩阵</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以将链表转化为搜索树和哈希表等提高效率</div>
 <p><img src="/images/loading.gif# eg ./images/loading.gif" data-original="/image/SF_13.png" alt="图的表示"></p>
 <h3 id="2-图的基本实现"><a href="#2-图的基本实现" class="headerlink" title="2.图的基本实现"></a>2.图的基本实现</h3><h4 id="2-1邻接矩阵实现"><a href="#2-1邻接矩阵实现" class="headerlink" title="2.1邻接矩阵实现"></a>2.1邻接矩阵实现</h4><p><strong>①结构代码</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">/* 基于邻接矩阵实现的无向图结构体 */
-typedef struct {
-    int vertices[MAX_SIZE];
-    int adjMat[MAX_SIZE][MAX_SIZE];
-    int size;
-} GraphAdjMat;
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 基于邻接矩阵实现的无向图结构体 */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token comment">//顶点集</span>
+    <span class="token keyword">int</span> vertices<span class="token punctuation">[</span>MAX_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">//边集</span>
+    <span class="token keyword">int</span> adjMat<span class="token punctuation">[</span>MAX_SIZE<span class="token punctuation">]</span><span class="token punctuation">[</span>MAX_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> size<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> GraphAdjMat<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②构造与析构</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 构造函数 */</span>
+GraphAdjMat <span class="token operator">*</span><span class="token function">newGraphAdjMat</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    GraphAdjMat <span class="token operator">*</span>graph <span class="token operator">=</span> <span class="token punctuation">(</span>GraphAdjMat <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>GraphAdjMat<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    graph<span class="token operator">-&gt;</span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> MAX_SIZE<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> MAX_SIZE<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> graph<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 构造函数 */
-GraphAdjMat *newGraphAdjMat() {
-    GraphAdjMat *graph = (GraphAdjMat *)malloc(sizeof(GraphAdjMat));
-    graph-&gt;size = 0;
-    for (int i = 0; i &lt; MAX_SIZE; i++) {
-        for (int j = 0; j &lt; MAX_SIZE; j++) {
-            graph-&gt;adjMat[i][j] = 0;
-        }
-    }
-    return graph;
-}
-
-/* 析构函数 */
-void delGraphAdjMat(GraphAdjMat *graph) {
-    free(graph);
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>②顶点操作</strong></p>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 添加顶点即添加一行一列，时间复杂度为O(n)，删除顶点即删除一行一列，时间复杂度为O(n^2)</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将所有顶点添加入初始图，即为图的初始化，时间复杂度为O(n^2)</div>
+<span class="token comment">/* 析构函数 */</span>
+<span class="token keyword">void</span> <span class="token function">delGraphAdjMat</span><span class="token punctuation">(</span>GraphAdjMat <span class="token operator">*</span>graph<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>graph<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③顶点操作</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 添加顶点即添加一行一列，时间复杂度为O(n)，删除顶点时间复杂度为O(n^2)</div>
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 删除顶点最坏情况即删除首行首列，需要移动(n-1)^2个顶点</div>
-<pre class="line-numbers language-none"><code class="language-none">/* 添加顶点 */
-void addVertex(GraphAdjMat *graph, int val) {
-    if (graph-&gt;size == MAX_SIZE) {
-        fprintf(stderr, "图的顶点数量已达最大值\n");
-        return;
-    }
-    // 添加第 n 个顶点，并将第 n 行和列置零
-    int n = graph-&gt;size;
-    graph-&gt;vertices[n] = val;
-    for (int i = 0; i &lt;= n; i++) {
-        graph-&gt;adjMat[n][i] = graph-&gt;adjMat[i][n] = 0;
-    }
-    graph-&gt;size++;
-}
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 将所有顶点添加入初始图，即为图的初始化，时间复杂度为O(n^2)</div>
 
-/* 删除顶点 */
-void removeVertex(GraphAdjMat *graph, int index) {
-    if (index &lt; 0 || index &gt;= graph-&gt;size) {
-        fprintf(stderr, "顶点索引越界\n");
-        return;
-    }
-    // 在顶点列表中移除索引 index 的顶点
-    for (int i = index; i &lt; graph-&gt;size - 1; i++) {
-        graph-&gt;vertices[i] = graph-&gt;vertices[i + 1];
-    }
-    // 在邻接矩阵中删除索引 index 的行
-    for (int i = index; i &lt; graph-&gt;size - 1; i++) {
-        for (int j = 0; j &lt; graph-&gt;size; j++) {
-            graph-&gt;adjMat[i][j] = graph-&gt;adjMat[i + 1][j];
-        }
-    }
-    // 在邻接矩阵中删除索引 index 的列
-    for (int i = 0; i &lt; graph-&gt;size; i++) {
-        for (int j = index; j &lt; graph-&gt;size - 1; j++) {
-            graph-&gt;adjMat[i][j] = graph-&gt;adjMat[i][j + 1];
-        }
-    }
-    graph-&gt;size--;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>③边操作</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 添加顶点 */</span>
+<span class="token keyword">void</span> <span class="token function">addVertex</span><span class="token punctuation">(</span>GraphAdjMat <span class="token operator">*</span>graph<span class="token punctuation">,</span> <span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>graph<span class="token operator">-&gt;</span>size <span class="token operator">==</span> MAX_SIZE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"图的顶点数量已达最大值\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 添加第 n 个顶点，并将第 n 行和列置零</span>
+    <span class="token keyword">int</span> n <span class="token operator">=</span> graph<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+    graph<span class="token operator">-&gt;</span>vertices<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> val<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    graph<span class="token operator">-&gt;</span>size<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 删除顶点 */</span>
+<span class="token keyword">void</span> <span class="token function">removeVertex</span><span class="token punctuation">(</span>GraphAdjMat <span class="token operator">*</span>graph<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> index <span class="token operator">&gt;=</span> graph<span class="token operator">-&gt;</span>size<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"顶点索引越界\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 在顶点列表中移除索引 index 的顶点</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> index<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        graph<span class="token operator">-&gt;</span>vertices<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> graph<span class="token operator">-&gt;</span>vertices<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 在邻接矩阵中删除索引 index 的行</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> index<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 在邻接矩阵中删除索引 index 的列</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> index<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    graph<span class="token operator">-&gt;</span>size<span class="token operator">--</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>④边操作</strong></p>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时间复杂度均为O(1)</div>
-<pre class="line-numbers language-none"><code class="language-none">/* 添加边 */
-// 参数 i, j 对应 vertices 元素索引
-void addEdge(GraphAdjMat *graph, int i, int j) {
-    if (i &lt; 0 || j &lt; 0 || i &gt;= graph-&gt;size || j &gt;= graph-&gt;size || i == j) {
-        fprintf(stderr, "边索引越界或相等\n");
-        return;
-    }
-    graph-&gt;adjMat[i][j] = 1;
-    graph-&gt;adjMat[j][i] = 1;
-}
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 添加边 */</span>
+<span class="token comment">// 参数 i, j 对应 vertices 元素索引</span>
+<span class="token keyword">void</span> <span class="token function">addEdge</span><span class="token punctuation">(</span>GraphAdjMat <span class="token operator">*</span>graph<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> j <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> i <span class="token operator">&gt;=</span> graph<span class="token operator">-&gt;</span>size <span class="token operator">||</span> j <span class="token operator">&gt;=</span> graph<span class="token operator">-&gt;</span>size <span class="token operator">||</span> i <span class="token operator">==</span> j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"边索引越界或相等\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 删除边 */
-// 参数 i, j 对应 vertices 元素索引
-void removeEdge(GraphAdjMat *graph, int i, int j) {
-    if (i &lt; 0 || j &lt; 0 || i &gt;= graph-&gt;size || j &gt;= graph-&gt;size || i == j) {
-        fprintf(stderr, "边索引越界或相等\n");
-        return;
-    }
-    graph-&gt;adjMat[i][j] = 0;
-    graph-&gt;adjMat[j][i] = 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="2-2邻接表实现"><a href="#2-2邻接表实现" class="headerlink" title="2.2邻接表实现"></a>2.2邻接表实现</h4><blockquote>
-<p>与<strong>邻接矩阵</strong>不同，<strong>邻接表</strong>的<strong>顶点总数</strong><code>n</code>和<strong>总边数</strong><code>m</code>均是有意义的<br><strong>①结构代码</strong></p>
+<span class="token comment">/* 删除边 */</span>
+<span class="token comment">// 参数 i, j 对应 vertices 元素索引</span>
+<span class="token keyword">void</span> <span class="token function">removeEdge</span><span class="token punctuation">(</span>GraphAdjMat <span class="token operator">*</span>graph<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> j <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> i <span class="token operator">&gt;=</span> graph<span class="token operator">-&gt;</span>size <span class="token operator">||</span> j <span class="token operator">&gt;=</span> graph<span class="token operator">-&gt;</span>size <span class="token operator">||</span> i <span class="token operator">==</span> j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"边索引越界或相等\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    graph<span class="token operator">-&gt;</span>adjMat<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-2邻接表实现"><a href="#2-2邻接表实现" class="headerlink" title="2.2邻接表实现"></a>2.2邻接表实现</h4><p><strong>①结构代码</strong></p>
+<blockquote>
+<p>与<strong>邻接矩阵</strong>不同，<strong>邻接表</strong>的<strong>顶点总数</strong><code>n</code>和<strong>总边数</strong><code>m</code>均是有意义的</p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 使用列表组代替链表，邻接表本质上时顶点与邻接顶点列表的对应关系，故使用哈希表存储邻接表</div>
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若邻接表中顶点和索引相对应，则需要移动之后的所有顶点，效率较低</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 每个顶点对应唯一的Vertex实例，删除某一顶点无需改动其他顶点</div>
-<pre class="line-numbers language-none"><code class="language-none">/* 节点结构体 */
-typedef struct AdjListNode {
-    Vertex *vertex;           // 顶点
-    struct AdjListNode *next; // 后继节点
-} AdjListNode;
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 节点结构体 */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">AdjListNode</span> <span class="token punctuation">{</span>
+    Vertex <span class="token operator">*</span>vertex<span class="token punctuation">;</span>           <span class="token comment">// 顶点</span>
+    <span class="token keyword">struct</span> <span class="token class-name">AdjListNode</span> <span class="token operator">*</span>next<span class="token punctuation">;</span> <span class="token comment">// 后继节点</span>
+<span class="token punctuation">}</span> AdjListNode<span class="token punctuation">;</span>
 
 
-/* 查找顶点对应的节点 */
-AdjListNode *findNode(GraphAdjList *graph, Vertex *vet) {
-    for (int i = 0; i &lt; graph-&gt;size; i++) {
-        if (graph-&gt;heads[i]-&gt;vertex == vet) {
-            return graph-&gt;heads[i];
-        }
-    }
-    return NULL;
-}
+<span class="token comment">/* 查找顶点对应的节点 */</span>
+AdjListNode <span class="token operator">*</span><span class="token function">findNode</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>vertex <span class="token operator">==</span> vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 添加边辅助函数 */
-void addEdgeHelper(AdjListNode *head, Vertex *vet) {
-    AdjListNode *node = (AdjListNode *)malloc(sizeof(AdjListNode));
-    node-&gt;vertex = vet;
-    // 头插法
-    node-&gt;next = head-&gt;next;
-    head-&gt;next = node;
-}
+<span class="token comment">/* 添加边辅助函数 */</span>
+<span class="token keyword">void</span> <span class="token function">addEdgeHelper</span><span class="token punctuation">(</span>AdjListNode <span class="token operator">*</span>head<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    AdjListNode <span class="token operator">*</span>node <span class="token operator">=</span> <span class="token punctuation">(</span>AdjListNode <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>AdjListNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    node<span class="token operator">-&gt;</span>vertex <span class="token operator">=</span> vet<span class="token punctuation">;</span>
+    <span class="token comment">// 头插法</span>
+    node<span class="token operator">-&gt;</span>next <span class="token operator">=</span> head<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    head<span class="token operator">-&gt;</span>next <span class="token operator">=</span> node<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 删除边辅助函数 */
-void removeEdgeHelper(AdjListNode *head, Vertex *vet) {
-    AdjListNode *pre = head;
-    AdjListNode *cur = head-&gt;next;
-    // 在链表中搜索 vet 对应节点
-    while (cur != NULL &amp;&amp; cur-&gt;vertex != vet) {
-        pre = cur;
-        cur = cur-&gt;next;
-    }
-    if (cur == NULL)
-        return;
-    // 将 vet 对应节点从链表中删除
-    pre-&gt;next = cur-&gt;next;
-    // 释放内存
-    free(cur);
-}
+<span class="token comment">/* 删除边辅助函数 */</span>
+<span class="token keyword">void</span> <span class="token function">removeEdgeHelper</span><span class="token punctuation">(</span>AdjListNode <span class="token operator">*</span>head<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    AdjListNode <span class="token operator">*</span>pre <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    AdjListNode <span class="token operator">*</span>cur <span class="token operator">=</span> head<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token comment">// 在链表中搜索 vet 对应节点</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>cur <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> cur<span class="token operator">-&gt;</span>vertex <span class="token operator">!=</span> vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pre <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+        cur <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>cur <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token comment">// 将 vet 对应节点从链表中删除</span>
+    pre<span class="token operator">-&gt;</span>next <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token comment">// 释放内存</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 基于邻接表实现的无向图类 */
-typedef struct {
-    AdjListNode *heads[MAX_SIZE]; // 节点数组
-    int size;                     // 节点数量
-} GraphAdjList;
+<span class="token comment">/* 基于邻接表实现的无向图类 */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    AdjListNode <span class="token operator">*</span>heads<span class="token punctuation">[</span>MAX_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 节点数组</span>
+    <span class="token keyword">int</span> size<span class="token punctuation">;</span>                     <span class="token comment">// 节点数量</span>
+<span class="token punctuation">}</span> GraphAdjList<span class="token punctuation">;</span>
 
-/* 构造函数 */
-GraphAdjList *newGraphAdjList() {
-    GraphAdjList *graph = (GraphAdjList *)malloc(sizeof(GraphAdjList));
-    if (!graph) {
-        return NULL;
-    }
-    graph-&gt;size = 0;
-    for (int i = 0; i &lt; MAX_SIZE; i++) {
-        graph-&gt;heads[i] = NULL;
-    }
-    return graph;
-}
+<span class="token comment">/* 构造函数 */</span>
+GraphAdjList <span class="token operator">*</span><span class="token function">newGraphAdjList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    GraphAdjList <span class="token operator">*</span>graph <span class="token operator">=</span> <span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>GraphAdjList<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>graph<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    graph<span class="token operator">-&gt;</span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> MAX_SIZE<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> graph<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 析构函数 */
-void delGraphAdjList(GraphAdjList *graph) {
-    for (int i = 0; i &lt; graph-&gt;size; i++) {
-        AdjListNode *cur = graph-&gt;heads[i];
-        while (cur != NULL) {
-            AdjListNode *next = cur-&gt;next;
-            if (cur != graph-&gt;heads[i]) {
-                free(cur);
-            }
-            cur = next;
-        }
-        free(graph-&gt;heads[i]-&gt;vertex);
-        free(graph-&gt;heads[i]);
-    }
-    free(graph);
-}
+<span class="token comment">/* 析构函数 */</span>
+<span class="token keyword">void</span> <span class="token function">delGraphAdjList</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        AdjListNode <span class="token operator">*</span>cur <span class="token operator">=</span> graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cur <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            AdjListNode <span class="token operator">*</span>next <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>cur <span class="token operator">!=</span> graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">free</span><span class="token punctuation">(</span>cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            cur <span class="token operator">=</span> next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">free</span><span class="token punctuation">(</span>graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>vertex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">free</span><span class="token punctuation">(</span>graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>graph<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 查找顶点对应的节点 */
-AdjListNode *findNode(GraphAdjList *graph, Vertex *vet) {
-    for (int i = 0; i &lt; graph-&gt;size; i++) {
-        if (graph-&gt;heads[i]-&gt;vertex == vet) {
-            return graph-&gt;heads[i];
-        }
-    }
-    return NULL;
-}
+<span class="token comment">/* 查找顶点对应的节点 */</span>
+AdjListNode <span class="token operator">*</span><span class="token function">findNode</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>vertex <span class="token operator">==</span> vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②边操作</strong></p>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 添加边直接在列表末尾添加即可，时间复杂度为O(1)，删除边需要遍历链表，时间复杂度为O(m)</div>
-<pre class="line-numbers language-none"><code class="language-none">/* 添加边 */
-void addEdge(GraphAdjList *graph, Vertex *vet1, Vertex *vet2) {
-    AdjListNode *head1 = findNode(graph, vet1);
-    AdjListNode *head2 = findNode(graph, vet2);
-    assert(head1 != NULL &amp;&amp; head2 != NULL &amp;&amp; head1 != head2);
-    // 添加边 vet1 - vet2
-    addEdgeHelper(head1, vet2);
-    addEdgeHelper(head2, vet1);
-}
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 添加边 */</span>
+<span class="token keyword">void</span> <span class="token function">addEdge</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet1<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    AdjListNode <span class="token operator">*</span>head1 <span class="token operator">=</span> <span class="token function">findNode</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> vet1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    AdjListNode <span class="token operator">*</span>head2 <span class="token operator">=</span> <span class="token function">findNode</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> vet2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>head1 <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> head2 <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> head1 <span class="token operator">!=</span> head2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 添加边 vet1 - vet2</span>
+    <span class="token function">addEdgeHelper</span><span class="token punctuation">(</span>head1<span class="token punctuation">,</span> vet2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">addEdgeHelper</span><span class="token punctuation">(</span>head2<span class="token punctuation">,</span> vet1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 删除边 */
-void removeEdge(GraphAdjList *graph, Vertex *vet1, Vertex *vet2) {
-    AdjListNode *head1 = findNode(graph, vet1);
-    AdjListNode *head2 = findNode(graph, vet2);
-    assert(head1 != NULL &amp;&amp; head2 != NULL);
-    // 删除边 vet1 - vet2
-    removeEdgeHelper(head1, head2-&gt;vertex);
-    removeEdgeHelper(head2, head1-&gt;vertex);
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 删除边 */</span>
+<span class="token keyword">void</span> <span class="token function">removeEdge</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet1<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    AdjListNode <span class="token operator">*</span>head1 <span class="token operator">=</span> <span class="token function">findNode</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> vet1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    AdjListNode <span class="token operator">*</span>head2 <span class="token operator">=</span> <span class="token function">findNode</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> vet2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>head1 <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> head2 <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 删除边 vet1 - vet2</span>
+    <span class="token function">removeEdgeHelper</span><span class="token punctuation">(</span>head1<span class="token punctuation">,</span> head2<span class="token operator">-&gt;</span>vertex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">removeEdgeHelper</span><span class="token punctuation">(</span>head2<span class="token punctuation">,</span> head1<span class="token operator">-&gt;</span>vertex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>③顶点操作</strong></p>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 添加顶点只需要添加邻接表项，时间复杂度为O(1)，删除顶点需要遍历邻接表以及对应的边，时间复杂度为O(m+n)</div>
-<pre class="line-numbers language-none"><code class="language-none">/* 添加顶点 */
-void addVertex(GraphAdjList *graph, Vertex *vet) {
-    assert(graph != NULL &amp;&amp; graph-&gt;size &lt; MAX_SIZE);
-    AdjListNode *head = (AdjListNode *)malloc(sizeof(AdjListNode));
-    head-&gt;vertex = vet;
-    head-&gt;next = NULL;
-    // 在邻接表中添加一个新链表
-    graph-&gt;heads[graph-&gt;size++] = head;
-}
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 添加顶点 */</span>
+<span class="token keyword">void</span> <span class="token function">addVertex</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>graph <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> graph<span class="token operator">-&gt;</span>size <span class="token operator">&lt;</span> MAX_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    AdjListNode <span class="token operator">*</span>head <span class="token operator">=</span> <span class="token punctuation">(</span>AdjListNode <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>AdjListNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    head<span class="token operator">-&gt;</span>vertex <span class="token operator">=</span> vet<span class="token punctuation">;</span>
+    head<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token comment">// 在邻接表中添加一个新链表</span>
+    graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>graph<span class="token operator">-&gt;</span>size<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> head<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 删除顶点 */
-void removeVertex(GraphAdjList *graph, Vertex *vet) {
-    AdjListNode *node = findNode(graph, vet);
-    assert(node != NULL);
-    // 在邻接表中删除顶点 vet 对应的链表
-    AdjListNode *cur = node, *pre = NULL;
-    while (cur) {
-        pre = cur;
-        cur = cur-&gt;next;
-        free(pre);
-    }
-    // 遍历其他顶点的链表，删除所有包含 vet 的边
-    for (int i = 0; i &lt; graph-&gt;size; i++) {
-        cur = graph-&gt;heads[i];
-        pre = NULL;
-        while (cur) {
-            pre = cur;
-            cur = cur-&gt;next;
-            if (cur &amp;&amp; cur-&gt;vertex == vet) {
-                pre-&gt;next = cur-&gt;next;
-                free(cur);
-                break;
-            }
-        }
-    }
-    // 将该顶点之后的顶点向前移动，以填补空缺
-    int i;
-    for (i = 0; i &lt; graph-&gt;size; i++) {
-        if (graph-&gt;heads[i] == node)
-            break;
-    }
-    for (int j = i; j &lt; graph-&gt;size - 1; j++) {
-        graph-&gt;heads[j] = graph-&gt;heads[j + 1];
-    }
-    graph-&gt;size--;
-    free(vet);
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 删除顶点 */</span>
+<span class="token keyword">void</span> <span class="token function">removeVertex</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    AdjListNode <span class="token operator">*</span>node <span class="token operator">=</span> <span class="token function">findNode</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> vet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>node <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 在邻接表中删除顶点 vet 对应的链表</span>
+    AdjListNode <span class="token operator">*</span>cur <span class="token operator">=</span> node<span class="token punctuation">,</span> <span class="token operator">*</span>pre <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pre <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+        cur <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+        <span class="token function">free</span><span class="token punctuation">(</span>pre<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 遍历其他顶点的链表，删除所有包含 vet 的边</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cur <span class="token operator">=</span> graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        pre <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            pre <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+            cur <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>cur <span class="token operator">&amp;&amp;</span> cur<span class="token operator">-&gt;</span>vertex <span class="token operator">==</span> vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                pre<span class="token operator">-&gt;</span>next <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+                <span class="token function">free</span><span class="token punctuation">(</span>cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 将该顶点之后的顶点向前移动，以填补空缺</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> node<span class="token punctuation">)</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> graph<span class="token operator">-&gt;</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> graph<span class="token operator">-&gt;</span>heads<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    graph<span class="token operator">-&gt;</span>size<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>vet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="3-图的遍历"><a href="#3-图的遍历" class="headerlink" title="3.图的遍历"></a>3.图的遍历</h3><h4 id="3-1广度优先遍历BFS"><a href="#3-1广度优先遍历BFS" class="headerlink" title="3.1广度优先遍历BFS"></a>3.1广度优先遍历BFS</h4><p><strong>①思想</strong></p>
 <blockquote>
 <p>从<strong>某个节点</strong>出发，<strong>优先遍历</strong>该节点所有<strong>邻接节点</strong>，随后<strong>广度优先遍历</strong>其各个<strong>邻接节点</strong></p>
@@ -717,74 +727,74 @@ void removeVertex(GraphAdjList *graph, Vertex *vet) {
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 所有顶点都会入队出队，且所有边都会被访问两次，故时间复杂度为O(n+m)</div>
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 已经访问过的节点不再入队</div>
-<pre class="line-numbers language-none"><code class="language-none">/* 节点队列结构体 */
-typedef struct {
-    Vertex *vertices[MAX_SIZE];
-    int front, rear, size;
-} Queue;
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 节点队列结构体 */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Vertex <span class="token operator">*</span>vertices<span class="token punctuation">[</span>MAX_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> front<span class="token punctuation">,</span> rear<span class="token punctuation">,</span> size<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> Queue<span class="token punctuation">;</span>
 
-/* 构造函数 */
-Queue *newQueue() {
-    Queue *q = (Queue *)malloc(sizeof(Queue));
-    q-&gt;front = q-&gt;rear = q-&gt;size = 0;
-    return q;
-}
+<span class="token comment">/* 构造函数 */</span>
+Queue <span class="token operator">*</span><span class="token function">newQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Queue <span class="token operator">*</span>q <span class="token operator">=</span> <span class="token punctuation">(</span>Queue <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Queue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token operator">-&gt;</span>front <span class="token operator">=</span> q<span class="token operator">-&gt;</span>rear <span class="token operator">=</span> q<span class="token operator">-&gt;</span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> q<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 判断队列是否为空 */
-int isEmpty(Queue *q) {
-    return q-&gt;size == 0;
-}
+<span class="token comment">/* 判断队列是否为空 */</span>
+<span class="token keyword">int</span> <span class="token function">isEmpty</span><span class="token punctuation">(</span>Queue <span class="token operator">*</span>q<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> q<span class="token operator">-&gt;</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 入队操作 */
-void enqueue(Queue *q, Vertex *vet) {
-    q-&gt;vertices[q-&gt;rear] = vet;
-    q-&gt;rear = (q-&gt;rear + 1) % MAX_SIZE;
-    q-&gt;size++;
-}
+<span class="token comment">/* 入队操作 */</span>
+<span class="token keyword">void</span> <span class="token function">enqueue</span><span class="token punctuation">(</span>Queue <span class="token operator">*</span>q<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    q<span class="token operator">-&gt;</span>vertices<span class="token punctuation">[</span>q<span class="token operator">-&gt;</span>rear<span class="token punctuation">]</span> <span class="token operator">=</span> vet<span class="token punctuation">;</span>
+    q<span class="token operator">-&gt;</span>rear <span class="token operator">=</span> <span class="token punctuation">(</span>q<span class="token operator">-&gt;</span>rear <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> MAX_SIZE<span class="token punctuation">;</span>
+    q<span class="token operator">-&gt;</span>size<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 出队操作 */
-Vertex *dequeue(Queue *q) {
-    Vertex *vet = q-&gt;vertices[q-&gt;front];
-    q-&gt;front = (q-&gt;front + 1) % MAX_SIZE;
-    q-&gt;size--;
-    return vet;
-}
+<span class="token comment">/* 出队操作 */</span>
+Vertex <span class="token operator">*</span><span class="token function">dequeue</span><span class="token punctuation">(</span>Queue <span class="token operator">*</span>q<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Vertex <span class="token operator">*</span>vet <span class="token operator">=</span> q<span class="token operator">-&gt;</span>vertices<span class="token punctuation">[</span>q<span class="token operator">-&gt;</span>front<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    q<span class="token operator">-&gt;</span>front <span class="token operator">=</span> <span class="token punctuation">(</span>q<span class="token operator">-&gt;</span>front <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> MAX_SIZE<span class="token punctuation">;</span>
+    q<span class="token operator">-&gt;</span>size<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> vet<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 检查顶点是否已被访问 */
-int isVisited(Vertex **visited, int size, Vertex *vet) {
-    // 遍历查找节点，使用 O(n) 时间
-    for (int i = 0; i &lt; size; i++) {
-        if (visited[i] == vet)
-            return 1;
-    }
-    return 0;
-}
+<span class="token comment">/* 检查顶点是否已被访问 */</span>
+<span class="token keyword">int</span> <span class="token function">isVisited</span><span class="token punctuation">(</span>Vertex <span class="token operator">*</span><span class="token operator">*</span>visited<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 遍历查找节点，使用 O(n) 时间</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>visited<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> vet<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 广度优先遍历 BFS */
-// 使用邻接表来表示图，以便获取指定顶点的所有邻接顶点
-void graphBFS(GraphAdjList *graph, Vertex *startVet, Vertex **res, int *resSize, Vertex **visited, int *visitedSize) {
-    // 队列用于实现 BFS
-    Queue *queue = newQueue();
-    enqueue(queue, startVet);
-    visited[(*visitedSize)++] = startVet;
-    // 以顶点 vet 为起点，循环直至访问完所有顶点
-    while (!isEmpty(queue)) {
-        Vertex *vet = dequeue(queue); // 队首顶点出队
-        res[(*resSize)++] = vet;      // 记录访问顶点
-        // 遍历该顶点的所有邻接顶点
-        AdjListNode *node = findNode(graph, vet);
-        while (node != NULL) {
-            // 跳过已被访问过的顶点
-            if (!isVisited(visited, *visitedSize, node-&gt;vertex)) {
-                enqueue(queue, node-&gt;vertex);             // 只入队未访问的顶点
-                visited[(*visitedSize)++] = node-&gt;vertex; // 标记该顶点已被访问
-            }
-            node = node-&gt;next;
-        }
-    }
-    // 释放内存
-    free(queue);
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 广度优先遍历 BFS */</span>
+<span class="token comment">// 使用邻接表来表示图，以便获取指定顶点的所有邻接顶点</span>
+<span class="token keyword">void</span> <span class="token function">graphBFS</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>startVet<span class="token punctuation">,</span> Vertex <span class="token operator">*</span><span class="token operator">*</span>res<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>resSize<span class="token punctuation">,</span> Vertex <span class="token operator">*</span><span class="token operator">*</span>visited<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>visitedSize<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 队列用于实现 BFS</span>
+    Queue <span class="token operator">*</span>queue <span class="token operator">=</span> <span class="token function">newQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">enqueue</span><span class="token punctuation">(</span>queue<span class="token punctuation">,</span> startVet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    visited<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token operator">*</span>visitedSize<span class="token punctuation">)</span><span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> startVet<span class="token punctuation">;</span>
+    <span class="token comment">// 以顶点 vet 为起点，循环直至访问完所有顶点</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Vertex <span class="token operator">*</span>vet <span class="token operator">=</span> <span class="token function">dequeue</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 队首顶点出队</span>
+        res<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token operator">*</span>resSize<span class="token punctuation">)</span><span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> vet<span class="token punctuation">;</span>      <span class="token comment">// 记录访问顶点</span>
+        <span class="token comment">// 遍历该顶点的所有邻接顶点</span>
+        AdjListNode <span class="token operator">*</span>node <span class="token operator">=</span> <span class="token function">findNode</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> vet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>node <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 跳过已被访问过的顶点</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isVisited</span><span class="token punctuation">(</span>visited<span class="token punctuation">,</span> <span class="token operator">*</span>visitedSize<span class="token punctuation">,</span> node<span class="token operator">-&gt;</span>vertex<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">enqueue</span><span class="token punctuation">(</span>queue<span class="token punctuation">,</span> node<span class="token operator">-&gt;</span>vertex<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment">// 只入队未访问的顶点</span>
+                visited<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token operator">*</span>visitedSize<span class="token punctuation">)</span><span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> node<span class="token operator">-&gt;</span>vertex<span class="token punctuation">;</span> <span class="token comment">// 标记该顶点已被访问</span>
+            <span class="token punctuation">}</span>
+            node <span class="token operator">=</span> node<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 释放内存</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="3-2深度优先遍历DFS"><a href="#3-2深度优先遍历DFS" class="headerlink" title="3.2深度优先遍历DFS"></a>3.2深度优先遍历DFS</h4><p><strong>①思想</strong></p>
 <blockquote>
 <p>从<strong>某一节点</strong>出发，不断访问<strong>当前节点</strong>的<strong>某个邻接节点</strong>，直到<strong>尽头返回</strong>，<strong>返回后再继续向后走</strong>，以此类推，直到<strong>所有顶点遍历完成</strong></p>
@@ -793,38 +803,38 @@ void graphBFS(GraphAdjList *graph, Vertex *startVet, Vertex **res, int *resSize,
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以人为设置节点的访问优先级，从而统一遍历后序列</div>
 <p><strong>②代码实现</strong></p>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 所有顶点都会被访问，所有边都会被访问两次，故时间复杂度为O(n+m)</div>
-<pre class="line-numbers language-none"><code class="language-none">/* 检查顶点是否已被访问 */
-int isVisited(Vertex **res, int size, Vertex *vet) {
-    // 遍历查找节点，使用 O(n) 时间
-    for (int i = 0; i &lt; size; i++) {
-        if (res[i] == vet) {
-            return 1;
-        }
-    }
-    return 0;
-}
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 检查顶点是否已被访问 */</span>
+<span class="token keyword">int</span> <span class="token function">isVisited</span><span class="token punctuation">(</span>Vertex <span class="token operator">*</span><span class="token operator">*</span>res<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 遍历查找节点，使用 O(n) 时间</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 深度优先遍历 DFS 辅助函数 */
-void dfs(GraphAdjList *graph, Vertex **res, int *resSize, Vertex *vet) {
-    // 记录访问顶点
-    res[(*resSize)++] = vet;
-    // 遍历该顶点的所有邻接顶点
-    AdjListNode *node = findNode(graph, vet);
-    while (node != NULL) {
-        // 跳过已被访问过的顶点
-        if (!isVisited(res, *resSize, node-&gt;vertex)) {
-            // 递归访问邻接顶点
-            dfs(graph, res, resSize, node-&gt;vertex);
-        }
-        node = node-&gt;next;
-    }
-}
+<span class="token comment">/* 深度优先遍历 DFS 辅助函数 */</span>
+<span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">,</span> Vertex <span class="token operator">*</span><span class="token operator">*</span>res<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>resSize<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>vet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 记录访问顶点</span>
+    res<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token operator">*</span>resSize<span class="token punctuation">)</span><span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> vet<span class="token punctuation">;</span>
+    <span class="token comment">// 遍历该顶点的所有邻接顶点</span>
+    AdjListNode <span class="token operator">*</span>node <span class="token operator">=</span> <span class="token function">findNode</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> vet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>node <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 跳过已被访问过的顶点</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isVisited</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> <span class="token operator">*</span>resSize<span class="token punctuation">,</span> node<span class="token operator">-&gt;</span>vertex<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 递归访问邻接顶点</span>
+            <span class="token function">dfs</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> res<span class="token punctuation">,</span> resSize<span class="token punctuation">,</span> node<span class="token operator">-&gt;</span>vertex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        node <span class="token operator">=</span> node<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-/* 深度优先遍历 DFS */
-// 使用邻接表来表示图，以便获取指定顶点的所有邻接顶点
-void graphDFS(GraphAdjList *graph, Vertex *startVet, Vertex **res, int *resSize) {
-    dfs(graph, res, resSize, startVet);
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 深度优先遍历 DFS */</span>
+<span class="token comment">// 使用邻接表来表示图，以便获取指定顶点的所有邻接顶点</span>
+<span class="token keyword">void</span> <span class="token function">graphDFS</span><span class="token punctuation">(</span>GraphAdjList <span class="token operator">*</span>graph<span class="token punctuation">,</span> Vertex <span class="token operator">*</span>startVet<span class="token punctuation">,</span> Vertex <span class="token operator">*</span><span class="token operator">*</span>res<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>resSize<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">dfs</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> res<span class="token punctuation">,</span> resSize<span class="token punctuation">,</span> startVet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
@@ -946,18 +956,18 @@ void graphDFS(GraphAdjList *graph, Vertex *startVet, Vertex **res, int *resSize)
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/10/ji-suan-ji-wang-luo-xia/">
+                <a href="/2023/12/10/python-xue-xi-bi-ji-er/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/31.webp" class="responsive-img" alt="计算机网络（下）">
+                        <img src="/medias/featureimages/4.webp" class="responsive-img" alt="python学习笔记（二）">
                         
-                        <span class="card-title">计算机网络（下）</span>
+                        <span class="card-title">python学习笔记（二）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            网络层、运输层和应用层
+                            python编程进阶
                         
                     </div>
                     <div class="publish-info">
@@ -968,8 +978,8 @@ void graphDFS(GraphAdjList *graph, Vertex *startVet, Vertex **res, int *resSize)
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    计算机基础
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
                                 </a>
                             
                             
@@ -979,12 +989,12 @@ void graphDFS(GraphAdjList *graph, Vertex *startVet, Vertex **res, int *resSize)
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">计算机网络</span>
+                    <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">编程语言</span>
                     </a>
                     
-                    <a href="/tags/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B/">
-                        <span class="chip bg-color">《计算机网络自顶向下》</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
                 </div>
@@ -998,18 +1008,18 @@ void graphDFS(GraphAdjList *graph, Vertex *startVet, Vertex **res, int *resSize)
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/12/10/ha-xi-biao/">
+                <a href="/2023/12/10/tu-jie-gou-xia/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="哈希表">
+                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="图结构（下）">
                         
-                        <span class="card-title">哈希表</span>
+                        <span class="card-title">图结构（下）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            哈希表
+                            图的应用
                         
                     </div>
                     <div class="publish-info">

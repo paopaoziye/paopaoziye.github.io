@@ -421,30 +421,204 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h1><h2 id="哈希表-1"><a href="#哈希表-1" class="headerlink" title="哈希表"></a>哈希表</h2><h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h3><h4 id="1-1定义"><a href="#1-1定义" class="headerlink" title="1.1定义"></a>1.1定义</h4><blockquote>
-<p>建立<strong>键</strong><code>key</code>与<strong>值</strong><code>value</code>的<strong>映射</strong>，根据<strong>映射关系</strong>快速<strong>根据键找到值</strong></p>
+<p><strong>概述</strong>：建立<strong>键</strong><code>key</code>与<strong>值</strong><code>value</code>的<strong>映射</strong>，根据<strong>映射关系</strong>快速<strong>根据键找到值</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 哈希表的增删查改操作的时间复杂度都是O(1)</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 由于需要快速查找，所以哈希表采用数组实现，数组的每一个空位称为桶</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 哈希表本质上是利用空间换时间</div>
 <h4 id="1-2哈希算法"><a href="#1-2哈希算法" class="headerlink" title="1.2哈希算法"></a>1.2哈希算法</h4><p><strong>①定义</strong></p>
 <blockquote>
-<p>即<strong>键与值的映射关系</strong>，构造<strong>散列函数</strong><code>h</code>，通过<code>h(key)</code>找到<strong>对应值的位置</strong></p>
+<p><strong>概述</strong>：即<strong>键与值的映射关系</strong>，构造<strong>散列函数</strong><code>h</code>，通过<code>h(key)</code>找到<strong>对应值的位置</strong></p>
 </blockquote>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 本质上是将一个较大的输入空间映射到一个较小的输出空间</div>
-<p><strong>②构造</strong></p>
+<p><strong>②工作原理</strong></p>
 <blockquote>
-<p>将<code>key</code>转化为<strong>哈希值</strong>，如将<code>key</code>的<strong>每个字符的ASCALL码相加</strong></p>
+<p><strong>概述</strong>：将<code>key</code>转化为<strong>哈希值</strong>，对<strong>哈希值</strong>进行<strong>二次操作</strong>，从而<strong>缩小范围</strong></p>
 </blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 哈希算法的构造准则为输出确定、计算简单以及均匀分布</div>
 <blockquote>
-<p>对<strong>哈希值</strong>进行<strong>二次操作</strong>，如<strong>对容器大小取模</strong>，从而<strong>缩小范围</strong></p>
+<p>如将<code>key</code>的<strong>每个字符的ASCALL码相加</strong>，也有有<strong>专业的哈希算法</strong>，如<code>SHA</code>系列，一些编程语言也有<strong>内置哈希算法</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 哈希算法的构造准则就是计算简单和减少冲突，有专业的哈希算法，如SHA系列，一些编程语言也有内置哈希算法</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 使用大质数作为模数时，可以最大化地保证哈希值的均匀分布，因为质数不会与其他数字存在公约数</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 只有不可变对象是可哈希的</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 二次操作通常为对大质数取模，可以最大化地保证哈希值的均匀分布，因为质数不会与其他数字存在公约数</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 加法哈希 */</span>
+<span class="token keyword">int</span> <span class="token function">addHash</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> hash <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> MODULUS <span class="token operator">=</span> <span class="token number">1000000007</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">strlen</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        hash <span class="token operator">=</span> <span class="token punctuation">(</span>hash <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token punctuation">)</span>key<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> MODULUS<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>hash<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 乘法哈希 */</span>
+<span class="token keyword">int</span> <span class="token function">mulHash</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> hash <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> MODULUS <span class="token operator">=</span> <span class="token number">1000000007</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">strlen</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        hash <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">31</span> <span class="token operator">*</span> hash <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token punctuation">)</span>key<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> MODULUS<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>hash<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 异或哈希 */</span>
+<span class="token keyword">int</span> <span class="token function">xorHash</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> hash <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> MODULUS <span class="token operator">=</span> <span class="token number">1000000007</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">strlen</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        hash <span class="token operator">^=</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token punctuation">)</span>key<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> hash <span class="token operator">&amp;</span> MODULUS<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 旋转哈希 */</span>
+<span class="token keyword">int</span> <span class="token function">rotHash</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> hash <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> MODULUS <span class="token operator">=</span> <span class="token number">1000000007</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">strlen</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        hash <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>hash <span class="token operator">&lt;&lt;</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token punctuation">(</span>hash <span class="token operator">&gt;&gt;</span> <span class="token number">28</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token punctuation">)</span>key<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> MODULUS<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>hash<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="1-3简单实现"><a href="#1-3简单实现" class="headerlink" title="1.3简单实现"></a>1.3简单实现</h4><p><strong>①结构代码</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 键值对 int-&gt;string */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> key<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>val<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> Pair<span class="token punctuation">;</span>
+<span class="token comment">/* 基于数组实现的哈希表 */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Pair <span class="token operator">*</span>buckets<span class="token punctuation">[</span>HASHTABLE_CAPACITY<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> ArrayHashMap<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②构造与析构</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 构造函数 */</span>
+ArrayHashMap <span class="token operator">*</span><span class="token function">newArrayHashMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ArrayHashMap <span class="token operator">*</span>hmap <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>ArrayHashMap<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> hmap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 析构函数 */</span>
+<span class="token keyword">void</span> <span class="token function">delArrayHashMap</span><span class="token punctuation">(</span>ArrayHashMap <span class="token operator">*</span>hmap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> HASHTABLE_CAPACITY<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>hmap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③操作集</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 添加操作 */</span>
+<span class="token keyword">void</span> <span class="token function">put</span><span class="token punctuation">(</span>ArrayHashMap <span class="token operator">*</span>hmap<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">int</span> key<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Pair <span class="token operator">*</span>Pair <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Pair<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Pair<span class="token operator">-&gt;</span>key <span class="token operator">=</span> key<span class="token punctuation">;</span>
+    Pair<span class="token operator">-&gt;</span>val <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">strcpy</span><span class="token punctuation">(</span>Pair<span class="token operator">-&gt;</span>val<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">hashFunc</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> Pair<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 删除操作 */</span>
+<span class="token keyword">void</span> <span class="token function">removeItem</span><span class="token punctuation">(</span>ArrayHashMap <span class="token operator">*</span>hmap<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">hashFunc</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 获取所有键值对 */</span>
+<span class="token keyword">void</span> <span class="token function">pairSet</span><span class="token punctuation">(</span>ArrayHashMap <span class="token operator">*</span>hmap<span class="token punctuation">,</span> MapSet <span class="token operator">*</span>set<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Pair <span class="token operator">*</span>entries<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">/* 统计有效键值对数量 */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> HASHTABLE_CAPACITY<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            total<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    entries <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Pair<span class="token punctuation">)</span> <span class="token operator">*</span> total<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> HASHTABLE_CAPACITY<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            entries<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>key <span class="token operator">=</span> hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>key<span class="token punctuation">;</span>
+            entries<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>val <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">strcpy</span><span class="token punctuation">(</span>entries<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>val<span class="token punctuation">,</span> hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            index<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    set<span class="token operator">-&gt;</span>set <span class="token operator">=</span> entries<span class="token punctuation">;</span>
+    set<span class="token operator">-&gt;</span>len <span class="token operator">=</span> total<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 获取所有键 */</span>
+<span class="token keyword">void</span> <span class="token function">keySet</span><span class="token punctuation">(</span>ArrayHashMap <span class="token operator">*</span>hmap<span class="token punctuation">,</span> MapSet <span class="token operator">*</span>set<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>keys<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">/* 统计有效键值对数量 */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> HASHTABLE_CAPACITY<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            total<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    keys <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span>total <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> HASHTABLE_CAPACITY<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            keys<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>key<span class="token punctuation">;</span>
+            index<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    set<span class="token operator">-&gt;</span>set <span class="token operator">=</span> keys<span class="token punctuation">;</span>
+    set<span class="token operator">-&gt;</span>len <span class="token operator">=</span> total<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 获取所有值 */</span>
+<span class="token keyword">void</span> <span class="token function">valueSet</span><span class="token punctuation">(</span>ArrayHashMap <span class="token operator">*</span>hmap<span class="token punctuation">,</span> MapSet <span class="token operator">*</span>set<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>vals<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">/* 统计有效键值对数量 */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> HASHTABLE_CAPACITY<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            total<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    vals <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span>total <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> HASHTABLE_CAPACITY<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            vals<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> hmap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val<span class="token punctuation">;</span>
+            index<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    set<span class="token operator">-&gt;</span>set <span class="token operator">=</span> vals<span class="token punctuation">;</span>
+    set<span class="token operator">-&gt;</span>len <span class="token operator">=</span> total<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 打印哈希表 */</span>
+<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span>ArrayHashMap <span class="token operator">*</span>hmap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    MapSet set<span class="token punctuation">;</span>
+    <span class="token function">pairSet</span><span class="token punctuation">(</span>hmap<span class="token punctuation">,</span> <span class="token operator">&amp;</span>set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Pair <span class="token operator">*</span>entries <span class="token operator">=</span> <span class="token punctuation">(</span>Pair <span class="token operator">*</span><span class="token punctuation">)</span>set<span class="token punctuation">.</span>set<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> set<span class="token punctuation">.</span>len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d -&gt; %s\n"</span><span class="token punctuation">,</span> entries<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>key<span class="token punctuation">,</span> entries<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>set<span class="token punctuation">.</span>set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <hr>
-<h3 id="2-冲突处理"><a href="#2-冲突处理" class="headerlink" title="2.冲突处理"></a>2.冲突处理</h3><div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 通常情况下，哈希表的输入空间远远大于输出空间，冲突无法避免，需要一定的方法处理冲突</div>
+<h3 id="2-冲突处理"><a href="#2-冲突处理" class="headerlink" title="2.冲突处理"></a>2.冲突处理</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><blockquote>
+<p><strong>概述</strong>：哈希表的<strong>输入空间远远大于输出空间</strong>，冲突<strong>无法避免</strong>，需要一定的方法处理冲突</p>
+</blockquote>
+<blockquote>
+<p><strong>负载因子</strong>：哈希表的<strong>元素数量除以桶数量</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 可以采用扩充哈希表容量缓解冲突</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 扩容的代价太大，所以只有当负载因子超过一定大小时，对哈希表进行扩容</div>
 <h4 id="2-1开放定址"><a href="#2-1开放定址" class="headerlink" title="2.1开放定址"></a>2.1开放定址</h4><p><strong>①定义</strong></p>
 <blockquote>
-<p>若发生了<strong>第<code>i</code>次冲突</strong>，试探性地将<strong>其地址增加</strong><code>di</code>，即<code>hi(key)=h(key)+di</code></p>
+<p>若发生了<strong>第<code>i</code>次冲突</strong>，试探性地将<strong>其地址增加</strong><code>di</code>，即<code>h(key)=h(key)+di</code></p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 这里的冲突不是总计的冲突，而是当前元素发生冲突的次数，即对于每个元素，i都是从0开始计数</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 查找元素时，倘若不匹配，试探性地假设其发生冲突，使用哈希函数向后遍历，直到找到该元素或者遇到空元素</div>
@@ -472,332 +646,333 @@
 
 
 <h4 id="2-2分离链接"><a href="#2-2分离链接" class="headerlink" title="2.2分离链接"></a>2.2分离链接</h4><blockquote>
-<p><strong>原始哈希表</strong>中，<strong>每个地址</strong>对应的只是<strong>一个值</strong>，<strong>分离链接法</strong>采用的是<strong>链表</strong>，先<strong>找到对应链表</strong>再<strong>遍历该链表</strong></p>
+<p><strong>概述</strong>：<strong>原始哈希表</strong>中，<strong>每个桶</strong>只有<strong>一个键值对</strong>，<strong>分离链接法</strong>将其改为一个<strong>链表</strong>，先<strong>找到对应链表</strong>再<strong>遍历该链表</strong></p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 分离链接的本质是扩容，此处不采用数组，因为数组一开始就要有一定的长度，会造成空间浪费</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当链表很长时，可以将其转化为红黑树或者AVL树，优化查找时间</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 由于采用链表，更加耗费内存空间，且查询效率降低</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当链表很长时，可以将其转化为动态数组、红黑树或者AVL树，优化查找时间</div>
 <hr>
 <h3 id="3-哈希表的实现"><a href="#3-哈希表的实现" class="headerlink" title="3.哈希表的实现"></a>3.哈希表的实现</h3><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 因为哈希表的特性就是快速查找，所以其主体采用结构数组实现</div>
 <h4 id="3-1分离链接哈希表"><a href="#3-1分离链接哈希表" class="headerlink" title="3.1分离链接哈希表"></a>3.1分离链接哈希表</h4><p><strong>①结构代码</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">/* 链表节点 */
-typedef struct Node {
-    Pair *pair;
-    struct Node *next;
-} Node;
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 链表节点 */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
+    Pair <span class="token operator">*</span>pair<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token operator">*</span>next<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> Node<span class="token punctuation">;</span>
 
-/* 分离链接哈希表 */
-typedef struct {
-    int size;         // 键值对数量
-    int capacity;     // 哈希表容量
-    double loadThres; // 触发扩容的负载因子阈值
-    int extendRatio;  // 扩容倍数
-    Node **buckets;   // 桶数组
-} HashMapChaining;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 分离链接哈希表 */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> size<span class="token punctuation">;</span>         <span class="token comment">// 键值对数量</span>
+    <span class="token keyword">int</span> capacity<span class="token punctuation">;</span>     <span class="token comment">// 哈希表容量</span>
+    <span class="token keyword">double</span> loadThres<span class="token punctuation">;</span> <span class="token comment">// 触发扩容的负载因子阈值</span>
+    <span class="token keyword">int</span> extendRatio<span class="token punctuation">;</span>  <span class="token comment">// 扩容倍数</span>
+    Node <span class="token operator">*</span><span class="token operator">*</span>buckets<span class="token punctuation">;</span>   <span class="token comment">// 桶数组</span>
+<span class="token punctuation">}</span> HashMapChaining<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②构造和析构</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">/* 构造函数 */
-HashMapChaining *newHashMapChaining() {
-    HashMapChaining *hashMap = (HashMapChaining *)malloc(sizeof(HashMapChaining));
-    hashMap-&gt;size = 0;
-    hashMap-&gt;capacity = 4;
-    hashMap-&gt;loadThres = 2.0 / 3.0;
-    hashMap-&gt;extendRatio = 2;
-    hashMap-&gt;buckets = (Node **)malloc(hashMap-&gt;capacity * sizeof(Node *));
-    for (int i = 0; i &lt; hashMap-&gt;capacity; i++) {
-        hashMap-&gt;buckets[i] = NULL;
-    }
-    return hashMap;
-}
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 构造函数 */</span>
+HashMapChaining <span class="token operator">*</span><span class="token function">newHashMapChaining</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HashMapChaining <span class="token operator">*</span>hashMap <span class="token operator">=</span> <span class="token punctuation">(</span>HashMapChaining <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>HashMapChaining<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>capacity <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>loadThres <span class="token operator">=</span> <span class="token number">2.0</span> <span class="token operator">/</span> <span class="token number">3.0</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>extendRatio <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>buckets <span class="token operator">=</span> <span class="token punctuation">(</span>Node <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>capacity <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>Node <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> hashMap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 析构函数 */
-void delHashMapChaining(HashMapChaining *hashMap) {
-    for (int i = 0; i &lt; hashMap-&gt;capacity; i++) {
-        Node *cur = hashMap-&gt;buckets[i];
-        while (cur) {
-            Node *tmp = cur;
-            cur = cur-&gt;next;
-            free(tmp-&gt;pair);
-            free(tmp);
-        }
-    }
-    free(hashMap-&gt;buckets);
-    free(hashMap);
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 析构函数 */</span>
+<span class="token keyword">void</span> <span class="token function">delHashMapChaining</span><span class="token punctuation">(</span>HashMapChaining <span class="token operator">*</span>hashMap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Node <span class="token operator">*</span>cur <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Node <span class="token operator">*</span>tmp <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+            cur <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>tmp<span class="token operator">-&gt;</span>pair<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>③增删查改</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">/* 查询操作 */
-char *get(HashMapChaining *hashMap, int key) {
-    int index = hashFunc(hashMap, key);
-    // 遍历桶，若找到 key 则返回对应 val
-    Node *cur = hashMap-&gt;buckets[index];
-    while (cur) {
-        if (cur-&gt;pair-&gt;key == key) {
-            return cur-&gt;pair-&gt;val;
-        }
-        cur = cur-&gt;next;
-    }
-    return ""; // 若未找到 key 则返回空字符串
-}
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 查询操作 */</span>
+<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">get</span><span class="token punctuation">(</span>HashMapChaining <span class="token operator">*</span>hashMap<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">hashFunc</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 遍历桶，若找到 key 则返回对应 val</span>
+    Node <span class="token operator">*</span>cur <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>cur<span class="token operator">-&gt;</span>pair<span class="token operator">-&gt;</span>key <span class="token operator">==</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> cur<span class="token operator">-&gt;</span>pair<span class="token operator">-&gt;</span>val<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        cur <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">;</span> <span class="token comment">// 若未找到 key 则返回空字符串</span>
+<span class="token punctuation">}</span>
 
-/* 添加操作 */
-void put(HashMapChaining *hashMap, int key, const char *val) {
-    // 当负载因子超过阈值时，执行扩容
-    if (loadFactor(hashMap) &gt; hashMap-&gt;loadThres) {
-        extend(hashMap);
-    }
-    int index = hashFunc(hashMap, key);
-    // 遍历桶，若遇到指定 key ，则更新对应 val 并返回
-    Node *cur = hashMap-&gt;buckets[index];
-    while (cur) {
-        if (cur-&gt;pair-&gt;key == key) {
-            strcpy(cur-&gt;pair-&gt;val, val); // 若遇到指定 key ，则更新对应 val 并返回
-            return;
-        }
-        cur = cur-&gt;next;
-    }
-    // 若无该 key ，则将键值对添加至尾部
-    Pair *newPair = (Pair *)malloc(sizeof(Pair));
-    newPair-&gt;key = key;
-    strcpy(newPair-&gt;val, val);
-    Node *newNode = (Node *)malloc(sizeof(Node));
-    newNode-&gt;pair = newPair;
-    newNode-&gt;next = hashMap-&gt;buckets[index];
-    hashMap-&gt;buckets[index] = newNode;
-    hashMap-&gt;size++;
-}
+<span class="token comment">/* 添加操作 */</span>
+<span class="token keyword">void</span> <span class="token function">put</span><span class="token punctuation">(</span>HashMapChaining <span class="token operator">*</span>hashMap<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 当负载因子超过阈值时，执行扩容</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">loadFactor</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">)</span> <span class="token operator">&gt;</span> hashMap<span class="token operator">-&gt;</span>loadThres<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">extend</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">hashFunc</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 遍历桶，若遇到指定 key ，则更新对应 val 并返回</span>
+    Node <span class="token operator">*</span>cur <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>cur<span class="token operator">-&gt;</span>pair<span class="token operator">-&gt;</span>key <span class="token operator">==</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">strcpy</span><span class="token punctuation">(</span>cur<span class="token operator">-&gt;</span>pair<span class="token operator">-&gt;</span>val<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 若遇到指定 key ，则更新对应 val 并返回</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        cur <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 若无该 key ，则将键值对添加至尾部</span>
+    Pair <span class="token operator">*</span>newPair <span class="token operator">=</span> <span class="token punctuation">(</span>Pair <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Pair<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    newPair<span class="token operator">-&gt;</span>key <span class="token operator">=</span> key<span class="token punctuation">;</span>
+    <span class="token function">strcpy</span><span class="token punctuation">(</span>newPair<span class="token operator">-&gt;</span>val<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Node <span class="token operator">*</span>newNode <span class="token operator">=</span> <span class="token punctuation">(</span>Node <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Node<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    newNode<span class="token operator">-&gt;</span>pair <span class="token operator">=</span> newPair<span class="token punctuation">;</span>
+    newNode<span class="token operator">-&gt;</span>next <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>size<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 扩容哈希表 */
-void extend(HashMapChaining *hashMap) {
-    // 暂存原哈希表
-    int oldCapacity = hashMap-&gt;capacity;
-    Node **oldBuckets = hashMap-&gt;buckets;
-    // 初始化扩容后的新哈希表
-    hashMap-&gt;capacity *= hashMap-&gt;extendRatio;
-    hashMap-&gt;buckets = (Node **)malloc(hashMap-&gt;capacity * sizeof(Node *));
-    for (int i = 0; i &lt; hashMap-&gt;capacity; i++) {
-        hashMap-&gt;buckets[i] = NULL;
-    }
-    hashMap-&gt;size = 0;
-    // 将键值对从原哈希表搬运至新哈希表
-    for (int i = 0; i &lt; oldCapacity; i++) {
-        Node *cur = oldBuckets[i];
-        while (cur) {
-            put(hashMap, cur-&gt;pair-&gt;key, cur-&gt;pair-&gt;val);
-            Node *temp = cur;
-            cur = cur-&gt;next;
-            // 释放内存
-            free(temp-&gt;pair);
-            free(temp);
-        }
-    }
+<span class="token comment">/* 扩容哈希表 */</span>
+<span class="token keyword">void</span> <span class="token function">extend</span><span class="token punctuation">(</span>HashMapChaining <span class="token operator">*</span>hashMap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 暂存原哈希表</span>
+    <span class="token keyword">int</span> oldCapacity <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span>
+    Node <span class="token operator">*</span><span class="token operator">*</span>oldBuckets <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">;</span>
+    <span class="token comment">// 初始化扩容后的新哈希表</span>
+    hashMap<span class="token operator">-&gt;</span>capacity <span class="token operator">*=</span> hashMap<span class="token operator">-&gt;</span>extendRatio<span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>buckets <span class="token operator">=</span> <span class="token punctuation">(</span>Node <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>capacity <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>Node <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    hashMap<span class="token operator">-&gt;</span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">// 将键值对从原哈希表搬运至新哈希表</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> oldCapacity<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Node <span class="token operator">*</span>cur <span class="token operator">=</span> oldBuckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">put</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">,</span> cur<span class="token operator">-&gt;</span>pair<span class="token operator">-&gt;</span>key<span class="token punctuation">,</span> cur<span class="token operator">-&gt;</span>pair<span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Node <span class="token operator">*</span>temp <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+            cur <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+            <span class="token comment">// 释放内存</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>temp<span class="token operator">-&gt;</span>pair<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    free(oldBuckets);
-}
+    <span class="token function">free</span><span class="token punctuation">(</span>oldBuckets<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 删除操作 */
-void removeItem(HashMapChaining *hashMap, int key) {
-    int index = hashFunc(hashMap, key);
-    Node *cur = hashMap-&gt;buckets[index];
-    Node *pre = NULL;
-    while (cur) {
-        if (cur-&gt;pair-&gt;key == key) {
-            // 从中删除键值对
-            if (pre) {
-                pre-&gt;next = cur-&gt;next;
-            } else {
-                hashMap-&gt;buckets[index] = cur-&gt;next;
-            }
-            // 释放内存
-            free(cur-&gt;pair);
-            free(cur);
-            hashMap-&gt;size--;
-            return;
-        }
-        pre = cur;
-        cur = cur-&gt;next;
-    }
-}
+<span class="token comment">/* 删除操作 */</span>
+<span class="token keyword">void</span> <span class="token function">removeItem</span><span class="token punctuation">(</span>HashMapChaining <span class="token operator">*</span>hashMap<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">hashFunc</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Node <span class="token operator">*</span>cur <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    Node <span class="token operator">*</span>pre <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>cur<span class="token operator">-&gt;</span>pair<span class="token operator">-&gt;</span>key <span class="token operator">==</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 从中删除键值对</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>pre<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                pre<span class="token operator">-&gt;</span>next <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// 释放内存</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>cur<span class="token operator">-&gt;</span>pair<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            hashMap<span class="token operator">-&gt;</span>size<span class="token operator">--</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        pre <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+        cur <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>④其他</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">/* 哈希函数 */
-int hashFunc(HashMapChaining *hashMap, int key) {
-    return key % hashMap-&gt;capacity;
-}
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 哈希函数 */</span>
+<span class="token keyword">int</span> <span class="token function">hashFunc</span><span class="token punctuation">(</span>HashMapChaining <span class="token operator">*</span>hashMap<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> key <span class="token operator">%</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 负载因子 */
-double loadFactor(HashMapChaining *hashMap) {
-    return (double)hashMap-&gt;size / (double)hashMap-&gt;capacity;
-}
-/* 打印哈希表 */
-void print(HashMapChaining *hashMap) {
-    for (int i = 0; i &lt; hashMap-&gt;capacity; i++) {
-        Node *cur = hashMap-&gt;buckets[i];
-        printf("[");
-        while (cur) {
-            printf("%d -&gt; %s, ", cur-&gt;pair-&gt;key, cur-&gt;pair-&gt;val);
-            cur = cur-&gt;next;
-        }
-        printf("]\n");
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 负载因子 */</span>
+<span class="token keyword">double</span> <span class="token function">loadFactor</span><span class="token punctuation">(</span>HashMapChaining <span class="token operator">*</span>hashMap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>hashMap<span class="token operator">-&gt;</span>size <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/* 打印哈希表 */</span>
+<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span>HashMapChaining <span class="token operator">*</span>hashMap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Node <span class="token operator">*</span>cur <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"["</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d -&gt; %s, "</span><span class="token punctuation">,</span> cur<span class="token operator">-&gt;</span>pair<span class="token operator">-&gt;</span>key<span class="token punctuation">,</span> cur<span class="token operator">-&gt;</span>pair<span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            cur <span class="token operator">=</span> cur<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"]\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="3-2开放寻址哈希表"><a href="#3-2开放寻址哈希表" class="headerlink" title="3.2开放寻址哈希表"></a>3.2开放寻址哈希表</h4><p><strong>①结构</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">/* 开放寻址哈希表 */
-typedef struct {
-    int size;         // 键值对数量
-    int capacity;     // 哈希表容量
-    double loadThres; // 触发扩容的负载因子阈值
-    int extendRatio;  // 扩容倍数
-    Pair **buckets;   // 桶数组
-    Pair *TOMBSTONE;  // 删除标记
-} HashMapOpenAddressing;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 开放寻址哈希表 */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> size<span class="token punctuation">;</span>         <span class="token comment">// 键值对数量</span>
+    <span class="token keyword">int</span> capacity<span class="token punctuation">;</span>     <span class="token comment">// 哈希表容量</span>
+    <span class="token keyword">double</span> loadThres<span class="token punctuation">;</span> <span class="token comment">// 触发扩容的负载因子阈值</span>
+    <span class="token keyword">int</span> extendRatio<span class="token punctuation">;</span>  <span class="token comment">// 扩容倍数</span>
+    Pair <span class="token operator">*</span><span class="token operator">*</span>buckets<span class="token punctuation">;</span>   <span class="token comment">// 桶数组</span>
+    Pair <span class="token operator">*</span>TOMBSTONE<span class="token punctuation">;</span>  <span class="token comment">// 删除标记</span>
+<span class="token punctuation">}</span> HashMapOpenAddressing<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②构造与析构</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">/* 构造函数 */
-HashMapOpenAddressing *newHashMapOpenAddressing() {
-    HashMapOpenAddressing *hashMap = (HashMapOpenAddressing *)malloc(sizeof(HashMapOpenAddressing));
-    hashMap-&gt;size = 0;
-    hashMap-&gt;capacity = 4;
-    hashMap-&gt;loadThres = 2.0 / 3.0;
-    hashMap-&gt;extendRatio = 2;
-    hashMap-&gt;buckets = (Pair **)malloc(sizeof(Pair *) * hashMap-&gt;capacity);
-    hashMap-&gt;TOMBSTONE = (Pair *)malloc(sizeof(Pair));
-    hashMap-&gt;TOMBSTONE-&gt;key = -1;
-    hashMap-&gt;TOMBSTONE-&gt;val = "-1";
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 构造函数 */</span>
+HashMapOpenAddressing <span class="token operator">*</span><span class="token function">newHashMapOpenAddressing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HashMapOpenAddressing <span class="token operator">*</span>hashMap <span class="token operator">=</span> <span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>HashMapOpenAddressing<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>capacity <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>loadThres <span class="token operator">=</span> <span class="token number">2.0</span> <span class="token operator">/</span> <span class="token number">3.0</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>extendRatio <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>buckets <span class="token operator">=</span> <span class="token punctuation">(</span>Pair <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Pair <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">*</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>TOMBSTONE <span class="token operator">=</span> <span class="token punctuation">(</span>Pair <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Pair<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token operator">-&gt;</span>key <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token operator">-&gt;</span>val <span class="token operator">=</span> <span class="token string">"-1"</span><span class="token punctuation">;</span>
 
-    return hashMap;
-}
+    <span class="token keyword">return</span> hashMap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 析构函数 */
-void delHashMapOpenAddressing(HashMapOpenAddressing *hashMap) {
-    for (int i = 0; i &lt; hashMap-&gt;capacity; i++) {
-        Pair *pair = hashMap-&gt;buckets[i];
-        if (pair != NULL &amp;&amp; pair != hashMap-&gt;TOMBSTONE) {
-            free(pair-&gt;val);
-            free(pair);
-        }
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 析构函数 */</span>
+<span class="token keyword">void</span> <span class="token function">delHashMapOpenAddressing</span><span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span>hashMap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Pair <span class="token operator">*</span>pair <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>pair <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> pair <span class="token operator">!=</span> hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>pair<span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>pair<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>③增删查改</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">/* 搜索 key 对应的桶索引 */
-int findBucket(HashMapOpenAddressing *hashMap, int key) {
-    int index = hashFunc(hashMap, key);
-    int firstTombstone = -1;
-    // 线性探测，当遇到空桶时跳出
-    while (hashMap-&gt;buckets[index] != NULL) {
-        // 若遇到 key ，返回对应桶索引
-        if (hashMap-&gt;buckets[index]-&gt;key == key) {
-            // 若之前遇到了删除标记，则将键值对移动至该索引
-            if (firstTombstone != -1) {
-                hashMap-&gt;buckets[firstTombstone] = hashMap-&gt;buckets[index];
-                hashMap-&gt;buckets[index] = hashMap-&gt;TOMBSTONE;
-                return firstTombstone; // 返回移动后的桶索引
-            }
-            return index; // 返回桶索引
-        }
-        // 记录遇到的首个删除标记
-        if (firstTombstone == -1 &amp;&amp; hashMap-&gt;buckets[index] == hashMap-&gt;TOMBSTONE) {
-            firstTombstone = index;
-        }
-        // 计算桶索引，越过尾部返回头部
-        index = (index + 1) % hashMap-&gt;capacity;
-    }
-    // 若 key 不存在，则返回添加点的索引
-    return firstTombstone == -1 ? index : firstTombstone;
-}
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 搜索 key 对应的桶索引 */</span>
+<span class="token keyword">int</span> <span class="token function">findBucket</span><span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span>hashMap<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">hashFunc</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> firstTombstone <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token comment">// 线性探测，当遇到空桶时跳出</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 若遇到 key ，返回对应桶索引</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token operator">-&gt;</span>key <span class="token operator">==</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 若之前遇到了删除标记，则将键值对移动至该索引</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>firstTombstone <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>firstTombstone<span class="token punctuation">]</span> <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> firstTombstone<span class="token punctuation">;</span> <span class="token comment">// 返回移动后的桶索引</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> index<span class="token punctuation">;</span> <span class="token comment">// 返回桶索引</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 记录遇到的首个删除标记</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>firstTombstone <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">==</span> hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            firstTombstone <span class="token operator">=</span> index<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 计算桶索引，越过尾部返回头部</span>
+        index <span class="token operator">=</span> <span class="token punctuation">(</span>index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 若 key 不存在，则返回添加点的索引</span>
+    <span class="token keyword">return</span> firstTombstone <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">?</span> index <span class="token operator">:</span> firstTombstone<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 查询操作 */
-char *get(HashMapOpenAddressing *hashMap, int key) {
-    // 搜索 key 对应的桶索引
-    int index = findBucket(hashMap, key);
-    // 若找到键值对，则返回对应 val
-    if (hashMap-&gt;buckets[index] != NULL &amp;&amp; hashMap-&gt;buckets[index] != hashMap-&gt;TOMBSTONE) {
-        return hashMap-&gt;buckets[index]-&gt;val;
-    }
-    // 若键值对不存在，则返回空字符串
-    return "";
-}
+<span class="token comment">/* 查询操作 */</span>
+<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">get</span><span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span>hashMap<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 搜索 key 对应的桶索引</span>
+    <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">findBucket</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 若找到键值对，则返回对应 val</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">!=</span> hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 若键值对不存在，则返回空字符串</span>
+    <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 添加操作 */
-void put(HashMapOpenAddressing *hashMap, int key, char *val) {
-    // 当负载因子超过阈值时，执行扩容
-    if (loadFactor(hashMap) &gt; hashMap-&gt;loadThres) {
-        extend(hashMap);
-    }
-    // 搜索 key 对应的桶索引
-    int index = findBucket(hashMap, key);
-    // 若找到键值对，则覆盖 val 并返回
-    if (hashMap-&gt;buckets[index] != NULL &amp;&amp; hashMap-&gt;buckets[index] != hashMap-&gt;TOMBSTONE) {
-        free(hashMap-&gt;buckets[index]-&gt;val);
-        hashMap-&gt;buckets[index]-&gt;val = (char *)malloc(sizeof(strlen(val + 1)));
-        strcpy(hashMap-&gt;buckets[index]-&gt;val, val);
-        hashMap-&gt;buckets[index]-&gt;val[strlen(val)] = '\0';
-        return;
-    }
-    // 若键值对不存在，则添加该键值对
-    Pair *pair = (Pair *)malloc(sizeof(Pair));
-    pair-&gt;key = key;
-    pair-&gt;val = (char *)malloc(sizeof(strlen(val + 1)));
-    strcpy(pair-&gt;val, val);
-    pair-&gt;val[strlen(val)] = '\0';
+<span class="token comment">/* 添加操作 */</span>
+<span class="token keyword">void</span> <span class="token function">put</span><span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span>hashMap<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 当负载因子超过阈值时，执行扩容</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">loadFactor</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">)</span> <span class="token operator">&gt;</span> hashMap<span class="token operator">-&gt;</span>loadThres<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">extend</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 搜索 key 对应的桶索引</span>
+    <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">findBucket</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 若找到键值对，则覆盖 val 并返回</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">!=</span> hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">free</span><span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span>val <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">strcpy</span><span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token operator">-&gt;</span>val<span class="token punctuation">[</span><span class="token function">strlen</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'\0'</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 若键值对不存在，则添加该键值对</span>
+    Pair <span class="token operator">*</span>pair <span class="token operator">=</span> <span class="token punctuation">(</span>Pair <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Pair<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pair<span class="token operator">-&gt;</span>key <span class="token operator">=</span> key<span class="token punctuation">;</span>
+    pair<span class="token operator">-&gt;</span>val <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span>val <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">strcpy</span><span class="token punctuation">(</span>pair<span class="token operator">-&gt;</span>val<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pair<span class="token operator">-&gt;</span>val<span class="token punctuation">[</span><span class="token function">strlen</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'\0'</span><span class="token punctuation">;</span>
 
-    hashMap-&gt;buckets[index] = pair;
-    hashMap-&gt;size++;
-}
+    hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> pair<span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>size<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 删除操作 */
-void removeItem(HashMapOpenAddressing *hashMap, int key) {
-    // 搜索 key 对应的桶索引
-    int index = findBucket(hashMap, key);
-    // 若找到键值对，则用删除标记覆盖它
-    if (hashMap-&gt;buckets[index] != NULL &amp;&amp; hashMap-&gt;buckets[index] != hashMap-&gt;TOMBSTONE) {
-        Pair *pair = hashMap-&gt;buckets[index];
-        free(pair-&gt;val);
-        free(pair);
-        hashMap-&gt;buckets[index] = hashMap-&gt;TOMBSTONE;
-        hashMap-&gt;size--;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 删除操作 */</span>
+<span class="token keyword">void</span> <span class="token function">removeItem</span><span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span>hashMap<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 搜索 key 对应的桶索引</span>
+    <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">findBucket</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 若找到键值对，则用删除标记覆盖它</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">!=</span> hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Pair <span class="token operator">*</span>pair <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">free</span><span class="token punctuation">(</span>pair<span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">free</span><span class="token punctuation">(</span>pair<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token punctuation">;</span>
+        hashMap<span class="token operator">-&gt;</span>size<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>④其他</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">/* 哈希函数 */
-int hashFunc(HashMapOpenAddressing *hashMap, int key) {
-    return key % hashMap-&gt;capacity;
-}
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 哈希函数 */</span>
+<span class="token keyword">int</span> <span class="token function">hashFunc</span><span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span>hashMap<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> key <span class="token operator">%</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 负载因子 */
-double loadFactor(HashMapOpenAddressing *hashMap) {
-    return (double)hashMap-&gt;size / (double)hashMap-&gt;capacity;
-}
-/* 扩容哈希表 */
-void extend(HashMapOpenAddressing *hashMap) {
-    // 暂存原哈希表
-    Pair **bucketsTmp = hashMap-&gt;buckets;
-    int oldCapacity = hashMap-&gt;capacity;
-    // 初始化扩容后的新哈希表
-    hashMap-&gt;capacity *= hashMap-&gt;extendRatio;
-    hashMap-&gt;buckets = (Pair **)malloc(sizeof(Pair *) * hashMap-&gt;capacity);
-    hashMap-&gt;size = 0;
-    // 将键值对从原哈希表搬运至新哈希表
-    for (int i = 0; i &lt; oldCapacity; i++) {
-        Pair *pair = bucketsTmp[i];
-        if (pair != NULL &amp;&amp; pair != hashMap-&gt;TOMBSTONE) {
-            put(hashMap, pair-&gt;key, pair-&gt;val);
-            free(pair-&gt;val);
-            free(pair);
-        }
-    }
-    free(bucketsTmp);
-}
+<span class="token comment">/* 负载因子 */</span>
+<span class="token keyword">double</span> <span class="token function">loadFactor</span><span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span>hashMap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>hashMap<span class="token operator">-&gt;</span>size <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/* 扩容哈希表 */</span>
+<span class="token keyword">void</span> <span class="token function">extend</span><span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span>hashMap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 暂存原哈希表</span>
+    Pair <span class="token operator">*</span><span class="token operator">*</span>bucketsTmp <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> oldCapacity <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span>
+    <span class="token comment">// 初始化扩容后的新哈希表</span>
+    hashMap<span class="token operator">-&gt;</span>capacity <span class="token operator">*=</span> hashMap<span class="token operator">-&gt;</span>extendRatio<span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>buckets <span class="token operator">=</span> <span class="token punctuation">(</span>Pair <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Pair <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">*</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    hashMap<span class="token operator">-&gt;</span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">// 将键值对从原哈希表搬运至新哈希表</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> oldCapacity<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Pair <span class="token operator">*</span>pair <span class="token operator">=</span> bucketsTmp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>pair <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> pair <span class="token operator">!=</span> hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">put</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">,</span> pair<span class="token operator">-&gt;</span>key<span class="token punctuation">,</span> pair<span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>pair<span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">free</span><span class="token punctuation">(</span>pair<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>bucketsTmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-/* 打印哈希表 */
-void print(HashMapOpenAddressing *hashMap) {
-    for (int i = 0; i &lt; hashMap-&gt;capacity; i++) {
-        Pair *pair = hashMap-&gt;buckets[i];
-        if (pair == NULL) {
-            printf("NULL\n");
-        } else if (pair == hashMap-&gt;TOMBSTONE) {
-            printf("TOMBSTONE\n");
-        } else {
-            printf("%d -&gt; %s\n", pair-&gt;key, pair-&gt;val);
-        }
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">/* 打印哈希表 */</span>
+<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span>HashMapOpenAddressing <span class="token operator">*</span>hashMap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> hashMap<span class="token operator">-&gt;</span>capacity<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Pair <span class="token operator">*</span>pair <span class="token operator">=</span> hashMap<span class="token operator">-&gt;</span>buckets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>pair <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"NULL\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>pair <span class="token operator">==</span> hashMap<span class="token operator">-&gt;</span>TOMBSTONE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"TOMBSTONE\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d -&gt; %s\n"</span><span class="token punctuation">,</span> pair<span class="token operator">-&gt;</span>key<span class="token punctuation">,</span> pair<span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
@@ -919,18 +1094,18 @@ void print(HashMapOpenAddressing *hashMap) {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/10/tu-jie-gou-shang/">
+                <a href="/2023/12/10/suan-fa-fan-shi-xia/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="图结构（上）">
+                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="算法范式（下）">
                         
-                        <span class="card-title">图结构（上）</span>
+                        <span class="card-title">算法范式（下）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            图的基本实现与遍历
+                            分治、回溯、贪心和动态规划
                         
                     </div>
                     <div class="publish-info">
@@ -975,18 +1150,18 @@ void print(HashMapOpenAddressing *hashMap) {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/12/10/python-xue-xi-bi-ji-er/">
+                <a href="/2023/12/10/pai-xu-suan-fa/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/4.webp" class="responsive-img" alt="python学习笔记（二）">
+                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="排序算法">
                         
-                        <span class="card-title">python学习笔记（二）</span>
+                        <span class="card-title">排序算法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            python编程进阶
+                            排序算法
                         
                     </div>
                     <div class="publish-info">
@@ -997,8 +1172,8 @@ void print(HashMapOpenAddressing *hashMap) {
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    编程语言
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
                                 </a>
                             
                             
@@ -1008,12 +1183,16 @@ void print(HashMapOpenAddressing *hashMap) {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">计算机基础</span>
                     </a>
                     
-                    <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">编程语言</span>
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8Ahello-%E7%AE%97%E6%B3%95%E3%80%8B/">
+                        <span class="chip bg-color">《hello 算法》</span>
                     </a>
                     
                 </div>

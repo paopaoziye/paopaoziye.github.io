@@ -552,6 +552,7 @@
 <blockquote>
 <p><strong>字符/字符串型字面值</strong>：<strong>前者</strong>用<code>''</code>包围，<strong>类型</strong>为<code>char</code>，<strong>后者</strong>用<code>""</code>包围，为一<code>char</code><strong>数组</strong></p>
 </blockquote>
+<p>类型转换<br>小整数类型通常都会被提升为int进行运算</p>
 <hr>
 <h3 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h3><h4 id="2-1声明与定义"><a href="#2-1声明与定义" class="headerlink" title="2.1声明与定义"></a>2.1声明与定义</h4><p><strong>①格式</strong></p>
 <blockquote>
@@ -668,75 +669,72 @@ ptr_to_char a,b;<span aria-hidden="true" class="line-numbers-rows"><span></span>
 int * const a：指针无法被修改<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3.语句"></a>3.语句</h3><h4 id="3-1基本语句"><a href="#3-1基本语句" class="headerlink" title="3.1基本语句"></a>3.1基本语句</h4><blockquote>
-<p><strong>空语句</strong>：本身<strong>只包含一个分号</strong>，用于<strong>不需要操作但是语法要求出现一条完整语句</strong>的场合</p>
+<p><strong>空语句</strong>：本身<strong>只包含一个分号</strong>，用于<strong>不需要操作</strong>但是<strong>语法要求</strong>出现<strong>一条完整语句</strong>的场合</p>
 </blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 空语句不需要的时候不要使用，尤其是在控制流中</div>
 <blockquote>
-<p><strong>表达式语句</strong>：由<strong>变量</strong>和<strong>操作符</strong>构成，如<code>1+1</code></p>
+<p><strong>表达式语句</strong>：由<strong>运算对象</strong>和<strong>操作符</strong>构成，如<code>1+1</code></p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个表达式语句都有其返回值，但是没有其他操作的情况下，该返回值不被保存</div>
 
 <blockquote>
 <p><strong>代码块</strong>：被<strong>一对花括号</strong>囊括的<strong>语句</strong>，在语法上相当于<strong>一条语句</strong></p>
 </blockquote>
-<h4 id="3-2条件语句"><a href="#3-2条件语句" class="headerlink" title="3.2条件语句"></a>3.2条件语句</h4><div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 出现if嵌套时，else从句属于最靠近他的不完整的if从句</div>
-<pre class="line-numbers language-none"><code class="language-none">if （expression）
-	{
-	statement;
-	}
-else if (expression)
-	{
-	statement;
-	}
-else 
-	{
+<h4 id="3-2条件语句"><a href="#3-2条件语句" class="headerlink" title="3.2条件语句"></a>3.2条件语句</h4><p><strong>①if语句</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 出现if嵌套时，else从句属于最靠近他的不完整的if从句</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果想要else忽略其最近的不完整if从句，使用代码块将对应if语句包裹起来即可</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 可以在if的expression中定义变量，但是其只在if结构内的语句中可见，其余语句如for语句，也有类似的特性</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>expression<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	statement<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>expression<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	statement<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token keyword">else</span> <span class="token punctuation">{</span>
 	statement；
-	}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+	<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②<code>switch</code>循环</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当执行到匹配到case语句后，执行流会一直往下直到switch语句结束，包括default子句</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 在每个case语句下添加break及时退出，break可以直接退出switch语句</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> switch语句的expression只能是整型常量</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">switch</span> <span class="token punctuation">(</span>expression<span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+    <span class="token keyword">case</span> expression_n：
+	  statement；
+      <span class="token keyword">break</span>；
+    <span class="token keyword">default</span>：
+      statement；
+      <span class="token keyword">break</span>；
+	<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="3-3循环语句"><a href="#3-3循环语句" class="headerlink" title="3.3循环语句"></a>3.3循环语句</h4><p><strong>①<code>while</code>循环</strong></p>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> expression的结果必须是整数，C语言中没有布尔类型，非零值为真，零值为假，缺省情况下，真值为1，假值为0</div>
-<pre class="line-numbers language-none"><code class="language-none">while （expression）
-	{
-	statement;
-	}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>②<code>for</code>循环</strong></p>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 初始化语句在循环一开始执行，条件语句在每一次循环开始之前执行，调整语句在每一次循环后执行</div>
-<pre class="line-numbers language-none"><code class="language-none">for （初始化语句; 条件语句;调整语句）
-	{
-	statement;
-	}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<p><strong>③<code>do while</code>循环</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 定义在while条件部分和循环体内的变量，每次迭代都要被创建并销毁</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 在循环语句中，可以使用break语句永久终止循环，使用continue语句终止当前的循环</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">while</span> <span class="token punctuation">(</span>expression<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	statement<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>②<code>do while</code>循环</strong></p>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 与while语句相比，do while语句会先执行语句然后再判断条件是否成立</div>
-<pre class="line-numbers language-none"><code class="language-none">do{
-	statement;
-	}while(expression);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>④<code>switch</code>循环</strong></p>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当执行到匹配到case语句后，执行流会一直往下直到switch语句结束，包括default子句</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在每个case语句下添加break及时退出</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 在循环中可以使用break语句，用于永久终止循环，使用continue语句终止当前的循环</div>
-<pre class="line-numbers language-none"><code class="language-none">switch（expression）
-	{
-    case expression_n：
-	  statement；
-      break；
-    default：
-      statement；
-      break；
-	}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 注意最后需要加上一个分号</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">do</span><span class="token punctuation">{</span>
+	statement<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token keyword">while</span><span class="token punctuation">(</span>expression<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>③<code>for</code>循环</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 初始化语句在循环一开始执行，条件语句在每一次循环开始之前执行，调整语句在每一次循环后执行</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> （初始化语句<span class="token punctuation">;</span> 条件语句<span class="token punctuation">;</span>调整语句）<span class="token punctuation">{</span>
+	statement<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="3-4跳转语句"><a href="#3-4跳转语句" class="headerlink" title="3.4跳转语句"></a>3.4跳转语句</h4><blockquote>
-<p>当执行到<strong>跳转语句</strong>时，会<strong>跳转</strong>到<strong>标号</strong>处</p>
+<p><code>goto [标签]</code>：当执行到<strong>跳转语句</strong>时，会<strong>跳转</strong>到<strong>标号</strong>处</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 标签就是标识符后面加一个冒号</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 非必要不使用goto语句</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 标签就是标识符后面加一个冒号，且与其他实体的名字不会相互干扰</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以通过goto语句跳出嵌套循环</div>
-<pre class="line-numbers language-none"><code class="language-none">biaoqian:
-goto biaoqian;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 非必要不使用goto语句，且不允许跨过变量的初始化语句直接跳转到该变量作用域的另一个位置</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">goto</span> end<span class="token punctuation">;</span><span class="token comment">//错误，跳过了a的定义</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+end<span class="token operator">:</span>
+a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="4-操作符"><a href="#4-操作符" class="headerlink" title="4.操作符"></a>4.操作符</h3><h4 id="4-1基本操作符"><a href="#4-1基本操作符" class="headerlink" title="4.1基本操作符"></a>4.1基本操作符</h4><p><strong>①算术操作符</strong></p>
 <blockquote>
 <p><strong>加</strong><code>+</code>、<strong>减</strong><code>-</code>、<strong>乘</strong><code>*</code>、<strong>除</strong><code>/</code>、<strong>取余</strong><code>%</code></p>
@@ -780,8 +778,8 @@ goto biaoqian;<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 <p><strong>取址</strong><code>&amp;</code>、<strong>引用</strong><code>*</code>、<strong>判断类型长度</strong><code>sizeof()</code>、<strong>求补码</strong><code>~</code>、<strong>递增/减</strong><code>++/--</code></p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ++/--为前缀时，先递加/减，再进行相关操作，为后缀时，先进行相关操作，再递加/减</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 强制类型转换的优先级非常高</div>
-
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> ++/--优先选择其前置形式，因为后置形式还需要将原始值保留以返回</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> sizeof()返回的是以字节为单位的无符号整型size_t，sizeof(*p)，p不必是一个有效指针，因为不会对其进行解引用</div>
 <h4 id="4-2位操作符"><a href="#4-2位操作符" class="headerlink" title="4.2位操作符"></a>4.2位操作符</h4><p><strong>①移位操作符</strong></p>
 <blockquote>
 <p><strong>左移<code>&lt;&lt;</code><strong>：</strong>左边</strong>的几位被<strong>丢弃</strong>，<strong>右边</strong>多出来的几位<strong>由0补齐</strong></p>
@@ -801,17 +799,19 @@ goto biaoqian;<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 
 <h4 id="4-3类型转换"><a href="#4-3类型转换" class="headerlink" title="4.3类型转换"></a>4.3类型转换</h4><p><strong>①隐式类型转换</strong></p>
 <blockquote>
-<p>当<strong>操作数</strong>为<strong>字符型</strong>和<strong>短整型</strong>时，使用之前会先被<strong>转化为普通整型</strong>再进行运算，结果是<strong>普通整型</strong>，若将<strong>结果</strong>存储到<strong>字符型</strong>和短<strong>整型</strong>中，则会<strong>截短</strong></p>
+<p><strong>整型提升</strong>：表达式中，<strong>比<code>int</code>类型小的整型值</strong>首先会被提升为<strong>较大的整数类型</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在C中的整型算数运算总是以缺省整型类型精度进行的</div>
-<p><strong>②算数转换</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如char、unsigned char和short等，一般会被提升为int，如果int不能容纳，则转换为unsigned int等</div>
 <blockquote>
-<p>当<strong>多操作数</strong>进行<strong>运算</strong>时，且操作数属于<strong>不同的类型</strong>，则会<strong>将精度低的数据类型转化为精度高的数据类型进行运算</strong></p>
+<p><strong>算数转换</strong>：当<strong>多操作数</strong>进行<strong>运算</strong>时，且操作数属于<strong>不同的类型</strong>，会将<strong>所有对象</strong>转化为<strong>其中最宽的类型</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 防止数据丢失</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 如int对象和double对象进行运算，int会被转化为double类型再进行运算，以防精度丢失</div>
+<blockquote>
+<p><strong>赋值转换</strong>：<strong>赋值语句</strong>的<strong>右侧运算对象</strong>会转化为<strong>左侧运算对象类型</strong></p>
+</blockquote>
 <p><strong>③强制类型转换</strong></p>
 <blockquote>
-<p><code>(类型) [操作数/表达式]</code></p>
+<p><strong>格式</strong>：<code>(类型) [操作数/表达式]</code></p>
 </blockquote>
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在16位机器上，第三个算式可能会产生溢出，可以在运算前将 a、b中的一个或者两个转化为long即可</div>
 <pre class="line-numbers language-none"><code class="language-none">int a = 5000；
@@ -820,18 +820,24 @@ long c = a*b；<span aria-hidden="true" class="line-numbers-rows"><span></span><
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 强制类型转换可能会导致精度的损失，因为位数不同</div>
 <h4 id="4-4优先级和结合性"><a href="#4-4优先级和结合性" class="headerlink" title="4.4优先级和结合性"></a>4.4优先级和结合性</h4><p><strong>①优先级</strong></p>
 <blockquote>
-<p>标识<strong>运算符</strong>在表达式中的<strong>运算顺序</strong></p>
+<p><strong>概述</strong>：标识<strong>运算符</strong>在表达式中的<strong>运算顺序</strong></p>
 </blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以使用小括号无视优先级改变运算顺序</div>
 <p><strong>②结合性</strong></p>
 <blockquote>
-<p>当一个<strong>运算对象两侧</strong>运算符的<strong>优先级别相同时</strong>, <strong>运算对象</strong>与<strong>运算符</strong>的<strong>结合顺序</strong></p>
+<p><strong>概述</strong>：当一个<strong>运算对象两侧</strong>运算符的<strong>优先级别相同时</strong>, <strong>运算对象</strong>与<strong>运算符</strong>的<strong>结合顺序</strong></p>
 </blockquote>
 <blockquote>
 <p>如<code>*a++</code>，其中<code>*</code>和<code>++</code>为<strong>同一优先级</strong>，结合性为<strong>从右到左</strong>，先进行<code>a++</code>，再进行<code>*(a++)</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 表达式的求值顺序不一定完全按照优先级和结合性，面对有副作用的操作符需要小心</div>
+<p><strong>③求值顺序</strong></p>
 <blockquote>
-<p>如<code>c + --c</code>，<code>c</code><strong>是否</strong>在执行了<code>--c</code>后再<strong>与其相加</strong>,结果<strong>取决于编译器</strong></p>
+<p><strong>概述</strong>：<strong>优先级</strong>和<strong>结合性</strong>只规定了<strong>运算对象</strong>的<strong>组合方式</strong>，并没有<strong>规定其求值顺序</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 只有&amp;&amp;、||、,和:?运算符规定了求值顺序，其余运算符的求值顺序由编译器决定</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 对于一些有副作用的运算符，由于求值顺序的不同可能会导致结果是不确定的</div>
+<blockquote>
+<p>如<code>c = c + --c</code>，<code>c</code><strong>是否</strong>在执行了<code>--c</code>后再<strong>与其相加</strong>,结果<strong>取决于编译器</strong></p>
 </blockquote>
 <p>分配和释放效率：栈是一块较小的内存，分配由编译器自动完成；而堆内存相对更大，可以在代码中动态分配，更容易碎片化。因此，堆上的分配和释放操作通常比栈上的慢。<br>大小限制：栈内存相对较小，堆的大小一般受限于可用内存。因此堆更加适合存储大型数组。<br>灵活性：栈上的数组的大小需要在编译时确定，而堆上的数组的大小可以在运行时动态确定。</p>
 <p>大多为 8 字节或 4 字节。</p>
@@ -952,18 +958,18 @@ long c = a*b；<span aria-hidden="true" class="line-numbers-rows"><span></span><
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/10/cpp-xue-xi-bi-ji-san/">
+                <a href="/2023/12/10/python-xue-xi-bi-ji-san/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/11.webp" class="responsive-img" alt="Cpp学习笔记（三）">
+                        <img src="/medias/featureimages/4.webp" class="responsive-img" alt="python学习笔记（三）">
                         
-                        <span class="card-title">Cpp学习笔记（三）</span>
+                        <span class="card-title">python学习笔记（三）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            面向对象编程
+                            python下文件管理
                         
                     </div>
                     <div class="publish-info">
@@ -985,12 +991,12 @@ long c = a*b；<span aria-hidden="true" class="line-numbers-rows"><span></span><
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C++</span>
+                    <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">编程语言</span>
                     </a>
                     
-                    <a href="/tags/%E3%80%8AC-primer%E3%80%8B/">
-                        <span class="chip bg-color">《C++ primer》</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
                 </div>
