@@ -1,6 +1,5 @@
 ---
 title: Zephyr源码阅读（一）
-seo_title: seo名称
 toc: true
 indent: true
 top: false
@@ -17,16 +16,15 @@ tag:
   - RTOS
   - Zephyr
 categories: RTOS
-keywords: 文章关键词
+keywords: Zephyr源码阅读（一）, RTOS, Zephyr
 updated: ''
-img: /medias/featureimages/10.webp
-date:
+img: /medias/featureimages/37.webp
+date: 2026-06-30 13:55:14
 summary: Zephyr移植
 ---
 # RTOS
-## Zephyr源码阅读
-### Zephyr源码阅读（一）
-#### 1.引言
+## Zephyr源码阅读（一）
+### Zephyr简介
 **①简介**
 >**概述**：由`Linux`基金会托管的开源`RTOS`，可以在[官方仓库](github.com/zephyrproject-rtos/zephyr)获取其源码，**代码架构**如下所示
 {%list%}
@@ -36,7 +34,7 @@ Zephyr采用类似Linux的Kconfig配置系统，支持模块化开发，并且�
 Zephyr采用统一的驱动接口以及设备树，并且代码高度抽象，便于代码移植
 {%endright%}
 {%warning%}
-由于其复杂的抽象层，Zephyr的RAM/Flash占用通常比FreeRTOS等较高
+由于其复杂的抽象层，Zephyr的RAM/Flash占用通常比FreeRTOS等简单实时操作系统高
 {%endwarning%}
 ```shell
 zephyrproject/
@@ -59,6 +57,7 @@ zephyrproject/
     ├── tests/           # 官方测试用例，用于验证内核和各功能模块
     └── ...
 ```
+![Zephyr架构](/image/Zephyr_1.png)
 **②环境配置**
 >**概述**：以`Ubuntu 24.04`为例构建`Zephyr 4.4.0`的开发环境，`SDK`版本为`1.0.1`，如下所示
 {%list%}
@@ -209,7 +208,7 @@ int main(void)
     }
 }
 ```
-```dts
+```devicetree
 /*
  * app.overlay
  *
@@ -295,24 +294,24 @@ int main(void)
     apb2-prescaler = <2>;
 };
 ```
-```Cmakelist
+```cmake
 # CMakeLists.txt
 cmake_minimum_required(VERSION 3.20.0)
 
-// 找到并加载 Zephyr 构建系统
+# 找到并加载 Zephyr 构建系统
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
-// 定义工程名称
+# 定义工程名称
 project(led_demo)
 
-//将 src/main.c 加入编译
+# 将 src/main.c 加入编译
 target_sources(app PRIVATE
     src/main.c
 )
 ```
-```Kconfig
+```kconfig
 # prj.conf
-//启用 GPIO 子系统
+# 启用 GPIO 子系统
 CONFIG_GPIO=y
 ```
 **④编译与烧写**
@@ -376,39 +375,3 @@ $_TARGETNAME configure -event gdb-detach {
     resume
 }
 ```
-
-#### 2.开发板适配
-**①简介**
->**概述**：
-{%list%}
-
-{%endlist%}
-{%right%}
-
-{%endright%}
-{%warning%}
-
-{%endwarning%}
-
-**②环境配置**
->**概述**：
-{%list%}
-
-{%endlist%}
-{%right%}
-
-{%endright%}
-{%warning%}
-
-{%endwarning%}
-**③移植组件**
->**概述**：
-{%list%}
-
-{%endlist%}
-{%right%}
-
-{%endright%}
-{%warning%}
-
-{%endwarning%}

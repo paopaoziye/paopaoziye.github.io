@@ -6,7 +6,7 @@ configRoot = (configRoot === null || configRoot === undefined || configRoot === 
 
     <div class="mobile-head bg-color">
         <% if (theme.logo !== undefined && theme.logo.length > 0) { %>
-        <img src="<%- theme.jsDelivr.url %><%- url_for(theme.logo) %>" class="logo-img circle responsive-img">
+        <img src="<%- theme.jsDelivr.url %><%- url_for(theme.logo) %>" class="logo-img circle responsive-img" alt="<%= config.title %>">
         <% } %>
         <div class="logo-name"><%= config.title %></div>
         <div class="logo-desc">
@@ -70,7 +70,7 @@ configRoot = (configRoot === null || configRoot === undefined || configRoot === 
         <% if (theme.githubLink && theme.githubLink.enable) { %>
         <li><div class="divider"></div></li>
         <li>
-            <a href="<%- theme.githubLink.url %>" class="waves-effect waves-light" target="_blank">
+            <a href="<%- theme.githubLink.url %>" class="waves-effect waves-light" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-github-square fa-fw"></i><%- theme.githubLink.title %>
             </a>
         </li>

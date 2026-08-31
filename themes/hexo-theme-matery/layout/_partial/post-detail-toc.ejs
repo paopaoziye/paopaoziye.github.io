@@ -105,8 +105,8 @@
 <!-- TOC 悬浮按钮. -->
 <% if (theme.toc.enable && theme.toc.showToggleBtn) { %>
 <div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
+    <a class="btn-floating btn-large bg-color" href="#toc-content" aria-label="显示或隐藏目录" aria-controls="toc-content" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
     </a>
 </div>
 <% } %>

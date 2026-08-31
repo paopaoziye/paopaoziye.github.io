@@ -1,6 +1,5 @@
 ---
-title: RT-thread源码阅读（一）
-seo_title: seo名称
+title: RT-Thread源码阅读（一）
 toc: true
 indent: true
 top: false
@@ -17,11 +16,11 @@ tag:
   - RTOS
   - RTT
 categories: RTOS
-keywords: 文章关键词
+keywords: RT-Thread源码阅读（一）, RTOS, RTT
 updated: ''
 img: /medias/featureimages/22.webp
-date:
-summary: RTthread
+date: 2026-06-30 13:55:14
+summary: RT-Thread
 ---
 # RTOS
 ## RT-thread源码阅读

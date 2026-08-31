@@ -1,6 +1,5 @@
 ---
 title: {{title}}
-seo_title: seo名称
 toc: true            # 是否生成目录
 indent: true         # 是否首行缩进
 top: false
@@ -16,9 +15,9 @@ tag:
   - 标签一
   - 标签二
 categories: 分组
-keywords: 文章关键词
-date: {{data}}
+keywords:
+date: {{date}}
 updated: ""
 summary: 
-img: /medias/featureimages/xxx.jpg
+img: /medias/featureimages/0.webp
 ---

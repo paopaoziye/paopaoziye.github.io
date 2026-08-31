@@ -1,6 +1,5 @@
 ---
 title: STM32（四）
-seo_title: seo名称
 toc: true
 indent: true
 top: false
@@ -16,10 +15,10 @@ sidebar:
 tag:
   - STM32
 categories: MCU
-keywords: 文章关键词
+keywords: STM32（四）, STM32, MCU
 updated: ''
 img: /medias/featureimages/27.webp
-date:
+date: 2026-06-30 13:55:14
 summary: HAL库
 ---
 # 单片机
@@ -88,7 +87,7 @@ __main将FLASH中已初始化的全局变量拷贝到RAM中并清零BSS段，最
 与标准库的SystemInit不同，HAL库不会启用并配置外部高速时钟，而是一直使用内部高速时钟
 {%endwarning%}
 
-```nasm
+```arm-gas
 ; Reset handler
 Reset_Handler    PROC
                  EXPORT  Reset_Handler             [WEAK]

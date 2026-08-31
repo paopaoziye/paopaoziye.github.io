@@ -3,12 +3,12 @@
         <div class="col s6 m4 l4">
             <% if (page.prev) { %>
             <a href="<%- url_for(page.prev_link) %>"
-               class="left btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fas fa-angle-left"></i>
+               class="left btn-floating btn-large waves-effect waves-light bg-color" aria-label="上一页">
+                <i class="fas fa-angle-left" aria-hidden="true"></i>
             </a>
             <% } else { %>
-            <a class="left btn-floating btn-large disabled">
-                <i class="fas fa-angle-left"></i>
+            <a class="left btn-floating btn-large disabled" aria-label="没有上一页" aria-disabled="true">
+                <i class="fas fa-angle-left" aria-hidden="true"></i>
             </a>
             <% } %>
         </div>
@@ -18,12 +18,12 @@
         <div class="col s6 m4 l4">
             <% if (page.next) { %>
             <a href="<%- url_for(page.next_link) %>"
-               class="right btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fas fa-angle-right"></i>
+               class="right btn-floating btn-large waves-effect waves-light bg-color" aria-label="下一页">
+                <i class="fas fa-angle-right" aria-hidden="true"></i>
             </a>
             <% } else { %>
-            <a class="right btn-floating btn-large disabled">
-                <i class="fas fa-angle-right"></i>
+            <a class="right btn-floating btn-large disabled" aria-label="没有下一页" aria-disabled="true">
+                <i class="fas fa-angle-right" aria-hidden="true"></i>
             </a>
             <% } %>
         </div>

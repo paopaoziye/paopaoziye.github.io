@@ -1,6 +1,5 @@
 ---
 title: STM32（二）
-seo_title: seo名称
 toc: true
 indent: true
 top: false
@@ -16,10 +15,10 @@ sidebar:
 tag:
   - STM32
 categories: MCU
-keywords: 文章关键词
+keywords: STM32（二）, STM32, MCU
 updated: ''
 img: /medias/featureimages/27.webp
-date:
+date: 2026-06-30 13:55:14
 summary: 串行通信
 ---
 # 单片机
@@ -244,7 +243,6 @@ SDA:[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][1][1][1][1][1][1][0][0][0][
     |                                               |                 |           
     发送数据：数据为00000000                         主机释放SDA并等待   从机拉低SDA应答
 ```
-![读写操作](/image/iic_3.png)
 **③模块配置**
 >**概述**：先初始化对应的`GPIO`引脚，`SCL`和`SDA`均配置为**复用开漏输出**，再配置`IIC`本身
 {%list%}
@@ -487,7 +485,6 @@ SPI为同步全双工通信，可以实现一对多的数据传输，速度最�
 {%warning%}
 SPI通信过程中，主设备向从设备写一次数据，从设备就会回一次数据，该数据可以被读取，也可以丢弃
 {%endwarning%}
-![通信协议](/image/spi_2.png)
 **③模块配置**
 >**概述**：先初始化对应的`GPIO`引脚，`SCLK`和`SDO`均配置为**复用推挽输出**，`SDI`配置为**上拉输入**，再配置`SPI`本身
 {%list%}

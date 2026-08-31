@@ -1,6 +1,5 @@
 ---
 title: Modbus协议（一）
-seo_title: seo名称
 toc: true
 indent: true
 top: false
@@ -16,11 +15,11 @@ sidebar:
 tag:
   - 串行协议
 categories: Modbus
-keywords: 文章关键词
+keywords: Modbus协议（一）, 串行协议, Modbus
 updated: ''
 img: /medias/featureimages/29.webp
-date:
-summary: 简单介绍
+date: 2026-06-30 13:55:14
+summary: Modbus协议简介
 ---
 # 串行协议
 ## Modbus协议

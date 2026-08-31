@@ -73,7 +73,7 @@ $(function () {
         $('#articleContent a').attr('target', '_blank');
 
         $('#articleContent img').each(function () {
-            let imgPath = $(this).attr('src');
+            let imgPath = $(this).attr('data-original') || $(this).attr('src');
             $(this).wrap('<div class="img-item" data-src="' + imgPath + '" data-sub-html=".caption"></div>');
             // 图片添加阴影
             $(this).addClass("img-shadow img-margin");

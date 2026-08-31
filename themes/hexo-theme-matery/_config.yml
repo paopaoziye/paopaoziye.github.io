@@ -42,7 +42,7 @@ menu:
 # Website start time.
 # 站点运行开始时间.
 time:
-  enable: ture
+  enable: true
   year: 2023 # 年份
   month: 2 # 月份
   date: 22 # 日期
@@ -64,7 +64,7 @@ cover:
 # index page dream text,
 # 配置首页显示"梦想"的语句.
 dream:
-  enable: true
+  enable: false
   showTitle: true
   title: My Dream
   text: 活在自己的期待里
@@ -72,7 +72,7 @@ dream:
 # Whether to display the musics.
 # 是否在首页显示音乐.
 music:
-  enable: true
+  enable: false
   title:     	    # 非吸底模式有效
     enable: true
     show: 勾栏听曲
@@ -108,7 +108,7 @@ video:
 # Whether to display the title of the recommended posts
 # 是否显示推荐文章的标题
 recommend:
-  enable: true
+  enable: false
   showTitle: true
   useConfig: false # 是否使用配置文件, 在 _data/recommends.json 下配置推荐文章, false则会走主题配置的 top 属性
   # useConfig 使用方式: 将主题 hexo-theme-matery/source/_data/recommends.json 移动到 my-blog/source/_data/下修改配置即可
@@ -138,7 +138,7 @@ socialLink:
   qq: 1781206070
   weibo: # https://weibo.com/xxx
   zhihu: # https://www.zhihu.com/xxx
-  rss: false # true、false
+  rss: true # true、false
 
 # Whether to activate the Post TOC, and Configure which title types are supported by TOC support.
 # You can add `toc: false` to the Front-matter of a post to turn off the TOC.
@@ -259,9 +259,9 @@ mySkills:
 myGallery:
   enable: false
   data:
-    - /medias/featureimages/0.jpg
-    - /medias/featureimages/1.jpg
-    - /medias/featureimages/2.jpg
+    - /medias/featureimages/0.webp
+    - /medias/featureimages/1.webp
+    - /medias/featureimages/2.webp
 
 # Whether to display post-calender in the `archive` page
 # 设置在归档页面中是否显示'文章日历'控件
@@ -396,7 +396,7 @@ verifyPassword:
 # busuanzi(http://busuanzi.ibruce.info/) website statistics
 # 不蒜子(http://busuanzi.ibruce.info/) 网站统计
 busuanziStatistics:
-  enable: ture
+  enable: true
   totalTraffic: true # 总访问量
   totalNumberOfvisitors: true # 总人次
 
@@ -462,30 +462,40 @@ libs:
 # The post featured images that needs to be displayed when there is no image.
 # 无文章特色图片时需要显示的文章特色图片.
 featureImages:
-- /medias/featureimages/0.jpg
-- /medias/featureimages/1.jpg
-- /medias/featureimages/2.jpg
-- /medias/featureimages/3.jpg
-- /medias/featureimages/4.jpg
-- /medias/featureimages/5.jpg
-- /medias/featureimages/6.jpg
-- /medias/featureimages/7.jpg
-- /medias/featureimages/8.jpg
-- /medias/featureimages/9.jpg
-- /medias/featureimages/10.jpg
-- /medias/featureimages/11.jpg
-- /medias/featureimages/12.jpg
-- /medias/featureimages/13.jpg
-- /medias/featureimages/14.jpg
-- /medias/featureimages/15.jpg
-- /medias/featureimages/16.jpg
-- /medias/featureimages/17.jpg
-- /medias/featureimages/18.jpg
-- /medias/featureimages/19.jpg
-- /medias/featureimages/20.jpg
-- /medias/featureimages/21.jpg
-- /medias/featureimages/22.jpg
-- /medias/featureimages/23.jpg
+- /medias/featureimages/0.webp
+- /medias/featureimages/1.webp
+- /medias/featureimages/2.webp
+- /medias/featureimages/3.webp
+- /medias/featureimages/4.webp
+- /medias/featureimages/5.webp
+- /medias/featureimages/6.webp
+- /medias/featureimages/7.webp
+- /medias/featureimages/8.webp
+- /medias/featureimages/9.webp
+- /medias/featureimages/10.webp
+- /medias/featureimages/11.webp
+- /medias/featureimages/12.webp
+- /medias/featureimages/13.webp
+- /medias/featureimages/15.webp
+- /medias/featureimages/16.webp
+- /medias/featureimages/17.webp
+- /medias/featureimages/18.webp
+- /medias/featureimages/20.webp
+- /medias/featureimages/22.webp
+- /medias/featureimages/23.webp
+- /medias/featureimages/25.webp
+- /medias/featureimages/26.webp
+- /medias/featureimages/27.webp
+- /medias/featureimages/28.webp
+- /medias/featureimages/29.webp
+- /medias/featureimages/30.webp
+- /medias/featureimages/31.webp
+- /medias/featureimages/33.webp
+- /medias/featureimages/36.webp
+- /medias/featureimages/37.webp
+- /medias/featureimages/38.webp
+- /medias/featureimages/39.webp
+- /medias/featureimages/40.webp
 
 # default configs that the default policy for every articles/posts
 # default 配置文章的默认转载规则
@@ -526,7 +536,7 @@ tuxiaochao:
   productId:
 #背景canvas-nest
 canvas_nest:
-  enable: ture
+  enable: true
   color: 0,0,255 # 线条颜色, 默认: '0,0,0' ；三个数字分别为(R,G,B)，注意用,分割
   pointColor: 0,0,255 # 交点颜色, 默认: '0,0,0' ；三个数字分别为(R,G,B)，注意用,分割
   opacity: 0.7 # 线条透明度（0~1）, 默认: 0.5
@@ -535,15 +545,15 @@ canvas_nest:
 
 # 背景静止彩带.
 ribbon:
-  enable: ture
+  enable: true
   size: 150 # 彩带大小, 默认: 90.
   alpha: 0.6 # 彩带透明度 (0 ~ 1), 默认: 0.6.
   zIndex: -1 # 背景的z-index属性，css属性用于控制所在层的位置, 默认: -1.
-  clickChange: ture  # 设置是否每次点击都更换彩带.
+  clickChange: true  # 设置是否每次点击都更换彩带.
 
 # 背景动态彩带.
 ribbon_dynamic:
-  enable: ture
+  enable: true
 
 # sharejs文章分享模块.
 # 支持顺序，可选项目为twitter, facebook, google, qq, qzone, wechat, weibo, douban, linkedin.

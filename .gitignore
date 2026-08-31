@@ -1,0 +1,24 @@
+# Hexo-generated output and state
+/public/
+/db.json
+/.deploy_git/
+
+# Logs and crash dumps
+*.log
+*.log.*
+*.dump
+*.dmp
+*.stackdump
+
+# Operating-system metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Claude Code local settings
+/.claude/settings.local.json

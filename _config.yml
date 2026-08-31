@@ -5,7 +5,7 @@
 # Site
 title: Zfk's Study Notes
 subtitle: Signature
-description: ''
+description: '嵌入式系统、通信协议、RTOS 与软件开发学习笔记'
 keywords:
 author: Paopaozi
 language: zh-CN
@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://paopaoziye.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -105,6 +105,21 @@ search:
   path: search.xml
   field: post
 
+# Atom feed configuration
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  order_by: -date
+  autodiscovery: true
+
+sitemap:
+  path: sitemap.xml
+  rel: false
+  tags: true
+  categories: true
+
 #中文链接转拼音
 permalink_pinyin:
   enable: true
@@ -155,7 +170,7 @@ live2d:
 lazyload:
   enable: true
   onlypost: true  # 是否只对文章的图片做懒加载
-  loadingImg: /images/loading.gif# eg ./images/loading.gif
+  loadingImg: /images/loading.gif # eg ./images/loading.gif
 
 
 # Deployment

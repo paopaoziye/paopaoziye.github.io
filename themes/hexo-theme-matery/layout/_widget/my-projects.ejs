@@ -12,11 +12,11 @@ var myprojects = theme.myProjects.data;
         <div class="col s12 m6 l4" data-aos="fade-up">
             <div class="info center-align">
                 <a href="<%- myprojects[project].url %>" class="icon"
-                   style="background: <%- myprojects[project].iconBackground %>" target="_blank">
+                   style="background: <%- myprojects[project].iconBackground %>" target="_blank" rel="noopener noreferrer">
                     <i class="<%- myprojects[project].icon %>"></i>
                 </a>
                 <div class="info-title">
-                    <a href="<%- url_for(myprojects[project].url) %>" target="_blank"><%- project %></a>
+                    <a href="<%- url_for(myprojects[project].url) %>" target="_blank" rel="noopener noreferrer"><%- project %></a>
                 </div>
                 <div class="info-desc"><%= myprojects[project].desc %></div>
             </div>

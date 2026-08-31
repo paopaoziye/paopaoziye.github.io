@@ -1,6 +1,5 @@
 ---
 title: C语言学习笔记（一）
-seo_title: seo名称
 toc: true
 indent: true
 top: false
@@ -15,11 +14,11 @@ sidebar:
   - toc
 tag:
   - C语言
-  - 《C和指针》        
+  - 《C和指针》
 categories: 编程语言
-keywords: 文章关键词
+keywords: C语言学习笔记（一）, C语言, 《C和指针》, 编程语言
 updated: ''
-date:
+date: 2023-11-07 17:33:24
 img: /medias/featureimages/0.webp
 summary: C语言基础
 ---

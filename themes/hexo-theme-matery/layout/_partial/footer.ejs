@@ -10,10 +10,9 @@
             <% } else { %>
                 <span id="year"><%- theme.time.year %></span>
             <% } %>
-            <span id="year"><%- theme.time.year %></span>
-            <a href="<%- url_for('/about') %>" target="_blank"><%- config.author %></a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <a href="<%- url_for('/about') %>" target="_blank" rel="noopener noreferrer"><%- config.author %></a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a>
             <br>
             <% if (theme.postInfo.totalCount) { %>
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
@@ -53,20 +52,23 @@
                     var startMinute = "<%- theme.time.minute %>";
                     var startSecond = "<%- theme.time.second %>";
                     var todayYear = today.getFullYear();
-                    var todayMonth = today.getMonth() + 1;
-                    var todayDate = today.getDate();
-                    var todayHour = today.getHours();
-                    var todayMinute = today.getMinutes();
-                    var todaySecond = today.getSeconds();
-                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                    var diff = t2 - t1;
-                    var diffYears = Math.floor(diff / years);
-                    var diffDays = Math.floor((diff / days) - diffYears * 365);
-                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
-                        minutes);
-                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                    var start = new Date(
+                        Number(startYear), Number(startMonth) - 1, Number(startDate),
+                        Number(startHour), Number(startMinute), Number(startSecond)
+                    );
+                    var diff = Date.now() - start.getTime();
+                    var diffYears = todayYear - start.getFullYear();
+                    var anniversary = new Date(start);
+                    anniversary.setFullYear(start.getFullYear() + diffYears);
+                    if (anniversary.getTime() > Date.now()) {
+                        diffYears--;
+                        anniversary.setFullYear(start.getFullYear() + diffYears);
+                    }
+                    diff = Date.now() - anniversary.getTime();
+                    var diffDays = Math.floor(diff / days);
+                    var diffHours = Math.floor((diff - diffDays * days) / hours);
+                    var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
+                    var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours -
                         diffMinutes * minutes) / seconds);
                     if (startYear == todayYear) {
                         document.getElementById("year").innerHTML = todayYear;
@@ -78,13 +80,14 @@
                             " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                     }
                 }
+                siteTime();
                 setInterval(siteTime, 1000);
             </script>
             <% } %>
             <br>
             <% if (theme.icp.enable) { %>
-            <span id="icp"><img src="<%- theme.jsDelivr.url %><%- url_for('/medias/icp.png') %>" style="vertical-align: text-bottom;" />
-                <a href="<%- url_for(theme.icp.url) %>" target="_blank"><%= theme.icp.text %></a>
+            <span id="icp"><img src="<%- theme.jsDelivr.url %><%- url_for('/medias/icp.png') %>" alt="备案图标" style="vertical-align: text-bottom;" />
+                <a href="<%- url_for(theme.icp.url) %>" target="_blank" rel="noopener noreferrer"><%= theme.icp.text %></a>
             </span>
             <% } %>
         </div>

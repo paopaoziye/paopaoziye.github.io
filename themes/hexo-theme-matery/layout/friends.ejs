@@ -205,14 +205,14 @@
                             <div class="card frind-card<%- ((i % 10) +1) %>">
                                 <div class="frind-ship">
                                     <div class="title">
-                                        <img src="<%- url_for(friend.avatar) %>" alt="img">
+                                        <img src="<%- url_for(friend.avatar) %>" alt="<%= friend.name %>" loading="lazy" decoding="async">
                                         <div>
                                             <h1 class="friend-name"><%= friend.name %></h1>
                                             <p style="position: relative;top: -35px;"><%= friend.introduction %></p>
                                         </div>
                                     </div>
                                     <div class="friend-button">
-                                        <a href="<%- url_for(friend.url) %>" target="_blank"
+                                        <a href="<%- url_for(friend.url) %>" target="_blank" rel="noopener noreferrer"
                                             class="button button-glow button-rounded button-caution">
                                             <%= friend.title %>
                                         </a>

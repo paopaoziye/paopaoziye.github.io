@@ -1,6 +1,5 @@
 ---
 title: Rust学习笔记（一）
-seo_title: seo名称
 toc: true
 indent: true
 top: false
@@ -17,10 +16,10 @@ tag:
   - 《Rust 权威学习指南》
   - Rust
 categories: 编程语言
-keywords: 文章关键词
+keywords: Rust学习笔记（一）, 《Rust 权威学习指南》, Rust, 编程语言
 updated: ''
 img: /medias/featureimages/30.webp
-date:
+date: 2026-07-19 01:32:03
 summary: Rust基础
 ---
 # 编程语言
@@ -38,6 +37,7 @@ Rust的所有权机制通过规定数据的归属、转移和释放方式，在�
 {%warning%}
 Rust的学习曲线陡峭，编译速度较慢，且经常会出现代码逻辑没有明显问题，但无法编译通过的情况
 {%endwarning%}
+![所有权机制](/image/Rust_1.png)
 **②环境配置**
 >**概述**：以`Ubuntu 24.04`为例构建`Rust`的开发环境，主要就是安装`rustc`、`cargo`和`rustup`
 {%list%}

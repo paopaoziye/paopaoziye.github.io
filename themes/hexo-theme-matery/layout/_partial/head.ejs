@@ -44,6 +44,10 @@
     }
     description = description ? description : pageTitle;
 
+    var siteUrl = String(config.url || '').replace(/\/+$/, '');
+    var canonicalPath = page.path ? url_for(page.path) : url_for('/');
+    var canonicalUrl = siteUrl + canonicalPath;
+
     let iconType = 'image/png'
     let faviconExt = theme.favicon.substr(theme.favicon.lastIndexOf('.') + 1, theme.favicon.length)
     if (faviconExt === 'png') {
@@ -64,9 +68,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="<%= keyWords %>">
-    <meta name="description" content="<%= config.description %>">
+    <meta name="description" content="<%= description %>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="<%= canonicalUrl %>">
+    <link rel="alternate" type="application/atom+xml" title="<%= config.title %> Atom Feed" href="<%- url_for('/atom.xml') %>">
+    <meta property="og:type" content="<%= page.__post ? 'article' : 'website' %>">
+    <meta property="og:title" content="<%= pageTitle %>">
+    <meta property="og:description" content="<%= description %>">
+    <meta property="og:url" content="<%= canonicalUrl %>">
+    <meta property="og:site_name" content="<%= config.title %>">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="<%= pageTitle %>">
+    <meta name="twitter:description" content="<%= description %>">
+    <meta name="twitter:url" content="<%= canonicalUrl %>">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
@@ -83,7 +98,6 @@
     <link rel="stylesheet" type="text/css" href="<%- theme.jsDelivr.url %><%- url_for(theme.libs.css.lightgallery) %>">
     <link rel="stylesheet" type="text/css" href="<%- theme.jsDelivr.url %><%- url_for(theme.libs.css.matery) %>">
     <link rel="stylesheet" type="text/css" href="<%- theme.jsDelivr.url %><%- url_for(theme.libs.css.mycss) %>">
-    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
 
     <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.jquery) %>"></script>
 
@@ -122,3 +136,4 @@
             font-weight: 600;
         }
  </style>
+</head>
