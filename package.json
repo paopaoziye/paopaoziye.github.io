@@ -14,7 +14,7 @@
     "version": "5.4.2"
   },
   "dependencies": {
-    "hexo": "^5.0.0",
+    "hexo": "^8.1.2",
     "hexo-deployer-git": "^4.0.0",
     "hexo-filter-github-emojis": "^3.0.5",
     "hexo-generator-archive": "^1.0.0",
