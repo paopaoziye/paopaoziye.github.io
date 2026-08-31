@@ -1,0 +1,1574 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="STM32（二）, STM32, MCU">
+    <meta name="description" content="串行通信">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://paopaoziye.github.io/2026/06/30/stm32-er/">
+    <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="归档 | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="串行通信">
+    <meta property="og:url" content="https://paopaoziye.github.io/2026/06/30/stm32-er/">
+    <meta property="og:site_name" content="Zfk&#39;s Study Notes">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="归档 | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="串行通信">
+    <meta name="twitter:url" content="https://paopaoziye.github.io/2026/06/30/stm32-er/">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse" aria-label="打开导航菜单"><i class="fas fa-bars" aria-hidden="true"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img" alt="Zfk&#39;s Study Notes">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            嵌入式系统、通信协议、RTOS 与软件开发学习笔记
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/27.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">STM32（二）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/STM32/">
+                                <span class="chip bg-color">STM32</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/MCU/" class="post-category">
+                                MCU
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-06-30
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="单片机"><a href="#单片机" class="headerlink" title="单片机"></a>单片机</h1><h2 id="STM32"><a href="#STM32" class="headerlink" title="STM32"></a>STM32</h2><h3 id="STM32（二）"><a href="#STM32（二）" class="headerlink" title="STM32（二）"></a>STM32（二）</h3><h4 id="1-UART"><a href="#1-UART" class="headerlink" title="1.UART"></a>1.UART</h4><p><strong>①简介</strong></p>
+<blockquote>
+<p><strong>概述</strong>：全称为<strong>通用异步收发传输器</strong>，收发双方都有引脚<code>RX</code>和<code>TX</code>，分别用于<strong>接收和发送</strong>数据</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> UART为异步全双工通信，采用小端传输，即先发送低位，再发送高位</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> STM32串口还有CK、RTS和CTS引脚，CK用于同步模式，RTS和CTS用于硬件流控</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> UART只能实现一对一的数据传输，速度较慢</div>
+<p><strong>②通信协议</strong></p>
+<blockquote>
+<p><strong>概述</strong>：每个数据帧由<strong>起始位</strong>、<strong>数据位</strong>、<strong>校验位</strong>和<strong>停止位</strong>组成，并以一定的速率即<strong>波特率</strong>传输</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 通常采用8N1，即八数据位、无校验位和一停止位，使用该设置传输Hello字符串的波形如下所示</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> RS232和RS485协议本质上是采用不同电平传输逻辑1和逻辑0的UART协议，抗干扰能力更强，适合长距离传输</div>
+<blockquote>
+<p><code>RS232</code>：普通<code>UART</code>逻辑<code>1</code>为<code>2v~5v</code>，逻辑<code>0</code>为<code>0v~0.8v</code>，<code>RS232</code>逻辑<code>1</code>为<code>+3v~+15v</code>，逻辑<code>0</code>为<code>-3v~-15v</code></p>
+</blockquote>
+<blockquote>
+<p><code>RS485</code>：使用两根线<code>A</code>、<code>B</code>生成<strong>差分信号</strong>，当<code>A</code>的电平<strong>高于</strong><code>B</code>的电平时，为逻辑<code>1</code>，反之为逻辑<code>0</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 使用串口前数据传输双方需要预先统一波特率，以便正确的传输数据，常用波特率有9600、115200和921600</div>
+<blockquote>
+<p><strong>起始位</strong>：当线路空闲时，一直处于<strong>逻辑</strong><code>1</code>状态，发送一个<strong>逻辑</strong><code>0</code>表示开始传输数据</p>
+</blockquote>
+<blockquote>
+<p><strong>数据位</strong>：紧接着<strong>起始位</strong>后，可以发送<code>8-9</code>位<strong>数据位</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>校验位</strong>：如果采用<strong>奇校验/偶校验</strong>，数据位的<strong>最后一位</strong>为校验位，该位应使得数据位中<code>1</code>的位数为<strong>奇数/偶数</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>停止位</strong>：紧接着<strong>数据位</strong>后，发送<code>0.5/1/1.5/2</code>位<strong>逻辑</strong><code>1</code>，表示数据<strong>发送完毕</strong></p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">空闲 起始位                     停止位  空闲
+       <span class="token operator">|</span>                          <span class="token operator">|</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> -<span class="token operator">&gt;</span>数据位为00010010，即<span class="token string">'H'</span>的小端序（H的ASCII码为01001000）
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> -<span class="token operator">&gt;</span>数据位为10100110，即<span class="token string">'e'</span>的小端序
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> -<span class="token operator">&gt;</span>数据位为00110110，即<span class="token string">'l'</span>的小端序
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> -<span class="token operator">&gt;</span>数据位为00110110，即<span class="token string">'l'</span>的小端序
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> -<span class="token operator">&gt;</span>数据位为11110110，即<span class="token string">'o'</span>的小端序<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③模块配置</strong></p>
+<blockquote>
+<p><strong>概述</strong>：先初始化对应的<code>GPIO</code>引脚，<code>TX</code>引脚为<strong>复用推挽输出</strong>，<code>RX</code>引脚为<strong>上拉输入</strong>，再配置<code>USART</code>本身</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 可以在数据手册的引脚分布表中和用户手册的IO配置表查询对应引脚编号和配置方式</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以使用AFIO模块对引脚进行重映射，USART1的TX和RX引脚默认为PA9和PA10，重映射后为PB6和PB7</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> RX引脚最好使用上拉输入模式，因为根据UASRT通信协议，串口空闲时需要保持高电平</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">Usart1_Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//打开GPIO时钟</span>
+  <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOA<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//初始化引脚，TX引脚设置为复用推挽输出</span>
+  GPIO_InitTypeDef gpio_init_struct <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> GPIO_Pin_9<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_AF_PP<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Speed <span class="token operator">=</span> GPIO_Speed_10MHz<span class="token punctuation">;</span>
+  <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>GPIOA<span class="token punctuation">,</span><span class="token operator">&amp;</span>gpio_init_struct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//RX引脚设置为输入上拉</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> GPIO_Pin_10<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_IPU<span class="token punctuation">;</span>
+  <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>GPIOA<span class="token punctuation">,</span><span class="token operator">&amp;</span>gpio_init_struct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//打开串口时钟</span>
+  <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_USART1<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//初始化串口，设置波特率、硬件流控、收发模式、校验位、停止位和数据位</span>
+  USART_InitTypeDef usart_init_struct <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  usart_init_struct<span class="token punctuation">.</span>USART_BaudRate <span class="token operator">=</span> <span class="token number">115200</span><span class="token punctuation">;</span>
+  usart_init_struct<span class="token punctuation">.</span>USART_HardwareFlowControl <span class="token operator">=</span> USART_HardwareFlowControl_None<span class="token punctuation">;</span>
+  usart_init_struct<span class="token punctuation">.</span>USART_Mode <span class="token operator">=</span> USART_Mode_Rx <span class="token operator">|</span> USART_Mode_Tx<span class="token punctuation">;</span>
+  usart_init_struct<span class="token punctuation">.</span>USART_Parity <span class="token operator">=</span> USART_Parity_No<span class="token punctuation">;</span>
+  usart_init_struct<span class="token punctuation">.</span>USART_Stop_Bits <span class="token operator">=</span> USART_StopBits_1<span class="token punctuation">;</span>
+  usart_init_struct<span class="token punctuation">.</span>USART_Word_Length <span class="token operator">=</span> USART_WordLength_8b<span class="token punctuation">;</span>
+  <span class="token function">USART_Init</span><span class="token punctuation">(</span>USART1<span class="token punctuation">,</span><span class="token operator">&amp;</span>usart_init_struct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//使能串口</span>
+  <span class="token function">USART_Cmd</span><span class="token punctuation">(</span>USART1<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">Usart1_Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//打开AFIO的时钟</span>
+  <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_AFIO<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span>
+  <span class="token comment">//开启USART1的重映射</span>
+  <span class="token function">GPIO_PinRemapConfig</span><span class="token punctuation">(</span>GPIO_Remap_USART1<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span>
+  <span class="token comment">//配置PA6、PA7，并设置串口，略</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>④收发数据</strong></p>
+<blockquote>
+<p><strong>概述</strong>：核心函数为<code>My_USART_SendBytes</code>和<code>My_USART_ReceiveBytes</code>，如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 发送数据时，数据先进入发送数据寄存器，随后进入移位寄存器，最后一位一位发送出去，接受数据流程类似</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 串口主要标志位有TXE、TC和RXNE，分别标识发送寄存器为空、数据发送完成和接收寄存器非空</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 当出现奇偶校验错、帧格式错误、噪声错和溢出错误时，PE、FE、NE和ORE标志位会被置为1</div>
+<blockquote>
+<p><code>PE</code>通常由双方<strong>奇偶校验设置不匹配</strong>导致，<code>FE</code>通常由双方<strong>波特率不匹配</strong>导致</p>
+</blockquote>
+<blockquote>
+<p><code>NE</code>通常由<strong>环境噪声和信号质量差</strong>导致，<code>ORE</code>通常由<strong>软件响应慢和中断被阻塞</strong>导致</p>
+</blockquote>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 使用串口发送多个字符 */</span>
+<span class="token keyword">void</span> <span class="token function">My_USART_SendBytes</span><span class="token punctuation">(</span>USART_TypeDef <span class="token operator">*</span>USARTx<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span>pData<span class="token punctuation">,</span> <span class="token class-name">uint16_t</span> Size<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>Size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">uint16_t</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> Size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//忙等待直到发送数据寄存器为空</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">USART_GetFlagStatus</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">,</span> USART_FLAG_TXE<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//将当前字节写入发送寄存器，后续硬件会自动开始发送</span>
+    <span class="token function">USART_SendData</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">,</span> pData<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//忙等待直到数据发送完成</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">USART_GetFlagStatus</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">,</span> USART_FLAG_TC<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 使用串口接收多个字符 */</span>
+<span class="token class-name">uint16_t</span> <span class="token function">My_USART_ReceiveBytes</span><span class="token punctuation">(</span>USART_TypeDef <span class="token operator">*</span>USARTx<span class="token punctuation">,</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span>pDataOut<span class="token punctuation">,</span> 
+                               <span class="token class-name">uint16_t</span> Size<span class="token punctuation">,</span> <span class="token keyword">int</span> Timeout<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token class-name">uint32_t</span> expireTime<span class="token punctuation">;</span>
+  <span class="token comment">//初始化systick寄存器</span>
+  <span class="token function">Delay_Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//计算过期时间</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>Timeout <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    expireTime <span class="token operator">=</span> <span class="token function">GetTick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> Timeout<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//记录接收的字节数</span>
+  <span class="token class-name">uint16_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token comment">//不断接收数据直到超时</span>
+  <span class="token keyword">do</span><span class="token punctuation">{</span>
+    <span class="token comment">//如果接收寄存器非空则提取数据</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">USART_GetFlagStatus</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">,</span> USART_FLAG_RXNE<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      pDataOut<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">USART_ReceiveData</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      
+      <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">==</span>Size<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token keyword">while</span><span class="token punctuation">(</span>Timeout <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token function">GetTick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> expireTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> i<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-IIC"><a href="#2-IIC" class="headerlink" title="2.IIC"></a>2.IIC</h4><p><strong>①简介</strong></p>
+<blockquote>
+<p><strong>概述</strong>：全称为<strong>内部集成电路</strong>，主要由<strong>时钟线</strong><code>SCL</code>和<strong>数据线</strong><code>SDA</code>组成，可以同时连接<strong>多个设备</strong>，如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> IIC为同步半双工通信，采用大端传输，可以实现一对多的数据传输，速度比UART快，比SPI慢</div>
+<blockquote>
+<p>设备被分为<strong>主设备</strong>和<strong>从设备</strong>，主设备<strong>发起和主导</strong>通信（控制<code>SCL</code>线），<strong>同一时刻</strong>只能有一个主设备</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> SCL和SDA线都接上拉电阻，且所有的SCL和SDA引脚都被设置为开漏输出，从而实现逻辑线与，进行一对多的通信</div>
+<blockquote>
+<p><strong>逻辑线与</strong>：以<code>SCL</code>线为例，只要有<strong>一个设备</strong>的<code>SCL</code>引脚为<strong>低电平</strong>，<code>SCL</code>线将从<strong>高电平变为低电平</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 只有主设备才能控制SCL线，从设备SCL引脚均被置为1，当一个设备控制SDA线时，其他设备的SDA引脚都置为1</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 如果采用推挽输出，必须所有设备的引脚为高电平才能将SCL/SDA线变为低电平，一个设备无法影响电路状态</div>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">                                                                                <span class="token punctuation">[</span>VDD<span class="token punctuation">]</span>
+                                                                                  <span class="token operator">|</span>
+                                                                                 <span class="token punctuation">[</span>R<span class="token punctuation">]</span>
+                                                                                  <span class="token operator">|</span>
+----------------------------------------------------------------------------------+SCL线
+    <span class="token operator">|</span>          <span class="token operator">|</span>         <span class="token operator">|</span>                                         <span class="token operator">|</span>
+    <span class="token punctuation">[</span>设备1<span class="token punctuation">]</span>    <span class="token punctuation">[</span>设备2<span class="token punctuation">]</span>    <span class="token punctuation">[</span>设备3<span class="token punctuation">]</span>                <span class="token punctuation">..</span>.                <span class="token punctuation">[</span>设备N<span class="token punctuation">]</span>
+          <span class="token operator">|</span>         <span class="token operator">|</span>          <span class="token operator">|</span>                                         <span class="token operator">|</span>
+----------------------------------------------------------------------------------+SDA线
+                                                                                  <span class="token operator">|</span>
+                                                                                 <span class="token punctuation">[</span>R<span class="token punctuation">]</span>
+                                                                                  <span class="token operator">|</span>
+                                                                                <span class="token punctuation">[</span>VDD<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②通信协议</strong></p>
+<blockquote>
+<p><strong>概述</strong>：每个数据帧由<strong>起始位</strong>、<strong>数据位</strong>、<strong>应答位</strong>和<strong>停止位</strong>组成，<strong>时序图</strong>如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 起始时SCL线和SDA线都处于逻辑1状态，接收到起始信号后，SCL线开始产生时钟信号</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 发送的第一个数据位前7位为设备地址，第8位为读写位，1表示读，0表示写</div>
+<blockquote>
+<p>每个设备都有一个<strong>设备地址</strong>，其中有几个<strong>保留地址</strong>有特殊作用，如<strong>广播地址</strong><code>0x00</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 接收应答位前，接收方将SDA引脚置1释放SDA线，发送方将SDA引脚置0发送应答信号</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 发送数据和应答位时，只能在SCL线为低电平期间修改SDA线</div>
+<blockquote>
+<p><strong>起始位</strong>：<code>SCL</code>线为<strong>逻辑</strong><code>1</code>期间，<strong>主设备</strong>将<code>SDA</code>线由<strong>逻辑</strong><code>1</code>变为<strong>逻辑</strong><code>0</code>，表示<strong>开始通信</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>数据位</strong>：<strong>开始通信</strong>或者<strong>接收到应答信号</strong>后，<strong>主设备/从设备</strong>发送<code>8</code>位<strong>数据位</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>应答位</strong>：每接收一个<strong>数据位</strong>，<strong>接收方</strong>都会发送<code>1</code>位<strong>应答位</strong>，若为<strong>逻辑</strong><code>0</code>，表示接收<strong>成功</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>停止位</strong>：<code>SCL</code>线为<strong>逻辑</strong><code>1</code>期间，<strong>主设备</strong>将<code>SDA</code>线由<strong>逻辑</strong><code>0</code>变为<strong>逻辑</strong><code>1</code>，表示<strong>结束通信</strong></p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">    空闲 起始位                                               主机释放SDA并等待  从机拉低SDA应答
+    <span class="token operator">|</span>   <span class="token operator">|</span>                                                    <span class="token operator">|</span>                 <span class="token operator">|</span>
+SCL:<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+SDA:<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+             <span class="token operator">|</span>                                         <span class="token operator">|</span>
+             寻址阶段：从机地址为0111100                 读写位：1表示读
+                                                                            主机拉高SCL并发送停止位
+                                                                            <span class="token operator">|</span>
+SCL:<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+SDA:<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token operator">|</span>                                               <span class="token operator">|</span>                 <span class="token operator">|</span>           
+    发送数据：数据为00000000                         主机释放SDA并等待   从机拉低SDA应答<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③模块配置</strong></p>
+<blockquote>
+<p><strong>概述</strong>：先初始化对应的<code>GPIO</code>引脚，<code>SCL</code>和<code>SDA</code>均配置为<strong>复用开漏输出</strong>，再配置<code>IIC</code>本身</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> STM32的硬件IIC支持标准模式和快速模式，前者速率最高为100kbps，后者速率最高为400kbps</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 同理可以采用AFIO模块对IIC1引脚进行重映射，默认SCL和SDA引脚为PB6和PB7，重映射后为PB8和PB9</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 只有在快速模式下才能设置时钟信号的占空比，即一个周期内低电平:高电平的比例，通常采用2:1</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">I2C_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//打开GPIOB时钟</span>
+  <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOB<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//初始化引脚，PB6和PB7均设置为复用开漏模式</span>
+  GPIO_InitTypeDef gpio_init_struct<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> GPIO_Pin_6 <span class="token operator">|</span> GPIO_Pin_7<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_AF_OD<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Speed <span class="token operator">=</span> GPIO_Speed_2MHz<span class="token punctuation">;</span>
+  <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>GPIOB<span class="token punctuation">,</span><span class="token operator">&amp;</span>gpio_init_struct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//打开IIC时钟并复位</span>
+  <span class="token function">RCC_APB1PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB1Periph_I2C1<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">RCC_APB1PeriphResetCmd</span><span class="token punctuation">(</span>RCC_APB1Periph_I2C1<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">RCC_APB1PeriphResetCmd</span><span class="token punctuation">(</span>RCC_APB1Periph_I2C1<span class="token punctuation">,</span>DISABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//设置IIC</span>
+  I2C_InitTypeDef iic_init_struct<span class="token punctuation">;</span>
+  iic_init_struct<span class="token punctuation">.</span>I2C_ClockSpeed <span class="token operator">=</span> <span class="token number">400000</span><span class="token punctuation">;</span>            <span class="token comment">//波特率，自动进入快速模式</span>
+  iic_init_struct<span class="token punctuation">.</span>I2C_Mode <span class="token operator">=</span> I2C_Mode_I2C<span class="token punctuation">;</span>            <span class="token comment">//模式采用标准IIC模式</span>
+  iic_init_struct<span class="token punctuation">.</span>I2C_DutyCycle <span class="token operator">=</span> I2C_DutyCycle_2<span class="token punctuation">;</span>    <span class="token comment">//占空比采用2:1</span>
+  <span class="token function">I2C_Init</span><span class="token punctuation">(</span>I2C1<span class="token punctuation">,</span><span class="token operator">&amp;</span>iic_init_struct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//使能IIC</span>
+  <span class="token function">I2C_Cmd</span><span class="token punctuation">(</span>I2C1<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>④发送数据</strong></p>
+<blockquote>
+<p><strong>概述</strong>：当<strong>总线空闲</strong>时，依次发送<strong>起始位</strong>、<strong>从机地址</strong>、<strong>相关数据</strong>和<strong>停止位</strong>，如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 发送起始位前，需要通过BUSY标志位确认总线空闲，发送起始位后，需要通过SB标志位确认起始位发送成功</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 发送从机地址后，需要通过ADDR标志位确认寻址成功，且ADDR标志位被置位后硬件会主动拉低SCL线</div>
+<blockquote>
+<p>硬件主动拉低<code>SCL</code>线给软件处理<strong>地址匹配</strong>的响应时间，需要通过读取<code>SR1</code>和<code>SR2</code><strong>手动清除</strong>该标志</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 发送数据前，需要确认上一个数据是否被应答，并且在发送最后一个数据后通过BTF标志位确认是否发送完成</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> AF标志位用于检测数据位是否被应答，该标志位不会被硬件自动清除，第一次检测该标志前需要手动清除该标志位</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 使用IIC向从机发送多个字节 */</span>
+<span class="token keyword">int</span> <span class="token function">My_I2C_SendBytes</span><span class="token punctuation">(</span>I2C_TypeDef <span class="token operator">*</span>I2Cx<span class="token punctuation">,</span> <span class="token class-name">uint8_t</span> Addr<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span>pData<span class="token punctuation">,</span> <span class="token class-name">uint16_t</span> Size<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//1.等待总线空闲并发送起始位</span>
+  <span class="token comment">//等待总线空闲</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_BUSY<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//发送起始位</span>
+  <span class="token function">I2C_GenerateSTART</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//确认起始位已经发送成功</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_SB<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">//2.清除AF标志位并发送从机地址和读写位，等待寻址成功或者失败</span>
+  <span class="token comment">//需要手动清除AF标志，因为AF标志位不会被硬件自动清除，防止之前的ACK应答失败影响该次传输</span>
+  <span class="token function">I2C_ClearFlag</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_AF<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//发送从机地址和写操作位0</span>
+  <span class="token function">I2C_SendData</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> Addr <span class="token operator">&amp;</span> <span class="token number">0xfe</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//不断循环直到寻址成功或者寻址失败</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//寻址成功则退出循环</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_ADDR<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//应答失败标识寻址失败，发送停止位并返回-1</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_AF<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token function">I2C_GenerateSTOP</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">//3.清除ADDR标志位，当ADDR标志位被设置后，硬件会拉低SCL线，给软件处理地址匹配事件</span>
+  <span class="token function">I2C_ReadRegister</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_Register_SR1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">I2C_ReadRegister</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_Register_SR2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">//4.清除ADDR标志位后，开始发送数据</span>
+  <span class="token comment">//对于每个数据，发送前都需要检测上一个数据是否被响应，随后当发送寄存器为空时开始发送数据</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">uint16_t</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>Size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//等待上一个数据应答成功以及发送数据寄存器为空</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token comment">//如果上一个数据应答失败，发送停止位并返回-2</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_AF<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">I2C_GenerateSTOP</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">// 数据被拒收</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">//当发送数据寄存器为空时，开始发送数据</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_TXE<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//发送数据</span>
+    <span class="token function">I2C_SendData</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> pData<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">//5.检测最后一个数据是否被应答以及是否发送完毕</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//如果数据被拒收则发送停止位并返回-2</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_AF<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">I2C_GenerateSTOP</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>
+    <span class="token comment">//如果数据发送完毕则退出</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_BTF<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">//6.发送停止位</span>
+  <span class="token function">I2C_GenerateSTOP</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 成功</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>⑤接收数据</strong></p>
+<blockquote>
+<p><strong>概述</strong>：发送<strong>起始位</strong>和<strong>从机地址</strong>，随后等待<strong>从机发送数据</strong>、<strong>做出应答</strong>并<strong>读取数据</strong>，最后发送<strong>停止位</strong>，如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 假设需要从从机读取n个数据，前n-1个字节主机需要回复ACK，最后一个字节主机需要回复NAK</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 需要在数据被完全接收即RXNE置位之前设置回复ACK还是NAK，硬件接收完数据后自动回复ACK还是NAK</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果调用I2C_GenerateSTOP时有数据正在被接收，硬件会等待该数据接收完成后再发送停止位</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 接收最后一个字节前，需要暂停中断并立即设置停止位以及回复ACK还是NAK</div>
+
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 使用IIC从从机读取多个字节 */</span>
+<span class="token keyword">int</span> <span class="token function">My_I2C_ReceiveBytes</span><span class="token punctuation">(</span>I2C_TypeDef <span class="token operator">*</span>I2Cx<span class="token punctuation">,</span> <span class="token class-name">uint8_t</span> Addr<span class="token punctuation">,</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span>pBuffer<span class="token punctuation">,</span> <span class="token class-name">uint16_t</span> Size<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//1.等待总线空闲并发送起始位</span>
+  <span class="token comment">//等待总线空闲</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_BUSY<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//发送起始位</span>
+  <span class="token function">I2C_GenerateSTART</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//等待起始位发送完成</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_SB<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">//2.清除AF标志位并发送从机地址和读写位，等待寻址成功或者失败</span>
+  <span class="token comment">//需要手动清除AF标志，因为AF标志位不会被硬件自动清除，防止之前的ACK应答失败影响该次传输</span>
+  <span class="token function">I2C_ClearFlag</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_AF<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">////发送从机地址和读操作位1</span>
+  <span class="token function">I2C_SendData</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> Addr <span class="token operator">|</span> <span class="token number">0x01</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//不断循环直到寻址成功或者寻址失败</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//寻址成功则退出循环</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_ADDR<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//应答失败标识寻址失败，发送停止位并返回-1</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_AF<span class="token punctuation">)</span> <span class="token operator">==</span> SET<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token function">I2C_GenerateSTOP</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//3.开始读取数据</span>
+  <span class="token comment">//如果只读取一个字节：设置NAK -&gt; 清除ADDR标志并设置停止位 -&gt;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>Size <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//向ACK写0，标识对于当前接收的字节回复NAK</span>
+    <span class="token comment">//需要提前设置，否则当前字节接收完成后在设置只能影响到下一字节</span>
+    <span class="token function">I2C_AcknowledgeConfig</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> DISABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//需要使用中断保护该时序，因为假设在清除ADDR后发生了中断</span>
+    <span class="token comment">//从机发送数据后，主机由于没有设置发送停止位导致不符合协议时序</span>
+    <span class="token function">__disable_irq</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//清除ADDR，从机开始发送数据</span>
+    <span class="token function">I2C_ReadRegister</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_Register_SR1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">I2C_ReadRegister</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_Register_SR2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//设置发送停止位，调用该函数后，硬件会等待当前字节接收完成再发送停止位</span>
+    <span class="token function">I2C_GenerateSTOP</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">__enable_irq</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//等待RxNE置位，即字节接收完成，此时由于设置</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_RXNE<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//读取数据</span>
+    pBuffer<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">I2C_ReceiveData</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//如果接收的字节数大于1</span>
+  <span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token comment">//向ACK写1，标识对于当前接收的字节回复ACK</span>
+    <span class="token comment">//同理需要提前设置</span>
+    <span class="token function">I2C_AcknowledgeConfig</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//清除ADDR，从机开始发送数据</span>
+    <span class="token function">I2C_ReadRegister</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_Register_SR1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">I2C_ReadRegister</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_Register_SR2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//读取前n - 1个字节，且由于设置了ACK，前n - 1个字节主机会自动回复ACK</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">uint16_t</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>Size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token comment">//当接收第 n - 1个字节时，需要暂停中断，防止处理最后一个字节时被中断打断</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">==</span>Size<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span>
+      <span class="token punctuation">{</span>
+        <span class="token function">__disable_irq</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// 等待RxNE置位</span>
+      <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_RXNE<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// 读取</span>
+      pBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">I2C_ReceiveData</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//向ACK写0，表示最后一个字节回复NAK</span>
+    <span class="token comment">//如果在这里被中断打断，主机还是会回复ACK，从机还会继续发送数据</span>
+    <span class="token function">I2C_AcknowledgeConfig</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> DISABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//设置发送停止位</span>
+    <span class="token comment">//如果在这里被中断打断，机由于没有设置发送停止位导致不符合协议时序</span>
+    <span class="token function">I2C_GenerateSTOP</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">__enable_irq</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//等待RxNE置位，即最后一个字节被接收完成</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">I2C_GetFlagStatus</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">,</span> I2C_FLAG_RXNE<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pBuffer<span class="token punctuation">[</span>Size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">I2C_ReceiveData</span><span class="token punctuation">(</span>I2Cx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-SPI"><a href="#3-SPI" class="headerlink" title="3.SPI"></a>3.SPI</h4><p><strong>①简介</strong></p>
+<blockquote>
+<p><strong>概述</strong>：全称为<strong>串行外设接口</strong>，主要由<strong>时钟线</strong><code>SCLK</code>、<strong>输出线</strong><code>SDO</code>、<strong>输入线</strong><code>SDI</code>和<strong>片选线</strong><code>SS</code>组成</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> SPI为同步全双工通信，可以实现一对多的数据传输，速度最快，需要较多的线口</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 提供并控制时钟信号的设备为主设备，其他设备为从设备，主设备通过片选线来确定要通信的从设备，低电平有效</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 同一时间只能有一个从设备与主设备通信，即其余从设备的片选线应该为高电平</div>
+
+<p><strong>②通信协议</strong></p>
+<blockquote>
+<p><strong>概述</strong>：对数据帧的格式<strong>没有具体规定</strong>，只需要设置<strong>时钟极性</strong><code>CPOL</code>、<strong>时钟相位</strong><code>CPHA</code>、<strong>传输顺序</strong>和<strong>数据宽度</strong>即可</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 时钟极性即时钟线空闲时为高电平还是低电平，时钟相位即在时钟线第一边沿还是第二边沿采集数据</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 具体的数据帧格式由从设备规定，根据规定发送对应的数据帧即可</div>
+<blockquote>
+<p>以<code>93C46</code>存储器为例，其<strong>指令格式</strong>为<code>1:[操作码]:[地址码]:[数据码]</code>，<strong>读操作码</strong>为<code>10</code>，<strong>写操作码</strong>为<code>01</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> SPI通信过程中，主设备向从设备写一次数据，从设备就会回一次数据，该数据可以被读取，也可以丢弃</div>
+<p><strong>③模块配置</strong></p>
+<blockquote>
+<p><strong>概述</strong>：先初始化对应的<code>GPIO</code>引脚，<code>SCLK</code>和<code>SDO</code>均配置为<strong>复用推挽输出</strong>，<code>SDI</code>配置为<strong>上拉输入</strong>，再配置<code>SPI</code>本身</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> SPI1默认SCL、SDI和SDO引脚为PA5、PA6和PA7，重映射后为PB3、PB4和PB5，使用PA15控制从设备片选</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> SPI的数据宽度、时钟极性、时钟相位和比特位传输顺序等由从设备决定，可以根据其手册中的数据传输示例获取</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 单片机作为主机时也需要设置片选信号，通常采用软件方式并将内部NSS引脚拉高</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">SPI1_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//开启GPIOA的时钟</span>
+  <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOA<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//将PA5和PA7设置为复用推挽输出</span>
+  GPIO_InitTypeDef gpio_init_struct <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> GPIO_Pin_5 <span class="token operator">|</span> GPIO_Pin_7<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_AF_PP<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Speed <span class="token operator">=</span> GPIO_Speed_2MHz<span class="token punctuation">;</span>
+  <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>GPIOA<span class="token punctuation">,</span><span class="token operator">&amp;</span>gpio_init_struct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//将PA6设置为上拉输入</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> GPIO_Pin_6<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_IPU<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Speed <span class="token operator">=</span> GPIO_Speed_2MHz<span class="token punctuation">;</span>
+  <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>GPIOA<span class="token punctuation">,</span><span class="token operator">&amp;</span>gpio_init_struct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//将PA15设置为通用推挽输出</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> GPIO_Pin_15<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_Out_PP<span class="token punctuation">;</span>
+  gpio_init_struct<span class="token punctuation">.</span>GPIO_Speed <span class="token operator">=</span> GPIO_Speed_2MHz<span class="token punctuation">;</span>
+  <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>GPIOA<span class="token punctuation">,</span><span class="token operator">&amp;</span>gpio_init_struct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//开启SPI1的时钟</span>
+  <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_SPI1<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//设置SPI1</span>
+  SPI_InitTypeDef SPI_InitStructure <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  SPI_InitStructure<span class="token punctuation">.</span>SPI_Mode <span class="token operator">=</span> SPI_Mode_Master<span class="token punctuation">;</span>                       <span class="token comment">//采用主模式</span>
+  SPI_InitStructure<span class="token punctuation">.</span>SPI_Direction <span class="token operator">=</span> SPI_Direction_2Lines_FullDuplex<span class="token punctuation">;</span>  <span class="token comment">//全双工</span>
+  SPI_InitStructure<span class="token punctuation">.</span>SPI_DataSize <span class="token operator">=</span> SPI_DataSize_8b<span class="token punctuation">;</span>                   <span class="token comment">//数据宽度为8位</span>
+  SPI_InitStructure<span class="token punctuation">.</span>SPI_CPOL <span class="token operator">=</span> SPI_CPOL_High<span class="token punctuation">;</span>                         <span class="token comment">//时钟极性为高极性</span>
+  SPI_InitStructure<span class="token punctuation">.</span>SPI_CPHA <span class="token operator">=</span> SPI_CPHA_2Edge<span class="token punctuation">;</span>                        <span class="token comment">//时钟相位为第二边沿</span>
+  SPI_InitStructure<span class="token punctuation">.</span>SPI_NSS <span class="token operator">=</span> SPI_NSS_Soft<span class="token punctuation">;</span>                           <span class="token comment">//采用软件NSS</span>
+  SPI_InitStructure<span class="token punctuation">.</span>SPI_FirstBit <span class="token operator">=</span> SPI_FirstBit_MSB<span class="token punctuation">;</span>                  <span class="token comment">//先发送低比特位</span>
+  SPI_InitStructure<span class="token punctuation">.</span>SPI_BaudRatePrescaler <span class="token operator">=</span> SPI_BaudRatePrescaler_64<span class="token punctuation">;</span> <span class="token comment">//采用64分频，时钟频率为1.125MHz</span>
+  <span class="token function">SPI_Init</span><span class="token punctuation">(</span>SPI1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>SPI_InitStructure<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//使能SPI1</span>
+  <span class="token function">SPI_Cmd</span><span class="token punctuation">(</span>SPI1<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//使用软件NSS模式时，使用该接口将内部NSS引脚拉高，避免SPI进入从模式</span>
+  <span class="token function">SPI_NSSInternalSoftwareConfig</span><span class="token punctuation">(</span>SPI1<span class="token punctuation">,</span> SPI_NSSInternalSoft_Set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>④数据收发</strong></p>
+<blockquote>
+<p><strong>概述</strong>：核心函数为<code>My_SPI_MasterTransmitReceive</code>，如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 根据SPI通信协议，当从机收到主机的一个数据后，会立马返回一个数据</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果只想接收数据，可以发送一些无效数据给从设备</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">My_SPI_MasterTransmitReceive</span><span class="token punctuation">(</span>SPI_TypeDef <span class="token operator">*</span>SPIx<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span>pDataTx<span class="token punctuation">,</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span>pDataRx<span class="token punctuation">,</span> <span class="token class-name">uint16_t</span> Size<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//1.使能SPI1并发送第一个字节</span>
+  <span class="token function">SPI_Cmd</span><span class="token punctuation">(</span>SPIx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">SPI_I2S_SendData</span><span class="token punctuation">(</span>SPIx<span class="token punctuation">,</span> pDataTx<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">//2.发送剩下size - 1个字节并接收前size - 1个字节</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">uint16_t</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>Size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//当发送寄存器为空时，发送下一个字节</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">SPI_I2S_GetFlagStatus</span><span class="token punctuation">(</span>SPIx<span class="token punctuation">,</span> SPI_I2S_FLAG_TXE<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SPI_I2S_SendData</span><span class="token punctuation">(</span>SPIx<span class="token punctuation">,</span> pDataTx<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//当接收寄存器非空，接收从机发送的上一个字节</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">SPI_I2S_GetFlagStatus</span><span class="token punctuation">(</span>SPIx<span class="token punctuation">,</span> SPI_I2S_FLAG_RXNE<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pDataRx<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">SPI_I2S_ReceiveData</span><span class="token punctuation">(</span>SPIx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">//3.读取最后一个字节</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">SPI_I2S_GetFlagStatus</span><span class="token punctuation">(</span>SPIx<span class="token punctuation">,</span> SPI_I2S_FLAG_RXNE<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  pDataRx<span class="token punctuation">[</span>Size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">SPI_I2S_ReceiveData</span><span class="token punctuation">(</span>SPIx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">//4.断开总开关</span>
+  <span class="token function">SPI_Cmd</span><span class="token punctuation">(</span>SPIx<span class="token punctuation">,</span> DISABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="4-软件IIC"><a href="#4-软件IIC" class="headerlink" title="4.软件IIC"></a>4.软件IIC</h4><p><strong>①简介</strong></p>
+<blockquote>
+<p><strong>概述</strong>：使用<code>GPIO</code>引脚和<strong>软件延时</strong>模拟<code>IIC</code>时序从而实现<code>IIC</code>通信，定义如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 软件IIC可以使用任意GPIO引脚，灵活性更高，且易于移植和调试，而且可以规避某些MCU硬件IIC不稳定的问题</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 软件IIC时序由CPU产生，需要占用CPU且精度和速度不如硬件IIC</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span><span class="token punctuation">{</span>
+  GPIO_TypeDef <span class="token operator">*</span>SCL_GPIOx<span class="token punctuation">;</span> <span class="token comment">//SCL引脚的组编号</span>
+  <span class="token class-name">uint16_t</span> SCL_GPIO_Pin<span class="token punctuation">;</span>   <span class="token comment">//SCL引脚的引脚编号</span>
+  GPIO_TypeDef <span class="token operator">*</span>SDA_GPIOx<span class="token punctuation">;</span> <span class="token comment">//SCL引脚的组编号</span>
+  <span class="token class-name">uint16_t</span> SDA_GPIO_Pin<span class="token punctuation">;</span>   <span class="token comment">//SDA引脚的引脚编号</span>
+<span class="token punctuation">}</span>SI2C_TypeDef<span class="token punctuation">;</span>
+<span class="token comment">//控制SCL线</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">scl_w</span><span class="token expression"><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token function">GPIO_WriteBit</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SCL_GPIOx<span class="token punctuation">,</span> SI2C<span class="token operator">-&gt;</span>SCL_GPIO_Pin<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token operator">?</span>Bit_SET<span class="token operator">:</span>Bit_RESET<span class="token punctuation">)</span><span class="token punctuation">)</span></span></span>
+<span class="token comment">//控制SDA线</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">sda_w</span><span class="token expression"><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token function">GPIO_WriteBit</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SDA_GPIOx<span class="token punctuation">,</span> SI2C<span class="token operator">-&gt;</span>SDA_GPIO_Pin<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token operator">?</span>Bit_SET<span class="token operator">:</span>Bit_RESET<span class="token punctuation">)</span><span class="token punctuation">)</span></span></span>
+<span class="token comment">//读取SCL线</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">scl_r</span> <span class="token expression"><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">GPIO_ReadInputDataBit</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SCL_GPIOx<span class="token punctuation">,</span> SI2C<span class="token operator">-&gt;</span>SCL_GPIO_Pin<span class="token punctuation">)</span> <span class="token operator">==</span> Bit_SET<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">)</span></span></span>
+<span class="token comment">//读取SDA线</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">sda_r</span> <span class="token expression"><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">GPIO_ReadInputDataBit</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SDA_GPIOx<span class="token punctuation">,</span> SI2C<span class="token operator">-&gt;</span>SDA_GPIO_Pin<span class="token punctuation">)</span> <span class="token operator">==</span> Bit_SET<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">)</span></span></span>
+<span class="token comment">//粗略的us级延迟函数</span>
+<span class="token keyword">void</span> <span class="token function">delay</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span> us<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">8</span><span class="token operator">*</span>us<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 软件IIC初始化 */</span>
+<span class="token keyword">void</span> <span class="token function">My_SI2C_Init</span><span class="token punctuation">(</span>SI2C_TypeDef <span class="token operator">*</span>SI2C<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//使能SCL引脚的时钟</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SCL_GPIOx <span class="token operator">==</span> GPIOA<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOA<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SCL_GPIOx <span class="token operator">==</span> GPIOB<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOB<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SCL_GPIOx <span class="token operator">==</span> GPIOC<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOC<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SCL_GPIOx <span class="token operator">==</span> GPIOD<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOD<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//使能SDA引脚的时钟</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SDA_GPIOx <span class="token operator">==</span> GPIOA<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOA<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SDA_GPIOx <span class="token operator">==</span> GPIOB<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOB<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SDA_GPIOx <span class="token operator">==</span> GPIOC<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOC<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SDA_GPIOx <span class="token operator">==</span> GPIOD<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>RCC_APB2Periph_GPIOD<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//初始化SCL引脚为输出开漏模式</span>
+  GPIO_InitTypeDef GPIO_InitStruct <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> SI2C<span class="token operator">-&gt;</span>SCL_GPIO_Pin<span class="token punctuation">;</span>
+  GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_Out_OD<span class="token punctuation">;</span>
+  GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Speed <span class="token operator">=</span> GPIO_Speed_2MHz<span class="token punctuation">;</span>
+  <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SCL_GPIOx<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//初始化SDA引脚为输出开漏模式</span>
+  GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> SI2C<span class="token operator">-&gt;</span>SDA_GPIO_Pin<span class="token punctuation">;</span>
+  GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_Out_OD<span class="token punctuation">;</span>
+  GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Speed <span class="token operator">=</span> GPIO_Speed_2MHz<span class="token punctuation">;</span>
+  <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SDA_GPIOx<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//将SDA和SCL都置为高电平，标识总线空闲</span>
+  <span class="token function">GPIO_WriteBit</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SDA_GPIOx<span class="token punctuation">,</span> SI2C<span class="token operator">-&gt;</span>SDA_GPIO_Pin<span class="token punctuation">,</span> Bit_SET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">GPIO_WriteBit</span><span class="token punctuation">(</span>SI2C<span class="token operator">-&gt;</span>SCL_GPIOx<span class="token punctuation">,</span> SI2C<span class="token operator">-&gt;</span>SCL_GPIO_Pin<span class="token punctuation">,</span> Bit_SET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②信号模拟</strong></p>
+<blockquote>
+<p><strong>概述</strong>：</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> </div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 模拟起始信号：SDA在SCL高电平期间产生下降沿 */</span>
+<span class="token comment">//SCL----</span>
+<span class="token comment">//SDA--</span>
+<span class="token comment">//     --</span>
+<span class="token keyword">void</span> <span class="token function">Soft_I2C_Start</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//将SCL线和SDA线拉高并延迟1us</span>
+  <span class="token function">scl_w</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">sda_w</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//仅仅拉低SDA线并延迟1us</span>
+  <span class="token function">sda_w</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//拉低SCL，准备发送数据</span>
+  <span class="token function">scl_w</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/* 模拟结束信号：SDA在SCL高电平期间产生上升沿 */</span>
+<span class="token comment">//SCL----</span>
+<span class="token comment">//SDA  --</span>
+<span class="token comment">//   --</span>
+<span class="token keyword">void</span> <span class="token function">Soft_I2C_Start</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//将SCL线拉高，SDA线拉低，为产生上升沿做准备</span>
+  <span class="token function">scl_w</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">sda_w</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//仅仅拉低SDA线并延迟1us</span>
+  <span class="token function">sda_w</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//拉低SCL，因为SDA线在SCL为低电平时产生变化不会有其他作用，较为安全</span>
+  <span class="token function">scl_w</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/* 发送应答信号 */</span>
+<span class="token comment">//</span>
+<span class="token comment">//--</span>
+<span class="token comment">//</span>
+<span class="token comment">//--</span>
+<span class="token keyword">void</span> <span class="token function">Soft_I2C_Ack</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">//</span>
+  <span class="token function">scl_w</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>③</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://paopaoziye.github.io/2026/06/30/stm32-er/">https://paopaoziye.github.io/2026/06/30/stm32-er/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank" rel="noopener noreferrer">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/STM32/">
+                                    <span class="chip bg-color">STM32</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2026/06/30/freertos-yuan-ma-yue-du-er/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/38.webp" class="responsive-img" alt="FreeRTOS源码阅读（二）" loading="lazy" decoding="async">
+                        
+                        <span class="card-title">FreeRTOS源码阅读（二）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            任务系统（一）
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-06-30
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/RTOS/" class="post-category">
+                                    RTOS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/RTOS/">
+                        <span class="chip bg-color">RTOS</span>
+                    </a>
+                    
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/06/30/stm32-si/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/27.webp" class="responsive-img" alt="STM32（四）" loading="lazy" decoding="async">
+                        
+                        <span class="card-title">STM32（四）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            HAL库
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-06-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MCU/" class="post-category">
+                                    MCU
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/STM32/">
+                        <span class="chip bg-color">STM32</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color" href="#toc-content" aria-label="显示或隐藏目录" aria-controls="toc-content" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2026</span>
+            
+            <a href="/about" target="_blank" rel="noopener noreferrer">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var start = new Date(
+                        Number(startYear), Number(startMonth) - 1, Number(startDate),
+                        Number(startHour), Number(startMinute), Number(startSecond)
+                    );
+                    var diff = Date.now() - start.getTime();
+                    var diffYears = todayYear - start.getFullYear();
+                    var anniversary = new Date(start);
+                    anniversary.setFullYear(start.getFullYear() + diffYears);
+                    if (anniversary.getTime() > Date.now()) {
+                        diffYears--;
+                        anniversary.setFullYear(start.getFullYear() + diffYears);
+                    }
+                    diff = Date.now() - anniversary.getTime();
+                    var diffDays = Math.floor(diff / days);
+                    var diffHours = Math.floor((diff - diffDays * days) / hours);
+                    var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
+                    var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                siteTime();
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   aria-label="搜索" class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

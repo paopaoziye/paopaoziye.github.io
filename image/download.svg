@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8FBFF"/><stop offset="1" stop-color="#EEF5FF"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#35A3FF"/><stop offset="1" stop-color="#1F6FE5"/></linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="145%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0B3C78" flood-opacity="0.08"/></filter>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#D97706"/></marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#E5252A"/></marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#1F6FE5"/></marker>
+    <style>
+      .zh{font-family:"Microsoft YaHei","Noto Sans SC",SimHei,sans-serif}
+      .latin{font-family:"Segoe UI",Arial,sans-serif}
+      .mixed{font-family:"Microsoft YaHei","Noto Sans SC",SimHei,"Segoe UI",Arial,sans-serif}
+      .mono{font-family:Consolas,"Cascadia Mono",monospace}
+      .navy{fill:#0B3C78}.slate{fill:#334155}.muted{fill:#64748B}
+      .state-title{font-family:"Microsoft YaHei","Noto Sans SC",SimHei,sans-serif;font-size:28px;font-weight:800;fill:#0B3C78}
+      .state-sub{font-family:"Segoe UI",Arial,sans-serif;font-size:17px;font-weight:800}
+      .condition{font-family:"Microsoft YaHei","Noto Sans SC",SimHei,sans-serif;font-size:19px;font-weight:800}.condition .expr{font-family:inherit;font-weight:700}.condition .join{font-family:"Microsoft YaHei","Noto Sans SC",SimHei,sans-serif;font-weight:400}
+      .state-body{font-family:"Microsoft YaHei","Noto Sans SC",SimHei,sans-serif;font-size:20px;font-weight:500;fill:#334155}
+      .bottom-title{font-family:"Microsoft YaHei","Noto Sans SC",SimHei,sans-serif;font-size:27px;font-weight:800;fill:#0B3C78}
+      .bottom-body{font-family:"Microsoft YaHei","Noto Sans SC",SimHei,sans-serif;font-size:20px;font-weight:500;fill:#334155}
+    </style>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect x="60" y="46" width="12" height="101" rx="6" fill="url(#accent)"/>
+  <text x="103" y="58" class="mixed navy" font-size="56" font-weight="500" dominant-baseline="hanging">CAN BUS-OFF 机制</text>
+  <text x="104" y="137" class="zh muted" font-size="23" dominant-baseline="hanging">发送错误持续累积时，故障节点如何主动退网并保护整条总线</text>
+  <path d="M48 182H248M1668 150H1868" stroke="#B9D6FA" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="48" cy="182" r="6" fill="#1F6FE5"/><circle cx="1868" cy="150" r="6" fill="#1F6FE5"/>
+  <g transform="translate(1510 66)"><rect width="320" height="68" rx="34" fill="#FFFFFF" stroke="#8ABCFB" stroke-width="2"/><circle cx="40" cy="34" r="19" fill="#FFF0F0"/><text x="40" y="35" class="latin" font-size="26" font-weight="800" fill="#E5252A" text-anchor="middle" dominant-baseline="middle">!</text><text x="74" y="35" class="zh navy" font-size="20" font-weight="700" dominant-baseline="middle">故障隔离保护机制</text></g>
+
+  <g id="state-panel" data-safe-zone="true" filter="url(#shadow)">
+    <rect x="60" y="195" width="1800" height="540" rx="28" fill="#FFFFFF" stroke="#70AFFF" stroke-width="2"/>
+    <path d="M60 223a28 28 0 0 1 28-28h1744a28 28 0 0 1 28 28v77H60z" fill="#EAF3FF"/>
+    <text x="960" y="224" class="zh navy" font-size="30" font-weight="700" text-anchor="middle" dominant-baseline="middle">错误计数器推动节点逐步进入更严格的限制状态</text>
+    <text x="960" y="273" class="mixed muted" font-size="17" text-anchor="middle" dominant-baseline="middle">TEC：发送错误计数器　　REC：接收错误计数器</text>
+
+    <g id="triggers" data-contained-by="state-panel">
+      <rect x="210" y="318" width="1500" height="70" rx="20" fill="#F8FBFF" stroke="#B7D5FA" stroke-width="2"/>
+      <text x="257" y="354" class="zh navy" font-size="21" font-weight="800" dominant-baseline="middle">常见触发源</text>
+      <rect x="420" y="333" width="230" height="40" rx="20" fill="#FFF4E3"/><text x="535" y="354" class="mixed" font-size="17" fill="#B45309" text-anchor="middle" dominant-baseline="middle">总线上无人 ACK</text>
+      <rect x="680" y="333" width="230" height="40" rx="20" fill="#FFF4E3"/><text x="795" y="354" class="zh" font-size="17" fill="#B45309" text-anchor="middle" dominant-baseline="middle">位速率配置错误</text>
+      <rect x="940" y="333" width="260" height="40" rx="20" fill="#FFF4E3"/><text x="1070" y="354" class="zh" font-size="17" fill="#B45309" text-anchor="middle" dominant-baseline="middle">接线或终端异常</text>
+      <rect x="1230" y="333" width="430" height="40" rx="20" fill="#FFF4E3"/><text x="1445" y="354" class="zh" font-size="17" fill="#B45309" text-anchor="middle" dominant-baseline="middle">干扰、时钟或收发器故障</text>
+    </g>
+
+    <text x="500" y="412" class="zh" font-size="17" fill="#B45309" text-anchor="middle">错误持续累积</text>
+    <text x="950" y="412" class="mixed" font-size="17" fill="#E5252A" text-anchor="middle">TEC 继续上升</text>
+    <text x="1400" y="412" class="zh" font-size="17" fill="#1F6FE5" text-anchor="middle">等待总线空闲</text>
+
+    <g id="active-card" data-contained-by="state-panel">
+      <rect x="110" y="430" width="330" height="220" rx="24" fill="#F7FCF7" stroke="#2E7D32" stroke-width="2.5"/>
+      <circle cx="164" cy="484" r="28" fill="#E8F5E9"/><path d="M149 484l10 10 21-24" fill="none" stroke="#2E7D32" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="210" y="474" class="state-title">错误主动</text><text x="210" y="503" class="state-sub" fill="#2E7D32">ERROR ACTIVE</text>
+      <rect x="145" y="535" width="260" height="47" rx="15" fill="#E3F4E5"/>
+      <text x="275" y="559" class="condition" fill="#2E7D32" text-anchor="middle" dominant-baseline="middle"><tspan class="expr">TEC &lt; 128</tspan><tspan class="join"> 且 </tspan><tspan class="expr">REC &lt; 128</tspan></text>
+      <text x="275" y="614" class="state-body" text-anchor="middle">正常收发，并可主动报告错误</text>
+    </g>
+
+    <path d="M460 540H542" stroke="#D97706" stroke-width="4" marker-end="url(#arrowAmber)"/>
+    <g id="passive-card" data-contained-by="state-panel">
+      <rect x="560" y="430" width="330" height="220" rx="24" fill="#FFFBF5" stroke="#D97706" stroke-width="2.5"/>
+      <circle cx="614" cy="484" r="28" fill="#FFF1DB"/><path d="M599 484h30M614 469v30" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+      <text x="660" y="474" class="state-title">错误被动</text><text x="660" y="503" class="state-sub" fill="#B45309">ERROR PASSIVE</text>
+      <rect x="595" y="535" width="260" height="47" rx="15" fill="#FFF0D5"/>
+      <text x="725" y="559" class="condition" fill="#B45309" text-anchor="middle" dominant-baseline="middle"><tspan class="expr">TEC ≥ 128</tspan><tspan class="join"> 或 </tspan><tspan class="expr">REC ≥ 128</tspan></text>
+      <text x="725" y="614" class="state-body" text-anchor="middle">仍可通信，但错误影响受到限制</text>
+    </g>
+
+    <path d="M910 540H992" stroke="#E5252A" stroke-width="4" marker-end="url(#arrowRed)"/>
+    <g id="busoff-card" data-contained-by="state-panel">
+      <rect x="1010" y="430" width="330" height="220" rx="24" fill="#FFF8F8" stroke="#E5252A" stroke-width="2.8"/>
+      <circle cx="1064" cy="484" r="28" fill="#FFE3E3"/><path d="M1050 470l28 28M1078 470l-28 28" stroke="#E5252A" stroke-width="4" stroke-linecap="round"/>
+      <text x="1110" y="475" class="latin navy" font-size="28" font-weight="900">BUS-OFF</text><text x="1110" y="503" class="zh" font-size="17" font-weight="700" fill="#E5252A">强制退出总线</text>
+      <rect x="1045" y="535" width="260" height="47" rx="15" fill="#FFE0E0"/>
+      <text x="1175" y="559" class="condition" fill="#E5252A" text-anchor="middle" dominant-baseline="middle"><tspan class="expr">TEC &gt; 255</tspan></text>
+      <text x="1175" y="614" class="state-body" text-anchor="middle">停止参与通信，不再干扰网络</text>
+    </g>
+
+    <path d="M1360 540H1442" stroke="#1F6FE5" stroke-width="4" marker-end="url(#arrowBlue)"/>
+    <g id="recovery-card" data-contained-by="state-panel">
+      <rect x="1460" y="430" width="330" height="220" rx="24" fill="#F7FAFF" stroke="#1F6FE5" stroke-width="2.5"/>
+      <circle cx="1514" cy="484" r="28" fill="#E6F1FF"/><path d="M1528 483a15 15 0 1 1-4-10M1528 473v12h-12" fill="none" stroke="#1F6FE5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="1560" y="474" class="state-title">恢复等待</text><text x="1560" y="503" class="state-sub" fill="#1F6FE5">RECOVERY</text>
+      <rect x="1495" y="528" width="260" height="61" rx="15" fill="#DDEEFF"/>
+      <text x="1625" y="548" class="zh navy" font-size="16" text-anchor="middle">检测到 128 次</text><text x="1625" y="575" class="zh navy" font-size="16" text-anchor="middle">“连续 11 个隐性位”</text>
+      <text x="1625" y="614" class="state-body" font-size="18" text-anchor="middle">重启方式取决于控制器与软件策略</text>
+    </g>
+
+    <rect x="415" y="674" width="1090" height="43" rx="22" fill="#EAF3FF"/>
+    <text x="960" y="696" class="mixed navy" font-size="18" font-weight="600" text-anchor="middle" dominant-baseline="middle">BUS-OFF 只由发送错误计数器 TEC 触发；REC 升高不会直接使节点进入 BUS-OFF</text>
+  </g>
+
+  <g id="protection-card" data-safe-zone="true" filter="url(#shadow)">
+    <rect x="60" y="780" width="560" height="240" rx="24" fill="#FFFFFF" stroke="#2E7D32" stroke-width="2"/>
+    <circle cx="118" cy="844" r="30" fill="#EAF7EA"/><path d="M118 827l14 7v12c0 12-7 20-14 24-7-4-14-12-14-24v-12z" fill="none" stroke="#2E7D32" stroke-width="2.5"/>
+    <text x="164" y="845" class="bottom-title" dominant-baseline="middle">保护作用</text>
+    <text x="100" y="905" class="bottom-body">隔离持续出错的发送节点，避免错误帧和重发</text><text x="100" y="938" class="bottom-body">长期占用总线，让其他正常节点继续通信</text>
+    <rect x="98" y="972" width="484" height="30" rx="15" fill="#EAF7EA"/><text x="340" y="988" class="zh" font-size="17" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="middle">本质是故障节点主动退网</text>
+  </g>
+  <g id="symptom-card" data-safe-zone="true" filter="url(#shadow)">
+    <rect x="680" y="780" width="560" height="240" rx="24" fill="#FFFFFF" stroke="#D97706" stroke-width="2"/>
+    <circle cx="738" cy="844" r="30" fill="#FFF4E3"/><path d="M738 829v20" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/><circle cx="738" cy="859" r="2.7" fill="#D97706"/>
+    <text x="784" y="845" class="bottom-title" dominant-baseline="middle">可观察现象</text>
+    <text x="720" y="905" class="bottom-body">报文停止发送，控制器产生 BUS-OFF 中断</text><text x="720" y="938" class="bottom-body">驱动或接口状态报告总线关闭</text>
+    <rect x="718" y="972" width="484" height="30" rx="15" fill="#FFF4E3"/><text x="960" y="988" class="zh" font-size="17" font-weight="700" fill="#B45309" text-anchor="middle" dominant-baseline="middle">应用未崩溃，也可能无法继续发送</text>
+  </g>
+  <g id="principle-card" data-safe-zone="true" filter="url(#shadow)">
+    <rect x="1300" y="780" width="560" height="240" rx="24" fill="#FFFFFF" stroke="#1F6FE5" stroke-width="2"/>
+    <circle cx="1358" cy="844" r="30" fill="#EAF3FF"/><path d="M1372 843a15 15 0 1 1-4-10M1372 833v12h-12" fill="none" stroke="#1F6FE5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1404" y="845" class="bottom-title" dominant-baseline="middle">恢复原则</text>
+    <text x="1340" y="905" class="bottom-body">先检查位速率、ACK、接线和终端等根因</text><text x="1340" y="938" class="bottom-body">再按控制器与系统安全策略恢复通信</text>
+    <rect x="1338" y="972" width="484" height="30" rx="15" fill="#EAF3FF"/><text x="1580" y="988" class="zh navy" font-size="17" font-weight="700" text-anchor="middle" dominant-baseline="middle">不修根因，恢复后会再次 BUS-OFF</text>
+  </g>
+  <path d="M68 1030H238M1710 1030H1860" stroke="#B9D6FA" stroke-width="3" stroke-linecap="round"/>
+  <text x="960" y="1048" class="mixed muted" font-size="16" text-anchor="middle">实际恢复流程以所用 CAN 控制器、驱动配置和系统安全要求为准</text>
+</svg>
+
+
+

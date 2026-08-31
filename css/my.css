@@ -1,0 +1,104 @@
+/* Here is your custom css styles. */
+*{
+    cursor: url("/medias/mouse/Arrow.cur"),auto!important;
+}
+:active{
+    cursor: url("/medias/mouse/Hand.cur"),auto!important;
+}
+
+/* Keep the article, its background, and the previous/next cards aligned. */
+@media only screen and (min-width: 768px) {
+    #artDetail {
+        --article-panel-width: 1000px;
+        --article-content-width: 900px;
+        --article-side-space: 50px;
+        --related-card-gap: 20px;
+    }
+
+    #artDetail > .card {
+        width: var(--article-panel-width) !important;
+        min-width: var(--article-panel-width);
+        max-width: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box;
+    }
+
+    #artDetail .article-card-content {
+        padding: 0 var(--article-side-space) 20px;
+        overflow-x: visible;
+    }
+
+    #artDetail #articleContent {
+        width: var(--article-content-width) !important;
+        min-width: var(--article-content-width);
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box;
+    }
+
+    /* Make the two related cards and their gap fill the article panel. */
+    #artDetail #prenext-posts {
+        width: var(--article-panel-width) !important;
+        margin-left: calc((100% - var(--article-panel-width)) / 2) !important;
+        margin-right: calc((100% - var(--article-panel-width)) / 2) !important;
+        box-sizing: border-box;
+    }
+
+    #artDetail #prenext-posts .article-row {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: var(--related-card-gap);
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #artDetail #prenext-posts .article {
+        float: none;
+        width: calc((100% - var(--related-card-gap)) / 2) !important;
+        flex: 0 0 calc((100% - var(--related-card-gap)) / 2);
+        padding-left: 0;
+        padding-right: 0;
+        box-sizing: border-box;
+    }
+
+    #artDetail #prenext-posts .article > .card {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Keep the TOC in its own column on wide desktop screens. */
+@media only screen and (min-width: 1560px) {
+    .post-container {
+        max-width: 1400px;
+    }
+
+    #toc-aside .toc-widget {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #toc-aside .toc-widget.toc-fixed {
+        position: sticky;
+        top: 64px;
+    }
+}
+
+/* Hide the TOC and its toggle on split-screen desktop windows. */
+@media only screen and (min-width: 768px) and (max-width: 1559px) {
+    #toc-aside,
+    #floating-toc-btn {
+        display: none !important;
+    }
+
+    #main-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+        left: auto !important;
+        margin-left: 0 !important;
+    }
+}

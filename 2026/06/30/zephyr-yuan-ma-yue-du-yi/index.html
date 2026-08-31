@@ -1,0 +1,1301 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Zephyr源码阅读（一）, RTOS, Zephyr">
+    <meta name="description" content="Zephyr移植">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://paopaoziye.github.io/2026/06/30/zephyr-yuan-ma-yue-du-yi/">
+    <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="归档 | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="Zephyr移植">
+    <meta property="og:url" content="https://paopaoziye.github.io/2026/06/30/zephyr-yuan-ma-yue-du-yi/">
+    <meta property="og:site_name" content="Zfk&#39;s Study Notes">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="归档 | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="Zephyr移植">
+    <meta name="twitter:url" content="https://paopaoziye.github.io/2026/06/30/zephyr-yuan-ma-yue-du-yi/">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>归档 | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse" aria-label="打开导航菜单"><i class="fas fa-bars" aria-hidden="true"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img" alt="Zfk&#39;s Study Notes">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            嵌入式系统、通信协议、RTOS 与软件开发学习笔记
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/37.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Zephyr源码阅读（一）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/RTOS/">
+                                <span class="chip bg-color">RTOS</span>
+                            </a>
+                        
+                            <a href="/tags/Zephyr/">
+                                <span class="chip bg-color">Zephyr</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/RTOS/" class="post-category">
+                                RTOS
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-06-30
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="RTOS"><a href="#RTOS" class="headerlink" title="RTOS"></a>RTOS</h1><h2 id="Zephyr源码阅读（一）"><a href="#Zephyr源码阅读（一）" class="headerlink" title="Zephyr源码阅读（一）"></a>Zephyr源码阅读（一）</h2><h3 id="Zephyr简介"><a href="#Zephyr简介" class="headerlink" title="Zephyr简介"></a>Zephyr简介</h3><p><strong>①简介</strong></p>
+<blockquote>
+<p><strong>概述</strong>：由<code>Linux</code>基金会托管的开源<code>RTOS</code>，可以在<a href="github.com/zephyrproject-rtos/zephyr">官方仓库</a>获取其源码，<strong>代码架构</strong>如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Zephyr采用类似Linux的Kconfig配置系统，支持模块化开发，并且包含丰富的组件如蓝牙和Wi-Fi等</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Zephyr采用统一的驱动接口以及设备树，并且代码高度抽象，便于代码移植</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 由于其复杂的抽象层，Zephyr的RAM/Flash占用通常比FreeRTOS等简单实时操作系统高</div>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">zephyrproject/
+├── .west/               <span class="token comment"># west 工作区配置，负责管理 Zephyr 及其依赖仓库</span>
+├── bootloader/          <span class="token comment"># 引导加载程序（通常为 MCUboot），负责安全启动、固件升级和 OTA</span>
+├── modules/             <span class="token comment"># 外部模块，如 HAL 库、中间件、文件系统、加密库等</span>
+├── tools/               <span class="token comment"># 开发辅助工具和脚本</span>
+└── zephyr/              <span class="token comment"># Zephyr RTOS 核心源码</span>
+    ├── arch/            <span class="token comment"># 不同 CPU 架构的底层实现，如上下文切换、中断处理等</span>
+    ├── boards/          <span class="token comment"># 官方开发板支持文件，如设备树、Kconfig 和默认配置</span>
+    ├── drivers/         <span class="token comment"># 各类硬件外设驱动，如 GPIO、UART、SPI、I2C、ADC 等</span>
+    ├── dts/             <span class="token comment"># 通用设备树源码（DeviceTree）及设备树绑定文件（Bindings）</span>
+    ├── include/         <span class="token comment"># Zephyr 对外提供的公共 API 头文件</span>
+    ├── kernel/          <span class="token comment"># RTOS 内核，实现线程调度、同步、定时器和内存管理等核心功能</span>
+    ├── lib/             <span class="token comment"># 通用基础库，如 C 库扩展、算法和常用工具函数</span>
+    ├── samples/         <span class="token comment"># 官方示例程序，适合学习和验证功能</span>
+    ├── scripts/         <span class="token comment"># 构建、配置和开发所需的 Python 脚本及工具</span>
+    ├── soc/             <span class="token comment"># 各厂商 SoC 的底层支持代码</span>
+    ├── subsys/          <span class="token comment"># 上层子系统，如蓝牙、USB、网络协议栈、Shell、文件系统等</span>
+    ├── tests/           <span class="token comment"># 官方测试用例，用于验证内核和各功能模块</span>
+    └── <span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/loading.gif" data-original="/image/Zephyr_1.png" alt="Zephyr架构"><br><strong>②环境配置</strong></p>
+<blockquote>
+<p><strong>概述</strong>：以<code>Ubuntu 24.04</code>为例构建<code>Zephyr 4.4.0</code>的开发环境，<code>SDK</code>版本为<code>1.0.1</code>，如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> West是Zephyr官方提供的元工具，用于统一管理源码、构建、烧录和调试整个Zephyr工程</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 使用虚拟环境可以使得每个Zephyr工作区有自己的Python环境，不会污染Ubuntu系统环境</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 每次进入zephyrproject文件夹下进行开发时都需要使用source .venv/bin/activate重新激活虚拟环境</div>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 更新系统</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> update
+<span class="token function">sudo</span> <span class="token function">apt</span> upgrade
+
+<span class="token comment"># 安装 Zephyr 所需依赖</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> --no-install-recommends <span class="token punctuation">\</span>
+    <span class="token function">git</span> cmake ninja-build gperf <span class="token punctuation">\</span>
+    ccache dfu-util device-tree-compiler <span class="token punctuation">\</span>
+    <span class="token function">wget</span> python3-dev python3-pip python3-setuptools <span class="token punctuation">\</span>
+    python3-tk python3-wheel xz-utils <span class="token function">file</span> <span class="token punctuation">\</span>
+    <span class="token function">make</span> gcc gcc-multilib g++-multilib <span class="token punctuation">\</span>
+    libsdl2-dev libmagic1 <span class="token punctuation">\</span>
+    python3-venv
+
+<span class="token comment"># 创建 Zephyr 工作区</span>
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ~/Workspace/zephyrproject
+<span class="token builtin class-name">cd</span> ~/Workspace/zephyrproject
+
+<span class="token comment"># 创建 Python 虚拟环境</span>
+python3 <span class="token parameter variable">-m</span> venv .venv
+<span class="token builtin class-name">source</span> .venv/bin/activate
+python <span class="token parameter variable">-m</span> pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span> pip
+
+<span class="token comment"># 安装 west 并初始化 Zephyr</span>
+pip <span class="token function">install</span> west
+west init ~/Workspace/zephyrproject
+<span class="token builtin class-name">cd</span> ~/Workspace/zephyrproject
+west update
+west zephyr-export
+
+<span class="token comment"># 安装 Python 依赖</span>
+pip <span class="token function">install</span> <span class="token parameter variable">-r</span> zephyr/scripts/requirements.txt
+
+<span class="token comment"># 安装 Zephyr SDK</span>
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ~/Workspace/zephyr-sdk
+<span class="token builtin class-name">cd</span> ~/Workspace/zephyr-sdk
+<span class="token function">wget</span> https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v1.0.1/zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz
+<span class="token function">tar</span> <span class="token parameter variable">-xf</span> zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz
+<span class="token builtin class-name">cd</span> zephyr-sdk-1.0.1
+./setup.sh
+<span class="token builtin class-name">echo</span> <span class="token string">'export ZEPHYR_SDK_INSTALL_DIR=$HOME/Workspace/zephyr-sdk/zephyr-sdk-1.0.1'</span> <span class="token operator">&gt;&gt;</span> ~/.bashrc
+<span class="token builtin class-name">source</span> ~/.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③简易工程</strong></p>
+<blockquote>
+<p><strong>概述</strong>：以一块<code>STM32F407VET6</code>开发板为例，构建一个<code>LED</code>闪烁工程，如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> app.overlay用于描述应用使用的硬件资源，并覆盖开发板默认的设备树配置</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> prj.conf用于配置Zephyr内核及各功能模块，决定工程启用哪些功能和驱动</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 建议使用Zephyr的API，而不是STM32的HAL库，充分发挥Zephyr的硬件抽象能力</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 该处使用的板卡外部晶振频率为25MHz，而Zephyr的black_f407ve默认为8MHz晶振，需要进行修改</div>
+<pre class="line-numbers language-none"><code class="language-none">~/Workspace/zephyrproject/
+└── app/
+    └── led_demo/
+        ├── CMakeLists.txt
+        ├── prj.conf
+        ├── app.overlay
+        └── src/
+            └── main.c<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
+ * main.c
+ *
+ * 演示如何使用 Zephyr GPIO API 控制两个 LED。
+ *
+ * Green LED : PC5（低电平点亮）
+ * Blue  LED : PB2（低电平点亮）
+ */</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;zephyr/kernel.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;zephyr/drivers/gpio.h&gt;</span></span>
+
+<span class="token comment">/*
+ * 从 DeviceTree 的 aliases 节点中获取 LED。
+ *
+ * 对应 app.overlay：
+ *
+ * aliases {
+ *     led0 = &amp;green_led;
+ *     led1 = &amp;blue_led;
+ * };
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LED_GREEN_NODE</span> <span class="token expression"><span class="token function">DT_ALIAS</span><span class="token punctuation">(</span>led0<span class="token punctuation">)</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LED_BLUE_NODE</span>  <span class="token expression"><span class="token function">DT_ALIAS</span><span class="token punctuation">(</span>led1<span class="token punctuation">)</span></span></span>
+
+<span class="token comment">/*
+ * 根据 DeviceTree 节点生成 GPIO 描述符。
+ *
+ * gpio_dt_spec 结构体中包含：
+ *   - GPIO 控制器
+ *   - GPIO 引脚编号
+ *   - GPIO 配置标志（如 GPIO_ACTIVE_LOW）
+ */</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">gpio_dt_spec</span> led_green <span class="token operator">=</span>
+    <span class="token function">GPIO_DT_SPEC_GET</span><span class="token punctuation">(</span>LED_GREEN_NODE<span class="token punctuation">,</span> gpios<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">gpio_dt_spec</span> led_blue <span class="token operator">=</span>
+    <span class="token function">GPIO_DT_SPEC_GET</span><span class="token punctuation">(</span>LED_BLUE_NODE<span class="token punctuation">,</span> gpios<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/*
+     * 将两个 LED 配置为 GPIO 输出模式。
+     *
+     * GPIO_OUTPUT_INACTIVE 表示：
+     * 初始化后输出"非激活"状态。
+     *
+     * 由于 LED 配置为 GPIO_ACTIVE_LOW，
+     * 因此非激活状态对应高电平，即 LED 熄灭。
+     */</span>
+    <span class="token function">gpio_pin_configure_dt</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>led_green<span class="token punctuation">,</span> GPIO_OUTPUT_INACTIVE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">gpio_pin_configure_dt</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>led_blue<span class="token punctuation">,</span> GPIO_OUTPUT_INACTIVE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">/*
+         * 翻转两个 LED 的状态。
+         *
+         * 每执行一次，LED 都会在亮/灭之间切换。
+         * Zephyr 会根据 GPIO_ACTIVE_LOW 自动完成电平转换，
+         * 应用程序无需关心实际输出的是高电平还是低电平。
+         */</span>
+        <span class="token function">gpio_pin_toggle_dt</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>led_green<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">gpio_pin_toggle_dt</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>led_blue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* 延时 500 ms */</span>
+        <span class="token function">k_msleep</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-devicetree" data-language="devicetree"><code class="language-devicetree"><span class="token comment">/*
+ * app.overlay
+ *
+ * 为 STM32F407VET6 配置：
+ *   - 外部高速晶振 HSE：25 MHz
+ *   - 系统主频：168 MHz
+ *   - Green LED：PC5（低电平点亮）
+ *   - Blue  LED：PB2（低电平点亮）
+ */</span>
+
+/ <span class="token punctuation">{</span>
+    <span class="token comment">/*
+     * 为 LED 创建逻辑别名。
+     * 应用程序通过 DT_ALIAS(led0/led1) 获取 LED，
+     * 不需要关心具体 GPIO 引脚。
+     */</span>
+   <span class="token node class-name"> aliases</span> <span class="token punctuation">{</span>
+        <span class="token property property">led0</span> <span class="token operator">=</span> <span class="token reference variable">&amp;green_led</span><span class="token punctuation">;</span>
+        <span class="token property property">led1</span> <span class="token operator">=</span> <span class="token reference variable">&amp;blue_led</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/*
+     * GPIO LED 设备节点。
+     */</span>
+   <span class="token node class-name"> leds</span> <span class="token punctuation">{</span>
+        <span class="token property property">compatible</span> <span class="token operator">=</span> <span class="token string">"gpio-leds"</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* Green LED：PC5（Active Low） */</span>
+        <span class="token label symbol">green_led</span><span class="token punctuation">:</span><span class="token node class-name"> green_led</span> <span class="token punctuation">{</span>
+            <span class="token property property">gpios</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token reference variable">&amp;gpioc</span> <span class="token number">5</span> GPIO_ACTIVE_LOW<span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+            <span class="token property property">label</span> <span class="token operator">=</span> <span class="token string">"Green LED"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* Blue LED：PB2（Active Low） */</span>
+        <span class="token label symbol">blue_led</span><span class="token punctuation">:</span><span class="token node class-name"> blue_led</span> <span class="token punctuation">{</span>
+            <span class="token property property">gpios</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token reference variable">&amp;gpiob</span> <span class="token number">2</span> GPIO_ACTIVE_LOW<span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+            <span class="token property property">label</span> <span class="token operator">=</span> <span class="token string">"Blue LED"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+ * 外部高速晶振 HSE 为 25 MHz。
+ */</span>
+<span class="token reference variable">&amp;clk_hse</span> <span class="token punctuation">{</span>
+    <span class="token property property">clock-frequency</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span>DT_FREQ_M(<span class="token number">25</span>)<span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+    <span class="token property property">status</span> <span class="token operator">=</span> <span class="token string">"okay"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+ * PLL 时钟配置：
+ *
+ * PLL 输入频率 = 25 MHz / 25 = 1 MHz
+ * PLL VCO 频率 = 1 MHz × 336 = 336 MHz
+ * SYSCLK       = 336 MHz / 2 = 168 MHz
+ * PLL48CLK     = 336 MHz / 7 = 48 MHz
+ */</span>
+<span class="token reference variable">&amp;pll</span> <span class="token punctuation">{</span>
+    <span class="token property property">clocks</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token reference variable">&amp;clk_hse</span><span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+
+    <span class="token property property">div-m</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token number">25</span><span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+    <span class="token property property">mul-n</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token number">336</span><span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+    <span class="token property property">div-p</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token number">2</span><span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+    <span class="token property property">div-q</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token number">7</span><span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+
+    <span class="token property property">status</span> <span class="token operator">=</span> <span class="token string">"okay"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+ * 将 PLL 作为系统时钟源。
+ *
+ * SYSCLK = 168 MHz
+ * HCLK   = 168 MHz
+ * PCLK1  = 42 MHz
+ * PCLK2  = 84 MHz
+ */</span>
+<span class="token reference variable">&amp;rcc</span> <span class="token punctuation">{</span>
+    <span class="token property property">clocks</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token reference variable">&amp;pll</span><span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+    <span class="token property property">clock-frequency</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span>DT_FREQ_M(<span class="token number">168</span>)<span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+
+    <span class="token property property">ahb-prescaler</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token number">1</span><span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+    <span class="token property property">apb1-prescaler</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token number">4</span><span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+    <span class="token property property">apb2-prescaler</span> <span class="token operator">=</span> <span class="token punctuation">&lt;</span><span class="token number">2</span><span class="token punctuation">&gt;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cmake" data-language="cmake"><code class="language-cmake"><span class="token comment"># CMakeLists.txt</span>
+<span class="token keyword">cmake_minimum_required</span><span class="token punctuation">(</span><span class="token property">VERSION</span> <span class="token number">3.20.0</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 找到并加载 Zephyr 构建系统</span>
+<span class="token keyword">find_package</span><span class="token punctuation">(</span>Zephyr REQUIRED HINTS $<span class="token variable">ENV</span>{ZEPHYR_BASE<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 定义工程名称</span>
+<span class="token keyword">project</span><span class="token punctuation">(</span>led_demo<span class="token punctuation">)</span>
+
+<span class="token comment"># 将 src/main.c 加入编译</span>
+<span class="token keyword">target_sources</span><span class="token punctuation">(</span>app <span class="token namespace">PRIVATE</span>
+    src/main.c
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-kconfig" data-language="kconfig"><code class="language-kconfig"><span class="token comment"># prj.conf</span>
+<span class="token comment"># 启用 GPIO 子系统</span>
+CONFIG_GPIO<span class="token operator">=</span><span class="token boolean">y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>④编译与烧写</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>Zephyr</code>采用<code>west</code>进行<code>编译</code>、<code>烧写</code>和<code>调试</code>，通常采用<code>OpenOCD</code>作为烧录后端</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 连接板卡和电脑后，可以采用lsusb命令查看调试器是否被Linux正确识别，此处采用CMSIS-DAP调试器</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> west会根据开发板配置自动调用对应的烧录工具完成程序下载</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Zephyr的black_f407ve板级配置默认使用ST-Link作为调试器，需要修改相关配置才能使用west flash</div>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 进入 Zephyr 工作区并激活 Python 虚拟环境</span>
+<span class="token builtin class-name">cd</span> ~/Workspace/zephyrproject
+<span class="token builtin class-name">source</span> .venv/bin/activate
+
+<span class="token comment"># 编译工程</span>
+<span class="token comment"># -p always标识清除旧的构建缓存，重新生成整个工程</span>
+<span class="token comment"># -b black_f407ve指定目标开发板</span>
+<span class="token comment"># app/led_demo为应用程序所在目录</span>
+west build <span class="token parameter variable">-p</span> always <span class="token parameter variable">-b</span> black_f407ve/stm32f407xx app/led_demo
+
+<span class="token comment"># 1.直接使用 OpenOCD 进行烧录</span>
+openocd <span class="token punctuation">\</span>
+    <span class="token parameter variable">-f</span> interface/cmsis-dap.cfg <span class="token punctuation">\</span>
+    <span class="token parameter variable">-f</span> target/stm32f4x.cfg <span class="token punctuation">\</span>
+    <span class="token parameter variable">-c</span> <span class="token string">"program build/zephyr/zephyr.hex verify reset exit"</span>
+
+<span class="token comment"># 2.直接使用 pyOCD 进行烧录，通常需要通过 pip install pyocd 下载先</span>
+pyocd flash <span class="token parameter variable">--target</span> stm32f407vetx build/zephyr/zephyr.hex
+
+<span class="token comment"># 3.修改 Zephyr 的 OpenOCD 配置 openocd.cfg 再使用 west flash 进行烧录，详细如下所示</span>
+<span class="token builtin class-name">cd</span> ~/Workspace/zephyrproject/zephyr/boards/others/black_f407ve/support
+<span class="token function">vim</span> openocd.cfg 
+<span class="token builtin class-name">cd</span> ~/Workspace/zephyrproject
+west flash<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token comment">#</span>
+<span class="token comment"># OpenOCD configuration for Black F407VE + CMSIS-DAP</span>
+<span class="token comment">#</span>
+
+<span class="token keyword">source</span> <span class="token punctuation">[</span>find interface<span class="token operator">/</span>cmsis<span class="token operator">-</span>dap.cfg<span class="token punctuation">]</span>
+
+transport select swd
+
+<span class="token keyword">source</span> <span class="token punctuation">[</span>find target<span class="token operator">/</span>stm32f4x.cfg<span class="token punctuation">]</span>
+
+reset_config srst_only srst_nogate
+
+$<span class="token variable">_TARGETNAME</span> configure <span class="token operator">-</span>event gdb<span class="token operator">-</span>attach <span class="token punctuation">{</span>
+    echo <span class="token string">"Debugger attaching: halting execution"</span>
+    reset halt
+    gdb_breakpoint_override hard
+<span class="token punctuation">}</span>
+
+$<span class="token variable">_TARGETNAME</span> configure <span class="token operator">-</span>event gdb<span class="token operator">-</span>detach <span class="token punctuation">{</span>
+    echo <span class="token string">"Debugger detaching: resuming execution"</span>
+    resume
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://paopaoziye.github.io/2026/06/30/zephyr-yuan-ma-yue-du-yi/">https://paopaoziye.github.io/2026/06/30/zephyr-yuan-ma-yue-du-yi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank" rel="noopener noreferrer">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/RTOS/">
+                                    <span class="chip bg-color">RTOS</span>
+                                </a>
+                            
+                                <a href="/tags/Zephyr/">
+                                    <span class="chip bg-color">Zephyr</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2026/06/30/stm32-yi/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/27.webp" class="responsive-img" alt="STM32（一）" loading="lazy" decoding="async">
+                        
+                        <span class="card-title">STM32（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            空白工程构建
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-06-30
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MCU/" class="post-category">
+                                    MCU
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/STM32/">
+                        <span class="chip bg-color">STM32</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/">
+                        <span class="chip bg-color">单片机</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/06/30/vibe-coding-yi/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/4.webp" class="responsive-img" alt="Vibe Coding（一）" loading="lazy" decoding="async">
+                        
+                        <span class="card-title">Vibe Coding（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Vibe Coding
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-06-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    AI工具
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/AI/">
+                        <span class="chip bg-color">AI</span>
+                    </a>
+                    
+                    <a href="/tags/Vibe-Coding/">
+                        <span class="chip bg-color">Vibe Coding</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color" href="#toc-content" aria-label="显示或隐藏目录" aria-controls="toc-content" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2026</span>
+            
+            <a href="/about" target="_blank" rel="noopener noreferrer">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var start = new Date(
+                        Number(startYear), Number(startMonth) - 1, Number(startDate),
+                        Number(startHour), Number(startMinute), Number(startSecond)
+                    );
+                    var diff = Date.now() - start.getTime();
+                    var diffYears = todayYear - start.getFullYear();
+                    var anniversary = new Date(start);
+                    anniversary.setFullYear(start.getFullYear() + diffYears);
+                    if (anniversary.getTime() > Date.now()) {
+                        diffYears--;
+                        anniversary.setFullYear(start.getFullYear() + diffYears);
+                    }
+                    diff = Date.now() - anniversary.getTime();
+                    var diffDays = Math.floor(diff / days);
+                    var diffHours = Math.floor((diff - diffDays * days) / hours);
+                    var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
+                    var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                siteTime();
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   aria-label="搜索" class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script src="/js/cursor.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>
