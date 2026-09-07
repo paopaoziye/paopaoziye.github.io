@@ -2,22 +2,23 @@
 <html lang="zh-CN">
 
 
+
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="关于, Zfk&#39;s Study Notes">
-    <meta name="description" content="关于 | Zfk&#39;s Study Notes">
+    <meta name="description" content="嵌入式系统、通信协议、RTOS 与软件开发学习笔记">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://paopaoziye.github.io/about/index.html">
     <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
     <meta property="og:type" content="website">
     <meta property="og:title" content="关于 | Zfk&#39;s Study Notes">
-    <meta property="og:description" content="关于 | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="嵌入式系统、通信协议、RTOS 与软件开发学习笔记">
     <meta property="og:url" content="https://paopaoziye.github.io/about/index.html">
     <meta property="og:site_name" content="Zfk&#39;s Study Notes">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="关于 | Zfk&#39;s Study Notes">
-    <meta name="twitter:description" content="关于 | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="嵌入式系统、通信协议、RTOS 与软件开发学习笔记">
     <meta name="twitter:url" content="https://paopaoziye.github.io/about/index.html">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
@@ -266,17 +267,23 @@
 
             <div class="description center-align">
                 
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+                
+                <span id="subtitle">从来没有真正的绝境, 只有心灵的迷途</span>
                 <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: ['从来没有真正的绝境, 只有心灵的迷途','Never really desperate, only the lost of the soul'],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
+                    window.materyTypedConfig = {
+                        enabled: true,
+                        target: '#subtitle',
+                        src: 'https://cdn.jsdelivr.net/npm/typed.js@2.0.11',
+                        strings: ["从来没有真正的绝境, 只有心灵的迷途","Never really desperate, only the lost of the soul"],
+                        options: {
+                            strings: ["从来没有真正的绝境, 只有心灵的迷途","Never really desperate, only the lost of the soul"],
+                            startDelay: 300,
+                            typeSpeed: 100,
+                            loop: true,
+                            backSpeed: 50,
+                            showCursor: true
+                        }
+                    };
                 </script>
                 
             </div>
@@ -302,21 +309,21 @@
                     <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
                         
 <div class="statis">
-    <span class="count"><a href="/">29</a></span>
+    <span class="count"><a href="/">33</a></span>
     <span class="name">文章</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/categories">14</a></span>
+    <span class="count"><a href="/categories">11</a></span>
     <span class="name">分类</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">21</a></span>
+    <span class="count"><a href="/tags">24</a></span>
     <span class="name">标签</span>
 </div>
 
@@ -332,21 +339,21 @@
                                 <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
                                     
 <div class="statis">
-    <span class="count"><a href="/">29</a></span>
+    <span class="count"><a href="/">33</a></span>
     <span class="name">文章</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/categories">14</a></span>
+    <span class="count"><a href="/categories">11</a></span>
     <span class="name">分类</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">21</a></span>
+    <span class="count"><a href="/tags">24</a></span>
     <span class="name">标签</span>
 </div>
 
@@ -480,7 +487,7 @@
         },
         xAxis: {
             type: 'category',
-            data: ["2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08"]
+            data: ["2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09"]
         },
         yAxis: {
             type: 'value',
@@ -490,7 +497,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,15,6,5],
+                data: [0,0,0,0,0,0,0,0,0,15,6,8,1],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -532,7 +539,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"处理器架构","value":5},{"name":"CAN","value":1},{"name":"RTOS","value":8},{"name":"编程语言","value":3},{"name":"EtherCAT","value":1},{"name":"IIC","value":1},{"name":"BootLoader","value":1},{"name":"Modbus","value":1},{"name":"SPI","value":1},{"name":"MCU","value":3},{"name":"UART","value":1},{"name":"AI工具","value":1},{"name":"工作流","value":1},{"name":"无线通信","value":1}],
+                data: [{"name":"编程语言","value":10},{"name":"CAN","value":1},{"name":"EtherCat","value":1},{"name":"RTOS","value":8},{"name":"通信协议","value":3},{"name":"BootLoader","value":2},{"name":"Modbus","value":1},{"name":"处理器架构","value":2},{"name":"MCU","value":3},{"name":"无线通信","value":1},{"name":"工作流","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -556,7 +563,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["RTOS","串行协议","ARM体系架构","FreeRTOS","STM32","Zephyr","C语言","《C和指针》","《C++ Primer》","C++"]
+                data: ["RTOS","ARM体系架构","串行协议","FreeRTOS","STM32","Zephyr","RISC-V体系架构","Arm体系架构","《C++ primer》","Cpp"]
             }
         ],
         yAxis: [
@@ -569,7 +576,7 @@
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth : 18,
-                data: [8,6,4,4,3,3,1,1,1,1],
+                data: [8,5,5,4,3,3,2,1,1,1],
                 markPoint: {
                     symbolSize: 45,
                     data: [{
@@ -763,6 +770,7 @@ $(function () {
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/effects.js"></script>
     <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
@@ -779,9 +787,6 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
@@ -791,27 +796,65 @@ $(function () {
 
 	
     
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
-    
-
-    
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
-    
+    <script>
+        window.MateryEffects.init({
+            effects: [
+                {
+                    name: 'clicklove',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/others/clicklove.js",
+                    options: { maxHearts: 32 }
+                },
+                {
+                    name: 'canvasNest',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/canvas-nest.js",
+                    options: {
+                        color: "0,0,255",
+                        opacity: 0.7,
+                        zIndex: -1,
+                        count: 99,
+                        fps: 30
+                    }
+                },
+                {
+                    name: 'ribbon',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon.min.js",
+                    options: {
+                        size: 150,
+                        alpha: 0.6,
+                        zIndex: -1,
+                        clickChange: true
+                    }
+                },
+                {
+                    name: 'ribbonDynamic',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon-dynamic.js",
+                    options: { fps: 30 }
+                },
+                {
+                    name: 'cursor',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/js/cursor.js",
+                    options: { maxParticles: 80 }
+                }
+            ],
+            typed: window.materyTypedConfig || null,
+            live2d: {"enabled":true,"src":"/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05","options":{"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false}}
+        });
+    </script>
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-<script src="/js/cursor.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+
         <style>
             [bg-lazy] {
                 background-image: none !important;

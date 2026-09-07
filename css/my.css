@@ -9,16 +9,16 @@
 /* Keep the article, its background, and the previous/next cards aligned. */
 @media only screen and (min-width: 768px) {
     #artDetail {
-        --article-panel-width: 1000px;
-        --article-content-width: 900px;
+        --article-panel-width: min(100%, 1000px);
+        --article-content-width: min(100%, 900px);
         --article-side-space: 50px;
         --related-card-gap: 20px;
     }
 
     #artDetail > .card {
         width: var(--article-panel-width) !important;
-        min-width: var(--article-panel-width);
-        max-width: none !important;
+        min-width: 0;
+        max-width: 100% !important;
         margin-left: auto !important;
         margin-right: auto !important;
         box-sizing: border-box;
@@ -31,8 +31,8 @@
 
     #artDetail #articleContent {
         width: var(--article-content-width) !important;
-        min-width: var(--article-content-width);
-        max-width: none !important;
+        min-width: 0;
+        max-width: 100% !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
         box-sizing: border-box;
@@ -68,6 +68,122 @@
         margin-left: 0;
         margin-right: 0;
     }
+}
+
+/* Keep inline code on the surrounding text baseline. */
+#articleContent p code:not(pre code),
+#articleContent li code:not(pre code),
+#articleContent blockquote code:not(pre code) {
+    position: static !important;
+    top: auto !important;
+    display: inline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.1em 0.3em;
+    font-family: inherit !important;
+    font-size: 0.9em !important;
+    font-weight: inherit;
+    line-height: inherit !important;
+    vertical-align: baseline !important;
+    border-radius: 3px;
+}
+
+/* Region trees use a scoped, high-contrast palette on the Prism background. */
+#articleContent pre.language-region-tree,
+#articleContent pre.language-memory-map {
+    --region-code-fg: #d6deeb;
+    --region-title: #ffcc66;
+    --region-property: #82aaff;
+    --region-value: #c3e88d;
+    --region-number: #f78c6c;
+    --region-structure: #89ddff;
+    overflow-x: auto;
+}
+
+#articleContent pre.language-region-tree,
+#articleContent pre.language-memory-map,
+#articleContent pre.language-region-tree code.language-region-tree,
+#articleContent pre.language-memory-map code.language-memory-map {
+    color: var(--region-code-fg) !important;
+    white-space: pre !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+}
+
+#articleContent pre.language-region-tree code.language-region-tree .token.region-title {
+    color: var(--region-title) !important;
+    font-weight: 600;
+}
+
+#articleContent pre.language-region-tree code.language-region-tree .token.region-property {
+    color: var(--region-property) !important;
+}
+
+#articleContent pre.language-region-tree code.language-region-tree .token.region-value {
+    color: var(--region-value) !important;
+}
+
+#articleContent pre.language-region-tree code.language-region-tree .token.number {
+    color: var(--region-number) !important;
+}
+
+#articleContent pre.language-region-tree code.language-region-tree .token.tree-glyph,
+#articleContent pre.language-region-tree code.language-region-tree .token.operator {
+    color: var(--region-structure) !important;
+}
+
+#articleContent pre.language-memory-map code.language-memory-map .token.address {
+    color: var(--region-number) !important;
+}
+
+#articleContent pre.language-memory-map code.language-memory-map .token.memory-border {
+    color: var(--region-structure) !important;
+}
+
+#articleContent pre.language-memory-map code.language-memory-map .token.region-name {
+    color: var(--region-title) !important;
+    font-weight: 600;
+}
+
+.mobile-menu-toggle {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid #42b983;
+    outline-offset: 3px;
+}
+
+#prev-cover,
+#next-cover,
+#backTop button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Keep code controls visually identical after using semantic buttons. */
+.code_copy,
+.code-expand {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    line-height: 1;
+}
+
+#articleContent pre.language-region-tree,
+#articleContent pre.language-memory-map {
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 /* Keep the TOC in its own column on wide desktop screens. */

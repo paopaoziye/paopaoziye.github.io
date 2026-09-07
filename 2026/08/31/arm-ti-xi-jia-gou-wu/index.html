@@ -1,0 +1,1567 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ARM,M-profile,Armv8-M,MPU,Region,TrustZone">
+    <meta name="description" content="M-profile的内存管理机制，主要围绕Armv8-M">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://paopaoziye.github.io/2026/08/31/arm-ti-xi-jia-gou-wu/">
+    <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="ARM体系架构（五） | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="M-profile的内存管理机制，主要围绕Armv8-M">
+    <meta property="og:url" content="https://paopaoziye.github.io/2026/08/31/arm-ti-xi-jia-gou-wu/">
+    <meta property="og:site_name" content="Zfk&#39;s Study Notes">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="ARM体系架构（五） | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="M-profile的内存管理机制，主要围绕Armv8-M">
+    <meta name="twitter:url" content="https://paopaoziye.github.io/2026/08/31/arm-ti-xi-jia-gou-wu/">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>ARM体系架构（五） | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse" aria-label="打开导航菜单"><i class="fas fa-bars" aria-hidden="true"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img" alt="Zfk&#39;s Study Notes">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            嵌入式系统、通信协议、RTOS 与软件开发学习笔记
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ARM体系架构（五）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
+    }
+
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ARM%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/">
+                                <span class="chip bg-color">ARM体系架构</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                编程语言
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-08-31
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="处理器架构"><a href="#处理器架构" class="headerlink" title="处理器架构"></a>处理器架构</h1><h2 id="ARM体系架构"><a href="#ARM体系架构" class="headerlink" title="ARM体系架构"></a>ARM体系架构</h2><h3 id="ARM体系架构（五）"><a href="#ARM体系架构（五）" class="headerlink" title="ARM体系架构（五）"></a>ARM体系架构（五）</h3><h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h4><p><strong>①内存地图</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>M-profile</code>采用统一的<code>32-bit</code><strong>线性地址空间</strong>，<strong>指令和数据</strong>共享同一套地址空间，总可寻址范围为<code>4GB</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> M-profile定义了一套Default Memory Map，将整个地址空间预划分为若干架构区域，并规定了默认的内存属性与访问语义</div>
+<blockquote>
+<p>主要可分为<code>Code</code>、<code>SRAM</code>、<code>Peripheral</code>、<code>External RAM/Device</code>和<code>System</code>等区域，详细如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> ARM采用Memory-mapped I/O机制，使处理器能够使用普通的Load/Store内存访问指令读写映射到地址空间中的硬件寄存器</div>
+<blockquote>
+<p><code>Memory-mapped I/O</code>即将外设寄存器映射到<strong>处理器地址空间</strong>，为各寄存器<strong>分配特定地址</strong>并纳入<strong>统一的寻址体系</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> ARM规定整体地址空间框架及部分系统资源地址，具体Flash、SRAM和芯片外设的实现范围及地址由芯片厂商定义</div>
+<blockquote>
+<p>比如某芯片厂商可以规定<code>UART0</code>的<strong>寄存器块基地址</strong>为<code>0x40001000</code>，另一厂商则可以将其放在<code>0x40010000</code></p>
+</blockquote>
+<blockquote>
+<p>芯片厂家可以通过<strong>别名映射</strong>使多个<strong>不同地址</strong>指向<strong>同一物理存储</strong>，也可以通过<strong>重映射</strong>改变<strong>某个地址所指向的物理存储</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 统一地址空间描述的是处理器的寻址模型，并不意味着整个地址范围都对应实际实现的存储器或外设</div>
+<pre class="line-numbers language-memory-map" data-language="memory-map"><code class="language-memory-map"><span class="token address">0xFFFF_FFFF</span>  <span class="token memory-border">┌</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">┐</span>   <span class="token region-name">System Region</span>
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   作用：核心系统资源
+             <span class="token memory-border">│</span>        <span class="token region-name">System Region</span>         <span class="token memory-border">│</span>   典型对象：Vendor_SYS, NVIC, SCB, SysTick
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>
+<span class="token address">0xE000_0000</span>  <span class="token memory-border">├</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">┤</span>
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   <span class="token region-name">External Device</span>
+             <span class="token memory-border">│</span>       <span class="token region-name">External Device</span>        <span class="token memory-border">│</span>   作用：典型片外 MMIO 设备
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   典型对象：FPGA 寄存器, LCD 控制器
+<span class="token address">0xA000_0000</span>  <span class="token memory-border">├</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">┤</span>
+             |                              |
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   <span class="token region-name">External RAM</span>
+             <span class="token memory-border">│</span>         <span class="token region-name">External RAM</span>         <span class="token memory-border">│</span>   作用：片外可读写存储器
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   典型对象：SDRAM, PSRAM, External <span class="token region-name">SRAM</span>
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>
+<span class="token address">0x6000_0000</span>  <span class="token memory-border">├</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">┤</span>
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   <span class="token region-name">Peripheral</span>
+             <span class="token memory-border">│</span>          <span class="token region-name">Peripheral</span>          <span class="token memory-border">│</span>   作用：片上外设寄存器
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   典型对象：GPIO, UART, SPI, ADC, Timer
+<span class="token address">0x4000_0000</span>  <span class="token memory-border">├</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">┤</span>
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   <span class="token region-name">SRAM</span>
+             <span class="token memory-border">│</span>             <span class="token region-name">SRAM</span>             <span class="token memory-border">│</span>   作用：运行时数据存储
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   典型对象：stack, heap, .data, .bss
+<span class="token address">0x2000_0000</span>  <span class="token memory-border">├</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">┤</span>
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   <span class="token region-name">Code</span>
+             <span class="token memory-border">│</span>             <span class="token region-name">Code</span>             <span class="token memory-border">│</span>   作用：程序镜像 / 常量 / 启动向量
+             <span class="token memory-border">│</span>                              <span class="token memory-border">│</span>   典型对象：Flash, ROM, vector table, .text, .rodata
+<span class="token address">0x0000_0000</span>  <span class="token memory-border">└</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">─</span><span class="token memory-border">┘</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②内存属性</strong></p>
+<blockquote>
+<p><strong>概述</strong>：也称为<code>Memory Attribute</code>，用于描述处理器访问某段地址时应遵循的<strong>访问语义</strong>和<strong>行为约束</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Memory Type是最基础的内存属性之一，Armv8-M主要定义了Normal Memory和Device Memory两种Memory Type</div>
+<blockquote>
+<p><code>Normal Memory</code>通常不会<strong>因为访问行为本身产生硬件副作用</strong>，主要用于<code>Flash</code>、<code>SRAM</code>和<code>External RAM</code>等<strong>普通存储器区域</strong></p>
+</blockquote>
+<blockquote>
+<p><code>Device Memory</code>的<strong>访问</strong>则可能会产生<code>W1C</code>或<strong>触发硬件操作</strong>等副作用，主要用于<code>GPIO</code>和<code>UART</code>等各种<code>Memory-mapped Peripheral</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Normal Memory具有更宽松的访问语义，因此架构允许处理器对其采用Cache、推测访问、访问合并和访问重排等优化</div>
+<blockquote>
+<p><code>Armv8-M</code>对<code>Device Memory</code>施加了更严格的<strong>访问约束</strong>，例如其始终为<code>Non-cacheable</code>，并按<code>Shareable</code>处理</p>
+</blockquote>
+<blockquote>
+<p><code>Device Memory</code>同时禁止<code>Speculative Data Access</code>，避免<strong>提前访问外设</strong>产生硬件副作用，并要求内存访问满足<strong>地址对齐要求</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Device Memory还通过G/nG、R/nR和E/nE属性，进一步约束访问合并、访问重排以及提前写确认等行为</div>
+<blockquote>
+<p><strong>合并访问</strong>：允许将<strong>多个同类型</strong>的内存访问合并为更少的<code>Memory Transaction</code>，以降低总线<strong>事务数量</strong>和<strong>访问开销</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>访问重排</strong>：允许在<strong>架构规则范围内</strong>改变设备访问<strong>到达目标的先后顺序</strong>，从而提高<code>Memory System</code>的处理效率</p>
+</blockquote>
+<blockquote>
+<p><strong>提前写确认</strong>：允许写请求在<strong>真正到达最终设备之前</strong>，由中间节点提前向处理器<strong>返回该写请求已被接受的确认</strong></p>
+</blockquote>
+<blockquote>
+<p>根据上述属性，<code>Device Memory</code>可细分为<code>Device-nGnRnE</code>、<code>Device-nGnRE</code>、<code>Device-nGRE</code>和<code>Device-GRE</code>四种类型</p>
+</blockquote>
+<p><strong>③缓存与共享</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>Armv8-M</code>为<code>Normal Memory</code>定义了可选的<code>Cacheability</code>和<code>Shareability</code>，分别表示<strong>缓存属性</strong>和<strong>共享属性</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 缓存属性可分为Cacheable和Non-cacheable，共享属性可分为Non-shareable、Inner Shareable和Outer Shareable</div>
+<blockquote>
+<p>以下将<strong>可以访问内存的主体</strong>如<code>CPU</code>和<code>DMA</code>等称为<code>Observer</code>，比如一个系统存在两个<code>Observer</code>分别为<code>CPU0</code>和<code>CPU1</code></p>
+</blockquote>
+<blockquote>
+<p><code>Shareability</code>用于管理多个<code>Observer</code>共享内存时，硬件需要在什么范围内满足<strong>架构规定的一致性和可观察性要求</strong></p>
+</blockquote>
+<blockquote>
+<p><code>Non-shareable</code>表示这片内存被一个<code>Observer</code>修改时，不需要保证其他处理器或设备能<strong>同步看到相同的数据</strong></p>
+</blockquote>
+<blockquote>
+<p><code>Inner Shareable</code>表示这片内存需要在同一<code>Inner Shareability Domain</code>内的多个<code>Observer</code>之间满足相应的<strong>数据共享与一致性要求</strong></p>
+</blockquote>
+<blockquote>
+<p><code>Outer Shareable</code>表示该内存需要在更大的<code>Outer Shareability Domain</code>内的多个<code>Observer</code>满足相应的<strong>数据共享与一致性要求</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果支持Cache，还可进一步配置写策略Write-Through/Write-Back以及分配策略Read Allocate/Write Allocate</div>
+<blockquote>
+<p><code>Write-Through</code>表示<code>CPU</code>进行<strong>写操作</strong>时会同时更新<code>Cache</code>以及对应的下级<code>Memory</code></p>
+</blockquote>
+<blockquote>
+<p><code>Write-Back</code>表示<code>CPU</code>进行<strong>写操作</strong>时只修改<code>Cache</code>并将对应<code>Cache Line</code>标记为<code>Dirty</code>，以后再写回<code>Memory</code></p>
+</blockquote>
+<blockquote>
+<p><code>Read Allocate</code>表示发生<strong>读缺失</strong>时，会先将对应<code>Cache Line</code>加载到<code>Cache</code>中，再完成本次读取</p>
+</blockquote>
+<blockquote>
+<p><code>Write Allocate</code>表示发生<strong>写缺失</strong>时，会先将对应<code>Cache Line</code>分配到<code>Cache</code>中，再在<code>Cache</code>内完成写入</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Armv8-M明确规定Normal Non-cacheable memory locations始终按Outer Shareable处理</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 带Cache且存在其他Bus Master时，需要进行缓存维护或将相关区域设为Non-cacheable，避免数据不一致</div>
+
+<p><strong>④内存访问流程</strong></p>
+<blockquote>
+<p><strong>概述</strong>：</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> </div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> </div>
+<h4 id="2-内存保护单元"><a href="#2-内存保护单元" class="headerlink" title="2.内存保护单元"></a>2.内存保护单元</h4><p><strong>①简介</strong></p>
+<blockquote>
+<p><strong>概述</strong>：也称为<code>MPU</code>，将<strong>地址空间</strong>划分成若干<code>Region</code>并规定<strong>访问权限</strong>、<strong>执行权限</strong>和<strong>内存属性</strong>，阻止<strong>非法访问</strong>并<strong>隔离不同软件区域</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Region的属性主要包含地址范围、读写权限、特权访问权限、执行权限以及内存类型、缓存和共享属性</div>
+<blockquote>
+<p>访问一个地址时，<code>MPU</code>会先判断这个地址属于哪个<code>Region</code>，随后依次进行<strong>相关权限的检查</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>地址范围</strong>：规定该<code>Region</code>覆盖的<strong>起始地址</strong>和<strong>结束地址</strong>，<code>Armv8-M</code>的<code>Region</code>边界必须按<code>32 Byte</code>对齐</p>
+</blockquote>
+<blockquote>
+<p><strong>读写权限</strong>：规定该<code>Region</code>允许<code>Read/Write</code>还是<strong>仅允许</strong><code>Read</code></p>
+</blockquote>
+<blockquote>
+<p><strong>特权访问权限</strong>：规定该<code>Region</code>是否允许<code>Unprivileged</code>代码访问，从而实现<strong>内核与普通任务</strong>之间的内存隔离</p>
+</blockquote>
+<blockquote>
+<p><strong>执行权限</strong>：规定处理器能否从该<code>Region</code>进行<strong>指令取指</strong>，<code>XN</code>置位时表示<code>Execute Never</code>即禁止执行</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Privileged访问在没有命中任何MPU Region时，可以使用ARM的默认Memory Map作为Background Region</div>
+<blockquote>
+<p><code>Unprivileged</code>软件不能靠这个获得<strong>默认兜底权限</strong>，通常只允许访问<strong>显式配置</strong>的<code>Region</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> MPU主要约束Cortex-M自身经过MPU的访存，不直接保护DMA等独立Bus Master的访问，并且不会像MMU那样进行地址转换</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 当访问违反Region的访问权限或执行权限时，会触发MemManage Fault，无法正常处理时还可能升级为HardFault</div>
+<pre class="line-numbers language-region-tree" data-language="region-tree"><code class="language-region-tree"><span class="token region-title">Region</span>
+<span class="token tree-glyph">│</span>
+<span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-title">地址属性</span>
+<span class="token tree-glyph">│</span>   <span class="token tree-glyph">└</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-property">Base</span> <span class="token operator">/</span> <span class="token region-property">Limit</span>
+<span class="token tree-glyph">│</span>
+<span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-title">保护属性</span>
+<span class="token tree-glyph">│</span>   <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-property">Privileged</span> <span class="token operator">/</span> <span class="token region-property">Unprivileged</span>
+<span class="token tree-glyph">│</span>   <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-property">Read</span> <span class="token operator">/</span> <span class="token region-property">Write</span>
+<span class="token tree-glyph">│</span>   <span class="token tree-glyph">└</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-property">Execute</span> <span class="token operator">/</span> <span class="token region-property">XN</span>
+<span class="token tree-glyph">│</span>
+<span class="token tree-glyph">└</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-title">内存属性</span>
+    <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-property">Memory Type</span>
+    <span class="token tree-glyph">│</span>   <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-value">Normal</span>
+    <span class="token tree-glyph">│</span>   <span class="token tree-glyph">└</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-value">Device</span>
+    <span class="token tree-glyph">│</span>
+    <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-property">Cache Attribute</span>
+    <span class="token tree-glyph">│</span>   <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-value">Non-cacheable</span>
+    <span class="token tree-glyph">│</span>   <span class="token tree-glyph">└</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-value">Cacheable</span>
+    <span class="token tree-glyph">│</span>       <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-value">Write-Through</span> <span class="token operator">/</span> <span class="token region-value">Write-Back</span>
+    <span class="token tree-glyph">│</span>       <span class="token tree-glyph">└</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-property">Read</span> <span class="token operator">/</span> <span class="token region-property">Write</span>
+    <span class="token tree-glyph">│</span>
+    <span class="token tree-glyph">└</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-property">Shareability</span>
+        <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-value">Non-shareable</span>
+        <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-value">Inner Shareable</span>
+        <span class="token tree-glyph">└</span><span class="token tree-glyph">─</span><span class="token tree-glyph">─</span> <span class="token region-value">Outer Shareable</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>②核心寄存器</strong></p>
+<blockquote>
+<p><strong>概述</strong>：以<code>Armv8-M</code>为例，<code>MPU</code>主要包含<code>MPU_TYPE</code>、<code>MPU_CTRL</code>、<code>MPU_RNR</code>、<code>MPU_RBAR</code>、<code>MPU_RLAR</code>以及<code>MPU_MAIR0/1</code>等寄存器</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> MPU_TYPE/CTRL负责整体能力与控制，RNR/RBAR/RLAR负责定义Region，MAIR负责定义Region使用的内存属性</div>
+<blockquote>
+<p><code>MPU_TYPE</code>：用于指示<code>MPU</code><strong>是否存在</strong>以及可以实现的<code>Region</code><strong>数目</strong>等能力信息</p>
+</blockquote>
+<blockquote>
+<p><code>MPU_CTRL</code>：用于控制<code>MPU</code>是否<code>Enable</code>、<code>Privileged</code>是否使用<code>Default Memory Map</code>以及某些<strong>高优先级异常环境</strong>下<code>MPU</code>是否生效</p>
+</blockquote>
+<blockquote>
+<p><code>MPU_RNR</code>：用于选择当前需要<strong>配置或访问</strong>的<code>Region</code>编号，后续对<code>RBAR</code>和<code>RLAR</code>的操作作用于该<code>Region</code></p>
+</blockquote>
+<blockquote>
+<p><code>MPU_RBAR</code>：用于定义<code>Region</code>的<strong>起始地址</strong>及<strong>保护属性</strong>，如<strong>共享属性</strong>、<strong>读写权限</strong>、<strong>非特权访问权限</strong>和<code>XN</code><strong>执行权限</strong>等</p>
+</blockquote>
+<blockquote>
+<p><code>MPU_RLAR</code>：用于定义<code>Region</code>的<strong>结束地址</strong>及<strong>内存属性索引</strong>，并通过<code>AttrIndx</code>关联<code>MAIR</code>中定义的<code>Memory Attribute</code></p>
+</blockquote>
+<blockquote>
+<p><code>MPU_MAIR0/1</code>：共同提供<code>8</code>组<strong>可复用</strong><code>Memory Attribute</code>，每组占<code>8 bit</code>，<code>MPU_RLAR.AttrIndx</code>选择一组属性给当前<code>Region</code>使用</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> MPU不识别具体Task，通常由RTOS在任务切换时加载对应的Region配置，实现各任务之间的访问隔离</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 高优先级异常环境是指处理器处于NMI、HardFault或FAULTMASK=1等具有负数执行优先级、可屏蔽绝大多数普通异常的执行状态</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 在HardFault、NMI等高优先级异常环境下忽略MPU，可避免错误的MPU配置阻止关键异常处理和故障恢复</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"stm32u5xx.h"</span></span>
+
+<span class="token comment">/* MAIR中的Memory Attribute索引 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">MPU_ATTR_NORMAL_NC</span>    <span class="token expression"><span class="token number">0U</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">MPU_ATTR_DEVICE</span>       <span class="token expression"><span class="token number">1U</span></span></span>
+
+<span class="token keyword">void</span> <span class="token function">MPU_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name">uint32_t</span> region_count<span class="token punctuation">;</span>
+
+    <span class="token comment">/*----------------------------------------------------------
+     * 1. 关闭MPU
+     *---------------------------------------------------------*/</span>
+    <span class="token function">ARM_MPU_Disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment">/*----------------------------------------------------------
+     * 2. 获取并清除当前MPU的所有Region
+     *
+     * ARM_MPU_TYPE()读取MPU_TYPE.DREGION
+     *---------------------------------------------------------*/</span>
+    region_count <span class="token operator">=</span> <span class="token function">ARM_MPU_TYPE</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">uint32_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> region_count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">ARM_MPU_ClrRegion</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token comment">/*----------------------------------------------------------
+     * 3. 配置MAIR中的Memory Attribute
+     *---------------------------------------------------------*/</span>
+
+    <span class="token comment">/*
+     * Attr 0:
+     * Normal Memory
+     * Non-cacheable
+     */</span>
+    <span class="token function">ARM_MPU_SetMemAttr</span><span class="token punctuation">(</span>
+        MPU_ATTR_NORMAL_NC<span class="token punctuation">,</span>
+        <span class="token function">ARM_MPU_ATTR</span><span class="token punctuation">(</span>
+            ARM_MPU_ATTR_NON_CACHEABLE<span class="token punctuation">,</span>     <span class="token comment">/* Outer */</span>
+            ARM_MPU_ATTR_NON_CACHEABLE      <span class="token comment">/* Inner */</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/*
+     * Attr 1:
+     * Device-nGnRnE
+     *
+     * nG = 不允许Gathering
+     * nR = 不允许Reordering
+     * nE = 不允许Early Write Acknowledgement
+     */</span>
+    <span class="token function">ARM_MPU_SetMemAttr</span><span class="token punctuation">(</span>
+        MPU_ATTR_DEVICE<span class="token punctuation">,</span>
+        <span class="token function">ARM_MPU_ATTR</span><span class="token punctuation">(</span>
+            ARM_MPU_ATTR_DEVICE<span class="token punctuation">,</span>
+            ARM_MPU_ATTR_DEVICE_nGnRnE
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment">/*----------------------------------------------------------
+     * 4. Region 0：Flash
+     *
+     * 0x08000000 ~ 0x081FFFFF
+     * 2 MB
+     *
+     * Normal Memory
+     * Read Only
+     * Unprivileged也可访问
+     * 可执行
+     *---------------------------------------------------------*/</span>
+    <span class="token function">ARM_MPU_SetRegion</span><span class="token punctuation">(</span>
+        <span class="token number">0U</span><span class="token punctuation">,</span>
+
+        <span class="token function">ARM_MPU_RBAR</span><span class="token punctuation">(</span>
+            <span class="token number">0x08000000UL</span><span class="token punctuation">,</span>       <span class="token comment">/* Base */</span>
+            ARM_MPU_SH_NON<span class="token punctuation">,</span>     <span class="token comment">/* Non-shareable */</span>
+            ARM_MPU_AP_RO<span class="token punctuation">,</span>      <span class="token comment">/* Read Only */</span>
+            ARM_MPU_AP_NP<span class="token punctuation">,</span>      <span class="token comment">/* Non-privileged allowed */</span>
+            ARM_MPU_EX          <span class="token comment">/* Executable */</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+        <span class="token function">ARM_MPU_RLAR</span><span class="token punctuation">(</span>
+            <span class="token number">0x081FFFFFUL</span><span class="token punctuation">,</span>       <span class="token comment">/* Limit */</span>
+            MPU_ATTR_NORMAL_NC  <span class="token comment">/* AttrIndx = 0 */</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment">/*----------------------------------------------------------
+     * 5. Region 1：主SRAM
+     *
+     * 0x20000000 ~ 0x200BFFFF
+     * 768 KB
+     *
+     * Normal Memory
+     * Read / Write
+     * Unprivileged也可访问
+     * XN：禁止执行代码
+     *---------------------------------------------------------*/</span>
+    <span class="token function">ARM_MPU_SetRegion</span><span class="token punctuation">(</span>
+        <span class="token number">1U</span><span class="token punctuation">,</span>
+
+        <span class="token function">ARM_MPU_RBAR</span><span class="token punctuation">(</span>
+            <span class="token number">0x20000000UL</span><span class="token punctuation">,</span>
+            ARM_MPU_SH_NON<span class="token punctuation">,</span>
+            ARM_MPU_AP_RW<span class="token punctuation">,</span>
+            ARM_MPU_AP_NP<span class="token punctuation">,</span>
+            ARM_MPU_XN
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+        <span class="token function">ARM_MPU_RLAR</span><span class="token punctuation">(</span>
+            <span class="token number">0x200BFFFFUL</span><span class="token punctuation">,</span>
+            MPU_ATTR_NORMAL_NC
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment">/*----------------------------------------------------------
+     * 6. Region 2：SRAM4
+     *
+     * 0x28000000 ~ 0x28003FFF
+     * 16 KB
+     *
+     * Normal Memory
+     * Read / Write
+     * Unprivileged可访问
+     * XN
+     *---------------------------------------------------------*/</span>
+    <span class="token function">ARM_MPU_SetRegion</span><span class="token punctuation">(</span>
+        <span class="token number">2U</span><span class="token punctuation">,</span>
+
+        <span class="token function">ARM_MPU_RBAR</span><span class="token punctuation">(</span>
+            <span class="token number">0x28000000UL</span><span class="token punctuation">,</span>
+            ARM_MPU_SH_NON<span class="token punctuation">,</span>
+            ARM_MPU_AP_RW<span class="token punctuation">,</span>
+            ARM_MPU_AP_NP<span class="token punctuation">,</span>
+            ARM_MPU_XN
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+        <span class="token function">ARM_MPU_RLAR</span><span class="token punctuation">(</span>
+            <span class="token number">0x28003FFFUL</span><span class="token punctuation">,</span>
+            MPU_ATTR_NORMAL_NC
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment">/*----------------------------------------------------------
+     * 7. Region 3：Non-secure Peripheral Address Space
+     *
+     * 0x40000000 ~ 0x4FFFFFFF
+     *
+     * Device-nGnRnE
+     * Read / Write
+     * Privileged Only
+     * XN
+     *
+     * 普通Unprivileged Task无法直接操作外设
+     *---------------------------------------------------------*/</span>
+    <span class="token function">ARM_MPU_SetRegion</span><span class="token punctuation">(</span>
+        <span class="token number">3U</span><span class="token punctuation">,</span>
+
+        <span class="token function">ARM_MPU_RBAR</span><span class="token punctuation">(</span>
+            <span class="token number">0x40000000UL</span><span class="token punctuation">,</span>
+            ARM_MPU_SH_NON<span class="token punctuation">,</span>     <span class="token comment">/* Device Memory下SH不作为普通Normal属性使用 */</span>
+            ARM_MPU_AP_RW<span class="token punctuation">,</span>
+            ARM_MPU_AP_PO<span class="token punctuation">,</span>      <span class="token comment">/* Privileged Only */</span>
+            ARM_MPU_XN
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+        <span class="token function">ARM_MPU_RLAR</span><span class="token punctuation">(</span>
+            <span class="token number">0x4FFFFFFFUL</span><span class="token punctuation">,</span>
+            MPU_ATTR_DEVICE
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment">/*----------------------------------------------------------
+     * 8. 使能MemManage Fault
+     *
+     * MPU权限违规时优先进入MemManage_Handler，
+     * 而不是因为MemManage未使能直接升级为HardFault
+     *---------------------------------------------------------*/</span>
+    SCB<span class="token operator">-&gt;</span>SHCSR <span class="token operator">|=</span> SCB_SHCSR_MEMFAULTENA_Msk<span class="token punctuation">;</span>
+
+
+    <span class="token comment">/*----------------------------------------------------------
+     * 9. 重新使能MPU
+     *
+     * PRIVDEFENA:
+     * Privileged访问没有命中显式Region时，
+     * 可以使用ARM Default Memory Map作为Background Region
+     *
+     * 不设置HFNMIENA：
+     * HardFault/NMI等特殊环境可以绕过普通MPU Region限制
+     *---------------------------------------------------------*/</span>
+    <span class="token function">ARM_MPU_Enable</span><span class="token punctuation">(</span>MPU_CTRL_PRIVDEFENA_Msk<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③</strong></p>
+<blockquote>
+<p><strong>概述</strong>：</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> </div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> </div>
+
+<h4 id="3-TrustZone"><a href="#3-TrustZone" class="headerlink" title="3.TrustZone"></a>3.TrustZone</h4><p><strong>①简介</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>Armv8-M</code>提供的<strong>硬件安全扩展</strong>，将系统划分为<code>Secure</code>和<code>Non-secure</code>区域，并限制后者<strong>直接访问</strong>前者的<strong>代码</strong>、<strong>数据</strong>和<strong>外设</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> TrustZone与运行模式和特权级相互独立，两个安全状态仍具有自己的运行模式、特权状态、栈、异常向量和MPU配置等</div>
+<blockquote>
+<p><code>TrustZone</code>对于<code>Armv8-M</code>是一个可选的<strong>安全扩展</strong>，支持该扩展的处理器<strong>复位</strong>后默认从<code>Secure state</code>开始执行</p>
+</blockquote>
+<blockquote>
+<p>启用<code>TrustZone</code>后，<code>Secure</code>和<code>Non-secure</code>区域有自己的栈指针<code>MSP_S</code>、<code>PSP_S</code>、<code>MSP_NS</code>和<code>PSP_NS</code>，表示<strong>执行上下文</strong>的隔离</p>
+</blockquote>
+<blockquote>
+<p>此外<code>Secure</code>和<code>Non-secure</code>状态也有各自的<code>CONTROL</code>、<code>PRIMASK</code>、<code>MPU</code>和<code>VTOR</code>等寄存器，对应后缀分别为<code>_S</code>和<code>_NS</code></p>
+</blockquote>
+<blockquote>
+<p><code>Non-secure</code>发起的<strong>访问请求</strong>只能访问<code>Non-secure</code>地址，而<code>Secure</code>发起的访问请求可以访问<code>Secure</code>和<code>Non-secure</code>地址</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 外部中断可通过NVIC_ITNS指定目标为Secure或Non-secure，异常发生后处理器可直接进入对应安全状态的Handler</div>
+<blockquote>
+<p><strong>系统异常</strong>则根据异常类型采用<code>Banked</code>、<strong>固定安全状态</strong>或<strong>目标安全状态可配置</strong>等方式</p>
+</blockquote>
+<blockquote>
+<p><code>Banked</code>即同一个系统异常在<code>Secure</code>和<code>Non-secure</code>状态下拥有各自的<code>Pending</code>、<code>Active</code>、<code>Priority</code>和<strong>异常向量</strong>等状态</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Non-secure Privileged仍然是Non-secure，它并不会因为拥有特权就获得Secure资源访问权</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 支持TrustZone的Armv8-M还会增加SecureFault这一系统异常，专门处理非法Secure访问等TrustZone安全违规异常</div>
+<blockquote>
+<p><code>SecureFault</code>只能在<code>Secure</code>状态下处理，对应的<strong>处理程序</strong>也必须放在<strong>安全内存</strong>中</p>
+</blockquote>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Secure
+├── Secure Code
+├── Secure Data
+├── Secure Flash
+├── Secure SRAM
+├── Secure Peripheral
+├── Secure Interrupt
+└── Secure System State
+
+Non-secure
+├── Non-secure Code
+├── Non-secure Data
+├── Non-secure Flash
+├── Non-secure SRAM
+├── Non-secure Peripheral
+└── Non-secure Interrupt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②安全属性单元</strong></p>
+<blockquote>
+<p><strong>概述</strong>：也称为<code>SAU</code>，用于将地址空间划分为多个<strong>安全属性区域</strong>，具体可分为<code>Secure</code>、<code>Non-secure</code>或<code>NSC</code>三种区域</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> SAU只能由Secure Privileged软件配置，未被配置为Non-secure/NSC的区域默认保持为Secure</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> SAU主要包含SAU_CTRL、SAU_TYPE、SAU_RNR、SAU_RBAR和SAU_RLAR等寄存器，区域边界同样采用32 Byte粒度</div>
+<blockquote>
+<p><code>SAU_CTRL</code>：用于控制<code>SAU</code><strong>是否使能</strong>，以及<code>SAU</code>关闭时地址空间默认按<code>Secure</code>还是<code>Non-secure</code>处理</p>
+</blockquote>
+<blockquote>
+<p><code>SAU_TYPE</code>：用于描述<code>SAU</code>的<strong>实现能力</strong>，主要通过<code>SREGION</code>字段表示处理器实际支持的<code>SAU Region</code>数量</p>
+</blockquote>
+<blockquote>
+<p><code>SAU_RNR</code>：用于选择当前需要<strong>配置或查看</strong>的<code>SAU Region</code>编号，后续对<code>SAU_RBAR</code>和<code>SAU_RLAR</code>的访问都作用于该<code>Region</code></p>
+</blockquote>
+<blockquote>
+<p><code>SAU_RBAR</code>：用于定义当前<code>Region</code>的<strong>起始地址</strong>，其<strong>低</strong><code>5 bit</code>不参与地址定义，因此<code>Region</code>的起始地址必须按<code>32 Byte</code>对齐</p>
+</blockquote>
+<blockquote>
+<p><code>SAU_RLAR</code>：用于定义当前<code>Region</code>的<strong>结束地址</strong>及<strong>安全属性</strong>，只能指定<code>Non-secure</code>和<code>NSC</code>，未指定的<code>Region</code>为<code>Secure</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> IDAU是由芯片厂家提供的实现定义安全属性单元，用于在SoC层面规定部分地址空间的固定或芯片级安全属性</div>
+<blockquote>
+<p><code>SAU</code>只能在<code>IDAU</code>的<strong>可编程安全区域</strong>进行进一步设置，通常需要结合<code>IDAU</code>与<code>SAU</code>来确定最终<code>Security Attribution</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> TrustZone主要约束处理器访问，DMA等独立Bus Master仍需依赖SoC级安全机制进行保护</div>
+
+<p><strong>③NSC</strong></p>
+<blockquote>
+<p><strong>概述</strong>：属于<code>Secure Memory</code>的一种<strong>特殊区域</strong>，专门用于存放从<code>Non-secure</code>进入<code>Secure</code>的<code>Gateway Veneer</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Gateway Veneer本质上是一个跳板，主要由SG指令和对应的跳转指令组成，如下所示</div>
+<blockquote>
+<p><code>Non-secure</code>工程链接的是<code>Secure</code>工程生成的<code>import library</code>，其中<strong>函数符号</strong>指向是<code>NSC</code>区域里对应的<code>Gateway Veneer</code>地址</p>
+</blockquote>
+<blockquote>
+<p><code>SG</code>指令用于从<code>Non-secure</code>合法进入<code>Secure</code>，但是<code>SG</code>只有在<code>NSC</code>中才有效，违规调用会导致<code>SecureFault</code></p>
+</blockquote>
+<blockquote>
+<p><code>BXNS</code>和<code>BLXNS</code>指令均可以用于从<code>Secure</code>主动切换到<code>Non-secure</code>，后者会<strong>保留返回地址</strong>，通常用于调用<code>Non-secure</code>函数</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Gateway Veneer通常由工具链生成，在编写Secure函数时添加对应的编译器函数属性则编译器会自动生成对应的Gateway Veneer</div>
+<blockquote>
+<p><code>Armv8-M</code>下的<code>Secure/Non-secure</code>状态切换由<strong>处理器硬件直接支持</strong>，这种设计降低了<strong>切换延迟</strong>和<strong>软件开销</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Secure API绝不能因为调用者经过了SG就相信其传入的参数，仍需进行严格的参数与访问权限检查</div>
+<blockquote>
+<p><code>Armv8-M</code>提供<code>TT</code>和<code>Test Target</code>等一系列指令帮助软件查询某个地址的<strong>安全和访问属性</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> </div>
+<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas"><span class="token label symbol">secure_add_veneer</span><span class="token punctuation">:</span>
+    SG                  <span class="token comment">; Non-secure -&gt; Secure</span>
+    <span class="token instruction keyword">B</span>   secure_add      <span class="token comment">; 跳到真正的 Secure 函数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<pre class="line-numbers language-none"><code class="language-none">二十三、启动过程是什么样
+
+支持 TrustZone 的 Armv8-M 系统：
+
+Reset
+  ↓
+Secure State
+
+首先运行：
+
+Secure Reset Handler
+
+Secure Firmware 通常需要做：
+
+① 初始化Secure执行环境
+       ↓
+② 配置SAU / 芯片安全控制器
+       ↓
+③ 划分Secure / Non-secure / NSC
+       ↓
+④ 配置Secure / Non-secure MPU
+       ↓
+⑤ 配置Interrupt Target State
+       ↓
+⑥ 配置Non-secure Vector Table
+       ↓
+⑦ 设置MSP_NS
+       ↓
+⑧ 跳转到Non-secure Reset Handler
+
+然后：
+
+Secure Boot / Initialization
+          ↓
+    Non-secure Application
+
+Arm 也指出典型系统会在上电/复位后的可信 Secure 软件中配置安全区域。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://paopaoziye.github.io/2026/08/31/arm-ti-xi-jia-gou-wu/">https://paopaoziye.github.io/2026/08/31/arm-ti-xi-jia-gou-wu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank" rel="noopener noreferrer">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/ARM%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/">
+                                    <span class="chip bg-color">ARM体系架构</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2026/08/31/arm-ti-xi-jia-gou-liu/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/20.webp" class="responsive-img" alt="ARM体系架构（六）" loading="lazy" decoding="async">
+                        
+                        <span class="card-title">ARM体系架构（六）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Armv8-A AArch64 执行模型与异常级别
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-08-31
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ARM%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/">
+                        <span class="chip bg-color">ARM体系架构</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/08/31/riscv-ti-xi-jia-gou-er/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/16.webp" class="responsive-img" alt="RISC-V体系架构（二）" loading="lazy" decoding="async">
+                        
+                        <span class="card-title">RISC-V体系架构（二）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            RISC-V 指令编码与执行机制
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-08-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    处理器架构
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/RISC-V%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/">
+                        <span class="chip bg-color">RISC-V体系架构</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color" href="#toc-content" aria-label="显示或隐藏目录" aria-controls="toc-content" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function (event) {
+            event.preventDefault();
+            let expanded = $tocAside.hasClass(expandedClass);
+            if (expanded) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            $(this).attr('aria-expanded', String(!expanded));
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2026</span>
+            
+            <a href="/about" target="_blank" rel="noopener noreferrer">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var start = new Date(
+                        Number(startYear), Number(startMonth) - 1, Number(startDate),
+                        Number(startHour), Number(startMinute), Number(startSecond)
+                    );
+                    var diff = Date.now() - start.getTime();
+                    var diffYears = todayYear - start.getFullYear();
+                    var anniversary = new Date(start);
+                    anniversary.setFullYear(start.getFullYear() + diffYears);
+                    if (anniversary.getTime() > Date.now()) {
+                        diffYears--;
+                        anniversary.setFullYear(start.getFullYear() + diffYears);
+                    }
+                    diff = Date.now() - anniversary.getTime();
+                    var diffDays = Math.floor(diff / days);
+                    var diffHours = Math.floor((diff - diffDays * days) / hours);
+                    var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
+                    var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                siteTime();
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   aria-label="搜索" class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/effects.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script>
+        window.MateryEffects.init({
+            effects: [
+                {
+                    name: 'clicklove',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/others/clicklove.js",
+                    options: { maxHearts: 32 }
+                },
+                {
+                    name: 'canvasNest',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/canvas-nest.js",
+                    options: {
+                        color: "0,0,255",
+                        opacity: 0.7,
+                        zIndex: -1,
+                        count: 99,
+                        fps: 30
+                    }
+                },
+                {
+                    name: 'ribbon',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon.min.js",
+                    options: {
+                        size: 150,
+                        alpha: 0.6,
+                        zIndex: -1,
+                        clickChange: true
+                    }
+                },
+                {
+                    name: 'ribbonDynamic',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon-dynamic.js",
+                    options: { fps: 30 }
+                },
+                {
+                    name: 'cursor',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/js/cursor.js",
+                    options: { maxParticles: 80 }
+                }
+            ],
+            typed: window.materyTypedConfig || null,
+            live2d: {"enabled":true,"src":"/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05","options":{"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false}}
+        });
+    </script>
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

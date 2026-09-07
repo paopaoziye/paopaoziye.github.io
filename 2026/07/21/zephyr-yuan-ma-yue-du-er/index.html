@@ -2,22 +2,23 @@
 <html lang="zh-CN">
 
 
+
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Zephyr源码阅读（二）, RTOS, Zephyr">
-    <meta name="description" content="启动流程">
+    <meta name="keywords" content="Zephyr,启动流程,ARM Cortex-M,CMake,链接脚本">
+    <meta name="description" content="Zephyr ARM 启动流程与链接脚本">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://paopaoziye.github.io/2026/07/21/zephyr-yuan-ma-yue-du-er/">
     <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta property="og:description" content="启动流程">
+    <meta property="og:title" content="Zephyr源码阅读（二） | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="Zephyr ARM 启动流程与链接脚本">
     <meta property="og:url" content="https://paopaoziye.github.io/2026/07/21/zephyr-yuan-ma-yue-du-er/">
     <meta property="og:site_name" content="Zfk&#39;s Study Notes">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta name="twitter:description" content="启动流程">
+    <meta name="twitter:title" content="Zephyr源码阅读（二） | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="Zephyr ARM 启动流程与链接脚本">
     <meta name="twitter:url" content="https://paopaoziye.github.io/2026/07/21/zephyr-yuan-ma-yue-du-er/">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
@@ -27,7 +28,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>归档 | Zfk&#39;s Study Notes</title>
+    <title>Zephyr源码阅读（二） | Zfk&#39;s Study Notes</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -283,8 +284,14 @@
         visibility: hidden;
     }
 
-    #articleContent :focus {
-        outline: none;
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
+    }
+
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
     }
 
     .toc-fixed {
@@ -475,7 +482,7 @@ INCLUDE isr_tables_vt.ld
 #endif
 
 _vector_end <span class="token operator">=</span> <span class="token location-counter important">.</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas"><span class="token comment">; 位于zephyr/arch/arm/core/cortex_m/vector_table.S</span>
+<pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 位于zephyr/arch/arm/core/cortex_m/vector_table.S</span>
 #include <span class="token operator">&lt;</span>zephyr<span class="token operator">/</span>toolchain.h<span class="token operator">&gt;</span>
 #include <span class="token operator">&lt;</span>zephyr<span class="token operator">/</span>linker<span class="token operator">/</span>sections.h<span class="token operator">&gt;</span>
 #include <span class="token string">"vector_table.h"</span>
@@ -484,19 +491,19 @@ _vector_end <span class="token operator">=</span> <span class="token location-co
 _ASM_FILE_PROLOGUE
 
 <span class="token comment">; 告诉 ARM 工具链代码会保持 ABI 要求的栈对齐</span>
-<span class="token directive property">.eabi_attribute</span> Tag_ABI_align_preserved<span class="token punctuation">,</span> <span class="token number">1</span>
+.eabi_attribute Tag_ABI_align_preserved, <span class="token number">1</span>
 
 <span class="token comment">; 声明全局数据符号 z_main_stack，该栈实际在其他源码中定义</span>
-GDATA<span class="token punctuation">(</span>z_main_stack<span class="token punctuation">)</span>
+GDATA(z_main_stack)
 
 <span class="token comment">; 创建输入节.exc_vector_table._vector_table_section，并定义全局符号 _vector_table</span>
-SECTION_SUBSEC_FUNC<span class="token punctuation">(</span>exc_vector_table<span class="token punctuation">,</span>_vector_table_section<span class="token punctuation">,</span>_vector_table<span class="token punctuation">)</span>
+SECTION_SUBSEC_FUNC(exc_vector_table,_vector_table_section,_vector_table)
 
     <span class="token comment">; 向量表第一个位置保存主栈栈顶地址</span>
-    <span class="token directive property">.word</span> z_main_stack <span class="token operator">+</span> CONFIG_MAIN_STACK_SIZE
+    .word z_main_stack <span class="token operator">+</span> CONFIG_MAIN_STACK_SIZE
 
     <span class="token comment">; 向量表第二个位置保存 z_arm_reset 的地址</span>
-    <span class="token directive property">.word</span> z_arm_reset<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    .word z_arm_reset<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>③<code>z_arm_reset</code></strong></p>
 <blockquote>
@@ -517,114 +524,114 @@ SECTION_SUBSEC_FUNC<span class="token punctuation">(</span>exc_vector_table<span
 <blockquote>
 <p><code>.bss</code>段还没有清零，<code>.data</code>段还没有复制，<code>ISR</code>使用的<strong>全局变量</strong>可能无效</p>
 </blockquote>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas"><span class="token comment">; 位于zephyr/arch/arm/core/cortex_m/reset.S</span>
+<pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 位于zephyr/arch/arm/core/cortex_m/reset.S</span>
 <span class="token comment">; 在 .text._reset_section 中定义函数符号 z_arm_reset</span>
-SECTION_SUBSEC_FUNC<span class="token punctuation">(</span>TEXT<span class="token punctuation">,</span>_reset_section<span class="token punctuation">,</span>z_arm_reset<span class="token punctuation">)</span>
+SECTION_SUBSEC_FUNC(TEXT,_reset_section,z_arm_reset)
 
 <span class="token comment">; 在相同的位置定义另一个入口符号 __start</span>
-SECTION_SUBSEC_FUNC<span class="token punctuation">(</span>TEXT<span class="token punctuation">,</span>_reset_section<span class="token punctuation">,</span>__start<span class="token punctuation">)</span>
+SECTION_SUBSEC_FUNC(TEXT,_reset_section,__start)
 
 <span class="token comment">; 如果启用了启动时架构硬件初始化，则清零 CONTROL：</span>
 <span class="token comment">; 进入特权线程模式、选择 MSP，并清除其他 CONTROL 状态位</span>
 <span class="token comment">; 执行 ISB，确保 CONTROL 的修改对后续指令立即生效</span>
-#if defined<span class="token punctuation">(</span>CONFIG_INIT_ARCH_HW_AT_BOOT<span class="token punctuation">)</span>
-    movs.n <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token immediate number">#0</span>
-    <span class="token instruction keyword">msr</span> CONTROL<span class="token punctuation">,</span> <span class="token register variable">r0</span>
+#if defined(CONFIG_INIT_ARCH_HW_AT_BOOT)
+    movs.n <span class="token register variable">r0</span>, #<span class="token number">0</span>
+    msr CONTROL, <span class="token register variable">r0</span>
     isb
 <span class="token comment">; 如果 CPU 支持栈指针限制寄存器，则清除 MSP 和 PSP 的栈边界限制</span>
-#if defined<span class="token punctuation">(</span>CONFIG_CPU_CORTEX_M_HAS_SPLIM<span class="token punctuation">)</span>
-    movs.n <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token immediate number">#0</span>
-    <span class="token instruction keyword">msr</span> MSPLIM<span class="token punctuation">,</span> <span class="token register variable">r0</span>
-    <span class="token instruction keyword">msr</span> PSPLIM<span class="token punctuation">,</span> <span class="token register variable">r0</span>
+#if defined(CONFIG_<span class="token keyword">CPU_CORTEX_M_HAS_SPLIM)</span>
+    movs.n <span class="token register variable">r0</span>, #<span class="token number">0</span>
+    msr MSPLIM, <span class="token register variable">r0</span>
+    msr PSPLIM, <span class="token register variable">r0</span>
 #endif
 #endif
 
 <span class="token comment">; 如果 SoC 提供超早期复位钩子，则调用对应钩子函数，此时栈和 RAM 尚未准备好</span>
-#if defined<span class="token punctuation">(</span>CONFIG_SOC_EARLY_RESET_HOOK<span class="token punctuation">)</span>
-    <span class="token instruction keyword">bl</span> soc_early_reset_hook
+#if defined(CONFIG_SOC_EARLY_RESET_HOOK)
+    <span class="token register variable">bl</span> soc_early_reset_hook
 #endif
 
 <span class="token comment">; 如果启用了 Suspend-to-RAM，则临时将 MSP 指向中断栈为休眠恢复检查函数提供可用栈</span>
 <span class="token comment">; 然后调用 arch_pm_s2ram_resume 尝试恢复休眠前的 CPU 上下文继续执行</span>
 <span class="token comment">; Suspend-to-RAM 指 CPU 和大部分外设停止工作，但 RAM 继续供电，以保留系统运行状态</span>
-#if defined<span class="token punctuation">(</span>CONFIG_PM_S2RAM<span class="token punctuation">)</span>
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token operator">=</span>z_interrupt_stacks <span class="token operator">+</span> CONFIG_ISR_STACK_SIZE <span class="token operator">+</span> MPU_GUARD_ALIGN_AND_SIZE
-    <span class="token instruction keyword">msr</span> msp<span class="token punctuation">,</span> <span class="token register variable">r0</span>
+#if defined(CONFIG_PM_S2RAM)
+    ldr <span class="token register variable">r0</span>, <span class="token operator">=</span>z_interrupt_stacks <span class="token operator">+</span> CONFIG_ISR_STACK_SIZE <span class="token operator">+</span> MPU_GUARD_ALIGN_AND_SIZE
+    msr msp, <span class="token register variable">r0</span>
 
-    <span class="token instruction keyword">bl</span> arch_pm_s2ram_resume
+    <span class="token register variable">bl</span> arch_pm_s2ram_resume
 #endif
     
     <span class="token comment">; 重新将 z_main_stack 的栈顶地址赋予 MSP</span>
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token operator">=</span>z_main_stack <span class="token operator">+</span> CONFIG_MAIN_STACK_SIZE
-    <span class="token instruction keyword">msr</span> msp<span class="token punctuation">,</span> <span class="token register variable">r0</span>
+    ldr <span class="token register variable">r0</span>, <span class="token operator">=</span>z_main_stack <span class="token operator">+</span> CONFIG_MAIN_STACK_SIZE
+    msr msp, <span class="token register variable">r0</span>
 
 <span class="token comment">; 如果启用了线程调试信息，则将 z_sys_post_kernel 清零告诉 RTOS 感知调试器系统目前仍处于内核启动阶段</span>
-#if defined<span class="token punctuation">(</span>CONFIG_DEBUG_THREAD_INFO<span class="token punctuation">)</span>
-    movs.n <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token immediate number">#0</span>
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r1</span><span class="token punctuation">,</span> <span class="token operator">=</span>z_sys_post_kernel
-    <span class="token instruction keyword">strb</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">r1</span><span class="token punctuation">]</span>
+#if defined(CONFIG_DEBUG_THREAD_INFO)
+    movs.n <span class="token register variable">r0</span>, #<span class="token number">0</span>
+    ldr <span class="token register variable">r1</span>, <span class="token operator">=</span>z_sys_post_kernel
+    strb <span class="token register variable">r0</span>, <span class="token operator">[</span><span class="token register variable">r1</span><span class="token operator">]</span>
 #endif
 
 <span class="token comment">; 如果 SoC 提供普通复位钩子，则调用对应钩子函数</span>
-#if defined<span class="token punctuation">(</span>CONFIG_SOC_RESET_HOOK<span class="token punctuation">)</span>
-    <span class="token instruction keyword">bl</span> soc_reset_hook
+#if defined(CONFIG_SOC_RESET_HOOK)
+    <span class="token register variable">bl</span> soc_reset_hook
 #endif
 
 <span class="token comment">; 如果启用了启动时初始化架构硬件</span>
 <span class="token comment">; 如果 CPU 带有 ARM MPU 则先关闭 MPU，清除 bootloader、调试器或前一个程序可能遗留的内存访问限制</span>
 <span class="token comment">; 调用 z_arm_init_arch_hw_at_boot 初始化 Cortex‑M 核心寄存器和系统控制模块</span>
-#if defined<span class="token punctuation">(</span>CONFIG_INIT_ARCH_HW_AT_BOOT<span class="token punctuation">)</span>
-#if defined<span class="token punctuation">(</span>CONFIG_CPU_HAS_ARM_MPU<span class="token punctuation">)</span>
-    movs.n <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token immediate number">#0</span>
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r1</span><span class="token punctuation">,</span> <span class="token operator">=</span>_SCS_MPU_CTRL
-    <span class="token instruction keyword">str</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">r1</span><span class="token punctuation">]</span>
+#if defined(CONFIG_INIT_ARCH_HW_AT_BOOT)
+#if defined(CONFIG_<span class="token keyword">CPU_HAS_ARM_MPU)</span>
+    movs.n <span class="token register variable">r0</span>, #<span class="token number">0</span>
+    ldr <span class="token register variable">r1</span>, <span class="token operator">=</span>_SCS_MPU_CTRL
+    str <span class="token register variable">r0</span>, <span class="token operator">[</span><span class="token register variable">r1</span><span class="token operator">]</span>
     dsb
 #endif 
-    <span class="token instruction keyword">bl</span> z_arm_init_arch_hw_at_boot
+    <span class="token register variable">bl</span> z_arm_init_arch_hw_at_boot
 #endif
 
 <span class="token comment">; 如果是 ARMv6‑M 或 ARMv8‑M Baseline 则启用 PRIMASK 屏蔽所有可屏蔽中断（除了 NMI 和 HardFault 中断）</span>
 <span class="token comment">; 如果是 ARMv7‑M 或 ARMv8‑M Mainline 则启用 BASEPRI 屏蔽优先级数值大于等于 _EXC_IRQ_DEFAULT_PRIO 的中断</span>
 <span class="token comment">; 如果两种架构都不匹配，则进入错误分支</span>
-#if defined<span class="token punctuation">(</span>CONFIG_ARMV6_M_ARMV8_M_BASELINE<span class="token punctuation">)</span>
+#if defined(CONFIG_ARMV6_M_ARMV8_M_BASELINE)
     cpsid i
-#elif defined<span class="token punctuation">(</span>CONFIG_ARMV7_M_ARMV8_M_MAINLINE<span class="token punctuation">)</span>
-    movs.n <span class="token register variable">r0</span><span class="token punctuation">,</span> #_EXC_IRQ_DEFAULT_PRIO
-    <span class="token instruction keyword">msr</span> BASEPRI<span class="token punctuation">,</span> <span class="token register variable">r0</span>
+#elif defined(CONFIG_ARMV7_M_ARMV8_M_MAINLINE)
+    movs.n <span class="token register variable">r0</span>, #_EXC_IRQ_<span class="token keyword">DEFAULT_PRIO</span>
+    msr BASEPRI, <span class="token register variable">r0</span>
 #else
 #error Unknown ARM architecture
 #endif
 
 <span class="token comment">; 如果要求启动阶段初始化看门狗，则调用板级 ARM 看门狗初始化函数</span>
 #ifdef CONFIG_WDOG_INIT
-    <span class="token instruction keyword">bl</span> z_arm_watchdog_init
+    <span class="token register variable">bl</span> z_arm_watchdog_init
 #endif
 
 <span class="token comment">; 如果启用了栈初始化，则使用 0xAA 填充中断栈区域便于后续检测栈使用量和栈溢出</span>
 #ifdef CONFIG_INIT_STACKS
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token operator">=</span>z_interrupt_stacks
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r1</span><span class="token punctuation">,</span> <span class="token operator">=</span><span class="token number">0xaa</span>
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r2</span><span class="token punctuation">,</span> <span class="token operator">=</span>CONFIG_ISR_STACK_SIZE <span class="token operator">+</span> MPU_GUARD_ALIGN_AND_SIZE
-    <span class="token instruction keyword">bl</span> arch_early_memset
+    ldr <span class="token register variable">r0</span>, <span class="token operator">=</span>z_interrupt_stacks
+    ldr <span class="token register variable">r1</span>, <span class="token operator">=</span><span class="token number">0xaa</span>
+    ldr <span class="token register variable">r2</span>, <span class="token operator">=</span>CONFIG_ISR_STACK_SIZE <span class="token operator">+</span> MPU_GUARD_ALIGN_AND_SIZE
+    <span class="token register variable">bl</span> arch_early_memset
 #endif
 
     <span class="token comment">; 将中断栈顶部地址赋予 PSP</span>
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token operator">=</span>z_interrupt_stacks
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r1</span><span class="token punctuation">,</span> <span class="token operator">=</span>CONFIG_ISR_STACK_SIZE <span class="token operator">+</span> MPU_GUARD_ALIGN_AND_SIZE
-    adds <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token register variable">r1</span>
-    <span class="token instruction keyword">msr</span> PSP<span class="token punctuation">,</span> <span class="token register variable">r0</span>
+    ldr <span class="token register variable">r0</span>, <span class="token operator">=</span>z_interrupt_stacks
+    ldr <span class="token register variable">r1</span>, <span class="token operator">=</span>CONFIG_ISR_STACK_SIZE <span class="token operator">+</span> MPU_GUARD_ALIGN_AND_SIZE
+    adds <span class="token register variable">r0</span>, <span class="token register variable">r0</span>, <span class="token register variable">r1</span>
+    msr PSP, <span class="token register variable">r0</span>
 
     <span class="token comment">; 修改 CONTROL 寄存器，让线程模式的栈指针使用 PSP</span>
-    <span class="token instruction keyword">mrs</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> CONTROL
-    movs <span class="token register variable">r1</span><span class="token punctuation">,</span> #<span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">|</span> CONTROL_ARM_PAC_MASK <span class="token operator">|</span> CONTROL_ARM_BTI_MASK<span class="token punctuation">)</span>
-    orrs <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token register variable">r1</span> <span class="token comment">/* CONTROL_SPSEL_Msk */</span>
-    <span class="token instruction keyword">msr</span> CONTROL<span class="token punctuation">,</span> <span class="token register variable">r0</span>
+    mrs <span class="token register variable">r0</span>, CONTROL
+    movs <span class="token register variable">r1</span>, #(<span class="token number">2</span> <span class="token operator">|</span> CONTROL_ARM_PAC_MASK <span class="token operator">|</span> CONTROL_ARM_BTI_MASK)
+    orrs <span class="token register variable">r0</span>, <span class="token register variable">r1</span> <span class="token operator">/</span><span class="token operator">*</span> CONTROL_SPSEL_Msk <span class="token operator">*</span><span class="token operator">/</span>
+    msr CONTROL, <span class="token register variable">r0</span>
 
     <span class="token comment">; 刷新指令流水线确保后续指令使用新的栈指针配置</span>
     isb
 
     <span class="token comment">; 跳转到 z_prep_c 进行 C 环境的初始化，此时 cortex M 内核的状态为特权级、线程模式、使用 PSP 且普通可配置中断被屏蔽</span>
-    <span class="token instruction keyword">bl</span> z_prep_c<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token register variable">bl</span> z_prep_c<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>④<code>z_prep_c</code></strong></p>
 <blockquote>
 <p><strong>概述</strong>：负责建立完整的<code>C</code><strong>运行环境</strong>即<code>.bss</code>段和<code>.data</code>段并初始化<strong>向量表</strong>、<strong>中断控制器</strong>和<strong>某些硬件</strong></p>
@@ -1032,7 +1039,7 @@ __boot_func <span class="token keyword">static</span> FUNC_NORETURN <span class=
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            内存模块初始化
+                            Zephyr 内存模块初始化与实现
                         
                     </div>
                     <div class="publish-info">
@@ -1084,7 +1091,7 @@ __boot_func <span class="token keyword">static</span> FUNC_NORETURN <span class=
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Rust基础
+                            Rust 工具链、项目创建与代码检查
                         
                     </div>
                     <div class="publish-info">
@@ -1224,14 +1231,17 @@ __boot_func <span class="token keyword">static</span> FUNC_NORETURN <span class=
         const expandedClass = 'expanded';
         let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
+        $('#floating-toc-btn .btn-floating').click(function (event) {
+            event.preventDefault();
+            let expanded = $tocAside.hasClass(expandedClass);
+            if (expanded) {
                 $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String(!expanded));
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -1397,6 +1407,7 @@ $(function () {
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/effects.js"></script>
     <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
@@ -1413,9 +1424,6 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
@@ -1425,27 +1433,65 @@ $(function () {
 
 	
     
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
-    
-
-    
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
-    
+    <script>
+        window.MateryEffects.init({
+            effects: [
+                {
+                    name: 'clicklove',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/others/clicklove.js",
+                    options: { maxHearts: 32 }
+                },
+                {
+                    name: 'canvasNest',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/canvas-nest.js",
+                    options: {
+                        color: "0,0,255",
+                        opacity: 0.7,
+                        zIndex: -1,
+                        count: 99,
+                        fps: 30
+                    }
+                },
+                {
+                    name: 'ribbon',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon.min.js",
+                    options: {
+                        size: 150,
+                        alpha: 0.6,
+                        zIndex: -1,
+                        clickChange: true
+                    }
+                },
+                {
+                    name: 'ribbonDynamic',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon-dynamic.js",
+                    options: { fps: 30 }
+                },
+                {
+                    name: 'cursor',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/js/cursor.js",
+                    options: { maxParticles: 80 }
+                }
+            ],
+            typed: window.materyTypedConfig || null,
+            live2d: {"enabled":true,"src":"/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05","options":{"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false}}
+        });
+    </script>
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-<script src="/js/cursor.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+
         <style>
             [bg-lazy] {
                 background-image: none !important;

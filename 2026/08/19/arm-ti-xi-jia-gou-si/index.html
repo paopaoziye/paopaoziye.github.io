@@ -2,22 +2,23 @@
 <html lang="zh-CN">
 
 
+
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ARM体系架构（四）, ARM体系架构, 处理器架构">
-    <meta name="description" content="ARM体系架构，以Cortex-M系列为主">
+    <meta name="keywords" content="ARM,M-profile,异常,中断">
+    <meta name="description" content="Arm M-profile 异常与中断机制">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://paopaoziye.github.io/2026/08/19/arm-ti-xi-jia-gou-si/">
     <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta property="og:description" content="ARM体系架构，以Cortex-M系列为主">
+    <meta property="og:title" content="ARM体系架构（四） | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="Arm M-profile 异常与中断机制">
     <meta property="og:url" content="https://paopaoziye.github.io/2026/08/19/arm-ti-xi-jia-gou-si/">
     <meta property="og:site_name" content="Zfk&#39;s Study Notes">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta name="twitter:description" content="ARM体系架构，以Cortex-M系列为主">
+    <meta name="twitter:title" content="ARM体系架构（四） | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="Arm M-profile 异常与中断机制">
     <meta name="twitter:url" content="https://paopaoziye.github.io/2026/08/19/arm-ti-xi-jia-gou-si/">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
@@ -27,7 +28,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>归档 | Zfk&#39;s Study Notes</title>
+    <title>ARM体系架构（四） | Zfk&#39;s Study Notes</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -283,8 +284,14 @@
         visibility: hidden;
     }
 
-    #articleContent :focus {
-        outline: none;
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
+    }
+
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
     }
 
     .toc-fixed {
@@ -383,8 +390,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84/" class="post-category">
-                                处理器架构
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                编程语言
                             </a>
                         
                     </div>
@@ -425,403 +432,344 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="处理器架构"><a href="#处理器架构" class="headerlink" title="处理器架构"></a>处理器架构</h1><h2 id="ARM体系架构"><a href="#ARM体系架构" class="headerlink" title="ARM体系架构"></a>ARM体系架构</h2><h3 id="ARM体系架构（四）"><a href="#ARM体系架构（四）" class="headerlink" title="ARM体系架构（四）"></a>ARM体系架构（四）</h3><h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h4><p><strong>①简介</strong></p>
+                <h1 id="处理器架构"><a href="#处理器架构" class="headerlink" title="处理器架构"></a>处理器架构</h1><h2 id="ARM体系架构"><a href="#ARM体系架构" class="headerlink" title="ARM体系架构"></a>ARM体系架构</h2><h3 id="ARM体系架构（四）"><a href="#ARM体系架构（四）" class="headerlink" title="ARM体系架构（四）"></a>ARM体系架构（四）</h3><h4 id="1-异常与中断"><a href="#1-异常与中断" class="headerlink" title="1.异常与中断"></a>1.异常与中断</h4><p><strong>①简介</strong></p>
 <blockquote>
-<p><strong>概述</strong>：一种基于<strong>精简指令集</strong>的处理器架构设计，强调<strong>指令简单</strong>、<strong>执行高效</strong>和<strong>低功效</strong></p>
+<p><strong>概述</strong>：使处理器暂时改变<strong>正常执行流</strong>，进入<strong>异常处理程序</strong>并在处理完成后再<strong>恢复原执行流</strong>的事件，统称为异常</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 现代ARM处理器通常分为Cortex-A、Cortex-R和Cortex-M三种系列，具体区别如下图所示</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 异常可分为同步异常和异步异常，前者由当前指令直接导致如系统调用，后者与当前指令没有直接因果关系如中断</div>
 <blockquote>
-<p><code>Cortex-M</code>只支持<code>MPU</code>，即只提供<strong>内存区域保护</strong>而不能提供<strong>虚拟地址到物理地址的转换</strong></p>
+<p><strong>同步异常</strong>通常在<strong>当前线程/进程上下文</strong>中处理，<code>IRQ</code>等<strong>异步硬件异常</strong>通常在<strong>中断上下文</strong>中处理</p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 异常处理程序本质上也是一段执行代码，其进入和返回受架构规则控制，不只是普通ABI调用</div>
 <blockquote>
-<p>此外还有<code>Cortex-X</code>系列，可以理解为<code>Cortex-A</code>的定制升级版，但是牺牲了<strong>功耗和芯片面积</strong>来换取<strong>绝对性能</strong></p>
+<p>异常处理程序内部仍然可以<strong>调用普通函数</strong>，但是要遵循<code>AAPCS</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Cortex-R定位为高性能实时处理器，响应速度极快且可靠性较高，常用于对安全性和实时性要求极高的领域如航天</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 异常处理程序需要明确当前执行环境、特权状态和所使用的栈，避免错误访问受限资源</div>
+<blockquote>
+<p>此外，异常处理期间可能发生<strong>更高优先级异常</strong>，需要考虑<strong>共享数据</strong>、<strong>临界区</strong>和<strong>可重入性</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 硬中断上下文不能执行可能导致当前执行流睡眠或等待调度的操作，因为其不具备普通任务的阻塞调度语义</div>
 
-<p><strong>②指令集</strong></p>
+<p><strong>②异常入口</strong></p>
 <blockquote>
-<p><strong>概述</strong>：主要可分为<code>ARM</code>、<code>Thumb</code>、<code>Thumb-2</code>和<code>A64</code>这几种指令集，这里主要关注前三者即<code>AArch32</code></p>
+<p><strong>概述</strong>：异常入口是<strong>异常满足响应条件</strong>后，处理器根据<strong>异常向量表</strong>及<strong>架构规则</strong>进入<strong>异常处理程序</strong>的过程</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ARM/Thumb为32/16或32位定长指令集，前者功能最全且性能最高，后者代码优势为密度较低即占用内存较少</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Thumb-2在Thumb的基础上引入了大量32位指令，完美结合了Thumb指令集的高代码密度和ARM指令集的高性能</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 程序通常在编译链接阶段建立异常向量表，将不同异常对应的入口地址或入口代码组织到对应表项中</div>
 <blockquote>
-<p><code>Thumb-2</code>指令集在<code>Cortex-M</code>系列中是<strong>默认且唯一</strong>的选择，且该指令集<strong>向后兼容</strong><code>Thumb</code></p>
+<p><strong>异常向量表</strong>的位置由<strong>具体架构和处理器实现</strong>决定，可能采用<strong>架构规定的固定位置</strong>，也可采用<strong>可编程基址寄存器</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> A64为32位定长指令集，但是操作的是64位宽度的地址、数据和寄存器，从而访问远大于4GB的内存地址空间</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 如果在Cortex-M中试图执行ARM指令，会触发硬件故障异常</div>
-<p><strong>③指令集切换</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 不同Profile和执行状态的异常向量表组织方式不同，有的保存处理程序地址，有的直接包含入口指令</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 进入异常处理程序前需要正确保存打断的执行上下文，部分由硬件完成，部分由软件完成</div>
 <blockquote>
-<p><strong>概述</strong>：<code>Cortex-A</code>和<code>Cortex-R</code>支持<code>ARM</code>和<code>Thumb/Thumb-2</code>多种指令集，需要根据应用场景<strong>切换指令集</strong></p>
+<p>执行上下文即能<strong>描述处理器当前程序运行状态</strong>所需的信息，通常涉及<strong>通用寄存器</strong>、<code>PC</code>、<code>SP</code>和<strong>处理器状态</strong>等</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ARM架构通过修改程序计数器最低有效位切换指令集，若其为0/1，表示后续使用ARM/Thumb和Thumb-2指令集</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 因为ARM架构指令集都是16位或32位对齐的即地址最低有效位为0，所以可以使用该位作为指令的切换标志位</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Cortex-A和Cortex-R在发生异常时，都会自动切换到ARM指令集再去执行异常处理程序</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 对于AArch64架构只支持A64指令集或者Cortex-M系列只支持Thumb-2指令集的情况，是不存在指令集切换的</div>
-<h4 id="2-寄存器"><a href="#2-寄存器" class="headerlink" title="2.寄存器"></a>2.寄存器</h4><p><strong>①经典ARM架构</strong></p>
+<p><strong>③异常返回</strong></p>
 <blockquote>
-<p><strong>概述</strong>：可分为<strong>通用寄存器</strong><code>R0-R12</code>、<strong>堆栈寄存器</strong><code>SP</code>、<strong>链接寄存器</strong><code>LR</code>、<strong>程序计数器</strong><code>PC</code>和<strong>程序状态寄存器</strong><code>xPSR</code></p>
+<p><strong>概述</strong>：异常返回是按照架构规则恢复<strong>异常发生前必要的执行上下文</strong>，并重新进入<strong>原执行流</strong>的过程</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 经典ARM架构有如下七种处理器模式，其中用户模式处于用户态，其余模式处于特权态</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 每个异常模式都有备份的SP、LR和SPSR寄存器，且快中断模式还有部分备份的通用寄存器，以加速/省略保存现场</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 异常返回通常需要恢复必要的程序执行现场和处理器状态，具体内容和恢复方式由架构及异常类型决定</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 异常返回后可能重新执行相关指令，也可能从后续指令继续执行，具体取决于异常类型和架构规则</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 中断处理程序应按照具体中断源的规则及时处理或撤销中断请求，否则返回后可能再次触发中断</div>
+<h4 id="2-M-profile异常响应"><a href="#2-M-profile异常响应" class="headerlink" title="2.M-profile异常响应"></a>2.M-profile异常响应</h4><p><strong>①NVIC</strong></p>
 <blockquote>
-<p>备份的<code>SP</code>可以确保其有<strong>独立的栈空间</strong>，备份的<code>LR</code>确保发生<strong>嵌套中断</strong>时返回地址被覆盖</p>
+<p><strong>概述</strong>：也称为<strong>嵌套向量中断控制器</strong>，用于管理<strong>异常/中断</strong>的<strong>使能</strong>、<strong>挂起</strong>、<strong>优先级</strong>和<strong>抢占</strong>等</p>
 </blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> NVIC主要记录中断的Enabled、Pending和Active状态，分别用于描述是否允许响应、是否等待处理和是否正在处理</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> NVIC支持通过优先级分组将中断优先级分为抢占优先级和子优先级，优先级数值越小，逻辑优先级越高</div>
 <blockquote>
-<p><code>SPSR</code>用于保存<strong>发生异常时</strong>的<code>CPSR</code>，异常结束执行返回指令时，处理器会根据<code>SPSR</code>的内容<strong>自动恢复</strong><code>CPSR</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 绝大多数16位Thumb指令只能访问R0-R7，只有很少的Thumb指令可以访问R8-R12，32位的指令则不受该限制</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 用户态需要通过异常切换到特权态，因为其不能修改CPSR，特权态之间可以模拟异常返回流程相互切换</div>
-<p><strong>②<code>Cortex-M</code></strong></p>
-<blockquote>
-<p><strong>概述</strong>：<code>Cortex-M</code>相较于<strong>经典ARM架构</strong>更加简洁，没有<strong>备份寄存器</strong>但是引入了<code>CONTROL</code>等<strong>特殊功能寄存器</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Cortex-M只有异常模式和线程模式两种处理器模式，前者一直处于特权态，后者可以是用户态也可以是特权态</div>
-<blockquote>
-<p><code>SP</code>分为<code>MSP</code>和<code>PSP</code>，触发异常进入<strong>异常模式</strong>时使用<code>MSP</code>，返回<strong>线程模式</strong>时需要根据<strong>异常返回值</strong>使用<code>MSP</code>或<code>PSP</code></p>
+<p>当多个中断同时等待处理时，<strong>抢占优先级更高</strong>的先执行；抢占优先级相同时，再由<strong>子优先级</strong>决定先后</p>
 </blockquote>
 <blockquote>
-<p><code>xPSR</code>可分为<code>APSR</code>、<code>IPSR</code>和<code>EPSR</code>三个子寄存器，分别记录<strong>算术运算单元</strong>、<strong>中断相关</strong>和<strong>所处指令集</strong>状态</p>
+<p><code>NVIC</code>支持<strong>中断嵌套</strong>，即<strong>高抢占优先级中断</strong>可以打断<strong>低抢占优先级中断</strong>从而被<code>CPU</code>响应</p>
 </blockquote>
 <blockquote>
-<p><code>CONTROL</code>的<code>D1</code>位用于控制<strong>堆栈指针选择</strong>，<code>D0</code>位用于控制<strong>特权态和用户态</strong>的选择，其余位保留</p>
+<p>如果两个中断的<strong>抢占优先级</strong>和<strong>子优先级</strong>均相等，则<code>CPU</code>优先执行<strong>异常编号更小</strong>的异常</p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 上电复位后，Cortex-M处理器处于特权态线程模式且使用MSP，需要主动修改CONTROL寄存器才能进入用户态</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> BASEPRI、PRIMASK和FAULTMASK为中断屏蔽寄存器，通常使用BASEPRI屏蔽低于或等于某个优先级的中断</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Disable一个中断并不代表这个中断不会产生，也不代表会清除它已经存在的Pending状态，也不会打断其处理流程</div>
 
-<p><strong>③过程调用标准</strong></p>
+<p><strong>②运行模式</strong></p>
 <blockquote>
-<p><strong>概述</strong>：<code>Cortex-M</code>要求<strong>调用者</strong>保存<code>R0-R3</code>、<code>R12</code>和<code>LR</code>，<strong>被调用者</strong>保存<code>R4-R11</code>，详细如下所示</p>
+<p><strong>概述</strong>：<code>M-profile</code>主要有两个<strong>运行模式</strong><code>Thread mode</code>和<code>Handler mode</code>，分别用于<strong>普通代码</strong>和<strong>异常处理程序</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 函数调用过程中使用R0-R3传递参数，R0-R1传递返回值，如果对应寄存器空间不足则使用栈空间</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 使用高级语言如C时，编译器会自动遵循该标准，而使用汇编和C交互时，我们编写汇编函数时必须遵循该标准</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果调用者在函数调用后还需要使用R0-R3等，需要提前保存，同理如果函数需要使用R4-R11，也需要提前保存</div>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas">;<span class="token comment">; 主程序（调用者）</span>
-<span class="token directive property">.syntax</span> unified
-<span class="token directive property">.cpu</span> cortex<span class="token operator">-</span>m3
-<span class="token directive property">.thumb</span>
-
-<span class="token directive property">.global</span> _start
-
-<span class="token label symbol">_start</span><span class="token punctuation">:</span>
-    <span class="token comment">; 设置栈指针（通常在启动代码中完成，这里模拟）</span>
-    <span class="token instruction keyword">LDR</span> <span class="token register variable">SP</span><span class="token punctuation">,</span> <span class="token operator">=</span>stack_top
-
-    <span class="token comment">; 1. 准备参数：前4个通过 R0-R3 传递</span>
-    MOVS <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token immediate number">#1</span>      <span class="token comment">; 第一个参数 a = 1</span>
-    MOVS <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token immediate number">#2</span>      <span class="token comment">; 第二个参数 b = 2  </span>
-    MOVS <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token immediate number">#3</span>      <span class="token comment">; 第三个参数 c = 3</span>
-    MOVS <span class="token register variable">R3</span><span class="token punctuation">,</span> <span class="token immediate number">#4</span>      <span class="token comment">; 第四个参数 d = 4</span>
-    
-    <span class="token comment">; 2. 第5个参数通过栈传递</span>
-    MOVS <span class="token register variable">R4</span><span class="token punctuation">,</span> <span class="token immediate number">#5</span>
-    <span class="token instruction keyword">PUSH</span> <span class="token punctuation">{</span><span class="token register variable">R4</span><span class="token punctuation">}</span>        <span class="token comment">; 将第5个参数 e = 5 压栈</span>
-
-    <span class="token comment">; 3. 调用函数</span>
-    <span class="token instruction keyword">BL</span> calculate
-    
-    <span class="token comment">; 4. 清理栈空间（移除之前压栈的参数）</span>
-    <span class="token instruction keyword">ADD</span> <span class="token register variable">SP</span><span class="token punctuation">,</span> <span class="token register variable">SP</span><span class="token punctuation">,</span> <span class="token immediate number">#4</span>   <span class="token comment">; 栈指针调整，清理一个参数（4字节）</span>
-    
-    <span class="token comment">; 5. 此时 R0 中包含返回值，可以继续使用</span>
-    <span class="token comment">; 这里我们简单地进入无限循环</span>
-<span class="token label symbol">end_loop</span><span class="token punctuation">:</span>
-    <span class="token instruction keyword">B</span> end_loop
-
-;<span class="token comment">; calculate 函数（被调用者）</span>
-;<span class="token comment">; 函数原型：int calculate(int a, int b, int c, int d, int e);</span>
-;<span class="token comment">; 参数：</span>
-;<span class="token comment">;   R0 = a, R1 = b, R2 = c, R3 = d, [SP] = e</span>
-;<span class="token comment">; 返回值：R0 = 计算结果</span>
-<span class="token directive property">.thumb_func</span>
-<span class="token label symbol">calculate</span><span class="token punctuation">:</span>
-    <span class="token comment">; === 函数开场 ===</span>
-    <span class="token comment">; 1. 保存需要使用的被调用者保存寄存器</span>
-    <span class="token instruction keyword">PUSH</span> <span class="token punctuation">{</span><span class="token register variable">R4</span><span class="token operator">-</span><span class="token register variable">R6</span><span class="token punctuation">,</span> <span class="token register variable">LR</span><span class="token punctuation">}</span>   <span class="token comment">; 保存 R4,R5,R6 和返回地址(LR)</span>
-    
-    <span class="token comment">; === 函数体 ===</span>
-    <span class="token comment">; 2. 从栈中获取第5个参数 e</span>
-    <span class="token instruction keyword">LDR</span> <span class="token register variable">R4</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">SP</span><span class="token punctuation">,</span> <span class="token immediate number">#16</span><span class="token punctuation">]</span>  <span class="token comment">; SP + 16 指向第5个参数（R4-R6,LR 各占4字节）</span>
-    
-    <span class="token comment">; 3. 使用需要保存的寄存器进行计算</span>
-    <span class="token comment">; 计算: result = (a + b) * (c + d) + e</span>
-    <span class="token instruction keyword">ADD</span> <span class="token register variable">R5</span><span class="token punctuation">,</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token register variable">R1</span>     <span class="token comment">; R5 = a + b  (使用R5，已在开场保存)</span>
-    <span class="token instruction keyword">ADD</span> <span class="token register variable">R6</span><span class="token punctuation">,</span> <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token register variable">R3</span>     <span class="token comment">; R6 = c + d  (使用R6，已在开场保存)</span>
-    <span class="token instruction keyword">MUL</span> <span class="token register variable">R5</span><span class="token punctuation">,</span> <span class="token register variable">R6</span><span class="token punctuation">,</span> <span class="token register variable">R5</span>     <span class="token comment">; R5 = (a+b) * (c+d)</span>
-    <span class="token instruction keyword">ADD</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token register variable">R5</span><span class="token punctuation">,</span> <span class="token register variable">R4</span>     <span class="token comment">; R0 = 结果 + e，同时准备返回值</span>
-    
-    <span class="token comment">; === 函数收场 ===</span>
-    <span class="token comment">; 4. 恢复保存的寄存器</span>
-    <span class="token instruction keyword">POP</span> <span class="token punctuation">{</span><span class="token register variable">R4</span><span class="token operator">-</span><span class="token register variable">R6</span><span class="token punctuation">,</span> <span class="token register variable">PC</span><span class="token punctuation">}</span>    <span class="token comment">; 恢复 R4,R5,R6，并将LR弹出到PC中实现返回</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="3-指令系统"><a href="#3-指令系统" class="headerlink" title="3.指令系统"></a>3.指令系统</h4><p><strong>①指令格式</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> M-profile处理器复位后通常处于特权级Thread mode并使用MSP，发生异常后进入Handler mode</div>
 <blockquote>
-<p><strong>概述</strong>：<code>ARM</code>指令<strong>标准语法格式</strong>为<code>&lt;指令助记符&gt;{&lt;执行条件&gt;}{S} &lt;目标寄存器&gt;,&lt;操作数&gt;{,&lt;第二个操作数&gt;}</code></p>
+<p><code>Thread mode</code>可以通过<code>CONTROL.nPRIV</code>选择<strong>特权级</strong>还是<strong>非特权级别</strong>，<code>Handler mode</code>始终处于<strong>特权级</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> &lt;&gt;内的项是必须的，{}内的项是可选的，其中指令助记符说明了指令的核心功能，目标寄存器用于存放结果</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 执行条件标识该指令只有在CPSR中的特定条件标志满足该条件时才会执行，是ARM架构实现高效分支的关键特性</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> S后缀标识该指令执行后需要更新CPSR中的条件标志位，但是比较指令如CMP不需要该后缀也会更新CPSR</div>
-<p><strong>②寻址方式</strong></p>
 <blockquote>
-<p><strong>概述</strong>：指示指令如何获取<strong>操作数</strong>，可分为<strong>立即数寻址</strong>、<strong>寄存器寻址</strong>、<strong>寄存器间接寻址</strong>等，如下所示</p>
+<p><code>Thread mode</code>可以通过<code>CONTROL.SPSEL</code>选择<code>MSP</code>还是<code>PSP</code>，<code>Handler mode</code>只能使用<code>MSP</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 指令的长度是有限的，所以能用于编码立即数的长度也是有限的，32位指令通常只有12位的长度用于表示立即数</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 为了表示更大范围的数，将其拆分为8位常数和4位旋转位移值，8位常数按照旋转位移值的两倍进行循环位移</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Armv8-M等新架构还支持TrustZone，可将系统划分为Secure和Non-secure安全域，实现资源隔离</div>
 <blockquote>
-<p>如<code>0x23000000</code>可以看作一个<code>8</code>位常数<code>0x00000023</code>循环右移<code>8</code>位得到</p>
+<p>这又是一个新的维度，如有<code>Secure Thread mode</code>，也有<code>Non-secure Thread mode</code>等</p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 立即数有一定的限制，在使用前需要判断其是否合法，较大的数最好采用伪指令LDR Rd, =constant</div>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas"><span class="token comment">; 1.立即数寻址：操作数是一个直接编码在指令中的常数值</span>
-<span class="token instruction keyword">MOV</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token immediate number">#0xFF</span>               ;表示<span class="token register variable">R0</span> <span class="token operator">=</span> <span class="token number">0xFF</span>
-<span class="token comment">; 2.寄存器寻址：操作数的值就是寄存器的内容</span>
-<span class="token instruction keyword">MOV</span> <span class="token register variable">R3</span><span class="token punctuation">,</span> <span class="token register variable">R4</span>                  ;<span class="token register variable">R3</span> <span class="token operator">=</span> <span class="token register variable">R4</span>
-<span class="token comment">; 3.寄存器间接寻址：寄存器的内容是一个内存地址，操作数位于该地址指向的内存中</span>
-<span class="token instruction keyword">LDR</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R1</span><span class="token punctuation">]</span>                ;从<span class="token register variable">R1</span>中存储的地址起始处加载一个<span class="token number">32</span>位字到<span class="token register variable">R0</span>
-<span class="token comment">; 4.基址寄存器偏移寻址：寄存器的内容是一个内存地址，但是该地址为寄存器的内容加上一个偏移量</span>
-<span class="token instruction keyword">LDR</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token immediate number">#4</span><span class="token punctuation">]</span>            ;<span class="token register variable">R0</span> <span class="token operator">=</span> memory<span class="token punctuation">[</span><span class="token register variable">R1</span> <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">]</span>
-<span class="token instruction keyword">LDR</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token register variable">R2</span><span class="token punctuation">]</span>            ;<span class="token register variable">R0</span> <span class="token operator">=</span> memory<span class="token punctuation">[</span><span class="token register variable">R1</span> <span class="token operator">+</span> <span class="token register variable">R2</span><span class="token punctuation">]</span>
-<span class="token instruction keyword">LDR</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token instruction keyword">LSL</span> <span class="token immediate number">#2</span><span class="token punctuation">]</span>    ;<span class="token register variable">R0</span> <span class="token operator">=</span> memory<span class="token punctuation">[</span><span class="token register variable">R1</span> <span class="token operator">+</span> <span class="token register variable">R2</span><span class="token operator">*</span><span class="token number">4</span><span class="token punctuation">]</span>
-<span class="token comment">; 5.基址寄存器变址寻址：访问后会自动更新基址寄存器</span>
-<span class="token instruction keyword">LDR</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token immediate number">#4</span><span class="token punctuation">]</span><span class="token operator">!</span>           ;<span class="token register variable">R0</span> <span class="token operator">=</span> memory<span class="token punctuation">[</span><span class="token register variable">R1</span> <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">]</span>且<span class="token register variable">R1</span> <span class="token operator">=</span> <span class="token register variable">R1</span> <span class="token operator">+</span> <span class="token number">4</span>
-<span class="token instruction keyword">LDR</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token immediate number">#4</span>            ;<span class="token register variable">R0</span> <span class="token operator">=</span> memory<span class="token punctuation">[</span><span class="token register variable">R1</span><span class="token punctuation">]</span>且<span class="token register variable">R1</span> <span class="token operator">=</span> <span class="token register variable">R1</span> <span class="token operator">+</span> <span class="token number">4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>③伪指令</strong></p>
-<blockquote>
-<p><strong>概述</strong>：伪指令可分为<strong>数据定义型</strong>、<strong>指令替代型</strong>和<strong>汇编控制型</strong>，常用伪指令如下所示</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 指令替代型伪指令可以像ARM指令一样使用，在汇编过程中会被转化为一个或多个等效的真实指令</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 汇编文件中可以使用[标签]:定义一个标签，用于标记一个位置的地址，通常用于标记函数入口和数据起始位置</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 汇编控制型伪指令本身并不生成机器码，而是控制汇编过程如代码/数据在内存中的布局和编译器的行为等</div>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas"><span class="token comment">; 1.数据定义型：在内存中分配空间并初始化数据</span>
-<span class="token directive property">.byte</span> <span class="token number">0x12</span><span class="token punctuation">,</span> <span class="token number">0x34</span><span class="token punctuation">,</span> <span class="token number">0x56</span>        ;在内存中存放连续的三个字节<span class="token number">12</span> <span class="token number">34</span> <span class="token number">56</span>
-<span class="token directive property">.hword</span> <span class="token number">0x1234</span>                 ;在内存中存放一个半字<span class="token number">0x1234</span>
-<span class="token directive property">.word</span> label_name              ;存放一个标签的地址（长度为一个字）
-<span class="token directive property">.string</span> <span class="token string">"Hello!"</span>              ;分配<span class="token number">7</span>个字节用于保存Hello<span class="token operator">!</span>，包括结尾的\<span class="token number">0</span>
-<span class="token directive property">.space</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">0</span>                 ;分配<span class="token number">100</span>个字节，全部初始化为<span class="token number">0</span>
-<span class="token comment">; 2.指令替代型：类似于编译器提供的语法糖</span>
-<span class="token instruction keyword">LDR</span> Rd<span class="token punctuation">,</span> <span class="token operator">=</span>constant             ;将任意<span class="token number">32</span>位立即数加载到寄存器
-<span class="token instruction keyword">ADR</span> Rd<span class="token punctuation">,</span> label                 ;将基于<span class="token register variable">PC</span>的一个标签的地址加载到寄存器，但是标签地址与当前<span class="token register variable">PC</span>值偏移量需要在±<span class="token number">4095</span>字节内
-ADRL Rd<span class="token punctuation">,</span> label                ;<span class="token instruction keyword">ADR</span>的增强版，可以加载更大范围内的地址
-<span class="token instruction keyword">NOP</span>                           ;执行空操作，常用于延时、对齐代码或占位
-<span class="token instruction keyword">PUSH</span> <span class="token punctuation">{</span><span class="token register variable">R0</span><span class="token operator">-</span><span class="token register variable">R3</span><span class="token punctuation">,</span><span class="token register variable">LR</span><span class="token punctuation">}</span>               ;将寄存器<span class="token register variable">R0</span>、<span class="token register variable">R1</span>、<span class="token register variable">R2</span>、<span class="token register variable">R3</span>和<span class="token register variable">LR</span>的值，按照特定的顺序压入当前栈中
-<span class="token instruction keyword">POP</span> <span class="token punctuation">{</span><span class="token register variable">R0</span><span class="token operator">-</span><span class="token register variable">R3</span><span class="token punctuation">}</span>                   ;从栈中弹出数据，恢复到寄存器<span class="token register variable">R0</span>、<span class="token register variable">R1</span>、<span class="token register variable">R2</span>和<span class="token register variable">R3</span>中
-<span class="token comment">; 3.汇编控制型：控制汇编器的行为和组织程序结构</span>
-<span class="token directive property">.global</span> _start                ;声明一个全局符号_start，_start为程序入口地址
-<span class="token directive property">.extern</span> main                  ;声明一个外部符号main
-<span class="token directive property">.section</span> <span class="token directive property">.text</span><span class="token operator">/</span>.data          ;定义一个代码段（只读可执行）<span class="token operator">/</span>已初始化数据段（可读写不可执行）
-<span class="token directive property">.section</span> <span class="token directive property">.bss</span>                 ;定义一个未初始化数据段（可读写不可执行）
-<span class="token directive property">.section</span> <span class="token directive property">.rodata</span>              ;定义一个只读数据段（只读不可执行）
-<span class="token directive property">.align</span> <span class="token number">3</span>                      ;将当前位置对其到<span class="token number">2</span><span class="token operator">^</span><span class="token number">3</span>字节边界
-<span class="token directive property">.end</span>                          ;标记汇编文件的结束，之后的任何内容都会被汇编器忽略<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>④简易脚本</strong></p>
-<blockquote>
-<p><strong>概述</strong>：以下为一个打印<code>Hello, ARM!</code>的汇编脚本，分别使用<strong>系统调用</strong>和<strong>C标准库</strong>，详细如下所示</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 主要由数据段和代码段组成，其中_start是ELF格式可执行文件的默认入口点，由操作系统加载器直接调用</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果需要使用C库，程序入口点需要使用main而不是_start，C运行时库会完成环境初始化并调用该程序</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 使用C库后程序本质上是一个被调用的函数，所以如果调用了其他函数需要将LR压入栈中保存并最后弹出给PC返回</div>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas">;文件名： hello.s
-;描述： 一个简单的ARM汇编程序，使用系统调用打印字符串并退出。
-;
-;
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 特权级代码通过修改CONTROL.nPRIV进入非特权级，非特权级代码只能通过异常进入特权Handler mode</div>
 
-;数据段
-<span class="token directive property">.data</span>
-<span class="token label symbol">msg</span><span class="token punctuation">:</span>
-    <span class="token directive property">.asciz</span> <span class="token string">"Hello, ARM!\n"</span>      ;一个C风格字符串
-len <span class="token operator">=</span> . <span class="token operator">-</span> msg                   ;字符串长度
-
-;代码段
-<span class="token directive property">.text</span>
-<span class="token directive property">.global</span> _start                  ;声明全局符号_start
-;主函数标签为_start，即程序入口点
-<span class="token label symbol">_start</span><span class="token punctuation">:</span>
-    ;调用系统调用sys_write打印字符串msg
-    <span class="token instruction keyword">MOV</span> <span class="token register variable">R7</span><span class="token punctuation">,</span> <span class="token immediate number">#4</span>                  ;系统调用号<span class="token number">4</span>（sys_write）写入<span class="token register variable">R7</span>
-    <span class="token instruction keyword">MOV</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token immediate number">#1</span>                  ;文件描述符<span class="token number">1</span><span class="token punctuation">(</span>标准输出 stdout<span class="token punctuation">)</span>
-    <span class="token instruction keyword">LDR</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token operator">=</span>msg                ;加载msg的地址到<span class="token register variable">R1</span>
-    <span class="token instruction keyword">LDR</span> <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token operator">=</span>len                ;加载字符串长度len的值到<span class="token register variable">R2</span>
-    SWI <span class="token number">0</span>                       ;执行软中断，触发系统调用
-    ;调用系统调用sys_exit退出程序
-    <span class="token instruction keyword">MOV</span> <span class="token register variable">R7</span><span class="token punctuation">,</span> <span class="token immediate number">#1</span>                  ;系统调用号<span class="token number">1</span>（sys_exit）写入<span class="token register variable">R7</span>
-    <span class="token instruction keyword">MOV</span> <span class="token register variable">R0</span><span class="token punctuation">,</span> <span class="token immediate number">#0</span>                  ;加载退出状态码<span class="token number">0</span><span class="token punctuation">(</span>表示成功<span class="token punctuation">)</span>到<span class="token register variable">R0</span>
-    SWI <span class="token number">0</span>                       ;执行软中断，触发系统调用<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas">;文件名： hello_c.s
-;描述： 一个简单的ARM汇编程序，调用C库函数打印字符串并退出
-;编译： as <span class="token operator">-</span>o hello_c.o hello_c.s <span class="token operator">&amp;&amp;</span> gcc <span class="token operator">-</span>o hello_c hello_c.o
-;运行： 
-
-;数据段
-<span class="token directive property">.section</span> <span class="token directive property">.data</span>
-<span class="token label symbol">msg</span><span class="token punctuation">:</span>
-    <span class="token directive property">.asciz</span> <span class="token string">"Hello, ARM!\n"</span>      ;一个C风格字符串
-
-;代码段
-<span class="token directive property">.section</span> <span class="token directive property">.text</span>
-<span class="token directive property">.global</span> main                    ;声明全局符号main
-;主函数标签为main，即程序入口点
-<span class="token label symbol">main</span><span class="token punctuation">:</span>
-    ;因为后续要使用<span class="token instruction keyword">BL</span>会破坏<span class="token register variable">LR</span>，而该脚本是被C库调用的，后续可能需要返回，所以需要保存<span class="token register variable">LR</span>
-    <span class="token instruction keyword">push</span> <span class="token punctuation">{</span><span class="token register variable">lr</span><span class="token punctuation">}</span>                   ;将链接寄存器<span class="token register variable">LR</span>压栈保存
-
-    ;调用C库函数printf打印字符串
-    <span class="token instruction keyword">ldr</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token operator">=</span>msg                ;加载msg的地址到<span class="token register variable">R1</span>
-    <span class="token instruction keyword">bl</span> printf                   ;调用printf函数
-
-    ;调用C库函数exit退出程序
-    <span class="token instruction keyword">mov</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token immediate number">#0</span>                  ;加载退出状态码<span class="token number">0</span>到<span class="token register variable">R1</span>
-    <span class="token instruction keyword">bl</span> exit                     ;调用exit函数
-
-    ;虽然调用了exit后该脚本不会不会返回到这里，但是如果exit调用失败，我们仍然需要返回
-    <span class="token instruction keyword">pop</span> <span class="token punctuation">{</span><span class="token register variable">pc</span><span class="token punctuation">}</span>                    <span class="token comment">@ 从栈中恢复pc（返回地址）</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="4-常用指令"><a href="#4-常用指令" class="headerlink" title="4.常用指令"></a>4.常用指令</h4><p><strong>①数据处理</strong></p>
+<p><strong>③异常响应流程</strong></p>
 <blockquote>
-<p><strong>概述</strong>：常用指令有<code>ADD</code>、<code>SUB</code>、<code>AND</code>、<code>ORR</code>、<code>EOR</code>、<code>BIC</code>和<code>CMP</code>，用于执行<strong>算数和逻辑运算</strong>，详细如下所示</p>
+<p><strong>概述</strong>：中断被响应后，<code>CPU</code><strong>自动保存上下文</strong>，并跳转到对应的<strong>中断处理程序</strong>运行，异常返回时<strong>自动恢复上下文</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 比较和测试指令如CMP只设置程序状态寄存器的条件标志且并不存储结果</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 先使用比较或带S后缀的指令，再使用带执行条件的指令可实现条件分支和循环等复杂逻辑，如下所示</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> CMP Rn, Operand2完全等价于SUBS Rz, Rn, Operand2，其中Rz为没有被使用的临时寄存器</div>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas"><span class="token instruction keyword">ADD</span> <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token register variable">R0</span>    ;<span class="token register variable">R2</span> <span class="token operator">=</span> <span class="token register variable">R1</span> <span class="token operator">+</span> <span class="token register variable">R0</span>
-<span class="token instruction keyword">SUB</span> <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token register variable">R0</span>	  ;<span class="token register variable">R2</span> <span class="token operator">=</span> <span class="token register variable">R1</span> <span class="token operator">-</span> <span class="token register variable">R0</span>
-<span class="token instruction keyword">AND</span> <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token register variable">R0</span>	  ;<span class="token register variable">R2</span> <span class="token operator">=</span> <span class="token register variable">R1</span> <span class="token operator">&amp;</span> <span class="token register variable">R0</span>
-<span class="token instruction keyword">ORR</span> <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token register variable">R0</span>	  ;<span class="token register variable">R2</span> <span class="token operator">=</span> <span class="token register variable">R1</span> <span class="token operator">|</span> <span class="token register variable">R0</span>
-<span class="token instruction keyword">EOR</span> <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token register variable">R0</span>	  ;<span class="token register variable">R2</span> <span class="token operator">=</span> <span class="token register variable">R1</span> <span class="token operator">^</span> <span class="token register variable">R0</span>
-<span class="token instruction keyword">BIC</span> <span class="token register variable">R2</span><span class="token punctuation">,</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token register variable">R0</span>    ;<span class="token register variable">R2</span> <span class="token operator">=</span> <span class="token register variable">R1</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token operator">~</span><span class="token register variable">R0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas">;分支判断
-<span class="token instruction keyword">CMP</span>   <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token register variable">r1</span>
-<span class="token instruction keyword">BEQ</span>   equal       ;如果 <span class="token register variable">r0</span> <span class="token operator">==</span> <span class="token register variable">r1</span> 则跳转 equal
-<span class="token instruction keyword">BNE</span>   not_equal   ;如果 <span class="token register variable">r0</span> <span class="token operator">!=</span> <span class="token register variable">r1</span> 则跳转 not_equal
-;短暂空循环延时
-MOVS <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token immediate number">#1000</span>    ;将<span class="token register variable">R0</span>初始化为<span class="token number">1000</span>
-<span class="token label symbol">delay</span><span class="token punctuation">:</span>
-SUBS <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token register variable">r0</span><span class="token punctuation">,</span> <span class="token immediate number">#1</span>   ;递减<span class="token register variable">R0</span>并设置标志位，当<span class="token register variable">R0</span>为<span class="token number">0</span>时，Z标志位被设置为<span class="token number">1</span>
-<span class="token instruction keyword">BNE</span>  delay        ;当Z为<span class="token number">1</span>即<span class="token register variable">R0</span>为<span class="token number">0</span>时，不成立，退出循环<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>②数据读写</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> CPU开始响应异常时，会将一组寄存器依次压入异常发生前正在使用的栈中，也称为基本异常栈帧</div>
 <blockquote>
-<p><strong>概述</strong>：常用指令有<code>MOV</code>、<code>LDR</code>、<code>STR</code>、<code>LDM</code>和<code>STM</code>，用于在<strong>寄存器和内存之间</strong>传输数据，详细如下所示</p>
+<p>具体为<code>R0-R3</code>、<code>R12</code>、<code>LR</code>、<code>PC</code>和<code>xPSR</code>，也就是在<code>caller-saved</code>规定的基础上新增了<code>PC</code>和<code>xPSR</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> MOV用于读写寄存器，LDR和STR用于读写内存，LDM和STM用于批量读写内存</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> PUSH和POP为堆栈操作指令，实际上是LDM和STM的别名，但是只能用于操作SP寄存器</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 使用LDR和STR可以使用B和H后缀指示读写长度，使用LDM和STM时需要使用IA和DB后缀指示地址增长方向</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> MOV只能访问R0-R15这些通用寄存器，如果需要访问特殊寄存器，需要使用MRS和MSR，如下所示</div>
 <blockquote>
-<p><code>Cortex-M</code>系列<code>MOV</code>只能访问<code>SP</code>，不能直接访问<code>MSP</code>和<code>PSP</code></p>
+<p>随后<code>CPU</code>将<code>PC</code>修改为<strong>异常处理程序地址</strong>，将<code>LR</code>修改为<strong>异常返回值</strong><code>EXC_RETURN</code></p>
 </blockquote>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas"><span class="token comment">; 1.读写寄存器</span>
-<span class="token instruction keyword">MOV</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token register variable">R0</span>           ;<span class="token register variable">R1</span> <span class="token operator">=</span> <span class="token register variable">R0</span> 
-<span class="token instruction keyword">MOV</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token immediate number">#0x10</span>        ;<span class="token register variable">R1</span> <span class="token operator">=</span> <span class="token number">0x10</span> 
-<span class="token instruction keyword">MRS</span> <span class="token register variable">r2</span><span class="token punctuation">,</span> PSP          ;<span class="token register variable">R2</span> <span class="token operator">=</span> PSP
-<span class="token instruction keyword">MSR</span> PSP<span class="token punctuation">,</span> <span class="token register variable">r3</span>          ;PSP <span class="token operator">=</span> <span class="token register variable">R2</span>
-<span class="token comment">; 2.读内存</span>
-<span class="token instruction keyword">LDR</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R0</span><span class="token punctuation">]</span>         ;从<span class="token register variable">R0</span>地址起始处读<span class="token number">32</span>位全字到<span class="token register variable">R1</span>
-<span class="token instruction keyword">LDRB</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R0</span><span class="token punctuation">]</span>        ;从<span class="token register variable">R0</span>地址起始处读<span class="token number">8</span>位字节<span class="token punctuation">(</span>零扩展<span class="token punctuation">)</span>
-<span class="token instruction keyword">LDRH</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R0</span><span class="token punctuation">]</span>        ;从<span class="token register variable">R0</span>地址起始处读<span class="token number">16</span>位半字<span class="token punctuation">(</span>零扩展<span class="token punctuation">)</span>
-LDMIA <span class="token register variable">R0</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span><span class="token punctuation">}</span>   ;从<span class="token register variable">R0</span>地址连续读数据并依次写入<span class="token register variable">R1</span><span class="token punctuation">,</span><span class="token register variable">R2</span><span class="token punctuation">,</span><span class="token register variable">R3</span><span class="token punctuation">,</span><span class="token register variable">R4</span>，每次写入寄存器后递增<span class="token register variable">R0</span>
-LDMDB <span class="token register variable">R0</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span><span class="token punctuation">}</span>   ;从<span class="token register variable">R0</span>地址连续读数据并依次写入<span class="token register variable">R1</span><span class="token punctuation">,</span><span class="token register variable">R2</span><span class="token punctuation">,</span><span class="token register variable">R3</span><span class="token punctuation">,</span><span class="token register variable">R4</span>，每次写入寄存器前递减<span class="token register variable">R0</span>
-<span class="token instruction keyword">POP</span> <span class="token punctuation">{</span><span class="token register variable">R0</span><span class="token operator">-</span><span class="token register variable">R3</span><span class="token punctuation">,</span> <span class="token register variable">PC</span><span class="token punctuation">}</span>      ;等价于 LDMIA <span class="token register variable">SP</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token register variable">R0</span><span class="token operator">-</span><span class="token register variable">R3</span><span class="token punctuation">,</span> <span class="token register variable">PC</span><span class="token punctuation">}</span>
-<span class="token comment">; 3.写内存</span>
-<span class="token instruction keyword">STR</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R0</span><span class="token punctuation">]</span>         ;将<span class="token register variable">R1</span>的<span class="token number">32</span>位写入<span class="token register variable">R0</span>地址
-<span class="token instruction keyword">STRB</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R0</span><span class="token punctuation">]</span>        ;写<span class="token number">8</span>位字节
-<span class="token instruction keyword">STRH</span> <span class="token register variable">R1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token register variable">R0</span><span class="token punctuation">]</span>        ;写<span class="token number">16</span>位半字
-STMIA <span class="token register variable">R0</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span><span class="token punctuation">}</span>   ;将<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>连续写入<span class="token register variable">R0</span>地址，每次写入内存后递增<span class="token register variable">R0</span>
-STMDB <span class="token register variable">R0</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span><span class="token punctuation">}</span>   ;将<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>连续写入<span class="token register variable">R0</span>地址，每次写入内存前递减<span class="token register variable">R0</span>
-<span class="token instruction keyword">PUSH</span> <span class="token punctuation">{</span><span class="token register variable">R0</span><span class="token operator">-</span><span class="token register variable">R3</span><span class="token punctuation">,</span> <span class="token register variable">LR</span><span class="token punctuation">}</span>     ;等价于 STMDB <span class="token register variable">SP</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token register variable">R0</span><span class="token operator">-</span><span class="token register variable">R3</span><span class="token punctuation">,</span> <span class="token register variable">LR</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>③分支跳转</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> EXC_RETURN用于指示返回时使用的栈指针和处理器模式，通常表示为0xFFFFFFFx</div>
 <blockquote>
-<p><strong>概述</strong>：常用指令有<code>B</code>、<code>BL</code>、<code>BX</code>和<code>BLX</code>，用于改变<strong>程序执行流程</strong>，详细如下所示</p>
+<p>最常见的值为<code>0xFFFFFFFD</code>，表示异常返回时从<code>PSP</code>弹出<strong>异常栈帧</strong>，并切换到<code>Thread Mode</code>使用<code>PSP</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> B表示直接跳转，L表示跳转前会将下一条指令地址存入LR寄存器，X表示会根据跳转地址切换处理器状态</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> B指令常用于跳转和循环，BL常用于函数调用，BX常用于函数返回，BLX常用于跨指令集的函数调用</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 以label为媒介跳转的范围是有限的，但是现代工具链通常会自动将其转换为合理的格式，如下所示</div>
-<blockquote>
-<p><code>B far_target</code>可能被自动转换为<code>LDR r0, =far_target</code>和<code>BX r0</code>或者<code>LDR pc, =far_target</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 以Rm为媒介的跳转是绝对跳转，如果代码重定位失败会导致跳转到非法位置从而引起程序崩溃</div>
-<pre class="line-numbers language-arm-gas" data-language="arm-gas"><code class="language-arm-gas"><span class="token instruction keyword">B</span> label                ;直接跳转到标签处，类似于goto
-<span class="token instruction keyword">BL</span> label               ;将下一条指令地址（返回地址）存入<span class="token register variable">LR</span>寄存器，然后跳转到标签处，不会切换ARM<span class="token operator">/</span>Thumb状态
-<span class="token instruction keyword">BX</span> Rm                  ;跳转到寄存器指定的地址（通常是<span class="token register variable">LR</span>），并根据Rm的最低位切换ARM<span class="token operator">/</span>Thumb状态
-BLX function_name<span class="token operator">/</span>Rm   ;将下一条指令地址（返回地址）存入<span class="token register variable">LR</span>寄存器，然后跳转指定地址，并根据其最低位切换ARM<span class="token operator">/</span>Thumb状态<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="5-异常中断"><a href="#5-异常中断" class="headerlink" title="5.异常中断"></a>5.异常中断</h4><p><strong>①中断处理器</strong></p>
-<blockquote>
-<p><strong>概述</strong>：<code>Cortex-M</code>系列中断处理器为<code>NVIC</code>，<code>Cortex-A/R</code>系列中断处理器为<code>GIC</code>，这里主要关注前者</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> NVIC支持N个中断请求IRQ、一个不可屏蔽中断NMI、一个Systick定时器中断和多个系统异常如SVC指令</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 为了使得中断可以被CPU响应，需要分别对中断源、中断控制器和CPU进行中断使能设置</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 当发生x中断但是CPU无法响应该中断或者x中断被更高优先级的中断打断时，该中断会被暂时挂起等待CPU处理</div>
-
-<p><strong>②中断优先级</strong></p>
-<blockquote>
-<p><strong>概述</strong>：<code>NVIC</code>将中断优先级分为<strong>抢占优先级</strong>和<strong>子优先级</strong>，需要设置<strong>优先级分组</strong>即这俩部分<strong>占用的位数</strong>，如下所示</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 当两个中断同时发生，抢占优先级高的中断先执行，若抢占优先级相同，则子优先级高的中断先执行</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> NVIC支持中断嵌套，即高抢占优先级中断可以打断低抢占优先级中断从而被CPU响应</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 中断优先级数值越小，优先级越高，且执行过程中只能设置一次中断分组，通常在系统初始化函数/主函数中被调用</div>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
-* STM32F103的中断分组配置 
-* 配置中断优先级分组：抢占优先级和子优先级
-* 形参如下：
-* @arg NVIC_PriorityGroup_0:        0 bit  for 抢占优先级
-*                                   4 bits for 子优先级
-* @arg NVIC_PriorityGroup_1:        1 bit  for 抢占优先级
-*                                   3 bits for 子优先级
-* @arg NVIC_PriorityGroup_2:        2 bits for 抢占优先级
-*                                   2 bits for 子优先级
-* @arg NVIC_PriorityGroup_3:        3 bits for 抢占优先级
-*                                   1 bit  for 子优先级
-* @arg NVIC_PriorityGroup_4:        4 bits for 抢占优先级
-*                                   0 bit  for 子优先级
-* @ 注意 如果优先级分组为 0，则抢占优先级就不存在，优先级就全部由子优先级控制
-*/</span>
-<span class="token keyword">void</span> <span class="token function">NVIC_PriorityGroupConfig</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span> NVIC_PriorityGroup<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token comment">/* 检查参数*/</span>
-    <span class="token function">assert_param</span><span class="token punctuation">(</span><span class="token function">IS_NVIC_PRIORITY_GROUP</span><span class="token punctuation">(</span>NVIC_PriorityGroup<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">/* 设置优先级分组*/</span> 
-    SCB<span class="token operator">-&gt;</span>AIRCR <span class="token operator">=</span> AIRCR_VECTKEY_MASK <span class="token operator">|</span> NVIC_PriorityGroup<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>③中断响应流程</strong></p>
-<blockquote>
-<p><strong>概述</strong>：中断被响应后，<code>NVIC</code><strong>自动保存上下文</strong>，并跳转到对应的<strong>中断服务程序</strong>运行，异常返回时<strong>自动恢复上下文</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 进入ISR前，NCIC会自动保存上下文到栈中即R0-R3、R12、LR、PC和xPSR，并更新xPSR的IPSR为当前异常号</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 进入ISR前，LR会根据发生异常时的状态被更新为一个特殊值，用于指示返回时使用的栈指针和处理器模式</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 进入ISR前，会强制切换到异常处理模式并使用MSP，异常返回时根据LR的值返回到原来的状态</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Thread Mode的特权级由CONTROL.nPRIV决定，但是进入Handler Mode后会强制变为特权级</div>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 任务函数 */</span>
-<span class="token keyword">void</span> <span class="token function">thread_task</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// 1. 线程模式下运行，使用PSP</span>
+<span class="token keyword">void</span> <span class="token function">thread_task</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 1. 假设当前运行状态为：</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    Mode      = Thread</span>
+        <span class="token comment">//    Privilege = Unprivileged</span>
+        <span class="token comment">//    SP        = PSP</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    CONTROL.nPRIV = 1   // Thread mode 为非特权级</span>
+        <span class="token comment">//    CONTROL.SPSEL = 1   // Thread mode 使用 PSP</span>
+        <span class="token comment">//</span>
         <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token function">calculate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        
-        <span class="token comment">// 2. 此时 UART 中断发生</span>
-        <span class="token comment">// 3. 硬件自动完成以下操作：</span>
-        <span class="token comment">//    - 保存 R0-R3,R12,LR,PC,xPSR 到 PSP 栈</span>
-        <span class="token comment">//    - 切换 SP 到 MSP</span>
-        <span class="token comment">//    - 切换为处理器模式</span>
-        <span class="token comment">//    - 更新 IPSR = UART_IRQn</span>
-        <span class="token comment">//    - LR = 0xFFFFFFED（因为从线程模式+PSP进入）</span>
-        <span class="token comment">//    - 跳转到 UART_IRQHandler</span>
+
+        <span class="token comment">// 2. 此时 UART 中断发生，NVIC 将对应中断置为 Pending</span>
+        <span class="token comment">//</span>
+        <span class="token comment">// 3. 当 CPU 判断该中断满足响应条件后，开始异常进入：</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    - 将 R0-R3、R12、LR、PC、xPSR</span>
+        <span class="token comment">//      自动保存到异常发生前正在使用的 PSP</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    - R4-R11 不属于硬件自动异常栈帧，</span>
+        <span class="token comment">//      需要时由软件/编译器负责保存</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    - 从 Thread mode 切换到 Handler mode</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    - Handler mode 开始使用 MSP</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    - Handler mode 始终是 Privileged，</span>
+        <span class="token comment">//      因此 CPU 此时获得特权执行权限</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    - CONTROL.nPRIV 仍保持为 1，并没有被清零</span>
+        <span class="token comment">//      只是 nPRIV 只影响 Thread mode，</span>
+        <span class="token comment">//      在 Handler mode 下不会使处理器变成非特权级</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    - IPSR 更新为当前 UART 中断对应的 Exception Number</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    - LR 写入 EXC_RETURN</span>
+        <span class="token comment">//      本例为 0xFFFFFFFD：</span>
+        <span class="token comment">//      返回 Thread mode + 使用 PSP + 基本异常栈帧</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//      注意：</span>
+        <span class="token comment">//      EXC_RETURN 并不记录“返回 Privileged 还是 Unprivileged”</span>
+        <span class="token comment">//      Thread mode 的特权级仍由 CONTROL.nPRIV 决定</span>
+        <span class="token comment">//</span>
+        <span class="token comment">//    - 从向量表取得 UART_IRQHandler 地址并开始执行</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
+
 <span class="token comment">/* 中断服务程序 */</span>
-<span class="token keyword">void</span> <span class="token function">UART_IRQHandler</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 4. 执行到这里时，已经处于：</span>
-    <span class="token comment">//    - 处理器模式 ✓</span>
-    <span class="token comment">//    - 使用 MSP ✓</span>
-    <span class="token comment">//    - LR = 0xFFFFFFED ✓</span>
-    
+<span class="token keyword">void</span> <span class="token function">UART_IRQHandler</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 4. 执行到这里时：</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    Mode      = Handler</span>
+    <span class="token comment">//    Privilege = Privileged</span>
+    <span class="token comment">//    SP        = MSP</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    CONTROL.nPRIV = 1</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    虽然 nPRIV 仍然为 1，</span>
+    <span class="token comment">//    但 Handler mode 天生就是 Privileged，</span>
+    <span class="token comment">//    因此这里仍具有特权级权限</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    被中断线程的基本异常栈帧仍保存在 PSP 中</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    LR 中保存 EXC_RETURN，</span>
+    <span class="token comment">//    本例为 0xFFFFFFFD</span>
+
     <span class="token comment">// 5. 处理中断</span>
     <span class="token class-name">uint8_t</span> data <span class="token operator">=</span> UART<span class="token operator">-&gt;</span>DR<span class="token punctuation">;</span>
-    
-    <span class="token comment">// 6. 返回时，执行 BX LR</span>
-    <span class="token comment">//    硬件看到 LR=0xFFFFFFED，知道要：</span>
-    <span class="token comment">//    - 恢复之前保存的寄存器</span>
-    <span class="token comment">//    - 切换回线程模式</span>
-    <span class="token comment">//    - 切换回 PSP</span>
-    <span class="token comment">//    - 从之前的位置继续执行</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    <span class="token comment">// 6. ISR 结束后，编译器生成异常返回代码，</span>
+    <span class="token comment">//    通常最终通过 BX LR 将 EXC_RETURN 装入 PC</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    CPU 识别出 EXC_RETURN 后：</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    - 根据 EXC_RETURN 判断返回 Thread mode</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    - 根据 EXC_RETURN 选择 PSP</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    - 从 PSP 自动恢复 R0-R3、R12、LR、PC、xPSR</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    - 从 Handler mode 返回 Thread mode</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    - CONTROL.nPRIV 仍然保持为 1</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    - 一旦重新进入 Thread mode，</span>
+    <span class="token comment">//      CONTROL.nPRIV 再次生效</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    - 因此：</span>
+    <span class="token comment">//          Mode      = Thread</span>
+    <span class="token comment">//          Privilege = Unprivileged</span>
+    <span class="token comment">//          SP        = PSP</span>
+    <span class="token comment">//</span>
+    <span class="token comment">//    - 从被中断的位置继续执行</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>④尾链机制</strong></p>
+<blockquote>
+<p><strong>概述</strong>：异常<code>A</code>返回时，如果有另一个<strong>挂起异常</strong><code>B</code>满足<strong>响应条件</strong>，则直接把<strong>控制权</strong>转给新的<code>B</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 尾链过程中不恢复再保存线程现场，而是保留原异常栈帧，待连续异常处理结束后再恢复</div>
+<blockquote>
+<p><strong>无尾链</strong>：<strong>异常栈帧</strong>压栈 <code>-&gt;</code> 响应中断<code>A</code> <code>-&gt;</code> 恢复<strong>异常栈帧</strong> <code>-&gt;</code> <strong>异常栈帧</strong>压栈 <code>-&gt;</code> 响应中断<code>B</code> <code>-&gt;</code> 恢复<strong>异常栈帧</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>有尾链</strong>：<strong>异常栈帧</strong>压栈 <code>-&gt;</code> 响应中断<code>A</code> <code>-&gt;</code> 响应中断<code>B</code> <code>-&gt;</code> 恢复<strong>异常栈帧</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 尾链机制可通过省去连续异常之间重复的出栈与压栈操作，从而降低中断延迟和处理开销</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 尾链只在异常返回阶段发生，前提是返回时已有其他挂起异常满足响应条件</div>
+<p><strong>⑤迟到异常</strong></p>
+<blockquote>
+<p><strong>概述</strong>：异常<code>A</code><strong>进入但尚未执行</strong>时，如果有另一个<strong>更高优先级</strong>的异常<code>B</code>后到达，改为<strong>优先执行</strong><code>B</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 无论最终去处理A还是B，他们打断的都是同一个上下文，进入Handler之前的工作都可以复用</div>
+<blockquote>
+<p><strong>无该机制</strong>：<strong>线程异常栈帧</strong>压栈 <code>-&gt;</code> 响应中断<code>A</code> <code>-&gt;</code> <code>A</code><strong>异常栈帧</strong>压栈 <code>-&gt;</code> 响应中断<code>B</code> <code>-&gt;</code> 恢复<code>A</code><strong>异常栈帧</strong> <code>-&gt;</code> 继续响应中断<code>A</code> <code>-&gt;</code> 恢复<strong>线程异常栈帧</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>有该机制</strong>：<strong>线程异常栈帧</strong>压栈（期间<code>B</code>到达） <code>-&gt;</code> 直接响应中断<code>B</code> <code>-&gt;</code> 响应中断<code>A</code> <code>-&gt;</code> 恢复<strong>线程异常栈帧</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 类似地，该机制也可以省去连续异常之间重复的出栈与压栈操作，并且在继续响应A的时候触发了尾链机制</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 迟到异常只在异常入口阶段发生，且后来到达的异常必须具有更高优先级</div>
+<h4 id="3-M-profile系统异常"><a href="#3-M-profile系统异常" class="headerlink" title="3.M-profile系统异常"></a>3.M-profile系统异常</h4><p><strong>①简介</strong></p>
+<blockquote>
+<p><strong>概述</strong>：系统异常是由<strong>架构本身定义</strong>的异常，用于处理<strong>处理器自身及系统运行过程中</strong>产生的各类系统级事件</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ARM架构下编号为1-15的异常为系统异常，Armv8-M下的系统异常详细如下所示</div>
+<blockquote>
+<p><code>1.Reset</code>：用于<strong>系统复位</strong>，即<strong>系统启动</strong>、<strong>时钟和存储等硬件的初始化</strong>、<strong>初始化</strong><code>.data</code>和<code>.bss</code>最后进入<code>main()</code></p>
+</blockquote>
+<blockquote>
+<p><code>2.NMI</code>：用于处理<strong>不可屏蔽的高优先级事件</strong>，通常用于<strong>时钟故障</strong>和<strong>电源异常</strong>等<strong>关键硬件故障</strong>等</p>
+</blockquote>
+<blockquote>
+<p><code>3.HardFault</code>：用于处理<strong>严重处理器故障</strong>以及其他<code>Fault</code>无法正常处理时产生的<strong>故障升级</strong></p>
+</blockquote>
+<blockquote>
+<p><code>4.MemManage</code>：用于处理<strong>内存保护和访问权限错误</strong>，如违反<code>MPU</code>权限或<strong>执行不可执行区域</strong>中的代码</p>
+</blockquote>
+<blockquote>
+<p><code>5.BusFault</code>：用于处理<strong>总线访问故障</strong>，即<strong>取指</strong>、<strong>数据访问</strong>或<strong>存储器传输过程</strong>中发生的总线错误</p>
+</blockquote>
+<blockquote>
+<p><code>6.UsageFault</code>：用于处理<strong>指令执行和处理器使用错误</strong>，如<strong>未定义指令</strong>、<strong>非法状态</strong>和<strong>非对齐访问</strong>等错误</p>
+</blockquote>
+<blockquote>
+<p><code>7.SecureFault</code>：用于处理<code>TrustZone</code>中的<strong>安全属性</strong>和<strong>安全访问违规</strong>，仅存在于<code>Armv8-M</code>等架构</p>
+</blockquote>
+<blockquote>
+<p><code>Exception 8-10、13</code>：<strong>保留异常号</strong>，当前架构不定义具体异常用途</p>
+</blockquote>
+<blockquote>
+<p><code>11.SVCall</code>：用于<strong>软件主动请求系统服务</strong>，常用于普通线程进入特权<code>Handler</code>执行<strong>操作系统内核功能</strong></p>
+</blockquote>
+<blockquote>
+<p><code>12.DebugMonitor</code>：用于处理<strong>调试事件</strong>，使断点、观察点等调试事件能够通过异常处理程序进行软件调试</p>
+</blockquote>
+<blockquote>
+<p><code>14.PendSV</code>：用于执行<strong>可挂起的系统服务请求</strong>，通常设置为<strong>最低优先级</strong>并用于<code>RTOS</code>的<strong>任务上下文切换</strong></p>
+</blockquote>
+<blockquote>
+<p><code>15.SysTick</code>：用于处理<code>SysTick</code>产生的<strong>周期性系统节拍</strong>，常用于<strong>系统计时</strong>、<strong>任务延时</strong>和<strong>任务调度</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> SVC、PendSV和SysTick可以构成一个极简RTOS的硬件骨架，分别用于陷入内核、任务调度和任务切换</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> MemManage、BusFault、UsageFault、DebugMonitor和SecureFault并非所有M-profile都实现</div>
+
+<p><strong>②Fault体系</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>M-profile</code>的完整<code>Fault</code>体系包括<code>MemManage</code>、<code>BusFault</code>、<code>UsageFault</code>和<code>HardFault</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> MemManage、BusFault和UsageFault都是独立的可配置异常，但是HardFault始终使能且具有固定的高优先级</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果MemManage、BusFault、UsageFault对应的故障发生但对应的Fault Handler不允许执行就会升级为HardFault</div>
+<blockquote>
+<p>当一个普通<code>Fault</code>升级为<code>HardFault</code>时，<code>HFSR.FORCED = 1</code>会被置位，并通过<code>CFSR</code>查询具体<strong>故障类型与原因</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 故障升级原因通常为对应Fault没有使能、对应Fault处理函数中再次产生同类Fault或Fault优先级不够高</div>
+<blockquote>
+<p><code>Fault</code>优先级不够高主要体现在其余<strong>异常处理函数</strong>触发了对应<code>Fault</code>但是其无法抢占触发<code>Fault</code>的异常</p>
+</blockquote>
+<p><strong>③系统控制寄存器</strong></p>
+<blockquote>
+<p><strong>概述</strong>：也称为<code>SCB</code>，用于处理器自身的<strong>异常</strong>、<strong>向量表</strong>、<strong>系统行为</strong>、<strong>低功耗</strong>以及<code>Fault</code>状态</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 部分SCB为只读能力描述寄存器，主要供系统软件、调试器或运行时检测处理器能力使用</div>
+<blockquote>
+<p><code>CPUID</code>：用于标识<strong>处理器身份和版本</strong>，记录<strong>实现厂商</strong>、<strong>架构版本</strong>、<strong>处理器型号</strong>、<code>Variant</code>和<code>Revision</code>等信息</p>
+</blockquote>
+<blockquote>
+<p><code>ID_PFR</code>：用于描述处理器支持的<strong>程序员模型</strong>和<strong>处理器功能特性</strong>，如<strong>异常模型</strong>、<strong>执行状态</strong>及<strong>部分架构能力</strong></p>
+</blockquote>
+<blockquote>
+<p><code>ID_DFR</code>：用于描述处理器支持的<strong>调试功能</strong>和<strong>调试架构能力</strong>，供调试器判断可使用哪些<strong>硬件调试机制</strong></p>
+</blockquote>
+<blockquote>
+<p><code>ID_AFR</code>：用于描述处理器实现的<strong>辅助架构特性</strong>，通常用于表示<strong>未归入其他<code>ID</code>寄存器的实现相关能力</strong></p>
+</blockquote>
+<blockquote>
+<p><code>ID_MMFR</code>：用于描述处理器支持的<strong>内存模型</strong>和<strong>内存管理能力</strong>，如<code>MPU</code>、<strong>内存属性</strong>及<strong>相关内存系统特性</strong></p>
+</blockquote>
+<blockquote>
+<p><code>ID_ISAR</code>：用于描述处理器支持的<strong>指令集架构特性</strong>，如是否实现某些<strong>算术</strong>、<strong>位操作</strong>、<strong>同步</strong>或<strong>其他可选指令</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 部分SCB用于控制处理器如何响应异常、如何运行以及如何访问部分系统资源，如下所示</div>
+<blockquote>
+<p><code>ICSR</code>：主要管理<strong>系统异常调度状态</strong>，如<strong>当前正在执行的异常</strong>、<strong>最高优先级挂起异常</strong>和<code>PendSV</code><strong>的挂起状态</strong>等</p>
+</blockquote>
+<blockquote>
+<p><code>VTOR</code>：主要管理<strong>异常向量表基地址</strong>，使处理器能够根据<code>Exception Number</code>找到对应的<strong>异常处理程序</strong></p>
+</blockquote>
+<blockquote>
+<p><code>AIRCR</code>：主要管理<strong>异常优先级分组</strong>和<strong>系统复位</strong>，如<strong>划分抢占优先级与子优先级</strong>和<strong>请求系统复位</strong>等</p>
+</blockquote>
+<blockquote>
+<p><code>SCR</code>：主要管理<strong>睡眠和低功耗行为</strong>，如<strong>深度睡眠</strong>、<strong>异常返回后继续睡眠</strong>和<strong>挂起事件唤醒</strong>等</p>
+</blockquote>
+<blockquote>
+<p><code>CCR</code>：主要用于配置处理器的<strong>运行行为</strong>和<strong>异常检查规则</strong>，如<strong>除零陷阱</strong>、<strong>非对齐访问检查</strong>和<strong>异常栈对齐</strong>等</p>
+</blockquote>
+<blockquote>
+<p><code>SHPR</code>：主要用于设置<strong>系统异常优先级</strong>，如<code>SVCall</code>、<code>PendSV</code>、<code>SysTick</code>及部分<code>Fault</code></p>
+</blockquote>
+<blockquote>
+<p><code>SHCSR</code>：主要用于控制并记录<strong>系统异常的使能和运行状态</strong>，如<code>SVCall</code>、<code>PendSV</code>、<code>SysTick</code>及部分<code>Fault</code></p>
+</blockquote>
+<blockquote>
+<p><code>CPACR</code>：用于控制<strong>协处理器</strong>或<strong>可选执行单元</strong>的访问权限，典型用途是配置<code>FPU</code>相关协处理器的<strong>访问权限</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 部分SCB用于Fault发生时的状态信息，可用于定位故障类型、触发原因和相关访问地址</div>
+<blockquote>
+<p><code>CFSR</code>：主要记录<strong>可配置<code>Fault</code>的具体故障原因</strong>，包括<code>MemManage</code>、<code>BusFault</code>和<code>UsageFault</code>的状态信息</p>
+</blockquote>
+<blockquote>
+<p><code>HFSR</code>：主要记录<code>HardFault</code>的<strong>产生原因</strong>，用于判断是否由<strong>其他<code>Fault</code>升级</strong>或<strong>其他严重故障</strong>导致</p>
+</blockquote>
+<blockquote>
+<p><code>DFSR</code>：用于记录<strong>调试异常的触发原因</strong>，如<strong>断点</strong>、<strong>观察点</strong>、<strong>向量捕获</strong>以及<strong>外部调试请求</strong>等</p>
+</blockquote>
+<blockquote>
+<p><code>MMFAR</code>：主要记录发生<code>MemManage Fault</code>时的<strong>故障访问地址</strong></p>
+</blockquote>
+<blockquote>
+<p><code>BFAR</code>：主要记录发生<code>BusFault</code>时的<strong>故障访问地址</strong></p>
+</blockquote>
+<blockquote>
+<p><code>AFSR</code>：用于记录<strong>实现定义的辅助<code>Fault</code>信息</strong>，由具体处理器或<code>SoC</code>实现提供<strong>额外的故障诊断信息</strong></p>
+</blockquote>
 
                 
             </div>
@@ -938,15 +886,15 @@ BLX function_name<span class="token operator">/</span>Rm   ;将下一条指令�
                 <a href="/2026/08/19/arm-ti-xi-jia-gou-yi/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/20.webp" class="responsive-img" alt="ARM体系架构（一）" loading="lazy" decoding="async">
+                        <img src="/medias/featureimages/20.webp" class="responsive-img" alt="Arm体系架构（一）" loading="lazy" decoding="async">
                         
-                        <span class="card-title">ARM体系架构（一）</span>
+                        <span class="card-title">Arm体系架构（一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ARM体系架构简介
+                            Arm 寄存器模型、处理器模式与过程调用标准
                         
                     </div>
                     <div class="publish-info">
@@ -957,8 +905,8 @@ BLX function_name<span class="token operator">/</span>Rm   ;将下一条指令�
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84/" class="post-category">
-                                    处理器架构
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
                                 </a>
                             
                             
@@ -968,8 +916,8 @@ BLX function_name<span class="token operator">/</span>Rm   ;将下一条指令�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ARM%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/">
-                        <span class="chip bg-color">ARM体系架构</span>
+                    <a href="/tags/Arm%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/">
+                        <span class="chip bg-color">Arm体系架构</span>
                     </a>
                     
                 </div>
@@ -994,7 +942,7 @@ BLX function_name<span class="token operator">/</span>Rm   ;将下一条指令�
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            UART协议简介
+                            UART 异步通信、帧格式与波特率
                         
                     </div>
                     <div class="publish-info">
@@ -1005,8 +953,8 @@ BLX function_name<span class="token operator">/</span>Rm   ;将下一条指令�
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/UART/" class="post-category">
-                                    UART
+                            <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="post-category">
+                                    通信协议
                                 </a>
                             
                             
@@ -1016,8 +964,8 @@ BLX function_name<span class="token operator">/</span>Rm   ;将下一条指令�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%B8%B2%E8%A1%8C%E5%8D%8F%E8%AE%AE/">
-                        <span class="chip bg-color">串行协议</span>
+                    <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">通信协议</span>
                     </a>
                     
                 </div>
@@ -1130,14 +1078,17 @@ BLX function_name<span class="token operator">/</span>Rm   ;将下一条指令�
         const expandedClass = 'expanded';
         let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
+        $('#floating-toc-btn .btn-floating').click(function (event) {
+            event.preventDefault();
+            let expanded = $tocAside.hasClass(expandedClass);
+            if (expanded) {
                 $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String(!expanded));
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -1303,6 +1254,7 @@ $(function () {
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/effects.js"></script>
     <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
@@ -1319,9 +1271,6 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
@@ -1331,27 +1280,65 @@ $(function () {
 
 	
     
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
-    
-
-    
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
-    
+    <script>
+        window.MateryEffects.init({
+            effects: [
+                {
+                    name: 'clicklove',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/others/clicklove.js",
+                    options: { maxHearts: 32 }
+                },
+                {
+                    name: 'canvasNest',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/canvas-nest.js",
+                    options: {
+                        color: "0,0,255",
+                        opacity: 0.7,
+                        zIndex: -1,
+                        count: 99,
+                        fps: 30
+                    }
+                },
+                {
+                    name: 'ribbon',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon.min.js",
+                    options: {
+                        size: 150,
+                        alpha: 0.6,
+                        zIndex: -1,
+                        clickChange: true
+                    }
+                },
+                {
+                    name: 'ribbonDynamic',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon-dynamic.js",
+                    options: { fps: 30 }
+                },
+                {
+                    name: 'cursor',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/js/cursor.js",
+                    options: { maxParticles: 80 }
+                }
+            ],
+            typed: window.materyTypedConfig || null,
+            live2d: {"enabled":true,"src":"/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05","options":{"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false}}
+        });
+    </script>
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-<script src="/js/cursor.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+
         <style>
             [bg-lazy] {
                 background-image: none !important;

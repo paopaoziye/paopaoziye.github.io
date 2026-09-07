@@ -2,22 +2,23 @@
 <html lang="zh-CN">
 
 
+
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Zephyr源码阅读（三）, RTOS, Zephyr">
-    <meta name="description" content="内存模块初始化">
+    <meta name="keywords" content="Zephyr,内存模块,初始化,源码阅读">
+    <meta name="description" content="Zephyr 内存模块初始化与实现">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://paopaoziye.github.io/2026/07/27/zephyr-yuan-ma-yue-du-san/">
     <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta property="og:description" content="内存模块初始化">
+    <meta property="og:title" content="Zephyr源码阅读（三） | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="Zephyr 内存模块初始化与实现">
     <meta property="og:url" content="https://paopaoziye.github.io/2026/07/27/zephyr-yuan-ma-yue-du-san/">
     <meta property="og:site_name" content="Zfk&#39;s Study Notes">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta name="twitter:description" content="内存模块初始化">
+    <meta name="twitter:title" content="Zephyr源码阅读（三） | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="Zephyr 内存模块初始化与实现">
     <meta name="twitter:url" content="https://paopaoziye.github.io/2026/07/27/zephyr-yuan-ma-yue-du-san/">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
@@ -27,7 +28,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>归档 | Zfk&#39;s Study Notes</title>
+    <title>Zephyr源码阅读（三） | Zfk&#39;s Study Notes</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -283,8 +284,14 @@
         visibility: hidden;
     }
 
-    #articleContent :focus {
-        outline: none;
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
+    }
+
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
     }
 
     .toc-fixed {
@@ -433,9 +440,6 @@
 <blockquote>
 <p><strong>概述</strong>：<code>z_cstart</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> </div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 位于 */</span>
 <span class="token function">SYS_INIT_NAMED</span><span class="token punctuation">(</span>statics_init_pre<span class="token punctuation">,</span> statics_init<span class="token punctuation">,</span> PRE_KERNEL_1<span class="token punctuation">,</span> CONFIG_KERNEL_INIT_PRIORITY_OBJECTS<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 位于 */</span>
@@ -605,7 +609,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            RISC-V体系架构简介
+                            RISC-V 寄存器模型、指令系统与架构
                         
                     </div>
                     <div class="publish-info">
@@ -653,7 +657,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            启动流程
+                            Zephyr ARM 启动流程与链接脚本
                         
                     </div>
                     <div class="publish-info">
@@ -793,14 +797,17 @@
         const expandedClass = 'expanded';
         let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
+        $('#floating-toc-btn .btn-floating').click(function (event) {
+            event.preventDefault();
+            let expanded = $tocAside.hasClass(expandedClass);
+            if (expanded) {
                 $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String(!expanded));
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -966,6 +973,7 @@ $(function () {
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/effects.js"></script>
     <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
@@ -982,9 +990,6 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
@@ -994,27 +999,65 @@ $(function () {
 
 	
     
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
-    
-
-    
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
-    
+    <script>
+        window.MateryEffects.init({
+            effects: [
+                {
+                    name: 'clicklove',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/others/clicklove.js",
+                    options: { maxHearts: 32 }
+                },
+                {
+                    name: 'canvasNest',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/canvas-nest.js",
+                    options: {
+                        color: "0,0,255",
+                        opacity: 0.7,
+                        zIndex: -1,
+                        count: 99,
+                        fps: 30
+                    }
+                },
+                {
+                    name: 'ribbon',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon.min.js",
+                    options: {
+                        size: 150,
+                        alpha: 0.6,
+                        zIndex: -1,
+                        clickChange: true
+                    }
+                },
+                {
+                    name: 'ribbonDynamic',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon-dynamic.js",
+                    options: { fps: 30 }
+                },
+                {
+                    name: 'cursor',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/js/cursor.js",
+                    options: { maxParticles: 80 }
+                }
+            ],
+            typed: window.materyTypedConfig || null,
+            live2d: {"enabled":true,"src":"/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05","options":{"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false}}
+        });
+    </script>
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-<script src="/js/cursor.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+
         <style>
             [bg-lazy] {
                 background-image: none !important;

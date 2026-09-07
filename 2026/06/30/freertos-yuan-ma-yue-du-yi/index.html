@@ -2,22 +2,23 @@
 <html lang="zh-CN">
 
 
+
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="FreeRTOS源码阅读（一）, RTOS, FreeRTOS">
-    <meta name="description" content="系统移植和内存管理">
+    <meta name="keywords" content="FreeRTOS,RTOS,系统移植,内存管理,堆分配">
+    <meta name="description" content="FreeRTOS 系统移植与内存管理">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://paopaoziye.github.io/2026/06/30/freertos-yuan-ma-yue-du-yi/">
     <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta property="og:description" content="系统移植和内存管理">
+    <meta property="og:title" content="FreeRTOS源码阅读（一） | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="FreeRTOS 系统移植与内存管理">
     <meta property="og:url" content="https://paopaoziye.github.io/2026/06/30/freertos-yuan-ma-yue-du-yi/">
     <meta property="og:site_name" content="Zfk&#39;s Study Notes">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta name="twitter:description" content="系统移植和内存管理">
+    <meta name="twitter:title" content="FreeRTOS源码阅读（一） | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="FreeRTOS 系统移植与内存管理">
     <meta name="twitter:url" content="https://paopaoziye.github.io/2026/06/30/freertos-yuan-ma-yue-du-yi/">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
@@ -27,7 +28,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>归档 | Zfk&#39;s Study Notes</title>
+    <title>FreeRTOS源码阅读（一） | Zfk&#39;s Study Notes</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -283,8 +284,14 @@
         visibility: hidden;
     }
 
-    #articleContent :focus {
-        outline: none;
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
+    }
+
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
     }
 
     .toc-fixed {
@@ -436,71 +443,138 @@
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 裸机开发模式代码高度耦合，当一个任务耗时较长或者出现故障时，会阻塞后续任务，导致系统响应延迟</div>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 中断天然具有最高优先级，且可以通过中断优先级划分实现简单的任务优先级</div>
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> ISR要求简短高效，无法实现复杂逻辑，且中断优先级是静态的，无法动态调整优先级</div>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 轮询：所有任务在一个循环中依次执行 */</span>
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
-    <span class="token comment">//初始化</span>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 轮询模式：各任务在主循环中依次执行 */</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* 系统初始化 */</span>
     <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//主循环</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token comment">/* 主循环 */</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
         <span class="token function">do_task1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">do_task2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 前后台：后台程序在主函数中运行，前台程序通过中断触发 */</span>
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token comment">//初始化</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 前后台模式：
+ * 前台由中断处理紧急事件，后台在主循环中完成具体任务
+ */</span>
+
+<span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token keyword">int</span> task2_pending <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* 系统初始化 */</span>
     <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//主循环</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token comment">/* 后台主循环 */</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
         <span class="token function">do_task1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>task2_pending<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            task2_pending <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token function">do_task2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token comment">//中断处理函数</span>
-<span class="token keyword">void</span> <span class="token function">task2_irq</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">do_task2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 定时器驱动：利用定时器划分时间片，每个任务间隔固定时间执行 */</span>
-<span class="token keyword">static</span> <span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token comment">//初始化</span>
+
+<span class="token comment">/* 前台：中断服务函数 */</span>
+<span class="token keyword">void</span> <span class="token function">task2_irq</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* ISR 中尽量只记录事件，避免执行耗时操作 */</span>
+    task2_pending <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 定时驱动：
+ * 利用周期定时器产生系统 Tick，
+ * 不同任务按照各自的固定周期执行
+ */</span>
+
+<span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> tick <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* 系统初始化 */</span>
     <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
         <span class="token function">do_tasks</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">do_tasks</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>cnt <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+<span class="token keyword">void</span> <span class="token function">do_tasks</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>tick <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
         <span class="token function">do_task1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>cnt <span class="token operator">%</span> <span class="token number">5</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>tick <span class="token operator">%</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
         <span class="token function">do_task2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">timer_irq</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    cnt<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 状态机：将任务分解为多个状态，通过事件触发状态切换 */</span>
-<span class="token keyword">static</span> state <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token comment">//初始化</span>
+
+<span class="token comment">/* 定时器中断，每个固定时间产生一次 Tick */</span>
+<span class="token keyword">void</span> <span class="token function">timer_irq</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    tick<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 状态机：
+ * 将复杂任务拆分为多个状态，
+ * 根据事件或执行结果逐步切换状态
+ */</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">enum</span>
+<span class="token punctuation">{</span>
+    STATE_TASK1<span class="token punctuation">,</span>
+    STATE_TASK2<span class="token punctuation">,</span>
+    STATE_IDLE
+<span class="token punctuation">}</span> State<span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> State state <span class="token operator">=</span> STATE_TASK1<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* 系统初始化 */</span>
     <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token function">tasks</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>  
-<span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">tasks</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">switch</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">case</span> <span class="token number">0</span><span class="token operator">:</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">do_task1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> state <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">do_task2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> state <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token keyword">case</span> <span class="token number">2</span><span class="token operator">:</span>
-            state <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">run_state_machine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">run_state_machine</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>state<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> STATE_TASK1<span class="token operator">:</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">do_task1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                state <span class="token operator">=</span> STATE_TASK2<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">case</span> STATE_TASK2<span class="token operator">:</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">do_task2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                state <span class="token operator">=</span> STATE_IDLE<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">case</span> STATE_IDLE<span class="token operator">:</span>
+            state <span class="token operator">=</span> STATE_TASK1<span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            state <span class="token operator">=</span> STATE_TASK1<span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②实时操作系统</strong></p>
 <blockquote>
 <p><strong>概述</strong>：保证在<strong>一定时间限制内</strong>完成<strong>特定功能</strong>的操作系统，如<code>FreeRTOS</code>和<code>RT-Thread</code>等</p>
@@ -1148,18 +1222,18 @@ xStart <span class="token operator">-&gt;</span> <span class="token punctuation"
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2026/06/30/can-xie-yi-yi/">
+                <a href="/2026/06/30/ethercat-xie-yi-yi/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/29.webp" class="responsive-img" alt="CAN协议（一）" loading="lazy" decoding="async">
+                        <img src="/medias/featureimages/29.webp" class="responsive-img" alt="EtherCat协议（一）" loading="lazy" decoding="async">
                         
-                        <span class="card-title">CAN协议（一）</span>
+                        <span class="card-title">EtherCat协议（一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            CAN协议简介
+                            EtherCAT 工业以太网协议与通信方式
                         
                     </div>
                     <div class="publish-info">
@@ -1170,8 +1244,8 @@ xStart <span class="token operator">-&gt;</span> <span class="token punctuation"
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/CAN/" class="post-category">
-                                    CAN
+                            <a href="/categories/EtherCat/" class="post-category">
+                                    EtherCat
                                 </a>
                             
                             
@@ -1196,18 +1270,18 @@ xStart <span class="token operator">-&gt;</span> <span class="token punctuation"
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2026/06/30/ethercat-xie-yi-yi/">
+                <a href="/2026/06/30/freertos-yuan-ma-yue-du-san/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/29.webp" class="responsive-img" alt="EtherCAT协议（一）" loading="lazy" decoding="async">
+                        <img src="/medias/featureimages/38.webp" class="responsive-img" alt="FreeRTOS源码阅读（三）" loading="lazy" decoding="async">
                         
-                        <span class="card-title">EtherCAT协议（一）</span>
+                        <span class="card-title">FreeRTOS源码阅读（三）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            EtherCAT协议简介
+                            FreeRTOS 任务删除、延时与通知
                         
                     </div>
                     <div class="publish-info">
@@ -1218,8 +1292,8 @@ xStart <span class="token operator">-&gt;</span> <span class="token punctuation"
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/EtherCAT/" class="post-category">
-                                    EtherCAT
+                            <a href="/categories/RTOS/" class="post-category">
+                                    RTOS
                                 </a>
                             
                             
@@ -1229,8 +1303,12 @@ xStart <span class="token operator">-&gt;</span> <span class="token punctuation"
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%B8%B2%E8%A1%8C%E5%8D%8F%E8%AE%AE/">
-                        <span class="chip bg-color">串行协议</span>
+                    <a href="/tags/RTOS/">
+                        <span class="chip bg-color">RTOS</span>
+                    </a>
+                    
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
                     </a>
                     
                 </div>
@@ -1343,14 +1421,17 @@ xStart <span class="token operator">-&gt;</span> <span class="token punctuation"
         const expandedClass = 'expanded';
         let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
+        $('#floating-toc-btn .btn-floating').click(function (event) {
+            event.preventDefault();
+            let expanded = $tocAside.hasClass(expandedClass);
+            if (expanded) {
                 $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String(!expanded));
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -1516,6 +1597,7 @@ $(function () {
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/effects.js"></script>
     <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
@@ -1532,9 +1614,6 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
@@ -1544,27 +1623,65 @@ $(function () {
 
 	
     
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
-    
-
-    
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
-    
+    <script>
+        window.MateryEffects.init({
+            effects: [
+                {
+                    name: 'clicklove',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/others/clicklove.js",
+                    options: { maxHearts: 32 }
+                },
+                {
+                    name: 'canvasNest',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/canvas-nest.js",
+                    options: {
+                        color: "0,0,255",
+                        opacity: 0.7,
+                        zIndex: -1,
+                        count: 99,
+                        fps: 30
+                    }
+                },
+                {
+                    name: 'ribbon',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon.min.js",
+                    options: {
+                        size: 150,
+                        alpha: 0.6,
+                        zIndex: -1,
+                        clickChange: true
+                    }
+                },
+                {
+                    name: 'ribbonDynamic',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon-dynamic.js",
+                    options: { fps: 30 }
+                },
+                {
+                    name: 'cursor',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/js/cursor.js",
+                    options: { maxParticles: 80 }
+                }
+            ],
+            typed: window.materyTypedConfig || null,
+            live2d: {"enabled":true,"src":"/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05","options":{"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false}}
+        });
+    </script>
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-<script src="/js/cursor.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+
         <style>
             [bg-lazy] {
                 background-image: none !important;

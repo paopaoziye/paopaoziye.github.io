@@ -2,22 +2,23 @@
 <html lang="zh-CN">
 
 
+
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ARM体系架构（三）, ARM体系架构, 处理器架构">
-    <meta name="description" content="A32/T32常用指令">
+    <meta name="keywords" content="ARM,A32,T32,ARM指令">
+    <meta name="description" content="ARM A32/T32 常用指令">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://paopaoziye.github.io/2026/08/20/arm-ti-xi-jia-gou-san/">
     <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta property="og:description" content="A32/T32常用指令">
+    <meta property="og:title" content="ARM体系架构（三） | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="ARM A32/T32 常用指令">
     <meta property="og:url" content="https://paopaoziye.github.io/2026/08/20/arm-ti-xi-jia-gou-san/">
     <meta property="og:site_name" content="Zfk&#39;s Study Notes">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="归档 | Zfk&#39;s Study Notes">
-    <meta name="twitter:description" content="A32/T32常用指令">
+    <meta name="twitter:title" content="ARM体系架构（三） | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="ARM A32/T32 常用指令">
     <meta name="twitter:url" content="https://paopaoziye.github.io/2026/08/20/arm-ti-xi-jia-gou-san/">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
@@ -27,7 +28,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>归档 | Zfk&#39;s Study Notes</title>
+    <title>ARM体系架构（三） | Zfk&#39;s Study Notes</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -283,8 +284,14 @@
         visibility: hidden;
     }
 
-    #articleContent :focus {
-        outline: none;
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
+    }
+
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
     }
 
     .toc-fixed {
@@ -383,8 +390,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84/" class="post-category">
-                                处理器架构
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                编程语言
                             </a>
                         
                     </div>
@@ -427,37 +434,360 @@
             <div id="articleContent">
                 <h1 id="处理器架构"><a href="#处理器架构" class="headerlink" title="处理器架构"></a>处理器架构</h1><h2 id="ARM体系架构"><a href="#ARM体系架构" class="headerlink" title="ARM体系架构"></a>ARM体系架构</h2><h3 id="ARM体系架构（三）"><a href="#ARM体系架构（三）" class="headerlink" title="ARM体系架构（三）"></a>ARM体系架构（三）</h3><h4 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h4><p><strong>①数据传输</strong></p>
 <blockquote>
-<p><strong>概述</strong>：</p>
+<p><strong>概述</strong>：主要用于在<strong>立即数</strong>、<strong>寄存器</strong>和<strong>内存</strong>之间传递数据，常用指令有<code>MOV</code>、<code>ADR</code>、<code>LDR</code>、<code>STR</code>、<code>PUSH</code>和<code>POP</code>等</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> </div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> </div>
-<p><strong>②</strong></p>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ARM采用典型的Load/Store架构，运算主要在寄存器之间进行，内存数据需先装入寄存器再进行运算</div>
 <blockquote>
-<p><strong>概述</strong>：</p>
+<p><code>MOV</code>主要用于<strong>给寄存器赋值</strong>，基本语法为<code>MOV Rd, Operand</code>，表示<code>Rd = Operand</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> </div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> </div>
-<p><strong>③</strong></p>
 <blockquote>
-<p><strong>概述</strong>：</p>
+<p><code>ADR</code>主要用于<strong>给寄存器赋予某个标签对应的地址</strong>，基本语法为<code>ADR Rd, label</code>，表示<code>Rd = &amp;label</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> </div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> </div>
-<p><strong>④</strong></p>
 <blockquote>
-<p><strong>概述</strong>：</p>
+<p><code>LDR</code>主要用于<strong>从内存中读取数据到寄存器</strong>，基本语法为<code>LDR Rd, [Rn]</code>，表示<code>Rd = Memory[Rn]</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> </div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> </div>
+<blockquote>
+<p><code>STR</code>主要用于<strong>将寄存器中的数据写入内存</strong>，基本语法为<code>STR Rd, [Rn]</code>，表示<code>Memory[Rn] = Rd</code></p>
+</blockquote>
+<blockquote>
+<p><code>PUSH</code>主要用于<strong>将一个或多个寄存器的数据压入栈中</strong>，基本语法为<code>PUSH {register_list}</code></p>
+</blockquote>
+<blockquote>
+<p><code>POP</code>主要用于<strong>从栈中恢复一个或多个寄存器的数据</strong>，基本语法为<code>POP {register_list}</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> LDM/STM用于在连续内存与多个寄存器之间批量传送数据，并通过IA/IB/DA/DB指定地址变化方式</div>
+<blockquote>
+<p><code>LDM</code>主要用于<strong>从连续内存中批量读取数据到多个寄存器</strong>，基本语法为<code>LDM Rn{!}, {register_list}</code></p>
+</blockquote>
+<blockquote>
+<p><code>STM</code>主要用于<strong>将多个寄存器的数据批量写入连续内存</strong>，基本语法为<code>STM Rn{!}, {register_list}</code></p>
+</blockquote>
+<blockquote>
+<p><code>!</code>表示<strong>基址回写</strong>，即批量访存结束后，把<strong>最终计算得到的地址</strong>重新写回<strong>基址寄存器</strong><code>Rn</code></p>
+</blockquote>
+<blockquote>
+<p><code>I/D</code>表示<strong>地址递增/减</strong>，<code>A/B</code>表示<strong>访问后/前变化</strong>，缺省采用<code>IA</code>即<strong>先访问随后<code>Rn</code>递增</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> LDR和STR默认读写32位数据，可通过添加B/H指定数据宽度，LDR还可通过SB/SH指定符号扩展</div>
+<blockquote>
+<p><code>STRB/STRH r0, [r1]</code>表示把<code>r0</code>的<strong>低</strong><code>8/16</code>位写入内存<code>Memory[r1]</code></p>
+</blockquote>
+<blockquote>
+<p><code>LDRB/LDRH r0, [r1]</code>表示从<code>r1</code>指向的<strong>内存地址</strong>中读取<code>8/16</code>位，并将其<strong>零扩展</strong>为<code>32</code>位后写入整个<code>r0</code></p>
+</blockquote>
+<blockquote>
+<p><code>LDRSB/LDRSH r0, [r1]</code>表示从<code>r1</code>指向的<strong>内存地址</strong>中读取<code>8/16</code>位，并将其<strong>符号扩展</strong>为<code>32</code>位后写入整个<code>r0</code></p>
+</blockquote>
+<blockquote>
+<p><strong>零扩展</strong>表示高位补<code>0</code>，<strong>符号扩展</strong>表示高位补<strong>符号位</strong>，<code>0xFF</code>对应扩展分别为<code>0x000000FF</code>和<code>0xFFFFFFFF</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 上述指令主要操作核心寄存器R0-R15，CPSR和SPSR等特殊寄存器需要通过MRS/MSR访问</div>
+<pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 1.寄存器与地址</span>
+MOV <span class="token register variable">R1</span>, <span class="token register variable">R0</span>            <span class="token comment">; R1 = R0</span>
+MOV <span class="token register variable">R1</span>, #<span class="token number">0x10</span>         <span class="token comment">; R1 = 0x10</span>
+MVN <span class="token register variable">R1</span>, <span class="token register variable">R0</span>            <span class="token comment">; R1 = ~R0</span>
+MOVW <span class="token register variable">R1</span>, #<span class="token number">0x5678</span>      <span class="token comment">; R1低16位 = 0x5678，高16位清0</span>
+MOVT <span class="token register variable">R1</span>, #<span class="token number">0x1234</span>      <span class="token comment">; R1高16位 = 0x1234，低16位保持不变</span>
+ADR <span class="token register variable">R1</span>, label         <span class="token comment">; R1 = &amp;label，取得label对应的地址</span>
 
+<span class="token comment">; 2.特殊寄存器</span>
+MRS <span class="token register variable">R2</span>, PSP           <span class="token comment">; R2 = PSP</span>
+MSR PSP, <span class="token register variable">R3</span>           <span class="token comment">; PSP = R3</span>
+
+<span class="token comment">; 3.读取内存</span>
+LDR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>          <span class="token comment">; 从R0指向的内存读取32位数据到R1</span>
+LDRB <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>         <span class="token comment">; 读取8位数据，零扩展为32位后写入R1</span>
+LDRH <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>         <span class="token comment">; 读取16位数据，零扩展为32位后写入R1</span>
+LDRSB <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>        <span class="token comment">; 读取8位有符号数据，符号扩展为32位后写入R1</span>
+LDRSH <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>        <span class="token comment">; 读取16位有符号数据，符号扩展为32位后写入R1</span>
+LDR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span>, #<span class="token number">4</span><span class="token operator">]</span>      <span class="token comment">; 从R0+4地址读取32位数据到R1，R0不变</span>
+LDR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span>, #<span class="token number">4</span><span class="token operator">]</span><span class="token operator">!</span>     <span class="token comment">; 先R0 = R0+4，再从新R0地址读取32位数据到R1</span>
+LDR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>, #<span class="token number">4</span>      <span class="token comment">; 先从R0地址读取32位数据到R1，再R0 = R0+4</span>
+
+<span class="token comment">; 4.批量读取</span>
+LDMIA <span class="token register variable">R0</span><span class="token operator">!</span>, {<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>}    <span class="token comment">; 从R0开始向高地址连续读取4个32位数据到R1-R4，结束后R0 = R0+16</span>
+LDMIB <span class="token register variable">R0</span><span class="token operator">!</span>, {<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>}    <span class="token comment">; 从R0+4开始向高地址连续读取4个32位数据到R1-R4，结束后R0 = R0+16</span>
+LDMDA <span class="token register variable">R0</span><span class="token operator">!</span>, {<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>}    <span class="token comment">; 向低地址方向读取连续数据到R1-R4，结束后R0 = R0-16</span>
+LDMDB <span class="token register variable">R0</span><span class="token operator">!</span>, {<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>}    <span class="token comment">; 基址先向低地址移动再读取连续数据到R1-R4，结束后R0 = R0-16</span>
+POP {<span class="token register variable">R0</span><span class="token operator">-</span><span class="token register variable">R3</span>, PC}       <span class="token comment">; 从栈中恢复R0-R3和PC，语义上对应LDMIA SP!, {R0-R3, PC}</span>
+
+<span class="token comment">; 5.写入内存</span>
+STR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>          <span class="token comment">; 将R1的32位数据写入R0指向的内存</span>
+STRB <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>         <span class="token comment">; 将R1低8位写入R0指向的内存</span>
+STRH <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>         <span class="token comment">; 将R1低16位写入R0指向的内存</span>
+STR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span>, #<span class="token number">4</span><span class="token operator">]</span>      <span class="token comment">; 将R1写入R0+4地址，R0不变</span>
+STR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span>, #<span class="token number">4</span><span class="token operator">]</span><span class="token operator">!</span>     <span class="token comment">; 先R0 = R0+4，再将R1写入新R0地址</span>
+STR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>, #<span class="token number">4</span>      <span class="token comment">; 先将R1写入R0地址，再R0 = R0+4</span>
+
+<span class="token comment">; 6.批量写入</span>
+STMIA <span class="token register variable">R0</span><span class="token operator">!</span>, {<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>}    <span class="token comment">; 从R0开始向高地址连续写入R1-R4，结束后R0 = R0+16</span>
+STMIB <span class="token register variable">R0</span><span class="token operator">!</span>, {<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>}    <span class="token comment">; 从R0+4开始向高地址连续写入R1-R4，结束后R0 = R0+16</span>
+STMDA <span class="token register variable">R0</span><span class="token operator">!</span>, {<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>}    <span class="token comment">; 向低地址方向连续写入R1-R4，结束后R0 = R0-16</span>
+STMDB <span class="token register variable">R0</span><span class="token operator">!</span>, {<span class="token register variable">R1</span><span class="token operator">-</span><span class="token register variable">R4</span>}    <span class="token comment">; 基址先向低地址移动再连续写入R1-R4，结束后R0 = R0-16</span>
+PUSH {<span class="token register variable">R0</span><span class="token operator">-</span><span class="token register variable">R3</span>, LR}      <span class="token comment">; 将R0-R3和LR压入栈，语义上对应STMDB SP!, {R0-R3, LR}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>②数据运算</strong></p>
+<blockquote>
+<p><strong>概述</strong>：主要用于对<strong>寄存器中的数据</strong>进行<strong>算术</strong>、<strong>逻辑</strong>及<strong>移位</strong>处理，常用指令有<code>ADD</code>、<code>SUB</code>、<code>MUL</code>、<code>AND</code>和<code>LSL</code>等</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ARM数据运算通常以寄存器或立即数为操作数，并可将移位与算术或逻辑运算组合执行</div>
+<blockquote>
+<p><code>ADD</code>表示<strong>加法运算</strong>，基本语法为<code>ADD Rd, Rn, Operand</code>，表示<code>Rd = Rn + Operand</code></p>
+</blockquote>
+<blockquote>
+<p><code>SUB</code>表示<strong>减法运算</strong>，基本语法为<code>SUB Rd, Rn, Operand</code>，表示<code>Rd = Rn - Operand</code></p>
+</blockquote>
+<blockquote>
+<p><code>MUL</code>表示<strong>乘法运算</strong>，基本语法为<code>MUL Rd, Rn, Rm</code>，表示<code>Rd = Rn × Rm</code>，只保留乘积的低<code>32</code>位</p>
+</blockquote>
+<blockquote>
+<p><code>SDIV/UDIV</code>表示<strong>有符号/无符号整数除法</strong>，基本语法为<code>SDIV/UDIV Rd, Rn, Rm</code>，表示<code>Rd = Rn ÷ Rm</code></p>
+</blockquote>
+<blockquote>
+<p><code>AND</code>表示<strong>按位与运算</strong>，基本语法为<code>AND Rd, Rn, Operand</code>，表示<code>Rd = Rn &amp; Operand</code></p>
+</blockquote>
+<blockquote>
+<p><code>ORR</code>表示<strong>按位或运算</strong>，基本语法为<code>ORR Rd, Rn, Operand</code>，表示<code>Rd = Rn | Operand</code></p>
+</blockquote>
+<blockquote>
+<p><code>EOR</code>表示<strong>按位异或运算</strong>，基本语法为<code>EOR Rd, Rn, Operand</code>，表示<code>Rd = Rn ^ Operand</code></p>
+</blockquote>
+<blockquote>
+<p><code>BIC</code>表示<strong>按位清除指定比特</strong>，基本语法为<code>BIC Rd, Rn, Operand</code>，表示<code>Rd = Rn &amp; ~Operand</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 移位与旋转指令常用于乘除2的幂、位操作和地址计算，也可与其他指令组合使用</div>
+<blockquote>
+<p><code>LSL</code>表示<strong>逻辑左移</strong>，基本语法为<code>LSL Rd, Rn, Operand</code>，表示<code>Rd = Rn &lt;&lt; Operand</code>，低位补<code>0</code></p>
+</blockquote>
+<blockquote>
+<p><code>LSR</code>表示<strong>逻辑右移</strong>，基本语法为<code>LSR Rd, Rn, Operand</code>，表示<code>Rd = Rn &gt;&gt; Operand</code>，高位补<code>0</code></p>
+</blockquote>
+<blockquote>
+<p><code>ASR</code>表示<strong>算术右移</strong>，基本语法为<code>ASR Rd, Rn, Operand</code>，右移时<strong>高位补符号位</strong></p>
+</blockquote>
+<blockquote>
+<p><code>ROR</code>表示<strong>循环右移</strong>，基本语法为<code>ROR Rd, Rn, Operand</code>，<strong>移出的低位重新进入高位</strong></p>
+</blockquote>
+<blockquote>
+<p><code>ADD R0, R1, R2, LSL #2</code>表示<code>R0 = R1 + (R2 &lt;&lt; 2)</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> ADD/SUB/MUL的普通形式只保留32位运算结果，更宽的整数运算需要配合ADC/SBC或长乘法指令</div>
+<blockquote>
+<p><code>ADC</code>表示<strong>带进位加法</strong>，基本语法为<code>ADC Rd, Rn, Operand</code>，表示<code>Rd = Rn + Operand + C</code></p>
+</blockquote>
+<blockquote>
+<p><code>SBC</code>表示<strong>带借位减法</strong>，基本语法为<code>SBC Rd, Rn, Operand</code>，表示<code>Rd = Rn - Operand - (1-C)</code></p>
+</blockquote>
+<blockquote>
+<p><code>UMULL</code>表示<strong>无符号长乘法</strong>，基本语法为<code>UMULL RdLo, RdHi, Rn, Rm</code>，表示<code>{RdHi, RdLo} = Rn × Rm</code></p>
+</blockquote>
+<blockquote>
+<p><code>SMULL</code>表示<strong>有符号长乘法</strong>，基本语法为<code>SMULL RdLo, RdHi, Rn, Rm</code>，表示<code>{RdHi, RdLo} = Rn × Rm</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 上述指令都只会改变目标寄存器，如果需要更新N/Z/C/V条件标志还需要添加S后缀</div>
+<p><strong>③比较测试</strong></p>
+<blockquote>
+<p><strong>概述</strong>：主要用于<strong>比较或测试数据</strong>并更新<code>N/Z/C/V</code>等条件标志位，常用指令有<code>CMP</code>、<code>CMN</code>、<code>TST</code>和<code>TEQ</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 比较测试指令通常不保存运算结果，只会更新条件标志位，供后续条件执行和分支判断使用</div>
+<blockquote>
+<p><code>CMP</code>用于<strong>比较两个数的大小</strong>，基本语法为<code>CMP Rn, Operand</code>，内部执行<code>Rn - Operand</code>并更新条件标志</p>
+</blockquote>
+<blockquote>
+<p><code>CMN</code>用于<strong>比较负值</strong>，基本语法为<code>CMN Rn, Operand</code>，内部执行<code>Rn + Operand</code>并更新条件标志</p>
+</blockquote>
+<blockquote>
+<p><code>TST</code>用于<strong>按位测试</strong>，基本语法为<code>TST Rn, Operand</code>，内部执行<code>Rn &amp; Operand</code>并更新条件标志</p>
+</blockquote>
+<blockquote>
+<p><code>TEQ</code>用于<strong>按位相等测试</strong>，基本语法为<code>TEQ Rn, Operand</code>，内部执行<code>Rn ^ Operand</code>并更新条件标志</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 条件标志位负责记录运算结果状态，条件码则根据这些状态决定某条指令是否执行</div>
+<blockquote>
+<p><code>N</code>表示结果的<strong>符号状态</strong>，<strong>结果最高位</strong>为<code>1</code>时置位，即<code>32</code>位结果的<code>bit31</code>为<code>1</code>时<code>N = 1</code></p>
+</blockquote>
+<blockquote>
+<p><code>Z</code>表示结果的<strong>零状态</strong>，当运算结果<strong>全部</strong>为<code>0</code>时置位，即结果为<code>0</code>时<code>Z = 1</code></p>
+</blockquote>
+<blockquote>
+<p><code>C</code>表示<strong>进位/无借位状态</strong>，当<strong>加法产生最高位进位</strong>或者<strong>减法未发生借位时</strong><code>Z = 1</code></p>
+</blockquote>
+<blockquote>
+<p><code>V</code>表示<strong>有符号溢出状态</strong>，当<strong>有符号运算结果超出当前位宽可表示范围</strong>时<code>V = 1</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 条件标志仅在特定指令执行时更新，并保持到下一次被改写，使用条件码前应确认其来源</div>
+<pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 1.数值比较</span>
+CMP <span class="token register variable">R0</span>, <span class="token register variable">R1</span>            <span class="token comment">; 计算R0-R1并更新条件标志，不保存结果</span>
+CMP <span class="token register variable">R0</span>, #<span class="token number">10</span>           <span class="token comment">; 将R0与10比较，内部计算R0-10</span>
+CMN <span class="token register variable">R0</span>, <span class="token register variable">R1</span>            <span class="token comment">; 计算R0+R1并更新条件标志，不保存结果</span>
+CMN <span class="token register variable">R0</span>, #<span class="token number">1</span>            <span class="token comment">; 计算R0+1并更新条件标志</span>
+
+<span class="token comment">; 2.位状态测试</span>
+TST <span class="token register variable">R0</span>, #<span class="token number">0x01</span>         <span class="token comment">; 计算R0 &amp; 0x01，测试bit0是否为1</span>
+TST <span class="token register variable">R0</span>, <span class="token register variable">R1</span>            <span class="token comment">; 计算R0 &amp; R1，并根据结果更新条件标志</span>
+TEQ <span class="token register variable">R0</span>, <span class="token register variable">R1</span>            <span class="token comment">; 计算R0 ^ R1，相等时结果为0并使Z=1</span>
+TEQ <span class="token register variable">R0</span>, #<span class="token number">0xFF</span>         <span class="token comment">; 计算R0 ^ 0xFF，并根据结果更新条件标志</span>
+
+<span class="token comment">; 3.条件标志</span>
+CMP <span class="token register variable">R0</span>, <span class="token register variable">R1</span>            <span class="token comment">; R0=R1时Z=1，R0-R1结果最高位为1时N=1</span>
+CMP <span class="token register variable">R0</span>, #<span class="token number">0</span>            <span class="token comment">; 常用于判断R0是否等于0、是否为负数</span>
+TST <span class="token register variable">R0</span>, #<span class="token number">0x08</span>         <span class="token comment">; bit3为0时结果为0，Z=1</span>
+TEQ <span class="token register variable">R0</span>, <span class="token register variable">R1</span>            <span class="token comment">; R0与R1完全相同时异或结果为0，Z=1</span>
+
+<span class="token comment">; 4.条件码与标志判断</span>
+BEQ label             <span class="token comment">; Equal，相等，Z=1时跳转</span>
+BNE label             <span class="token comment">; Not Equal，不相等，Z=0时跳转</span>
+BCS label             <span class="token comment">; Carry Set，无符号大于等于，C=1时跳转</span>
+BCC label             <span class="token comment">; Carry Clear，无符号小于，C=0时跳转</span>
+BHI label             <span class="token comment">; Higher，无符号大于，C=1且Z=0时跳转</span>
+BLS label             <span class="token comment">; Lower or Same，无符号小于等于，C=0或Z=1时跳转</span>
+BMI label             <span class="token comment">; Minus，结果为负，N=1时跳转</span>
+BPL label             <span class="token comment">; Plus，结果非负，N=0时跳转</span>
+BVS label             <span class="token comment">; Overflow Set，发生有符号溢出，V=1时跳转</span>
+BVC label             <span class="token comment">; Overflow Clear，未发生有符号溢出，V=0时跳转</span>
+BGE label             <span class="token comment">; Greater or Equal，有符号大于等于，N=V时跳转</span>
+BLT label             <span class="token comment">; Less Than，有符号小于，N≠V时跳转</span>
+BGT label             <span class="token comment">; Greater Than，有符号大于，Z=0且N=V时跳转</span>
+BLE label             <span class="token comment">; Less or Equal，有符号小于等于，Z=1或N≠V时跳转</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>④分支跳转</strong></p>
+<blockquote>
+<p><strong>概述</strong>：主要用于<strong>改变程序执行流</strong>，实现<strong>条件判断</strong>、<strong>循环</strong>及<strong>函数调用</strong>，常用指令有<code>B</code>、<code>BL</code>、<code>BX</code>和<code>BLX</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> B表示分支跳转，L表示保存返回地址到LR用于支持返回，X表示支持A32/T32指令状态切换</div>
+<blockquote>
+<p><code>B</code>的基本语法为<code>B label</code>，表示跳转到<code>label</code>处继续执行</p>
+</blockquote>
+<blockquote>
+<p><code>BL</code>的基本语法为<code>BL label</code>，在跳转到<code>label</code>的同时将<strong>返回地址</strong>保存到<code>LR</code></p>
+</blockquote>
+<blockquote>
+<p><code>BX</code>的基本语法为<code>BX Rm</code>，表示跳转到<code>Rm</code><strong>保存的地址</strong>，并根据<strong>目标地址</strong>决定使用<code>A32/T32</code>状态</p>
+</blockquote>
+<blockquote>
+<p><code>BLX</code>的基本语法为<code>BLX Rm/label</code>，在跳转并支持<code>A32/T32</code>状态切换的同时，将<strong>返回地址</strong>保存到<code>LR</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 跳转分为相对跳转和绝对跳转，前者通过PC + offset计算目标地址，后者使用完整地址目标</div>
+<blockquote>
+<p><code>B/BL/BLX label</code>的机器码通常保存的不是<code>label</code>的<strong>完整地址</strong>，而是<strong>目标相对当前<code>PC</code>的偏移量</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 相对跳转不依赖代码的绝对位置，但跳转范围受偏移量编码限制，目标过远时需要借助中转跳转等方式</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 绝对跳转依赖完整目标地址，若代码重定位失败会导致跳转到错误或非法地址，引发异常甚至程序崩溃</div>
+<pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 1.直接跳转</span>
+B label               <span class="token comment">; 无条件跳转到label继续执行</span>
+B loop                <span class="token comment">; 跳转到loop，常用于循环</span>
+B end                 <span class="token comment">; 跳转到end，常用于跳过某段代码</span>
+
+<span class="token comment">; 2.条件跳转</span>
+BEQ label             <span class="token comment">; Z=1时跳转，表示相等</span>
+BNE label             <span class="token comment">; Z=0时跳转，表示不相等</span>
+BGT label             <span class="token comment">; 有符号大于时跳转，Z=0且N=V</span>
+BLT label             <span class="token comment">; 有符号小于时跳转，N≠V</span>
+BGE label             <span class="token comment">; 有符号大于等于时跳转，N=V</span>
+BLE label             <span class="token comment">; 有符号小于等于时跳转，Z=1或N≠V</span>
+BHI label             <span class="token comment">; 无符号大于时跳转，C=1且Z=0</span>
+BLO label             <span class="token comment">; 无符号小于时跳转，C=0</span>
+
+<span class="token comment">; 3.函数调用</span>
+<span class="token register variable">BL</span> function           <span class="token comment">; 跳转到function，同时将返回地址保存到LR</span>
+<span class="token register variable">BL</span> printf             <span class="token comment">; 调用已知函数printf，返回地址保存到LR</span>
+<span class="token register variable">BX</span> LR                 <span class="token comment">; 跳转到LR保存的返回地址，常用于函数返回</span>
+
+<span class="token comment">; 4.寄存器间接跳转</span>
+<span class="token register variable">BX</span> <span class="token register variable">R0</span>                 <span class="token comment">; 跳转到R0保存的地址，并根据目标地址确定A32/T32状态</span>
+<span class="token register variable">BX</span> LR                 <span class="token comment">; 跳转到LR保存的地址，常用于函数返回</span>
+BLX <span class="token register variable">R0</span>                <span class="token comment">; 调用R0指向的函数，返回地址保存到LR并支持状态切换</span>
+BLX <span class="token register variable">R3</span>                <span class="token comment">; 调用R3保存地址对应的函数，常用于函数指针调用</span>
+
+<span class="token comment">; 5.跨状态调用</span>
+BLX function          <span class="token comment">; 相对调用function，保存返回地址并切换A32/T32状态，需架构支持</span>
+BLX <span class="token register variable">R0</span>                <span class="token comment">; 间接调用R0中的目标，保存返回地址并按目标地址切换状态</span>
+
+<span class="token comment">; 6.相对与间接跳转</span>
+B label               <span class="token comment">; PC相对跳转，机器码保存目标相对当前PC的偏移量</span>
+<span class="token register variable">BL</span> function           <span class="token comment">; PC相对函数调用，同时将返回地址保存到LR</span>
+BLX function          <span class="token comment">; PC相对调用并支持状态切换，需相应A32/T32架构支持</span>
+<span class="token register variable">BX</span> <span class="token register variable">R0</span>                 <span class="token comment">; 寄存器间接跳转，完整目标地址由R0提供</span>
+BLX <span class="token register variable">R0</span>                <span class="token comment">; 寄存器间接调用，目标地址由R0提供并保存返回地址</span>
+
+<span class="token comment">; 7.典型循环</span>
+<span class="token label function">loop:</span>
+SUBS <span class="token register variable">R0</span>, <span class="token register variable">R0</span>, #<span class="token number">1</span>       <span class="token comment">; R0 = R0-1，同时更新条件标志</span>
+BNE loop              <span class="token comment">; Z=0时返回loop，直到R0减为0</span>
+
+<span class="token comment">; 8.典型条件判断</span>
+CMP <span class="token register variable">R0</span>, <span class="token register variable">R1</span>            <span class="token comment">; 比较R0和R1，更新条件标志</span>
+BEQ equal             <span class="token comment">; R0=R1时跳转到equal</span>
+BGT greater           <span class="token comment">; R0&gt;R1时按有符号比较跳转到greater</span>
+BLT less              <span class="token comment">; R0&lt;R1时按有符号比较跳转到less</span>
+
+<span class="token comment">; 9.典型函数调用与返回</span>
+PUSH {<span class="token register variable">R4</span>, LR}         <span class="token comment">; 保存R4和当前函数返回地址</span>
+<span class="token register variable">BL</span> function           <span class="token comment">; 调用function，新返回地址写入LR</span>
+POP {<span class="token register variable">R4</span>, LR}          <span class="token comment">; 恢复R4和原函数返回地址</span>
+<span class="token register variable">BX</span> LR                 <span class="token comment">; 跳转到LR，返回上一级调用者</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>⑤系统指令</strong></p>
+<blockquote>
+<p><strong>概述</strong>：主要用于<strong>控制异常中断</strong>、<strong>低功耗等待</strong>及<strong>同步操作</strong>，常用指令有<code>SVC</code>、<code>WFI</code>和<code>DMB</code>等</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 系统指令主要用于处理器运行状态和系统级行为控制，其可用性和权限要求与具体ARM架构及Profile有关</div>
+<blockquote>
+<p><code>SVC</code>用于<strong>软件触发异常</strong>，基本语法为<code>SVC #imm</code>，用于主动进入<code>SVC</code><strong>异常处理程序</strong>，常用于<strong>系统调用</strong></p>
+</blockquote>
+<blockquote>
+<p><code>CPSID/CPSIE</code>用于<strong>禁止/使能指定异常</strong>，常见语法为<code>CPSID i</code>，用于<strong>禁止/使能</strong><code>IRQ</code>响应</p>
+</blockquote>
+<blockquote>
+<p><code>WFI</code>基本语法为<code>WFI</code>，用于让处理器<strong>停止执行普通指令</strong>，直到<strong>符合条件的中断或异常</strong>唤醒处理器</p>
+</blockquote>
+<blockquote>
+<p><code>WFE</code>和<code>WFI</code>类似，但是等待的是<strong>事件</strong>，事件可由<code>SEV/SEVL</code>等机制产生</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 屏障用于约束处理器的乱序和缓冲行为，保证多核、内存及外设操作按预期顺序生效</div>
+<blockquote>
+<p><code>DMB</code>表示<strong>数据内存屏障</strong>，用于约束屏障前后<strong>内存访问的顺序</strong>，保证其按照规定顺序被观察到</p>
+</blockquote>
+<blockquote>
+<p><code>DSB</code>表示<strong>数据同步屏障</strong>，用于<strong>等待屏障前的相关操作完成</strong>，再允许后续指令继续执行</p>
+</blockquote>
+<blockquote>
+<p><code>ISB</code>表示<strong>指令同步屏障</strong>，表示<strong>清空当前流水线中的后续指令</strong>，需要<strong>重新取指、译码和执行</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 屏障会限制处理器的乱序执行和并行优化，过度使用会降低性能，应只在确有同步需求时使用</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 部分系统指令只能在特权级下执行，权限不足时可能触发异常或执行失败</div>
+<pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 1.软件异常</span>
+SVC #<span class="token number">0</span>                 <span class="token comment">; 触发SVC异常，立即数0作为软件调用标识</span>
+SVC #<span class="token number">1</span>                 <span class="token comment">; 触发SVC异常，立即数1作为软件调用标识</span>
+
+<span class="token comment">; 2.异常中断控制</span>
+CPSID i                <span class="token comment">; 禁止IRQ响应，常用于进入需要避免中断干扰的临界区</span>
+CPSIE i                <span class="token comment">; 使能IRQ响应，常用于退出临界区并恢复中断</span>
+
+<span class="token comment">; 3.等待与唤醒</span>
+WFI                    <span class="token comment">; 停止普通指令执行，等待符合条件的中断或异常唤醒</span>
+WFE                    <span class="token comment">; 进入事件等待状态，等待事件到来后继续执行</span>
+SEV                    <span class="token comment">; 产生事件，可用于唤醒处于WFE等待状态的处理器</span>
+
+<span class="token comment">; 4.内存与执行屏障</span>
+DMB SY                 <span class="token comment">; 约束屏障前后的内存访问顺序，常用于多核共享数据和外设访问排序</span>
+DSB SY                 <span class="token comment">; 等待屏障前相关操作完成，常用于外设配置完成后再进行后续关键操作</span>
+ISB SY                 <span class="token comment">; 刷新后续指令流水线，使后续指令按最新处理器执行环境重新取指执行</span>
+
+<span class="token comment">; 5.DMB典型场景：共享数据发布</span>
+STR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>           <span class="token comment">; 先写共享数据</span>
+DMB SY                 <span class="token comment">; 保证共享数据写入先于后续状态标志写入被观察</span>
+STR <span class="token register variable">R2</span>, <span class="token operator">[</span><span class="token register variable">R3</span><span class="token operator">]</span>           <span class="token comment">; 再写状态标志，避免其他处理器先看到标志而读到旧数据</span>
+
+<span class="token comment">; 6.DSB典型场景：进入等待前完成操作</span>
+STR <span class="token register variable">R1</span>, <span class="token operator">[</span><span class="token register variable">R0</span><span class="token operator">]</span>           <span class="token comment">; 先完成外设或内存相关配置</span>
+DSB SY                 <span class="token comment">; 等待此前相关操作达到规定的完成状态</span>
+WFI                    <span class="token comment">; 确认操作完成后再进入中断等待状态</span>
+
+<span class="token comment">; 7.ISB典型场景：执行环境发生变化</span>
+DSB SY                 <span class="token comment">; 先确保此前影响处理器状态的相关操作已经完成</span>
+ISB SY                 <span class="token comment">; 清空后续流水线，使之后指令按新的执行环境重新取指执行</span>
+
+<span class="token comment">; 8.事件等待与通知</span>
+WFE                    <span class="token comment">; 当前处理器进入事件等待状态</span>
+SEV                    <span class="token comment">; 产生事件，通知等待事件的处理器继续执行</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -566,29 +896,28 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2026/08/20/arm-ti-xi-jia-gou-san/">
+                <a href="/2026/08/31/riscv-ti-xi-jia-gou-er/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/20.webp" class="responsive-img" alt="ARM体系架构（三）" loading="lazy" decoding="async">
+                        <img src="/medias/featureimages/16.webp" class="responsive-img" alt="RISC-V体系架构（二）" loading="lazy" decoding="async">
                         
-                        <span class="card-title">ARM体系架构（三）</span>
+                        <span class="card-title">RISC-V体系架构（二）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            A32/T32常用指令
+                            RISC-V 指令编码与执行机制
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-08-20
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-08-31
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -601,12 +930,11 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ARM%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/">
-                        <span class="chip bg-color">ARM体系架构</span>
+                    <a href="/tags/RISC-V%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/">
+                        <span class="chip bg-color">RISC-V体系架构</span>
                     </a>
                     
                 </div>
@@ -631,7 +959,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ARM指令系统
+                            ARM A32/T32/A64 指令系统
                         
                     </div>
                     <div class="publish-info">
@@ -642,8 +970,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84/" class="post-category">
-                                    处理器架构
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
                                 </a>
                             
                             
@@ -767,14 +1095,17 @@
         const expandedClass = 'expanded';
         let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
+        $('#floating-toc-btn .btn-floating').click(function (event) {
+            event.preventDefault();
+            let expanded = $tocAside.hasClass(expandedClass);
+            if (expanded) {
                 $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String(!expanded));
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -940,6 +1271,7 @@ $(function () {
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/effects.js"></script>
     <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
@@ -956,9 +1288,6 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
@@ -968,27 +1297,65 @@ $(function () {
 
 	
     
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
-    
-
-    
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
-    
+    <script>
+        window.MateryEffects.init({
+            effects: [
+                {
+                    name: 'clicklove',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/others/clicklove.js",
+                    options: { maxHearts: 32 }
+                },
+                {
+                    name: 'canvasNest',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/canvas-nest.js",
+                    options: {
+                        color: "0,0,255",
+                        opacity: 0.7,
+                        zIndex: -1,
+                        count: 99,
+                        fps: 30
+                    }
+                },
+                {
+                    name: 'ribbon',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon.min.js",
+                    options: {
+                        size: 150,
+                        alpha: 0.6,
+                        zIndex: -1,
+                        clickChange: true
+                    }
+                },
+                {
+                    name: 'ribbonDynamic',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon-dynamic.js",
+                    options: { fps: 30 }
+                },
+                {
+                    name: 'cursor',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/js/cursor.js",
+                    options: { maxParticles: 80 }
+                }
+            ],
+            typed: window.materyTypedConfig || null,
+            live2d: {"enabled":true,"src":"/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05","options":{"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false}}
+        });
+    </script>
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-<script src="/js/cursor.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script>
+
         <style>
             [bg-lazy] {
                 background-image: none !important;

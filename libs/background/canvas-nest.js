@@ -1,92 +1,137 @@
-! function () {
-    var userAgentInfo = navigator.userAgent;
-    var Agents = ["iPad", "iPhone", "Android",
-        "SymbianOS", "Windows Phone",
-        "iPod", "webOS", "BlackBerry", "IEMobile"
-    ];
-    for (var v = 0; v < Agents.length; v++) {
-        if (userAgentInfo.indexOf(Agents[v]) > 0) {
-            return;
+(function (window, document) {
+    'use strict';
+
+    window.MateryEffects.define('canvasNest', function (options) {
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        var requestId = null;
+        var running = false;
+        var listening = false;
+        var lastFrame = 0;
+        var frameInterval = 1000 / (options.fps || 30);
+        var width = 0;
+        var height = 0;
+        var points = [];
+        var pointer = {x: null, y: null, max: 20000};
+        var count = Number(options.count) || 99;
+        var color = options.color || '0,0,0';
+
+        canvas.className = 'canvas-nest-effect';
+        canvas.style.cssText = 'position:fixed;top:0;left:0;z-index:' + (options.zIndex == null ? -1 : options.zIndex) + ';opacity:' + (options.opacity == null ? 0.5 : options.opacity) + ';pointer-events:none';
+
+        function resize() {
+            width = canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            height = canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
         }
-    }
 
-    function o(w, v, i) {
-        return w.getAttribute(v) || i
-    }
-
-    function j(i) {
-        return document.getElementsByTagName(i)
-    }
-
-    function l() {
-        var i = j("script"),
-            w = i.length,
-            v = i[w - 1];
-        return {
-            l: w,
-            z: o(v, "zIndex", -1),
-            o: o(v, "opacity", 0.5),
-            c: o(v, "color", "0,0,0"),
-            n: o(v, "count", 99)
-        }
-    }
-
-    function k() {
-        r = u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth, n = u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-    }
-
-    function b() {
-        e.clearRect(0, 0, r, n);
-        var w = [f].concat(t);
-        var x, v, A, B, z, y;
-        t.forEach(function (i) {
-            i.x += i.xa, i.y += i.ya, i.xa *= i.x > r || i.x < 0 ? -1 : 1, i.ya *= i.y > n || i.y < 0 ? -1 : 1, e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1);
-            for (v = 0; v < w.length; v++) {
-                x = w[v];
-                if (i !== x && null !== x.x && null !== x.y) {
-                    B = i.x - x.x, z = i.y - x.y, y = B * B + z * z;
-                    y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")", e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke())
-                }
+        function createPoints() {
+            points = [];
+            for (var i = 0; i < count; i++) {
+                points.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    xa: 2 * Math.random() - 1,
+                    ya: 2 * Math.random() - 1,
+                    max: 6000
+                });
             }
-            w.splice(w.indexOf(i), 1)
-        }), m(b)
-    }
-    var u = document.createElement("canvas"),
-        s = l(),
-        c = "c_n" + s.l,
-        e = u.getContext("2d"),
-        r, n, m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
-            window.setTimeout(i, 1000 / 45)
-        },
-        a = Math.random,
-        f = {
-            x: null,
-            y: null,
-            max: 20000
+        }
+
+        function draw(timestamp) {
+            if (!running) return;
+            requestId = window.requestAnimationFrame(draw);
+            if (timestamp - lastFrame < frameInterval) return;
+            var step = lastFrame ? Math.min((timestamp - lastFrame) / (1000 / 60), 2) : 1;
+            lastFrame = timestamp;
+            context.clearRect(0, 0, width, height);
+            var candidates = [pointer].concat(points);
+
+            points.forEach(function (point) {
+                point.x += point.xa * step;
+                point.y += point.ya * step;
+                if (point.x > width || point.x < 0) point.xa *= -1;
+                if (point.y > height || point.y < 0) point.ya *= -1;
+                context.fillRect(point.x - 0.5, point.y - 0.5, 1, 1);
+
+                for (var i = 0; i < candidates.length; i++) {
+                    var target = candidates[i];
+                    if (point === target || target.x === null || target.y === null) continue;
+                    var dx = point.x - target.x;
+                    var dy = point.y - target.y;
+                    var distance = dx * dx + dy * dy;
+                    if (distance >= target.max) continue;
+                    if (target === pointer && distance >= target.max / 2) {
+                        point.x -= 0.03 * dx * step;
+                        point.y -= 0.03 * dy * step;
+                    }
+                    var opacity = (target.max - distance) / target.max;
+                    context.beginPath();
+                    context.lineWidth = opacity / 2;
+                    context.strokeStyle = 'rgba(' + color + ',' + (opacity + 0.2) + ')';
+                    context.moveTo(point.x, point.y);
+                    context.lineTo(target.x, target.y);
+                    context.stroke();
+                }
+                candidates.splice(candidates.indexOf(point), 1);
+            });
+        }
+
+        function onPointerMove(event) {
+            pointer.x = event.clientX;
+            pointer.y = event.clientY;
+        }
+
+        function clearPointer() {
+            pointer.x = null;
+            pointer.y = null;
+        }
+
+        function addListeners() {
+            if (listening) return;
+            listening = true;
+            window.addEventListener('resize', resize);
+            window.addEventListener('pointermove', onPointerMove, {passive: true});
+            document.addEventListener('pointerleave', clearPointer);
+        }
+
+        function start() {
+            if (!canvas.parentNode) {
+                document.body.appendChild(canvas);
+                resize();
+                createPoints();
+            }
+            addListeners();
+            if (running) return;
+            running = true;
+            lastFrame = 0;
+            requestId = window.requestAnimationFrame(draw);
+        }
+
+        function pause() {
+            running = false;
+            if (requestId !== null) {
+                window.cancelAnimationFrame(requestId);
+                requestId = null;
+            }
+        }
+
+        function destroy() {
+            pause();
+            if (listening) {
+                window.removeEventListener('resize', resize);
+                window.removeEventListener('pointermove', onPointerMove);
+                document.removeEventListener('pointerleave', clearPointer);
+                listening = false;
+            }
+            if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+            points = [];
+        }
+
+        return {
+            start: start,
+            pause: pause,
+            resume: start,
+            destroy: destroy
         };
-    u.id = c;
-    u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o;
-    j("body")[0].appendChild(u);
-    k(), window.onresize = k;
-    window.onmousemove = function (i) {
-        i = i || window.event, f.x = i.clientX, f.y = i.clientY
-    }, window.onmouseout = function () {
-        f.x = null, f.y = null
-    };
-    for (var t = [], p = 0; s.n > p; p++) {
-        var h = a() * r,
-            g = a() * n,
-            q = 2 * a() - 1,
-            d = 2 * a() - 1;
-        t.push({
-            x: h,
-            y: g,
-            xa: q,
-            ya: d,
-            max: 6000
-        })
-    }
-    setTimeout(function () {
-        b()
-    }, 100)
-}();
+    });
+})(window, document);
