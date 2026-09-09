@@ -308,15 +308,6 @@
   </url>
   
   <url>
-    <loc>https://paopaoziye.github.io/contact/index.html</loc>
-    
-    <lastmod>2026-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://paopaoziye.github.io/about/index.html</loc>
     
     <lastmod>2026-07-18</lastmod>
@@ -327,6 +318,15 @@
   
   <url>
     <loc>https://paopaoziye.github.io/categories/index.html</loc>
+    
+    <lastmod>2026-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopaoziye.github.io/contact/index.html</loc>
     
     <lastmod>2026-07-18</lastmod>
     
@@ -376,6 +376,20 @@
   </url>
   
   <url>
+    <loc>https://paopaoziye.github.io/tags/RTOS/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopaoziye.github.io/tags/FreeRTOS/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://paopaoziye.github.io/tags/%E4%B8%B2%E8%A1%8C%E5%8D%8F%E8%AE%AE/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -405,20 +419,6 @@
   
   <url>
     <loc>https://paopaoziye.github.io/tags/%E3%80%8AC%E5%92%8C%E6%8C%87%E9%92%88%E3%80%8B/</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://paopaoziye.github.io/tags/RTOS/</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://paopaoziye.github.io/tags/FreeRTOS/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -474,20 +474,6 @@
   </url>
   
   <url>
-    <loc>https://paopaoziye.github.io/tags/AI/</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://paopaoziye.github.io/tags/Vibe-Coding/</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://paopaoziye.github.io/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -496,6 +482,20 @@
   
   <url>
     <loc>https://paopaoziye.github.io/tags/Uboot/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopaoziye.github.io/tags/AI/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopaoziye.github.io/tags/Vibe-Coding/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -539,6 +539,13 @@
   </url>
   
   <url>
+    <loc>https://paopaoziye.github.io/categories/RTOS/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://paopaoziye.github.io/categories/CAN/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -553,7 +560,7 @@
   </url>
   
   <url>
-    <loc>https://paopaoziye.github.io/categories/RTOS/</loc>
+    <loc>https://paopaoziye.github.io/categories/BootLoader/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -567,7 +574,7 @@
   </url>
   
   <url>
-    <loc>https://paopaoziye.github.io/categories/BootLoader/</loc>
+    <loc>https://paopaoziye.github.io/categories/%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -575,13 +582,6 @@
   
   <url>
     <loc>https://paopaoziye.github.io/categories/Modbus/</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://paopaoziye.github.io/categories/%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

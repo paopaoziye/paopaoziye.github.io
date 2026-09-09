@@ -167,17 +167,70 @@ a:focus-visible {
     cursor: pointer;
 }
 
-/* Keep code controls visually identical after using semantic buttons. */
-.code_copy,
-.code-expand {
+/* Keep code controls aligned as a compact toolbar. */
+.code-area {
+    --code-control-size: 28px;
+    --code-control-gap: 8px;
+    --code-control-right: 8px;
+}
+
+.code-area .code_lang,
+.code-area .code_copy,
+.code-area .code-expand,
+.code-area .codecopy_notice {
+    top: 4px;
+    height: var(--code-control-size);
+    line-height: var(--code-control-size);
+    margin: 0;
+    box-sizing: border-box;
+    transform: none;
+}
+
+.code-area .code-expand,
+.code-area .code_copy {
+    width: var(--code-control-size);
+    padding: 0;
+    text-align: center;
+}
+
+.code-area .code-expand {
+    right: var(--code-control-right);
+}
+
+.code-area .code_copy {
+    right: calc(var(--code-control-right) + var(--code-control-size) + var(--code-control-gap));
+}
+
+.code-area .code_lang {
+    right: calc(var(--code-control-right) + (var(--code-control-size) + var(--code-control-gap)) * 2);
+    padding: 0;
+    line-height: var(--code-control-size);
+}
+
+.code-area .codecopy_notice {
+    right: calc(var(--code-control-right) + var(--code-control-size) + var(--code-control-gap));
+    line-height: var(--code-control-size);
+    white-space: nowrap;
+}
+
+.code-area .code_copy,
+.code-area .code-expand {
     appearance: none;
     -webkit-appearance: none;
     border: 0;
-    padding: 0;
     color: inherit;
     background: transparent;
-    font: inherit;
-    line-height: 1;
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+    font-weight: 900;
+}
+
+.code-area .code-expand {
+    transform: rotate(0deg);
+}
+
+.code-area.code-closed .code-expand {
+    transform: rotate(-180deg) !important;
 }
 
 #articleContent pre.language-region-tree,
