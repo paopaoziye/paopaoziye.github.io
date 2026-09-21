@@ -424,19 +424,86 @@
         
 
         
-        <!-- 代码块折行 -->
-        <style type="text/css">
-            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
-        </style>
-        
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="串行协议"><a href="#串行协议" class="headerlink" title="串行协议"></a>串行协议</h1><h2 id="SPI协议"><a href="#SPI协议" class="headerlink" title="SPI协议"></a>SPI协议</h2><h3 id="SPI协议（一）"><a href="#SPI协议（一）" class="headerlink" title="SPI协议（一）"></a>SPI协议（一）</h3><h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h4><p><strong>①简介</strong></p>
+                <h1 id="串行协议"><a href="#串行协议" class="headerlink" title="串行协议"></a>串行协议</h1><h2 id="SPI协议"><a href="#SPI协议" class="headerlink" title="SPI协议"></a>SPI协议</h2><h3 id="SPI协议（一）"><a href="#SPI协议（一）" class="headerlink" title="SPI协议（一）"></a>SPI协议（一）</h3><h4 id="协议简介"><a href="#协议简介" class="headerlink" title="协议简介"></a>协议简介</h4><p><strong>①引言</strong></p>
 <blockquote>
-<p><strong>概述</strong>：</p>
+<p><strong>概述</strong>：也称为<strong>串行外设接口</strong>，是一种常用的<strong>同步全双工串行通信方式</strong>，主要用于<code>MCU</code>与<strong>外围器件</strong>之间的<strong>短距离高速通信</strong></p>
 </blockquote>
-
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 典型SPI通常由SCLK、MOSI、MISO和CS/NSS四根信号线组成，分别用于提供同步时钟、发送数据、接收数据和片选</div>
+<blockquote>
+<p><code>SPI</code>将设备分为<strong>主设备和从设备</strong>，前者负责产生<strong>时钟信号</strong>并控制<strong>片选信号</strong>，后者主要根据前者提供的时钟<strong>完成数据收发</strong></p>
+</blockquote>
+<blockquote>
+<p><code>CS/NSS</code>为片选信号，通常由主机控制且<strong>低电平有效</strong>，主机通过拉低对应<code>CS</code>选择从设备，<strong>通信结束</strong>后再将其拉高</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> SPI结构简单、协议开销较小，支持较高的通信速率和全双工数据传输，适合MCU与高速外设之间进行高效的数据交换</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> SPI缺少统一的设备寻址、错误校验和总线仲裁机制，连接多个从设备时通常需要增加独立片选线，不适合复杂的多节点通信场景</div>
+<p><strong>②帧格式</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>SPI</code>没有<strong>统一固定的帧格式</strong>，一次通信通常由<code>CS</code>有效开始，在<code>SCLK</code>驱动下连续<strong>传输若干位数据</strong>，并在<code>CS</code>失效后结束</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> SPI本身主要规定基本的数据传输时序即时钟极性CPOL、时钟相位CPHA、传输顺序和数据宽度，保证主从设备安全完成数据交互</div>
+<blockquote>
+<p><strong>时钟极性</strong>规定<code>SCLK</code>在<strong>空闲状态</strong>下保持高电平还是低电平，<strong>时钟相位</strong>规定数据在<code>SCLK</code>的第一个还是第二个<strong>有效边沿</strong>进行采样</p>
+</blockquote>
+<blockquote>
+<p><strong>传输顺序</strong>规定数据按<code>MSB First</code>还是<code>LSB First</code>逐位发送，<strong>数据宽度</strong>规定一次基本传输包含的<strong>有效数据位数</strong>，如<code>8 bit</code>或<code>16 bit</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> SPI对帧内容限制较少，不同外设可以根据自身需求灵活定义命令、地址和数据等字段，具体结合对应的数据手册确定实际通信格式</div>
+<blockquote>
+<p>以<code>W25Q64</code>存储器为例，其<strong>读数据指令</strong>通常为<code>03H:[24位地址]:[数据]</code>，其中<code>03H</code>为读操作码</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 主从设备的CPOL、CPHA、传输顺序和数据宽度必须保持一致，否则可能导致数据错位或通信异常</div>
+<p><strong>③收发流程</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>SPI</code>采用<strong>全双工同步通信</strong>，主机在产生<code>SCLK</code>的同时，通过<code>MOSI</code><strong>发送数据</strong>，并通过<code>MISO</code><strong>同步接收</strong>从机返回的数据</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> SPI收发本质上是主从设备的移位寄存器随SCLK同步移位，每个时钟周期同时完成一位数据的发送和接收</div>
+<blockquote>
+<p><code>SPI</code>收发流程为<code>CPU -&gt; TXDR -&gt; TX FIFO -&gt; TX Shift Register -&gt; MOSI</code>和<code>MISO -&gt; RX Shift Register -&gt; RX FIFO -&gt; RXDR -&gt; CPU</code></p>
+</blockquote>
+<blockquote>
+<p><code>SPI</code>收发过程中，可通过<code>TXE</code>、<code>TXP</code>、<code>RXNE</code>、<code>RXP</code>、<code>RXWNE</code>和<code>BSY/EOT</code>等标志位判断<strong>收发缓冲区状态</strong>及<strong>传输是否完成</strong></p>
+</blockquote>
+<blockquote>
+<p><code>TXE</code>表示<strong>发送数据寄存器为空</strong>，<code>TXP</code>表示<code>TX FIFO</code>中存在<strong>可写空间</strong>，<code>RXNE</code>表示<strong>接收数据寄存器非空</strong></p>
+</blockquote>
+<blockquote>
+<p><code>RXWNE</code>表示<code>RX FIFO</code>中至少存在<strong>一个完整的数据字</strong>，<code>BSY</code>表示<code>SPI</code>当前仍处于<strong>数据传输状态</strong>，<code>EOT</code>表示<strong>本次配置的数据传输结束</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> TX/RX FIFO可在CPU与移位寄存器之间缓存数据，减少CPU频繁访问数据寄存器的开销，但是不是所有SPI都支持TX/RX FIFO</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> SPI接收数据时仍需要主机持续产生SCLK，因此纯接收场景下通常也需要发送Dummy Data以提供传输时钟</div>
+<p><strong>④错误标志</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>SPI</code>在通信过程中可通过<code>OVR</code>、<code>UDR</code>和<code>MODF</code>等错误标志判断是否发生<strong>接收溢出</strong>、<strong>发送下溢</strong>和<strong>模式冲突</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 常见SPI错误主要集中在收发缓冲、主从模式和总线状态等方面，可结合对应标志位进行定位</div>
+<blockquote>
+<p><code>OVR</code>：表示<strong>旧的接收数据尚未及时读取</strong>时新的数据再次到达即发生<strong>接收溢出</strong>，通常由<code>CPU</code><strong>处理不及时</strong>或<strong>接收速率过高</strong>引起</p>
+</blockquote>
+<blockquote>
+<p><code>UDR</code>：表示需要发送数据时发送端<strong>未及时提供新的数据</strong>即发生<strong>发送下溢</strong>，通常由<strong>数据准备不及时</strong>或<strong>从机响应速度不足</strong>引起</p>
+</blockquote>
+<blockquote>
+<p><code>MODF</code>：表示<code>SPI</code>发生<strong>主从模式冲突</strong>，通常与主机模式下<code>NSS/CS</code><strong>状态异常</strong>或<strong>多个主设备同时驱动总线</strong>有关</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> SPI协议本身不规定CRC校验，但部分SPI控制器支持硬件CRC功能，启用后可通过CRCERR等标志判断是否发生CRC校验错误</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 不同SPI控制器支持的错误类型并不完全一致，部分标志仅在特定工作模式或功能开启后才会产生</div>
+<p><strong>⑤功能扩展</strong></p>
+<blockquote>
+<p><strong>概述</strong>：为了<strong>减少引脚数量或提高数据吞吐率</strong>，<code>SPI</code>又发展出了<code>3-Wire SPI</code>、<code>Dual SPI</code>、<code>Quad SPI</code>和<code>OctoSPI</code>等扩展形式</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 3-Wire SPI主要用于减少引脚占用，而Dual/Quad/OctoSPI主要通过增加并行数据线提高单位时钟周期的数据传输能力简洁一点</div>
+<blockquote>
+<p><code>3-Wire SPI</code>：将<code>MOSI</code>和<code>MISO</code>合并为一根<strong>双向数据线</strong><code>SDIO</code>，以减少引脚占用，变为<strong>半双工通信</strong></p>
+</blockquote>
+<blockquote>
+<p><code>Dual SPI</code>、<code>Quad SPI</code>和<code>OctoSPI</code>分别使用<code>2</code>、<code>4</code>、<code>8</code>根数据线<strong>并行传输</strong>，以提高<strong>单位时钟周期的数据传输能力</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Dual/Quad/OctoSPI可在指令、地址和数据阶段使用不同数量的数据线，并可结合DDR/DTR进一步提高传输带宽</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 3-Wire SPI、Dual SPI、Quad SPI和OctoSPI并非所有设备都支持，具体的数据线切换、Dummy Cycle和时钟要求需参考芯片手册</div>
                 
             </div>
             <hr/>
@@ -560,7 +627,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            I2C 总线组成、信号线与通信过程
+                            IIC主机协议基础与收发流程
                         
                     </div>
                     <div class="publish-info">
@@ -582,8 +649,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%B8%B2%E8%A1%8C%E5%8D%8F%E8%AE%AE/">
-                        <span class="chip bg-color">串行协议</span>
+                    <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">通信协议</span>
                     </a>
                     
                 </div>

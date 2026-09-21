@@ -424,11 +424,6 @@
         
 
         
-        <!-- 代码块折行 -->
-        <style type="text/css">
-            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
-        </style>
-        
 
         <div class="card-content article-card-content">
             <div id="articleContent">
@@ -436,26 +431,26 @@
 <blockquote>
 <p><strong>概述</strong>：主要用于在<strong>立即数</strong>、<strong>寄存器</strong>和<strong>内存</strong>之间传递数据，常用指令有<code>MOV</code>、<code>ADR</code>、<code>LDR</code>、<code>STR</code>、<code>PUSH</code>和<code>POP</code>等</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ARM采用典型的Load/Store架构，运算主要在寄存器之间进行，内存数据需先装入寄存器再进行运算</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ARM采用典型的Load/Store架构，处理器的算数和逻辑运算通常只作用于寄存器操作数，内存数据需先装入寄存器再进行运算</div>
 <blockquote>
-<p><code>MOV</code>主要用于<strong>给寄存器赋值</strong>，基本语法为<code>MOV Rd, Operand</code>，表示<code>Rd = Operand</code></p>
+<p><code>MOV</code>主要用于<strong>寄存器之间</strong>或<strong>立即数到寄存器</strong>的数据传递，基本语法为<code>MOV Rd, Operand</code>，表示<code>Rd = Operand</code></p>
 </blockquote>
 <blockquote>
-<p><code>ADR</code>主要用于<strong>给寄存器赋予某个标签对应的地址</strong>，基本语法为<code>ADR Rd, label</code>，表示<code>Rd = &amp;label</code></p>
+<p><code>ADR</code>主要用于<strong>获取标签对应地址</strong>，常用于访问<strong>代码段或数据段</strong>中的静态对象，基本语法为<code>ADR Rd, label</code>，表示<code>Rd = &amp;label</code></p>
 </blockquote>
 <blockquote>
-<p><code>LDR</code>主要用于<strong>从内存中读取数据到寄存器</strong>，基本语法为<code>LDR Rd, [Rn]</code>，表示<code>Rd = Memory[Rn]</code></p>
+<p><code>LDR</code>主要用于<strong>从内存中加载数据到寄存器</strong>，是访问<strong>内存数据</strong>的主要方式，基本语法为<code>LDR Rd, [Rn]</code>，表示<code>Rd = Memory[Rn]</code></p>
 </blockquote>
 <blockquote>
-<p><code>STR</code>主要用于<strong>将寄存器中的数据写入内存</strong>，基本语法为<code>STR Rd, [Rn]</code>，表示<code>Memory[Rn] = Rd</code></p>
+<p><code>STR</code>主要用于<strong>将寄存器中的数据写入内存</strong>，从而<strong>保存计算结果</strong>或<strong>修改内存数据</strong>，基本语法为<code>STR Rd, [Rn]</code>，表示<code>Memory[Rn] = Rd</code></p>
 </blockquote>
 <blockquote>
-<p><code>PUSH</code>主要用于<strong>将一个或多个寄存器的数据压入栈中</strong>，基本语法为<code>PUSH {register_list}</code></p>
+<p><code>PUSH</code>主要用于<strong>将一个或多个寄存器的数据压入栈中</strong>，从而<strong>保存寄存器现场</strong>，基本语法为<code>PUSH {register_list}</code></p>
 </blockquote>
 <blockquote>
-<p><code>POP</code>主要用于<strong>从栈中恢复一个或多个寄存器的数据</strong>，基本语法为<code>POP {register_list}</code></p>
+<p><code>POP</code>主要用于<strong>从栈中取出保存的数据并写回指定寄存器</strong>，常用于<strong>函数返回</strong>或<strong>恢复执行环境</strong>，基本语法为<code>POP {register_list}</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> LDM/STM用于在连续内存与多个寄存器之间批量传送数据，并通过IA/IB/DA/DB指定地址变化方式</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> LDM/STM用于在连续内存与多个寄存器之间进行批量数据传输，并通过IA/IB/DA/DB指定地址变化方式，提高传输效率</div>
 <blockquote>
 <p><code>LDM</code>主要用于<strong>从连续内存中批量读取数据到多个寄存器</strong>，基本语法为<code>LDM Rn{!}, {register_list}</code></p>
 </blockquote>
@@ -463,25 +458,25 @@
 <p><code>STM</code>主要用于<strong>将多个寄存器的数据批量写入连续内存</strong>，基本语法为<code>STM Rn{!}, {register_list}</code></p>
 </blockquote>
 <blockquote>
-<p><code>!</code>表示<strong>基址回写</strong>，即批量访存结束后，把<strong>最终计算得到的地址</strong>重新写回<strong>基址寄存器</strong><code>Rn</code></p>
+<p><code>!</code>表示<strong>基址回写</strong>，表示批量传输完成后，把<strong>最终计算得到的地址</strong>重新写回<strong>基址寄存器</strong><code>Rn</code>，常用于<strong>数组遍历</strong>和<strong>栈指针维护</strong></p>
 </blockquote>
 <blockquote>
-<p><code>I/D</code>表示<strong>地址递增/减</strong>，<code>A/B</code>表示<strong>访问后/前变化</strong>，缺省采用<code>IA</code>即<strong>先访问随后<code>Rn</code>递增</strong></p>
+<p><code>I/D</code>表示<strong>地址变化方向为递增/递减</strong>，<code>A/B</code>表示<strong>地址更新</strong>在<strong>访问后/前</strong>，缺省采用<code>IA</code>方式，即<strong>先访问当前地址随后<code>Rn</code>递增</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> LDR和STR默认读写32位数据，可通过添加B/H指定数据宽度，LDR还可通过SB/SH指定符号扩展</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> LDR和STR默认传输32位数据，可通过添加B/H后缀指定访问的数据宽度，LDR还可通过SB/SH指定读取后的符号扩展方式</div>
 <blockquote>
-<p><code>STRB/STRH r0, [r1]</code>表示把<code>r0</code>的<strong>低</strong><code>8/16</code>位写入内存<code>Memory[r1]</code></p>
-</blockquote>
-<blockquote>
-<p><code>LDRB/LDRH r0, [r1]</code>表示从<code>r1</code>指向的<strong>内存地址</strong>中读取<code>8/16</code>位，并将其<strong>零扩展</strong>为<code>32</code>位后写入整个<code>r0</code></p>
+<p><code>STRB/STRH r0, [r1]</code>表示把寄存器<code>r0</code>的<strong>低</strong><code>8/16</code>位数据写入寄存器<code>r1</code>指定的<strong>内存地址</strong></p>
 </blockquote>
 <blockquote>
-<p><code>LDRSB/LDRSH r0, [r1]</code>表示从<code>r1</code>指向的<strong>内存地址</strong>中读取<code>8/16</code>位，并将其<strong>符号扩展</strong>为<code>32</code>位后写入整个<code>r0</code></p>
+<p><code>LDRB/LDRH r0, [r1]</code>表示从寄存器<code>r1</code>指向的<strong>内存地址</strong>中读取<code>8/16</code>位数据，并将其<strong>零扩展</strong>为<code>32</code>位后写入整个<code>r0</code>寄存器</p>
 </blockquote>
 <blockquote>
-<p><strong>零扩展</strong>表示高位补<code>0</code>，<strong>符号扩展</strong>表示高位补<strong>符号位</strong>，<code>0xFF</code>对应扩展分别为<code>0x000000FF</code>和<code>0xFFFFFFFF</code></p>
+<p><code>LDRSB/LDRSH r0, [r1]</code>表示从寄存器<code>r1</code>指向的<strong>内存地址</strong>中读取<code>8/16</code>位数据，并将其<strong>符号扩展</strong>为<code>32</code>位后写入整个<code>r0</code>寄存器</p>
 </blockquote>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 上述指令主要操作核心寄存器R0-R15，CPSR和SPSR等特殊寄存器需要通过MRS/MSR访问</div>
+<blockquote>
+<p><strong>零扩展</strong>表示将数据高位全部补<code>0</code>，<strong>符号扩展</strong>表示根据<strong>最高有效位</strong>复制填充高位，<code>0xFF</code>对应扩展分别为<code>0x000000FF</code>和<code>0xFFFFFFFF</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 上述数据传输指令主要用于访问通用寄存器R0-R15，CPSR/SPSR等特殊寄存器需要使用MRS/MSR等专用指令进行读取和修改</div>
 <pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 1.寄存器与地址</span>
 MOV <span class="token register variable">R1</span>, <span class="token register variable">R0</span>            <span class="token comment">; R1 = R0</span>
 MOV <span class="token register variable">R1</span>, #<span class="token number">0x10</span>         <span class="token comment">; R1 = 0x10</span>
@@ -527,94 +522,96 @@ STMDB <span class="token register variable">R0</span><span class="token operator
 PUSH {<span class="token register variable">R0</span><span class="token operator">-</span><span class="token register variable">R3</span>, LR}      <span class="token comment">; 将R0-R3和LR压入栈，语义上对应STMDB SP!, {R0-R3, LR}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②数据运算</strong></p>
 <blockquote>
-<p><strong>概述</strong>：主要用于对<strong>寄存器中的数据</strong>进行<strong>算术</strong>、<strong>逻辑</strong>及<strong>移位</strong>处理，常用指令有<code>ADD</code>、<code>SUB</code>、<code>MUL</code>、<code>AND</code>和<code>LSL</code>等</p>
+<p><strong>概述</strong>：主要用于对<strong>寄存器中的数据</strong>进行<strong>算术运算</strong>、<strong>逻辑运算</strong>及<strong>移位操作</strong>，常用指令有<code>ADD</code>、<code>SUB</code>、<code>MUL</code>、<code>AND</code>和<code>LSL</code>等</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ARM数据运算通常以寄存器或立即数为操作数，并可将移位与算术或逻辑运算组合执行</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> ARM数据运算通常以寄存器或立即数作为操作数，并支持将移位操作与算术或逻辑运算结合执行，从而减少额外的数据处理指令</div>
 <blockquote>
-<p><code>ADD</code>表示<strong>加法运算</strong>，基本语法为<code>ADD Rd, Rn, Operand</code>，表示<code>Rd = Rn + Operand</code></p>
-</blockquote>
-<blockquote>
-<p><code>SUB</code>表示<strong>减法运算</strong>，基本语法为<code>SUB Rd, Rn, Operand</code>，表示<code>Rd = Rn - Operand</code></p>
+<p><code>ADD</code>表示<strong>加法运算</strong>，<code>SUB</code>表示<strong>减法运算</strong>，<code>MUL</code>表示<strong>乘法运算</strong>，其中<code>MUL</code>仅保留<strong>乘积结果</strong>的低<code>32</code>位</p>
 </blockquote>
 <blockquote>
-<p><code>MUL</code>表示<strong>乘法运算</strong>，基本语法为<code>MUL Rd, Rn, Rm</code>，表示<code>Rd = Rn × Rm</code>，只保留乘积的低<code>32</code>位</p>
+<p><code>SDIV</code>和<code>UDIV</code>表示<strong>有符号整数除法</strong>和<strong>无符号整数除法</strong>，即<code>SDIV</code>将<strong>最高位作为符号位</strong>，按照<strong>补码</strong>计算，<code>UDIV</code>将<strong>所有位作为数值位</strong></p>
 </blockquote>
 <blockquote>
-<p><code>SDIV/UDIV</code>表示<strong>有符号/无符号整数除法</strong>，基本语法为<code>SDIV/UDIV Rd, Rn, Rm</code>，表示<code>Rd = Rn ÷ Rm</code></p>
+<p><code>AND</code>表示<strong>按位与运算</strong>，<code>ORR</code>表示<strong>按位或运算</strong>，<code>EOR</code>表示<strong>按位异或运算</strong>，<code>BIC</code>表示<strong>按位清除指定比特</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 移位与旋转指令主要用于快速实现乘除2的幂、数据位调整、地址计算以及通信数据解析，并且可以与算术或逻辑指令组合执行</div>
+<blockquote>
+<p><code>LSL</code>表示<strong>逻辑左移</strong>，低位补<code>0</code>，常用于实现<strong>乘以</strong><code>2</code>的幂，<code>LSR</code>表示<strong>逻辑右移</strong>，高位补<code>0</code>，常用于<strong>无符号数据除以</strong><code>2</code>的幂</p>
 </blockquote>
 <blockquote>
-<p><code>AND</code>表示<strong>按位与运算</strong>，基本语法为<code>AND Rd, Rn, Operand</code>，表示<code>Rd = Rn &amp; Operand</code></p>
+<p><code>ASR</code>表示<strong>算术右移</strong>，右移过程中<strong>高位补符号位</strong>，确保负数移动后任保持<strong>正确的符号</strong>，常用于<strong>有符号数据除以</strong><code>2</code>的幂</p>
 </blockquote>
 <blockquote>
-<p><code>ORR</code>表示<strong>按位或运算</strong>，基本语法为<code>ORR Rd, Rn, Operand</code>，表示<code>Rd = Rn | Operand</code></p>
+<p><code>ROR</code>表示<strong>循环右移</strong>，数据右移后<strong>移出的低位重新进入高位</strong>，保持所有<strong>比特信息不变</strong>，常用于<strong>位模式处理</strong>和<strong>密码算法</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> ADD、SUB和MUL等普通数据运算指令只保存32位结果，超过32位的数据计算需要配合ADC、SBC或长乘法指令保存高位结果</div>
+<blockquote>
+<p><code>ADC</code>表示<strong>带进位加法</strong>，<code>SBC</code>表示<strong>带借位减法</strong>，通过引入<strong>进位标志</strong><code>C</code>完成进位和借位运算，实现<strong>高精度多字节加减法</strong></p>
 </blockquote>
 <blockquote>
-<p><code>EOR</code>表示<strong>按位异或运算</strong>，基本语法为<code>EOR Rd, Rn, Operand</code>，表示<code>Rd = Rn ^ Operand</code></p>
+<p><code>UMULL</code>和<code>SMULL</code>表示<strong>无符号长乘法</strong>和<strong>有符号长乘法</strong>，通过<strong>两个寄存器</strong><code>RdHi</code>和<code>RdLo</code>分别保存结果的高<code>32</code>位和低<code>32</code>位</p>
 </blockquote>
-<blockquote>
-<p><code>BIC</code>表示<strong>按位清除指定比特</strong>，基本语法为<code>BIC Rd, Rn, Operand</code>，表示<code>Rd = Rn &amp; ~Operand</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 移位与旋转指令常用于乘除2的幂、位操作和地址计算，也可与其他指令组合使用</div>
-<blockquote>
-<p><code>LSL</code>表示<strong>逻辑左移</strong>，基本语法为<code>LSL Rd, Rn, Operand</code>，表示<code>Rd = Rn &lt;&lt; Operand</code>，低位补<code>0</code></p>
-</blockquote>
-<blockquote>
-<p><code>LSR</code>表示<strong>逻辑右移</strong>，基本语法为<code>LSR Rd, Rn, Operand</code>，表示<code>Rd = Rn &gt;&gt; Operand</code>，高位补<code>0</code></p>
-</blockquote>
-<blockquote>
-<p><code>ASR</code>表示<strong>算术右移</strong>，基本语法为<code>ASR Rd, Rn, Operand</code>，右移时<strong>高位补符号位</strong></p>
-</blockquote>
-<blockquote>
-<p><code>ROR</code>表示<strong>循环右移</strong>，基本语法为<code>ROR Rd, Rn, Operand</code>，<strong>移出的低位重新进入高位</strong></p>
-</blockquote>
-<blockquote>
-<p><code>ADD R0, R1, R2, LSL #2</code>表示<code>R0 = R1 + (R2 &lt;&lt; 2)</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> ADD/SUB/MUL的普通形式只保留32位运算结果，更宽的整数运算需要配合ADC/SBC或长乘法指令</div>
-<blockquote>
-<p><code>ADC</code>表示<strong>带进位加法</strong>，基本语法为<code>ADC Rd, Rn, Operand</code>，表示<code>Rd = Rn + Operand + C</code></p>
-</blockquote>
-<blockquote>
-<p><code>SBC</code>表示<strong>带借位减法</strong>，基本语法为<code>SBC Rd, Rn, Operand</code>，表示<code>Rd = Rn - Operand - (1-C)</code></p>
-</blockquote>
-<blockquote>
-<p><code>UMULL</code>表示<strong>无符号长乘法</strong>，基本语法为<code>UMULL RdLo, RdHi, Rn, Rm</code>，表示<code>{RdHi, RdLo} = Rn × Rm</code></p>
-</blockquote>
-<blockquote>
-<p><code>SMULL</code>表示<strong>有符号长乘法</strong>，基本语法为<code>SMULL RdLo, RdHi, Rn, Rm</code>，表示<code>{RdHi, RdLo} = Rn × Rm</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 上述指令都只会改变目标寄存器，如果需要更新N/Z/C/V条件标志还需要添加S后缀</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 上述数据处理指令默认只修改目标寄存器，并不会自动更新条件标志位，如果需要根据运算结果更新状态标志，需要添加S后缀</div>
+<pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 1.算术运算</span>
+ADD <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>          <span class="token comment">; R0 = R1 + R2，两个寄存器相加</span>
+ADD <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, #<span class="token number">10</span>         <span class="token comment">; R0 = R1 + 10，寄存器与立即数相加</span>
+SUB <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>          <span class="token comment">; R0 = R1 - R2，两个寄存器相减</span>
+SUB <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, #<span class="token number">10</span>         <span class="token comment">; R0 = R1 - 10，寄存器减去立即数</span>
+MUL <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>          <span class="token comment">; R0 = R1 × R2，保留乘积低32位</span>
+SDIV <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>         <span class="token comment">; R0 = R1 ÷ R2，按照有符号整数进行除法</span>
+UDIV <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>         <span class="token comment">; R0 = R1 ÷ R2，按照无符号整数进行除法</span>
+
+<span class="token comment">; 2.逻辑运算</span>
+AND <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>          <span class="token comment">; R0 = R1 &amp; R2，按位与运算，用于提取指定比特</span>
+ORR <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>          <span class="token comment">; R0 = R1 | R2，按位或运算，用于设置指定比特</span>
+EOR <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>          <span class="token comment">; R0 = R1 ^ R2，按位异或运算，用于数据翻转</span>
+BIC <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>          <span class="token comment">; R0 = R1 &amp; ~R2，清除R2中对应位置的比特</span>
+
+<span class="token comment">; 3.移位运算</span>
+LSL <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, #<span class="token number">2</span>          <span class="token comment">; R0 = R1 &lt;&lt; 2，逻辑左移2位，等价于乘以4</span>
+LSR <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, #<span class="token number">2</span>          <span class="token comment">; R0 = R1 &gt;&gt; 2，逻辑右移2位，用于无符号除以4</span>
+ASR <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, #<span class="token number">2</span>          <span class="token comment">; R0 = R1 &gt;&gt; 2，算术右移2位，用于有符号除以4</span>
+ROR <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, #<span class="token number">8</span>          <span class="token comment">; R0 = R1循环右移8位，低位重新进入高位</span>
+
+<span class="token comment">; 4.移位结合运算</span>
+ADD <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>, LSL #<span class="token number">2</span>  <span class="token comment">; R0 = R1 + (R2 &lt;&lt; 2)，先将R2左移2位再执行加法</span>
+
+<span class="token comment">; 5.高精度运算</span>
+ADDS <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>         <span class="token comment">; R0 = R1 + R2，同时更新N/Z/C/V条件标志</span>
+ADC <span class="token register variable">R1</span>, <span class="token register variable">R3</span>, <span class="token register variable">R4</span>          <span class="token comment">; R1 = R3 + R4 + C，利用进位完成多字节加法</span>
+SBC <span class="token register variable">R1</span>, <span class="token register variable">R3</span>, <span class="token register variable">R4</span>          <span class="token comment">; R1 = R3 - R4 - (1-C)，利用进位完成多字节减法</span>
+
+<span class="token comment">; 6.长乘法</span>
+UMULL <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>, <span class="token register variable">R3</span>    <span class="token comment">; {R1,R0}=R2×R3，保存64位无符号乘法结果</span>
+SMULL <span class="token register variable">R0</span>, <span class="token register variable">R1</span>, <span class="token register variable">R2</span>, <span class="token register variable">R3</span>    <span class="token comment">; {R1,R0}=R2×R3，保存64位有符号乘法结果</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>③比较测试</strong></p>
 <blockquote>
-<p><strong>概述</strong>：主要用于<strong>比较或测试数据</strong>并更新<code>N/Z/C/V</code>等条件标志位，常用指令有<code>CMP</code>、<code>CMN</code>、<code>TST</code>和<code>TEQ</code></p>
+<p><strong>概述</strong>：主要用于对<strong>寄存器中的数据进行比较或位测试</strong>，并更新<code>N/Z/C/V</code>等条件标志位，常用指令有<code>CMP</code>、<code>CMN</code>、<code>TST</code>和<code>TEQ</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 比较测试指令通常不保存运算结果，只会更新条件标志位，供后续条件执行和分支判断使用</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 比较测试指令通常只执行内部运算并更新条件标志位，不保存计算结果，主要用于数据比较、位状态检测和程序流程控制</div>
 <blockquote>
-<p><code>CMP</code>用于<strong>比较两个数的大小</strong>，基本语法为<code>CMP Rn, Operand</code>，内部执行<code>Rn - Operand</code>并更新条件标志</p>
-</blockquote>
-<blockquote>
-<p><code>CMN</code>用于<strong>比较负值</strong>，基本语法为<code>CMN Rn, Operand</code>，内部执行<code>Rn + Operand</code>并更新条件标志</p>
+<p><code>CMP</code>用于<strong>比较两个数大小</strong>，基本语法为<code>CMP Rn, Operand</code>，内部执行<code>Rn - Operand</code>并更新条件标志，常用于<strong>条件判断</strong>和<strong>分支跳转</strong></p>
 </blockquote>
 <blockquote>
-<p><code>TST</code>用于<strong>按位测试</strong>，基本语法为<code>TST Rn, Operand</code>，内部执行<code>Rn &amp; Operand</code>并更新条件标志</p>
+<p><code>CMN</code>用于<strong>比较负值</strong>，基本语法为<code>CMN Rn, Operand</code>，内部执行<code>Rn + Operand</code>并更新条件标志，常用于<strong>判断加法运算后的状态</strong></p>
 </blockquote>
 <blockquote>
-<p><code>TEQ</code>用于<strong>按位相等测试</strong>，基本语法为<code>TEQ Rn, Operand</code>，内部执行<code>Rn ^ Operand</code>并更新条件标志</p>
-</blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 条件标志位负责记录运算结果状态，条件码则根据这些状态决定某条指令是否执行</div>
-<blockquote>
-<p><code>N</code>表示结果的<strong>符号状态</strong>，<strong>结果最高位</strong>为<code>1</code>时置位，即<code>32</code>位结果的<code>bit31</code>为<code>1</code>时<code>N = 1</code></p>
+<p><code>TST</code>用于<strong>按位测试</strong>，基本语法为<code>TST Rn, Operand</code>，内部执行<code>Rn &amp; Operand</code>并更新条件标志，常用于<strong>检测指定比特是否置位</strong></p>
 </blockquote>
 <blockquote>
-<p><code>Z</code>表示结果的<strong>零状态</strong>，当运算结果<strong>全部</strong>为<code>0</code>时置位，即结果为<code>0</code>时<code>Z = 1</code></p>
+<p><code>TEQ</code>用于<strong>按位相等测试</strong>，基本语法为<code>TEQ Rn, Operand</code>，内部执行<code>Rn ^ Operand</code>并更新条件标志，常用于<strong>判断对应位是否相同</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 条件标志位用于记录最近一次运算的结果状态，而条件码根据这些标志决定后续指令是否执行，从而实现条件判断和流程控制</div>
+<blockquote>
+<p><code>N</code>表示结果的<strong>符号状态</strong>，<strong>结果最高位</strong>为<code>1</code>时置位，<code>Z</code>表示结果的<strong>零状态</strong>，当运算结果<strong>全部</strong>为<code>0</code>时置位</p>
 </blockquote>
 <blockquote>
-<p><code>C</code>表示<strong>进位/无借位状态</strong>，当<strong>加法产生最高位进位</strong>或者<strong>减法未发生借位时</strong><code>Z = 1</code></p>
+<p><code>C</code>表示<strong>进位标志</strong>，当<strong>加法产生最高位进位</strong>或者<strong>减法未发生借位时</strong>置位，用于表示<strong>无符号运算</strong>中的进位状态</p>
 </blockquote>
 <blockquote>
-<p><code>V</code>表示<strong>有符号溢出状态</strong>，当<strong>有符号运算结果超出当前位宽可表示范围</strong>时<code>V = 1</code></p>
+<p><code>V</code>表示<strong>溢出状态</strong>，当<strong>有符号运算结果超出当前位宽可表示范围时</strong>置位，用于判断<strong>有符号数据溢出</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 条件标志仅在特定指令执行时更新，并保持到下一次被改写，使用条件码前应确认其来源</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 条件标志位只会在执行特定指令后发生改变，并会一直保持到下一次被修改，因此使用条件码前需要确认当前标志位的来源</div>
 <pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 1.数值比较</span>
 CMP <span class="token register variable">R0</span>, <span class="token register variable">R1</span>            <span class="token comment">; 计算R0-R1并更新条件标志，不保存结果</span>
 CMP <span class="token register variable">R0</span>, #<span class="token number">10</span>           <span class="token comment">; 将R0与10比较，内部计算R0-10</span>
@@ -650,27 +647,27 @@ BGT label             <span class="token comment">; Greater Than，有符号大�
 BLE label             <span class="token comment">; Less or Equal，有符号小于等于，Z=1或N≠V时跳转</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>④分支跳转</strong></p>
 <blockquote>
-<p><strong>概述</strong>：主要用于<strong>改变程序执行流</strong>，实现<strong>条件判断</strong>、<strong>循环</strong>及<strong>函数调用</strong>，常用指令有<code>B</code>、<code>BL</code>、<code>BX</code>和<code>BLX</code></p>
+<p><strong>概述</strong>：主要用于<strong>改变程序执行流</strong>，实现<strong>条件判断</strong>、<strong>循环控制</strong>及<strong>函数调用</strong>，常用指令有<code>B</code>、<code>BL</code>、<code>BX</code>和<code>BLX</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> B表示分支跳转，L表示保存返回地址到LR用于支持返回，X表示支持A32/T32指令状态切换</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在ARM指令中，B表示分支跳转，L表示链接即保存返回地址到LR用于支持返回，X表示支持A32/T32指令状态切换</div>
 <blockquote>
-<p><code>B</code>的基本语法为<code>B label</code>，表示跳转到<code>label</code>处继续执行</p>
-</blockquote>
-<blockquote>
-<p><code>BL</code>的基本语法为<code>BL label</code>，在跳转到<code>label</code>的同时将<strong>返回地址</strong>保存到<code>LR</code></p>
+<p><code>B</code>表示<strong>无条件分支跳转</strong>，基本语法为<code>B label</code>，通过指定标签<code>label</code>直接跳转到<strong>目标地址</strong>继续执行</p>
 </blockquote>
 <blockquote>
-<p><code>BX</code>的基本语法为<code>BX Rm</code>，表示跳转到<code>Rm</code><strong>保存的地址</strong>，并根据<strong>目标地址</strong>决定使用<code>A32/T32</code>状态</p>
+<p><code>BL</code>表示<strong>带链接的分支跳转</strong>，基本语法为<code>BL label</code>，在跳转到<code>label</code>对应地址的同时将<strong>返回地址</strong>保存到<code>LR</code>寄存器</p>
 </blockquote>
 <blockquote>
-<p><code>BLX</code>的基本语法为<code>BLX Rm/label</code>，在跳转并支持<code>A32/T32</code>状态切换的同时，将<strong>返回地址</strong>保存到<code>LR</code></p>
+<p><code>BX</code>表示<strong>寄存器间接跳转</strong>，基本语法为<code>BX Rm</code>，在跳转到<code>Rm</code><strong>保存的地址</strong>同事根据<strong>目标地址最低位</strong>进入<code>A32</code>或<code>T32</code>指令状态</p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 跳转分为相对跳转和绝对跳转，前者通过PC + offset计算目标地址，后者使用完整地址目标</div>
+<blockquote>
+<p><code>BLX</code>表示<strong>带链接的状态切换跳转</strong>，基本语法为<code>BLX Rm/label</code>，在跳转并支持<code>A32/T32</code>状态切换的同时，将<strong>返回地址</strong>保存到<code>LR</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> ARM跳转方式分为相对跳转和绝对跳转，前者通过当前PC加偏移量计算目标地址，后者则直接使用完整目标地址进行跳转</div>
 <blockquote>
 <p><code>B/BL/BLX label</code>的机器码通常保存的不是<code>label</code>的<strong>完整地址</strong>，而是<strong>目标相对当前<code>PC</code>的偏移量</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 相对跳转不依赖代码的绝对位置，但跳转范围受偏移量编码限制，目标过远时需要借助中转跳转等方式</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 绝对跳转依赖完整目标地址，若代码重定位失败会导致跳转到错误或非法地址，引发异常甚至程序崩溃</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 相对跳转不依赖代码的绝对位置，但跳转范围受到指令编码位数限制，目标地址过远时需要通过中间跳转等方式实现远距离跳转</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 绝对跳转依赖完整目标地址，如果程序进行重定位后地址发生变化，未正确更新目标地址可能导致跳转错误或访问非法区域</div>
 <pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token comment">; 1.直接跳转</span>
 B label               <span class="token comment">; 无条件跳转到label继续执行</span>
 B loop                <span class="token comment">; 跳转到loop，常用于循环</span>
@@ -726,20 +723,20 @@ POP {<span class="token register variable">R4</span>, LR}          <span class="
 <span class="token register variable">BX</span> LR                 <span class="token comment">; 跳转到LR，返回上一级调用者</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>⑤系统指令</strong></p>
 <blockquote>
-<p><strong>概述</strong>：主要用于<strong>控制异常中断</strong>、<strong>低功耗等待</strong>及<strong>同步操作</strong>，常用指令有<code>SVC</code>、<code>WFI</code>和<code>DMB</code>等</p>
+<p><strong>概述</strong>：主要用于<strong>处理器状态控制</strong>、<strong>异常中断管理</strong>、<strong>低功耗等待</strong>及<strong>同步操作</strong>，常用指令有<code>SVC</code>、<code>WFI</code>和<code>DMB</code>等</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 系统指令主要用于处理器运行状态和系统级行为控制，其可用性和权限要求与具体ARM架构及Profile有关</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 系统指令主要用于处理器运行状态和系统级行为控制，其支持范围、执行权限以及具体功能与ARM架构版本和处理器Profile有关</div>
 <blockquote>
-<p><code>SVC</code>用于<strong>软件触发异常</strong>，基本语法为<code>SVC #imm</code>，用于主动进入<code>SVC</code><strong>异常处理程序</strong>，常用于<strong>系统调用</strong></p>
-</blockquote>
-<blockquote>
-<p><code>CPSID/CPSIE</code>用于<strong>禁止/使能指定异常</strong>，常见语法为<code>CPSID i</code>，用于<strong>禁止/使能</strong><code>IRQ</code>响应</p>
+<p><code>SVC</code>表示<strong>软件触发异常</strong>，基本语法为<code>SVC #imm</code>，用于主动进入<code>SVC</code><strong>异常处理程序</strong>，常用于实现操作系统中的<strong>系统调用机制</strong></p>
 </blockquote>
 <blockquote>
-<p><code>WFI</code>基本语法为<code>WFI</code>，用于让处理器<strong>停止执行普通指令</strong>，直到<strong>符合条件的中断或异常</strong>唤醒处理器</p>
+<p><code>CPSID/CPSIE</code>用于<strong>禁止/使能指定异常</strong>，常见语法为<code>CPSID/CPSIE i</code>，用于<strong>禁止/使能</strong><code>IRQ</code>响应</p>
 </blockquote>
 <blockquote>
-<p><code>WFE</code>和<code>WFI</code>类似，但是等待的是<strong>事件</strong>，事件可由<code>SEV/SEVL</code>等机制产生</p>
+<p><code>WFI</code>表示<strong>等待中断</strong>，基本语法为<code>WFI</code>，用于让处理器<strong>停止执行普通指令</strong>，直到<strong>符合条件的中断或异常</strong>唤醒处理器</p>
+</blockquote>
+<blockquote>
+<p><code>WFE</code>表示<strong>等待事件</strong>，与<code>WFI</code>类似，但等待的是事件信号，事件通常由<code>SEV/SEVL</code>等指令或硬件机制产生</p>
 </blockquote>
 <div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 屏障用于约束处理器的乱序和缓冲行为，保证多核、内存及外设操作按预期顺序生效</div>
 <blockquote>
@@ -959,7 +956,7 @@ SEV                    <span class="token comment">; 产生事件，通知等待
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ARM A32/T32/A64 指令系统
+                            ARM指令系统基础
                         
                     </div>
                     <div class="publish-info">

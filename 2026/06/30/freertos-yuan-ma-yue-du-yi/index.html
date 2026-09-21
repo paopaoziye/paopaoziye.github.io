@@ -5,20 +5,20 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="FreeRTOS,RTOS,系统移植,内存管理,堆分配">
-    <meta name="description" content="FreeRTOS 系统移植与内存管理">
+    <meta name="keywords" content="FreeRTOS,RTOS,裸机开发,移植">
+    <meta name="description" content="FreeRTOS简介与移植">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://paopaoziye.github.io/2026/06/30/freertos-yuan-ma-yue-du-yi/">
     <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
     <meta property="og:type" content="article">
     <meta property="og:title" content="FreeRTOS源码阅读（一） | Zfk&#39;s Study Notes">
-    <meta property="og:description" content="FreeRTOS 系统移植与内存管理">
+    <meta property="og:description" content="FreeRTOS简介与移植">
     <meta property="og:url" content="https://paopaoziye.github.io/2026/06/30/freertos-yuan-ma-yue-du-yi/">
     <meta property="og:site_name" content="Zfk&#39;s Study Notes">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="FreeRTOS源码阅读（一） | Zfk&#39;s Study Notes">
-    <meta name="twitter:description" content="FreeRTOS 系统移植与内存管理">
+    <meta name="twitter:description" content="FreeRTOS简介与移植">
     <meta name="twitter:url" content="https://paopaoziye.github.io/2026/06/30/freertos-yuan-ma-yue-du-yi/">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
@@ -428,33 +428,28 @@
         
 
         
-        <!-- 代码块折行 -->
-        <style type="text/css">
-            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
-        </style>
-        
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="FreeRTOS"><a href="#FreeRTOS" class="headerlink" title="FreeRTOS"></a>FreeRTOS</h1><h2 id="FreeRTOS源码阅读（一）"><a href="#FreeRTOS源码阅读（一）" class="headerlink" title="FreeRTOS源码阅读（一）"></a>FreeRTOS源码阅读（一）</h2><h3 id="1-RTOS"><a href="#1-RTOS" class="headerlink" title="1.RTOS"></a>1.RTOS</h3><h4 id="1-1引言"><a href="#1-1引言" class="headerlink" title="1.1引言"></a>1.1引言</h4><p><strong>①裸机开发</strong></p>
+                <h1 id="RTOS"><a href="#RTOS" class="headerlink" title="RTOS"></a>RTOS</h1><h2 id="FreeRTOS"><a href="#FreeRTOS" class="headerlink" title="FreeRTOS"></a>FreeRTOS</h2><h3 id="FreeRTOS源码阅读（一）"><a href="#FreeRTOS源码阅读（一）" class="headerlink" title="FreeRTOS源码阅读（一）"></a>FreeRTOS源码阅读（一）</h3><h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h4><p><strong>①裸机开发</strong></p>
 <blockquote>
 <p><strong>概述</strong>：裸机指直接在<strong>没有操作系统</strong>的<code>MCU</code>上运行程序，常用的编程范式有<strong>轮询</strong>、<strong>前后台</strong>、<strong>状态机</strong>和<strong>定时驱动</strong>，如下所示</p>
 </blockquote>
 <div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 裸机开发结构简单、资源占用少且执行可控，但缺少完善的任务机制，随着任务和功能的增多，维护和扩展难度会逐渐增大</div>
 <blockquote>
-<p><strong>轮询</strong>：</p>
+<p><strong>轮询</strong>：简单可预测且无<strong>上下文切换开销</strong>，但是<strong>任务数量较多</strong>或者<strong>某个任务阻塞</strong>时就会延长其他任务的响应时间</p>
 </blockquote>
 <blockquote>
-<p><strong>前后台</strong>：</p>
+<p><strong>前后台</strong>：能够通过<strong>中断快速响应紧急事件</strong>，但是中断处理函数即<code>ISR</code>要求<strong>简洁高效</strong>，不适合执行<strong>复杂或耗时逻辑</strong></p>
 </blockquote>
 <blockquote>
-<p><strong>状态机</strong>：</p>
+<p><strong>状态机</strong>：通过<strong>状态划分</strong>和<strong>事件驱动</strong>将复杂流程拆分为多个步骤，适合多阶段任务，但是<strong>状态嵌套复杂时</strong>会变得难以维护</p>
 </blockquote>
 <blockquote>
-<p><strong>定时驱动</strong>：</p>
+<p><strong>定时驱动</strong>：通过周期定时器按<strong>固定时间执行任务</strong>，时序清晰，但任务执行时间过长时容易造成<strong>任务堆积</strong>或<strong>错过执行周期</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 中断天然具有最高优先级，且可以通过中断优先级划分实现简单的任务优先级</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> ISR要求简短高效，无法实现复杂逻辑，且中断优先级是静态的，无法动态调整优先级</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 中断可以抢占主循环以及较低优先级中断，并可通过配置不同的中断优先级实现对紧急事件的分级响应</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> ISR应尽量简短高效，避免执行阻塞、延时或复杂逻辑，且与主循环共享数据时，还需要注意并发访问、数据一致性和临界区保护</div>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 轮询模式：各任务在主循环中依次执行 */</span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
@@ -589,37 +584,55 @@
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②实时操作系统</strong></p>
 <blockquote>
-<p><strong>概述</strong>：保证在<strong>一定时间限制内</strong>完成<strong>特定功能</strong>的操作系统，如<code>FreeRTOS</code>和<code>RT-Thread</code>等</p>
+<p><strong>概述</strong>：也称为<code>RTOS</code>，一类强调<strong>确定性响应</strong>和<strong>实时调度</strong>的操作系统，常见的<code>RTOS</code>有<code>FreeRTOS</code>、<code>RT-Thread</code>和<code>Zephyr</code>等</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> RTOS分为硬实时系统和软实时系统，前者要求任务必须在绝对截止时间前完成，后者允许偶尔超时</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 相较于裸机系统，RTOS提供任务调度、内存管理以及任务间通信等机制，使得任务之间相互独立且优先级明确</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> RTOS内核本身需要占用一定的ROM和RAM，且任务调度等会增加额外计算负担</div>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token comment">//初始化</span>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> RTOS分为硬实时系统和软实时系统，前者要求关键任务必须在绝对截止时间内完成，后者允许偶尔错过截止时间</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> RTOS提供任务调度、内存管理以及任务间通信等机制，使不同任务具有独立的执行上下文，并能够按照优先级进行调度</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> RTOS需要额外占用一定的ROM、RAM和CPU资源，且任务切换和系统调用也会产生额外开销</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* RTOS：将不同功能划分为独立任务，由调度器统一调度 */</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* 系统初始化 */</span>
     <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//创建任务</span>
+
+    <span class="token comment">/* 创建任务 */</span>
     <span class="token function">create_task</span><span class="token punctuation">(</span>task1<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">create_task</span><span class="token punctuation">(</span>task2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//启动调度器</span>
+
+    <span class="token comment">/* 启动任务调度器 */</span>
     <span class="token function">start_scheduler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* 正常情况下不会执行到这里 */</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">task1</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+<span class="token comment">/* 任务1 */</span>
+<span class="token keyword">void</span> <span class="token function">task1</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
         <span class="token function">do_task1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">task2</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+<span class="token comment">/* 任务2 */</span>
+<span class="token keyword">void</span> <span class="token function">task2</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
         <span class="token function">do_task2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>③<code>FreeRTOS</code></strong></p>
 <blockquote>
-<p><strong>概述</strong>：一个<strong>轻量级且完全开源</strong>的<code>RTOS</code>，可以在<a target="_blank" rel="noopener" href="https://freertos.org/">官网</a>中下载到<strong>源码</strong>，其<strong>内核源码框架</strong>如下所示，使用<code>V11.0</code>版本</p>
+<p><strong>概述</strong>：一个<strong>轻量级且完全开源</strong>的<code>RTOS</code>，可以在<a target="_blank" rel="noopener" href="https://freertos.org/">官网</a>中下载到<strong>源码</strong>，其<strong>内核源码框架</strong>如下所示，此处以<code>V11.0.1</code>版本为例</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> FreeRTOS使用优先级驱动的抢占式调度，并不感知任务的截止期限，所以其是软实时操作系统</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Freertos内核由C语言编写，可移植性较高，通常情况下占⽤4k-9k字节的空间</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若使用heap.x的动态内存分配，还可能因为内存碎片或分配失败引入不可预测的延迟</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> FreeRTOS采用优先级驱动的抢占式调度，当更高优先级任务进入就绪态时，可以立即抢占当前低优先级任务运行</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> FreeRTOS主要由C语言编写，代码规模较小且具有较好的可移植性和可裁剪性，实际资源占用取决于处理器架构以及内核配置</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> FreeRTOS支持静态和动态内存分配，若使用heap.x的动态内存分配，还可能因为内存碎片或分配失败引入不可预测的延迟</div>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">FreeRTOS-Kernel/
 ├── include/         <span class="token comment"># 内核头文件</span>
 ├── examples/        <span class="token comment"># 一些示例文件</span>
@@ -633,16 +646,16 @@
     ├─ <span class="token punctuation">[</span>Compiler<span class="token punctuation">]</span>/   <span class="token comment"># 编译器适配</span>
     │  └─ <span class="token punctuation">[</span>Arch<span class="token punctuation">]</span>/    <span class="token comment"># 架构适配</span>
     └─ MemMang/      <span class="token comment"># 内存管理</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="1-2系统移植"><a href="#1-2系统移植" class="headerlink" title="1.2系统移植"></a>1.2系统移植</h4><p><strong>①文件提取</strong></p>
+<p><strong>④系统移植</strong></p>
 <blockquote>
-<p><strong>概述</strong>：在<strong>工程根目录</strong>下创建<code>FreeRTOS</code>文件夹以及<code>src</code>、<code>inc</code>和<code>portable</code>子文件夹，并将提取相关文件</p>
+<p><strong>概述</strong>：移植<code>FreeRTOS</code>时，需要根据<strong>处理器架构</strong>和<strong>编译器</strong>选择对应的<strong>移植文件</strong>，并将所需<strong>源码</strong>、<strong>头文件</strong>和<strong>内存管理文件</strong>加入工程</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 根据编译器和芯片架构对portable下的文件进行筛选，以Keil MDK编译环境下的STM32F407VET6为例</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 先根据编译环境选择文件夹，如Keil MDK需要选择portable/RVDS下的移植文件，随后根据处理器架构再选择对应的子文件夹</div>
 <blockquote>
-<p><code>Keil MDK</code>对应上述源码的<code>portable/RVDS</code>，从该文件夹下根据<strong>处理器架构</strong>找到对应的<code>ARM_CM4F</code>子文件夹</p>
+<p>以<code>STM32F407VET6</code>为例，其处理器内核为<code>Cortex-M4F</code>，可选择<code>portable/RVDS/ARM_CM4F</code>下的移植文件，如下所示</p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果需要使用动态内存分配，还需要从portable/MemMang中选取对应的内存管理算法，通常采用heap4.c</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果处理器有内存保护单元且需要使用该功能，还需要提取portable/Common/mpu_wrappers.c</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 移植层主要负责任务上下文切换、栈初始化、临界区和中断管理等功能，并且封装了处理器相关的底层寄存器操作</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Common、MemMang和ThirdParty还提供多个移植层共享的公共代码，如内存管理组件和MPU功能等</div>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">FreeRTOS/
 ├── inc/             <span class="token comment"># 存放内核头文件，对应上述源码的include</span>
 ├── src/             <span class="token comment"># 存放内核源文件，如tasks.c、list.c和queue.c等</span>
@@ -650,472 +663,421 @@
     ├─ port.c        <span class="token comment"># 处理器架构相关的底层操作</span>
     ├─ portmacro.h   <span class="token comment"># 处理器架构密切相关的宏定义和数据类型</span>
     └─ heap4.c       <span class="token comment"># 内存管理</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>②<code>FreeRTOSConfig.h</code></strong></p>
+<p><strong>⑤<code>FreeRTOSConfig.h</code></strong></p>
 <blockquote>
-<p><strong>概述</strong>：在<code>Keil</code>工程新增<code>FreeRTOS_CORE</code>和<code>FreeRTOS_PORTABLE</code>分组并添加<strong>对应源文件</strong>以及<strong>头文件路径</strong></p>
+<p><strong>概述</strong>：<code>FreeRTOS</code>的<strong>用户配置文件</strong>，用于设置<strong>任务调度</strong>、<strong>系统时钟</strong>、<strong>中断</strong>、<strong>内存管理</strong>及各功能模块的<strong>启用与裁剪</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 需要自己添加FreeRTOSConfig.h进行内核功能裁剪和配置，可以从示例程序中寻找</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 因为FreeRTOS需要使用自己定义的PendSV、SVC和SysTick中断处理函数，需要在FreeRTOSConfig.h中进行重定向</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 需要将stm32f4xx_it.c中的对应中断处理函数注释掉防止重复定义</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 移植时需根据硬件平台和功能需求编写FreeRTOSConfig.h，用于内核配置与功能裁剪，也可参考官方示例</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> FreeRTOS需要接管PendSV、SVC和SysTick等异常处理函数，因此通常需要在FreeRTOSConfig.h中进行对应的函数映射</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果工程中已经在stm32f4xx_it.c定义了对应的异常处理函数，需要将其删除避免与FreeRTOS实现重复定义</div>
+<blockquote>
+<p>其中<code>SysTick</code>若同时被<code>STM32 HAL</code>使用，可将<code>HAL</code>时基迁移至<strong>其他定时器</strong>，或统一在<code>SysTick_Handler()</code>中维护两者的系统<code>Tick</code></p>
+</blockquote>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">FREERTOS_CONFIG_H</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">FREERTOS_CONFIG_H</span></span>
 
-<span class="token comment">//若编译器为IAR、Keil和GCC，则需要引入stdint.h并声明SystemCoreClock，即CPU 核心时钟频率</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token function">defined</span><span class="token punctuation">(</span>__ICCARM__<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">defined</span><span class="token punctuation">(</span>__CC_ARM<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">defined</span><span class="token punctuation">(</span>__GNUC__<span class="token punctuation">)</span></span></span>
-    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdint.h&gt;</span></span>
-    <span class="token keyword">extern</span> <span class="token class-name">uint32_t</span> SystemCoreClock<span class="token punctuation">;</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdint.h&gt;</span></span>
 
-<span class="token comment">//任务系统配置</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_PREEMPTION</span>                                        <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使用抢占式调度，即任务可以被高优先级任务中断</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_CO_ROUTINES</span>                                       <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//禁用协程</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TIME_SLICING</span>                                      <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使用时间片调度(默认使能)</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_PORT_OPTIMISED_TASK_SELECTION</span>                     <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使用芯片特定的指令加速最高优先级任务的查找</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configMAX_PRIORITIES</span>                                        <span class="token expression"><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span>                            </span><span class="token comment">//任务优先级数量，优先级为0-31</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configMINIMAL_STACK_SIZE</span>                                    <span class="token expression"><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">short</span><span class="token punctuation">)</span><span class="token number">130</span><span class="token punctuation">)</span>           </span><span class="token comment">//空闲任务堆栈大小</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configMAX_TASK_NAME_LEN</span>                                     <span class="token expression"><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span>                            </span><span class="token comment">//任务名字符串长度</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configIDLE_SHOULD_YIELD</span>                                     <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//空闲任务主动让出CPU使用权给其他同优先级的用户任务</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTaskGetSchedulerState</span>                              <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能调度器状态查询                      </span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskPrioritySet</span>                                    <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能动态修改任务优先级</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_uxTaskPriorityGet</span>                                   <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能获取任务当前优先级</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskDelete</span>                                         <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能删除任务</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_APPLICATION_TASK_TAG</span>                              <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//禁用任务标签</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_eTaskGetState</span>                                       <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能任务状态查询</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskSuspend</span>                                        <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能挂起/恢复任务</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskDelayUntil</span>                                     <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能绝对时间延时</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskDelay</span>                                          <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能相对时间延时</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTaskGetSchedulerState</span>                              <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能调度器状态查询                      </span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskPrioritySet</span>                                    <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能动态修改任务优先级</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_uxTaskPriorityGet</span>                                   <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能获取任务当前优先级</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskDelete</span>                                         <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//使能删除任务</span></span>
+<span class="token comment">/* STM32 CMSIS 中定义，表示 Cortex-M4 内核时钟频率 */</span>
+<span class="token keyword">extern</span> <span class="token class-name">uint32_t</span> SystemCoreClock<span class="token punctuation">;</span>
 
-<span class="token comment">//系统时钟配置</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configCPU_CLOCK_HZ</span>                                          <span class="token expression"><span class="token punctuation">(</span>SystemCoreClock<span class="token punctuation">)</span>               </span><span class="token comment">//CPU主频</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTICK_RATE_HZ</span>                                          <span class="token expression"><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>                          </span><span class="token comment">//系统时钟节拍频率，这里设置为1000，一个TICK就是1ms</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_16_BIT_TICKS</span>                                      <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//系统节拍计数器变量数据类型，1表示为16位无符号整形，0表示为32位无符号整形</span></span>
 
-<span class="token comment">//功能模块开关</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TASK_NOTIFICATIONS</span>                                <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//启用任务通知</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_MUTEXES</span>                                           <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//启用互斥锁</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_COUNTING_SEMAPHORES</span>                               <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//启用计数信号量</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_QUEUE_SETS</span>                                        <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//禁用队列集</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_STREAM_BUFFERS</span>                                    <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//禁用流缓冲</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TICKLESS_IDLE</span>                                     <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//启用低功耗tickless模式</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configQUEUE_REGISTRY_SIZE</span>                                   <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//禁用队列记录</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_RECURSIVE_MUTEXES</span>                                 <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//启用递归互斥信号量</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TIMERS</span>                                            <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//禁用软件定时器</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configCHECK_FOR_STACK_OVERFLOW</span>                              <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//关闭栈溢出检测</span></span>
+<span class="token comment">/* ============================================================
+ * 1. 处理器与系统时钟配置
+ * ============================================================ */</span>
 
-<span class="token comment">//钩子函数配置</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_MALLOC_FAILED_HOOK</span>                                <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//禁用内存分配失败钩子</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_IDLE_HOOK</span>                                         <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//禁用空闲任务钩子函数</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TICK_HOOK</span>                                         <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//禁用时间片钩子函数</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskCleanUpResources</span>                               <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//启用清理任务资源钩子函数</span></span>
+<span class="token comment">/* Cortex-M4 内核时钟 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configCPU_CLOCK_HZ</span>                          <span class="token expression"><span class="token punctuation">(</span> SystemCoreClock <span class="token punctuation">)</span></span></span>
 
-<span class="token comment">//内存管理配置</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configSUPPORT_DYNAMIC_ALLOCATION</span>                            <span class="token expression"><span class="token number">1</span>                               </span><span class="token comment">//启用动态内存申请</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTOTAL_HEAP_SIZE</span>                                       <span class="token expression"><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">size_t</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token operator">*</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">)</span>             </span><span class="token comment">//堆内存总大小</span></span>
-                                       
-<span class="token comment">//软件定时器配置</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTIMER_TASK_PRIORITY</span>                                   <span class="token expression"><span class="token punctuation">(</span>configMAX_PRIORITIES<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>        </span><span class="token comment">//软件定时器任务优先级</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTIMER_QUEUE_LENGTH</span>                                    <span class="token expression"><span class="token number">5</span>                               </span><span class="token comment">//软件定时器队列长度</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTIMER_TASK_STACK_DEPTH</span>                                <span class="token expression"><span class="token punctuation">(</span>configMINIMAL_STACK_SIZE<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span>    </span><span class="token comment">//软件定时器任务堆栈大小</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTimerPendFunctionCall</span>                              <span class="token expression"><span class="token number">0</span>                               </span><span class="token comment">//不允许从中断/任务异步调用函数得到定时器服务任务上下文</span></span>
+<span class="token comment">/* FreeRTOS 系统节拍：1000Hz，即 1 Tick = 1ms */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTICK_RATE_HZ</span>                          <span class="token expression"><span class="token number">1000U</span></span></span>
 
-<span class="token comment">//中断相关配置</span>
+<span class="token comment">/*
+ * 使用32位 TickType_t。
+ * V11.x 推荐使用该配置，不再使用 configUSE_16_BIT_TICKS。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTICK_TYPE_WIDTH_IN_BITS</span>               <span class="token expression">TICK_TYPE_WIDTH_32_BITS</span></span>
+
+
+<span class="token comment">/* ============================================================
+ * 2. 任务调度配置
+ * ============================================================ */</span>
+
+<span class="token comment">/* 启用抢占式调度 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_PREEMPTION</span>                        <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/*
+ * 同优先级任务采用时间片轮转。
+ * 一个 Tick 到来时可以在同优先级 Ready Task 之间切换。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TIME_SLICING</span>                      <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/*
+ * Cortex-M4 使用 CLZ 指令快速查找最高优先级 Ready Task。
+ * ARM_CM4F Port 要求 configMAX_PRIORITIES &lt;= 32。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_PORT_OPTIMISED_TASK_SELECTION</span>     <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/*
+ * 提供 0~15 共16个任务优先级。
+ * 0最低，15最高。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configMAX_PRIORITIES</span>                        <span class="token expression"><span class="token number">16U</span></span></span>
+
+<span class="token comment">/*
+ * Idle Task 的最小栈深度。
+ *
+ * 注意：单位是 StackType_t，而不是 Byte。
+ * Cortex-M4F 中 StackType_t = uint32_t，
+ * 因此128对应约512 Byte。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configMINIMAL_STACK_SIZE</span>                    <span class="token expression"><span class="token number">128U</span></span></span>
+
+<span class="token comment">/* 任务名称最大长度，包括字符串结束符 '\0' */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configMAX_TASK_NAME_LEN</span>                     <span class="token expression"><span class="token number">16U</span></span></span>
+
+<span class="token comment">/*
+ * 如果存在优先级0的用户任务，
+ * Idle Task 可以主动让出剩余时间片。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configIDLE_SHOULD_YIELD</span>                     <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 暂不启用低功耗 Tickless Idle */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TICKLESS_IDLE</span>                     <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/* 单核 FreeRTOS */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configNUMBER_OF_CORES</span>                       <span class="token expression"><span class="token number">1</span></span></span>
+
+
+<span class="token comment">/* ============================================================
+ * 3. 任务相关功能
+ * ============================================================ */</span>
+
+<span class="token comment">/* 启用 Task Notification */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TASK_NOTIFICATIONS</span>                <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 每个任务提供1个 Notification Slot */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTASK_NOTIFICATION_ARRAY_ENTRIES</span>       <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 启用互斥量 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_MUTEXES</span>                           <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 启用递归互斥量 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_RECURSIVE_MUTEXES</span>                 <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 启用计数信号量 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_COUNTING_SEMAPHORES</span>               <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 暂不使用 Queue Set */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_QUEUE_SETS</span>                        <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/*
+ * Queue Registry主要供调试器查看队列、信号量等对象。
+ * 学习和调试阶段保留8个位置。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configQUEUE_REGISTRY_SIZE</span>                   <span class="token expression"><span class="token number">8U</span></span></span>
+
+<span class="token comment">/* 不使用 Task Tag */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_APPLICATION_TASK_TAG</span>              <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/* 不使用 Thread Local Storage Pointer */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configNUM_THREAD_LOCAL_STORAGE_POINTERS</span>     <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/* 不使用 Newlib 的 task-local _reent */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_NEWLIB_REENTRANT</span>                  <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/* 禁止旧版 FreeRTOS API 名称兼容，便于学习新版 API */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configENABLE_BACKWARD_COMPATIBILITY</span>         <span class="token expression"><span class="token number">0</span></span></span>
+
+
+<span class="token comment">/* ============================================================
+ * 4. 可选 Task API
+ * ============================================================ */</span>
+
+<span class="token comment">/* 动态修改任务优先级 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskPrioritySet</span>                    <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 获取任务优先级 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_uxTaskPriorityGet</span>                   <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 删除任务 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskDelete</span>                         <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 挂起/恢复任务 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskSuspend</span>                        <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 周期任务绝对时间延时 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTaskDelayUntil</span>                     <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 相对时间延时 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_vTaskDelay</span>                          <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 获取任务状态 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_eTaskGetState</span>                       <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 获取调度器状态 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTaskGetSchedulerState</span>              <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 获取当前任务句柄 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTaskGetCurrentTaskHandle</span>           <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 获取 Idle Task 句柄 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTaskGetIdleTaskHandle</span>              <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 根据任务名称查找任务句柄 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTaskGetHandle</span>                      <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 获取任务剩余栈空间 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_uxTaskGetStackHighWaterMark</span>         <span class="token expression"><span class="token number">1</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_uxTaskGetStackHighWaterMark2</span>        <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 允许中止任务阻塞 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTaskAbortDelay</span>                     <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* ISR中恢复任务 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTaskResumeFromISR</span>                  <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 获取持有Mutex的任务 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xQueueGetMutexHolder</span>                <span class="token expression"><span class="token number">1</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xSemaphoreGetMutexHolder</span>            <span class="token expression"><span class="token number">1</span></span></span>
+
+
+<span class="token comment">/* ============================================================
+ * 5. 软件定时器
+ * ============================================================ */</span>
+
+<span class="token comment">/* 启用软件定时器 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TIMERS</span>                            <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/*
+ * Timer Service Task优先级。
+ * 给最高优先级15留出一级，这里设置为14。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTIMER_TASK_PRIORITY</span>                   <span class="token punctuation">\</span>
+        <span class="token expression"><span class="token punctuation">(</span> configMAX_PRIORITIES <span class="token operator">-</span> <span class="token number">2U</span> <span class="token punctuation">)</span></span></span>
+
+<span class="token comment">/* Timer Command Queue长度 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTIMER_QUEUE_LENGTH</span>                    <span class="token expression"><span class="token number">10U</span></span></span>
+
+<span class="token comment">/*
+ * Timer Task栈深度。
+ * Cortex-M4F上256 words约为1KB。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTIMER_TASK_STACK_DEPTH</span>                <span class="token expression"><span class="token number">256U</span></span></span>
+
+<span class="token comment">/*
+ * 启用 xTimerPendFunctionCall() /
+ * xTimerPendFunctionCallFromISR()。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">INCLUDE_xTimerPendFunctionCall</span>              <span class="token expression"><span class="token number">1</span></span></span>
+
+
+<span class="token comment">/* ============================================================
+ * 6. 内存管理
+ * ============================================================ */</span>
+
+<span class="token comment">/*
+ * 同时支持静态创建和动态创建。
+ *
+ * 动态：
+ *     xTaskCreate()
+ *     xQueueCreate()
+ *
+ * 静态：
+ *     xTaskCreateStatic()
+ *     xQueueCreateStatic()
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configSUPPORT_STATIC_ALLOCATION</span>             <span class="token expression"><span class="token number">1</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configSUPPORT_DYNAMIC_ALLOCATION</span>            <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/*
+ * V11.0.1可以由Kernel提供Idle Task和Timer Task
+ * 所需的静态内存，无需应用自己实现
+ * vApplicationGetIdleTaskMemory()等函数。
+ *
+ * 标准ARM_CM4F Port可以这样使用；
+ * MPU Port则需要单独处理。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configKERNEL_PROVIDED_STATIC_MEMORY</span>         <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/*
+ * heap_4.c使用的FreeRTOS Heap大小。
+ * 单位：Byte。
+ *
+ * STM32F407项目中20KB作为学习/一般项目初始值比较合适，
+ * 最终应根据实际任务、队列、信号量等占用调整。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configTOTAL_HEAP_SIZE</span>                       <span class="token expression"><span class="token punctuation">(</span> <span class="token number">20U</span> <span class="token operator">*</span> <span class="token number">1024U</span> <span class="token punctuation">)</span></span></span>
+
+<span class="token comment">/* Heap数组由FreeRTOS内部创建 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configAPPLICATION_ALLOCATED_HEAP</span>            <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/* vPortFree()后不主动清零内存 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configHEAP_CLEAR_MEMORY_ON_FREE</span>             <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/* 暂不启用heap_4/heap_5的Heap Protector */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configENABLE_HEAP_PROTECTOR</span>                 <span class="token expression"><span class="token number">0</span></span></span>
+
+
+<span class="token comment">/* ============================================================
+ * 7. Hook与错误检测
+ * ============================================================ */</span>
+
+<span class="token comment">/*
+ * 开启较强的栈溢出检测。
+ * 需要实现：
+ *
+ * vApplicationStackOverflowHook()
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configCHECK_FOR_STACK_OVERFLOW</span>              <span class="token expression"><span class="token number">2</span></span></span>
+
+<span class="token comment">/*
+ * 动态内存申请失败时进入Hook。
+ * 需要实现：
+ *
+ * vApplicationMallocFailedHook()
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_MALLOC_FAILED_HOOK</span>                <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/* 不使用Idle Hook */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_IDLE_HOOK</span>                         <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/* 不使用Tick Hook */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TICK_HOOK</span>                         <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/* 不使用Timer Daemon启动Hook */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_DAEMON_TASK_STARTUP_HOOK</span>          <span class="token expression"><span class="token number">0</span></span></span>
+
+
+<span class="token comment">/* ============================================================
+ * 8. 调试与运行状态统计
+ * ============================================================ */</span>
+
+<span class="token comment">/*
+ * 加入部分任务调试信息。
+ * 学习/调试阶段建议打开。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_TRACE_FACILITY</span>                    <span class="token expression"><span class="token number">1</span></span></span>
+
+<span class="token comment">/*
+ * 不启用vTaskList()/vTaskGetRunTimeStats()
+ * 的字符串格式化接口，减少printf/sprintf依赖。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_STATS_FORMATTING_FUNCTIONS</span>        <span class="token expression"><span class="token number">0</span></span></span>
+
+<span class="token comment">/*
+ * 暂不统计每个Task的CPU运行时间。
+ * 开启后还需要提供高精度计数器。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configGENERATE_RUN_TIME_STATS</span>               <span class="token expression"><span class="token number">0</span></span></span>
+
+
+<span class="token comment">/* ============================================================
+ * 9. Co-Routine
+ * ============================================================ */</span>
+
+<span class="token comment">/* Co-Routine属于较老的机制，普通项目不建议使用 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configUSE_CO_ROUTINES</span>                       <span class="token expression"><span class="token number">0</span></span></span>
+
+
+<span class="token comment">/* ============================================================
+ * 10. Cortex-M4中断优先级配置
+ * ============================================================ */</span>
+
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__NVIC_PRIO_BITS</span></span>
-  <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configPRIO_BITS</span>                                           <span class="token expression">__NVIC_PRIO_BITS                </span><span class="token comment">//使用芯片定义的优先级位数</span></span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configPRIO_BITS</span>                         <span class="token expression">__NVIC_PRIO_BITS</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
-  <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configPRIO_BITS</span>                                           <span class="token expression"><span class="token number">4</span>                               </span><span class="token comment">//中断优先级位数设置为4位           </span></span>
+    <span class="token comment">/*
+     * STM32F407实现4个NVIC优先级位。
+     */</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configPRIO_BITS</span>                         <span class="token expression"><span class="token number">4</span></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configLIBRARY_LOWEST_INTERRUPT_PRIORITY</span>                     <span class="token expression"><span class="token number">15</span>                              </span><span class="token comment">//内核可以管理的中断最低优先级</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY</span>                <span class="token expression"><span class="token number">5</span>                               </span><span class="token comment">//内核可管理的最高中断优先级，即0-4优先级任务不允许调用任何RTOS API</span></span>
-<span class="token comment">//configLIBRARY_LOWEST_INTERRUPT_PRIORITY对应的硬件优先级值</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configKERNEL_INTERRUPT_PRIORITY</span>                            <span class="token expression"><span class="token punctuation">(</span> configLIBRARY_LOWEST_INTERRUPT_PRIORITY <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token number">8</span> <span class="token operator">-</span> configPRIO_BITS<span class="token punctuation">)</span> <span class="token punctuation">)</span></span></span>
-<span class="token comment">//configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY对应的硬件优先级值</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configMAX_SYSCALL_INTERRUPT_PRIORITY</span>                       <span class="token expression"><span class="token punctuation">(</span> configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token number">8</span> <span class="token operator">-</span> configPRIO_BITS<span class="token punctuation">)</span> <span class="token punctuation">)</span></span></span>
 
-<span class="token comment">//中断处理函数重定向宏</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">xPortPendSVHandler</span>                                         <span class="token expression">PendSV_Handler</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">vPortSVCHandler</span>                                            <span class="token expression">SVC_Handler</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">xPortSysTickHandler</span>                                        <span class="token expression">SysTick_Handler</span></span>
 
-<span class="token comment">//将毫秒和频率转化为对应TICK数</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">M2T</span><span class="token expression"><span class="token punctuation">(</span>X<span class="token punctuation">)</span>                                                     <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>configTICK_RATE_HZ<span class="token operator">/</span><span class="token number">1000.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">F2T</span><span class="token expression"><span class="token punctuation">(</span>X<span class="token punctuation">)</span>                                                     <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span>configTICK_RATE_HZ<span class="token operator">/</span><span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span></span>
-  
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="2-内存管理"><a href="#2-内存管理" class="headerlink" title="2.内存管理"></a>2.内存管理</h3><h4 id="2-1引言"><a href="#2-1引言" class="headerlink" title="2.1引言"></a>2.1引言</h4><p><strong>①管理算法</strong></p>
-<blockquote>
-<p><strong>概述</strong>：<code>FreeRTOS</code>提供<code>5</code>种不同的<strong>内存管理算法</strong><code>heapx.c</code>，通常采用<code>heap4.c</code>，后续主要分析该文件</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> heap1.c使用静态分配，不进行内存回收；heap2.c回收内存但并不合并内存块，采用最佳匹配算法分配内存</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> heap4.c回收内存并合并内存块，采用首次匹配算法分配内存；heap5.c在heap4.c的基础上支持非连续内存区域</div>
-<blockquote>
-<p><code>heap2.c</code>的空闲内存块按照<strong>块的大小</strong>升序排列，<code>heap4.c</code>的空闲内存块按照<strong>起始地址大小</strong>升序排列</p>
-</blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> heap3.c本质上是对malloc和free的封装，可能引入较大的内存开销，通常为兼容标准库的过渡方案</div>
-<p><strong>②匹配算法</strong></p>
-<blockquote>
-<p><strong>概述</strong>：常用的匹配算法有<strong>最佳匹配算法</strong>、<strong>首次匹配算法</strong>、<strong>最坏匹配算法</strong>和<strong>临近匹配算法</strong>，如下所示</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 最佳匹配可以减少内部碎片，最坏匹配可以减少外部碎片，临近匹配速度最快且可以避免低地址频繁分配</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 首次匹配速度快于最佳匹配和最坏匹配，且碎片率和稳定性优于临近匹配，所以heap4.c采用首次匹配</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 内存碎片分为内部碎片和外部碎片，前者为已分配但是未使用的部分，后者为未分配但无法使用的部分</div>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//最佳匹配算法：分配大小最接近请求值的空闲块</span>
-<span class="token punctuation">[</span>空闲链表<span class="token punctuation">]</span>
-xStart <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块A<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块B<span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块C<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> pxEnd
+<span class="token comment">/*
+ * Cortex-M优先级：
+ *
+ * 数字越小 → 逻辑优先级越高
+ *
+ * 0   最高
+ * ...
+ * 15  最低
+ */</span>
 
-<span class="token number">1.</span> 遍历链表：
-   <span class="token operator">-</span> 块A<span class="token operator">:</span> <span class="token number">100</span> <span class="token operator">&gt;=</span> <span class="token number">80</span> <span class="token punctuation">(</span>记录为候选<span class="token punctuation">)</span>
-   <span class="token operator">-</span> 块B<span class="token operator">:</span> <span class="token number">200</span> <span class="token operator">&gt;=</span> <span class="token number">80</span> <span class="token punctuation">(</span>但<span class="token number">200</span> <span class="token operator">&gt;</span> <span class="token number">100</span>，不更新候选<span class="token punctuation">)</span>
-   <span class="token operator">-</span> 块C<span class="token operator">:</span> <span class="token number">50</span>  <span class="token operator">&lt;</span> <span class="token number">80</span> <span class="token punctuation">(</span>跳过<span class="token punctuation">)</span>
+<span class="token comment">/* PendSV和SysTick使用最低中断优先级 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configLIBRARY_LOWEST_INTERRUPT_PRIORITY</span>     <span class="token expression"><span class="token number">15</span></span></span>
 
-<span class="token number">2.</span> 选择最佳匹配：块<span class="token function">A</span> <span class="token punctuation">(</span><span class="token number">100</span>字节<span class="token punctuation">)</span>
+<span class="token comment">/*
+ * FreeRTOS API中断优先级边界：
+ *
+ * 0~4：
+ *     不受FreeRTOS临界区BASEPRI屏蔽
+ *     不能调用FreeRTOS API
+ *
+ * 5~15：
+ *     可以调用允许在ISR中使用的 xxxFromISR() API
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY</span> <span class="token expression"><span class="token number">5</span></span></span>
 
-<span class="token number">3.</span> 分割块A：
-   <span class="token operator">-</span> 分配<span class="token number">80</span>字节 <span class="token operator">+</span> 块头 <span class="token operator">=</span><span class="token operator">&gt;</span> 实际占用<span class="token number">88</span>字节（假设<span class="token number">8</span>字节对齐）
-   <span class="token operator">-</span> 剩余<span class="token number">100</span> <span class="token operator">-</span> <span class="token number">88</span> <span class="token operator">=</span> <span class="token number">12</span>字节（若小于最小块大小，则不分割）
 
-<span class="token punctuation">[</span>分配后链表<span class="token punctuation">]</span>
-xStart <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块B<span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块C<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> pxEnd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//首次匹配算法：从空闲链表的头部开始遍历，选择第一个大小大于请求值的空闲块</span>
-<span class="token punctuation">[</span>空闲链表<span class="token punctuation">]</span>
-xStart <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块A<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块B<span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块C<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> pxEnd
+<span class="token comment">/* 转换为Cortex-M NVIC寄存器使用的左对齐值 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configKERNEL_INTERRUPT_PRIORITY</span>             <span class="token punctuation">\</span>
+        <span class="token expression"><span class="token punctuation">(</span> configLIBRARY_LOWEST_INTERRUPT_PRIORITY <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span> <span class="token number">8</span> <span class="token operator">-</span> configPRIO_BITS <span class="token punctuation">)</span> <span class="token punctuation">)</span></span></span>
 
-<span class="token number">1.</span> 遍历链表：
-   <span class="token operator">-</span> 块A<span class="token operator">:</span> <span class="token number">50</span> <span class="token operator">&lt;</span> <span class="token number">80</span> <span class="token punctuation">(</span>跳过<span class="token punctuation">)</span>
-   <span class="token operator">-</span> 块B<span class="token operator">:</span> <span class="token number">200</span> <span class="token operator">&gt;=</span> <span class="token number">80</span> <span class="token punctuation">(</span>选择第一个满足的块，停止遍历<span class="token punctuation">)</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configMAX_SYSCALL_INTERRUPT_PRIORITY</span>        <span class="token punctuation">\</span>
+        <span class="token expression"><span class="token punctuation">(</span> configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span> <span class="token number">8</span> <span class="token operator">-</span> configPRIO_BITS <span class="token punctuation">)</span> <span class="token punctuation">)</span></span></span>
 
-<span class="token number">2.</span> 分割块B：
-   <span class="token operator">-</span> 分配<span class="token number">80</span>字节 <span class="token operator">+</span> 块头 <span class="token operator">=</span><span class="token operator">&gt;</span> 实际占用<span class="token number">88</span>字节（假设<span class="token number">8</span>字节对齐）
-   <span class="token operator">-</span> 剩余<span class="token number">200</span> <span class="token operator">-</span> <span class="token number">88</span> <span class="token operator">=</span> <span class="token number">112</span>字节（作为新空闲块插入链表）
 
-<span class="token punctuation">[</span>分配后链表<span class="token punctuation">]</span>
-xStart <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块A<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>新空闲块<span class="token operator">:</span><span class="token number">112</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块C<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> pxEnd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//最坏匹配算法：分配最大的空闲块</span>
-<span class="token punctuation">[</span>空闲链表<span class="token punctuation">]</span>
-xStart <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块A<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块B<span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块C<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> pxEnd
+<span class="token comment">/* ============================================================
+ * 11. FreeRTOS异常处理函数映射
+ * ============================================================ */</span>
 
-<span class="token number">1.</span> 遍历链表找最大块：
-   <span class="token operator">-</span> 块A<span class="token operator">:</span> <span class="token number">50</span>
-   <span class="token operator">-</span> 块B<span class="token operator">:</span> <span class="token number">200</span> （当前最大）
-   <span class="token operator">-</span> 块C<span class="token operator">:</span> <span class="token number">100</span>
+<span class="token comment">/*
+ * FreeRTOS接管PendSV：
+ * 负责实际的任务上下文切换。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">xPortPendSVHandler</span>                          <span class="token expression">PendSV_Handler</span></span>
 
-<span class="token number">2.</span> 选择最大块：块<span class="token function">B</span> <span class="token punctuation">(</span><span class="token number">200</span>字节<span class="token punctuation">)</span>
+<span class="token comment">/*
+ * FreeRTOS接管SVC：
+ * 主要用于启动第一个Task。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">vPortSVCHandler</span>                             <span class="token expression">SVC_Handler</span></span>
 
-<span class="token number">3.</span> 分割块B：
-   <span class="token operator">-</span> 分配<span class="token number">80</span>字节 <span class="token operator">+</span> 块头 <span class="token operator">=</span><span class="token operator">&gt;</span> 实际占用<span class="token number">88</span>字节（假设<span class="token number">8</span>字节对齐）
-   <span class="token operator">-</span> 剩余<span class="token number">200</span> <span class="token operator">-</span> <span class="token number">88</span> <span class="token operator">=</span> <span class="token number">112</span>字节（插入链表）
+<span class="token comment">/*
+ * 如果SysTick完全由FreeRTOS管理，可以直接映射。
+ *
+ * 如果STM32 HAL仍然依赖HAL_IncTick()，
+ * 请参见下文的HAL兼容方案。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">xPortSysTickHandler</span>                         <span class="token expression">SysTick_Handler</span></span>
 
-<span class="token punctuation">[</span>分配后链表<span class="token punctuation">]</span>
-xStart <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块A<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>新空闲块<span class="token operator">:</span><span class="token number">112</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块C<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> pxEnd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//临近匹配算法：基于首次匹配算法，但是每次查找从上次分配位置继续</span>
-<span class="token punctuation">[</span>初始链表<span class="token punctuation">]</span>
-xStart <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块A<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块B<span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块C<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块D<span class="token operator">:</span><span class="token number">80</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> pxEnd
-           ↑
-           pxLastFreeBlock
 
-<span class="token number">1.</span> 从pxLastFreeBlock（块A）开始遍历：
-   <span class="token operator">-</span> 块A<span class="token operator">:</span> <span class="token number">50</span> <span class="token operator">&lt;</span> <span class="token number">60</span> <span class="token punctuation">(</span>跳过<span class="token punctuation">)</span>
-   <span class="token operator">-</span> 块B<span class="token operator">:</span> <span class="token number">200</span> <span class="token operator">&gt;=</span> <span class="token number">60</span> <span class="token punctuation">(</span>选择此块<span class="token punctuation">)</span>
-   <span class="token operator">-</span> 更新pxLastFreeBlock指向块B的下一位置（块C）
+<span class="token comment">/* ============================================================
+ * 12. Assert
+ * ============================================================ */</span>
 
-<span class="token number">2.</span> 分割块B：
-   <span class="token operator">-</span> 分配<span class="token number">60</span>字节 <span class="token operator">+</span> 块头 <span class="token operator">=</span><span class="token operator">&gt;</span> 实际占用<span class="token number">68</span>字节（假设<span class="token number">8</span>字节对齐）
-   <span class="token operator">-</span> 剩余<span class="token number">200</span> <span class="token operator">-</span> <span class="token number">68</span> <span class="token operator">=</span> <span class="token number">132</span>字节（插入链表）
+<span class="token comment">/*
+ * 调试阶段强烈建议开启。
+ *
+ * Cortex-M Port还会利用configASSERT()
+ * 检测非法的ISR优先级配置等问题。
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">configASSERT</span><span class="token expression"><span class="token punctuation">(</span> x <span class="token punctuation">)</span>                           </span><span class="token punctuation">\</span>
+    <span class="token expression"><span class="token keyword">do</span>                                              </span><span class="token punctuation">\</span>
+    <span class="token expression"><span class="token punctuation">{</span>                                               </span><span class="token punctuation">\</span>
+        <span class="token expression"><span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> x <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>                           </span><span class="token punctuation">\</span>
+        <span class="token expression"><span class="token punctuation">{</span>                                           </span><span class="token punctuation">\</span>
+            <span class="token expression"><span class="token function">taskDISABLE_INTERRUPTS</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>               </span><span class="token punctuation">\</span>
+            <span class="token expression"><span class="token keyword">for</span><span class="token punctuation">(</span> <span class="token punctuation">;</span><span class="token punctuation">;</span> <span class="token punctuation">)</span>                               </span><span class="token punctuation">\</span>
+            <span class="token expression"><span class="token punctuation">{</span>                                       </span><span class="token punctuation">\</span>
+            <span class="token expression"><span class="token punctuation">}</span>                                       </span><span class="token punctuation">\</span>
+        <span class="token expression"><span class="token punctuation">}</span>                                           </span><span class="token punctuation">\</span>
+    <span class="token expression"><span class="token punctuation">}</span> <span class="token keyword">while</span><span class="token punctuation">(</span> <span class="token number">0</span> <span class="token punctuation">)</span></span></span>
 
-<span class="token punctuation">[</span>分配后链表<span class="token punctuation">]</span>
-xStart <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块A<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>新空闲块<span class="token operator">:</span><span class="token number">132</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块C<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> <span class="token punctuation">[</span>块D<span class="token operator">:</span><span class="token number">80</span><span class="token punctuation">]</span> <span class="token operator">-&gt;</span> pxEnd
-                                       ↑
-                                       pxLastFreeBlock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>③堆初始化</strong></p>
-<blockquote>
-<p><strong>概述</strong>：初始化<strong>哨兵节点</strong><code>xStart</code>和<code>pxEnd</code>，并将剩余内存作为<strong>第一个空闲内存块</strong>，最后更新<strong>相关统计信息</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 采用静态数组作为堆内存，内存块头部为BlockLink_t，将每个空闲内存块按照地址大小串联为一个单向链表</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 两个哨兵节点的xBlockSize成员均为0，其中xStart节点位于堆内存外部，pxEnd位于堆内存尾部，如下所示</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 内存对齐要求数据起始地址满足一定的规则，若不满足内存对齐，会增加访问内存所需的CPU周期数甚至引发异常</div>
-<p><img src="/images/loading.gif" data-original="/image/Freertos_5.png" alt="初始堆内存"></p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//静态堆内存，位于RAM</span>
-<span class="token keyword">static</span> <span class="token class-name">uint8_t</span> ucHeap<span class="token punctuation">[</span> configTOTAL_HEAP_SIZE <span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token comment">//块头结构体，用于内存块链表管理</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">A_BLOCK_LINK</span><span class="token punctuation">{</span>
-    <span class="token keyword">struct</span> <span class="token class-name">A_BLOCK_LINK</span> <span class="token operator">*</span> pxNextFreeBlock<span class="token punctuation">;</span> 
-    <span class="token class-name">size_t</span> xBlockSize<span class="token punctuation">;</span>                     
-<span class="token punctuation">}</span>BlockLink_t<span class="token punctuation">;</span>
-<span class="token comment">//空闲内存块链表的起始节点和尾部节点指针</span>
-<span class="token keyword">static</span> BlockLink_t xStart<span class="token punctuation">;</span>
-<span class="token keyword">static</span> BlockLink_t <span class="token operator">*</span> pxEnd <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-<span class="token comment">//块头结构体经过内存对齐后的大小，按照8字节对齐</span>
-<span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token class-name">size_t</span> xHeapStructSize <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span> BlockLink_t <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> portBYTE_ALIGNMENT <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">~</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">//堆状态统计变量</span>
-<span class="token keyword">static</span> <span class="token class-name">size_t</span> xFreeBytesRemaining <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0U</span><span class="token punctuation">;</span>             <span class="token comment">//空闲内存字节数</span>
-<span class="token keyword">static</span> <span class="token class-name">size_t</span> xMinimumEverFreeBytesRemaining <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0U</span><span class="token punctuation">;</span>  <span class="token comment">//历史最小剩余空闲内存字节数</span>
-<span class="token keyword">static</span> <span class="token class-name">size_t</span> xNumberOfSuccessfulAllocations <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0U</span><span class="token punctuation">;</span>  <span class="token comment">//成功的内存分配次数</span>
-<span class="token keyword">static</span> <span class="token class-name">size_t</span> xNumberOfSuccessfulFrees <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0U</span><span class="token punctuation">;</span>        <span class="token comment">//成功的内存释放次数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 初始化内存堆 */</span>
-<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">prvHeapInit</span><span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> 
-<span class="token punctuation">{</span>
-    BlockLink_t <span class="token operator">*</span> pxFirstFreeBlock<span class="token punctuation">;</span>
-    portPOINTER_SIZE_TYPE uxStartAddress<span class="token punctuation">,</span> uxEndAddress<span class="token punctuation">;</span>
-    <span class="token comment">//获取堆内存总大小</span>
-    <span class="token class-name">size_t</span> xTotalHeapSize <span class="token operator">=</span> configTOTAL_HEAP_SIZE<span class="token punctuation">;</span>
-    <span class="token comment">//获取堆的起始地址，本质上是32位整型</span>
-    uxStartAddress <span class="token operator">=</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> ucHeap<span class="token punctuation">;</span>
-    <span class="token comment">//如果堆的起始地址未对齐（8字节对齐），则调整uxAddress使其对齐到下一边界，并调整可用堆的大小</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> uxStartAddress <span class="token operator">&amp;</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment">//先加7，假设uxAddress为0x80000002，变为0x80000009</span>
-        uxStartAddress <span class="token operator">+=</span> <span class="token punctuation">(</span> portBYTE_ALIGNMENT <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//进行对齐操作，即0x80000009 &amp; 0xFFFFFFF8，变为0x80000008</span>
-        uxStartAddress <span class="token operator">&amp;=</span> <span class="token operator">~</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//如果首地址变化则调整堆的可用大小</span>
-        xTotalHeapSize <span class="token operator">-=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> uxStartAddress <span class="token operator">-</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> ucHeap <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">//获取初始化xStart节点，将其pxNextFreeBlock指向堆起始地址，并其xBlockSize设置为0</span>
-    xStart<span class="token punctuation">.</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> <span class="token punctuation">)</span>uxStartAddress<span class="token punctuation">;</span>
-    xStart<span class="token punctuation">.</span>xBlockSize <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token comment">//获取堆的结束地址</span>
-    uxEndAddress <span class="token operator">=</span> uxStartAddress <span class="token operator">+</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> xTotalHeapSize<span class="token punctuation">;</span>
-    <span class="token comment">//在堆的结束地址处构建pxEnd节点，其pxNextFreeBlock为NULL，xBlockSize为0</span>
-    uxEndAddress <span class="token operator">-=</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> xHeapStructSize<span class="token punctuation">;</span>
-    uxEndAddress <span class="token operator">&amp;=</span> <span class="token operator">~</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    pxEnd <span class="token operator">=</span> <span class="token punctuation">(</span> BlockLink_t <span class="token operator">*</span> <span class="token punctuation">)</span> uxEndAddress<span class="token punctuation">;</span>
-    pxEnd<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    pxEnd<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token comment">//将剩余内存初始化为第一个空闲块</span>
-    pxFirstFreeBlock <span class="token operator">=</span> <span class="token punctuation">(</span> BlockLink_t <span class="token operator">*</span> <span class="token punctuation">)</span> uxStartAddress<span class="token punctuation">;</span>
-    pxFirstFreeBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> uxEndAddress <span class="token operator">-</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> pxFirstFreeBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    pxFirstFreeBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxEnd<span class="token punctuation">;</span>
-    <span class="token comment">//记录剩余内存</span>
-    xMinimumEverFreeBytesRemaining <span class="token operator">=</span> pxFirstFreeBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
-    xFreeBytesRemaining <span class="token operator">=</span> pxFirstFreeBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="2-2分配与释放"><a href="#2-2分配与释放" class="headerlink" title="2.2分配与释放"></a>2.2分配与释放</h4><p><strong>①内存块分配</strong></p>
-<blockquote>
-<p><strong>概述</strong>：<strong>从头遍历</strong>空闲链表并分配<strong>第一个符合要求</strong>的空闲内存块，如果空闲内存块过大，还需要进行<strong>内存块分割</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 申请内存块的真实所需大小为用户请求大小 + 块头 + 补充字节，补充字节用于满足内存对齐要求</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> heap4.c使用内存块大小的最高位作为内存块是否被分配的标记，当最高位为1时，表明该内存块被分配</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果分配的内存块大小减去真实所需大小大于heapMINIMUM_BLOCK_SIZE，需要进行内存块分割控制内部碎片</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 在内存分配前，需要检查申请内存块大小是否会导致堆溢出和整数溢出，且最终的内存块大小最高位不能为1</div>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//定义空闲内存块的最小尺寸，为块头结构体大小的两倍</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">heapMINIMUM_BLOCK_SIZE</span>    <span class="token expression"><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> xHeapStructSize <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span></span></span>
-<span class="token comment">//字节的位数</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">heapBITS_PER_BYTE</span>         <span class="token expression"><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">8</span> <span class="token punctuation">)</span></span></span>
-<span class="token comment">//将size_t的最高位置为1，用于标记内存块是否被分配</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">heapBLOCK_ALLOCATED_BITMASK</span>              <span class="token expression"><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token operator">*</span> heapBITS_PER_BYTE <span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span></span></span>
-<span class="token comment">//用于检查内存块是否未分配，当其大小最高位为0时，说明该内存块未分配</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapBLOCK_SIZE_IS_VALID</span><span class="token expression"><span class="token punctuation">(</span> xBlockSize <span class="token punctuation">)</span>    <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> xBlockSize <span class="token punctuation">)</span> <span class="token operator">&amp;</span> heapBLOCK_ALLOCATED_BITMASK <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span></span></span>
-<span class="token comment">//用于检查内存块是否已分配，当其大小最高位为1时，说明该内存块已分配</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapBLOCK_IS_ALLOCATED</span><span class="token expression"><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span>        <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">&amp;</span> heapBLOCK_ALLOCATED_BITMASK <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span></span></span>
-<span class="token comment">//将内存块标记为已分配</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapALLOCATE_BLOCK</span><span class="token expression"><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span>            <span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">|=</span> heapBLOCK_ALLOCATED_BITMASK <span class="token punctuation">)</span></span></span>
-<span class="token comment">//将内存块标记为未分配</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapFREE_BLOCK</span><span class="token expression"><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span>                <span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">&amp;=</span> <span class="token operator">~</span>heapBLOCK_ALLOCATED_BITMASK <span class="token punctuation">)</span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 内存块分配 */</span>
-<span class="token keyword">void</span> <span class="token operator">*</span> <span class="token function">pvPortMalloc</span><span class="token punctuation">(</span> <span class="token class-name">size_t</span> xWantedSize <span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    BlockLink_t <span class="token operator">*</span> pxBlock<span class="token punctuation">;</span>
-    BlockLink_t <span class="token operator">*</span> pxPreviousBlock<span class="token punctuation">;</span>
-    BlockLink_t <span class="token operator">*</span> pxNewBlockLink<span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token operator">*</span> pvReturn <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token class-name">size_t</span> xAdditionalRequiredSize<span class="token punctuation">;</span>
-    <span class="token comment">//计算最终的内存块大小，如果合理且不会出现溢出则为请求大小 + 块头 + 补充字节，反之为0</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span> xWantedSize <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment">//检查用户请求大小 + 块头是否会导致整数溢出</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapADD_WILL_OVERFLOW</span><span class="token punctuation">(</span> xWantedSize<span class="token punctuation">,</span> xHeapStructSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            xWantedSize <span class="token operator">+=</span> xHeapStructSize<span class="token punctuation">;</span>
-            <span class="token comment">//检查是否字节对齐，如果需要则补充字节xAdditionalRequiredSize</span>
-            <span class="token comment">//假设用户请求了10个字节，则对齐填充为8 - 10 &amp; 0x07 = 6，最后变为16字节</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> xWantedSize <span class="token operator">&amp;</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0x00</span> <span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token comment">//计算补充字节</span>
-                xAdditionalRequiredSize <span class="token operator">=</span> portBYTE_ALIGNMENT <span class="token operator">-</span> <span class="token punctuation">(</span> xWantedSize <span class="token operator">&amp;</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment">//检查用户请求大小 + 块头 + 补充字节是否会溢出</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapADD_WILL_OVERFLOW</span><span class="token punctuation">(</span> xWantedSize<span class="token punctuation">,</span> xAdditionalRequiredSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-                <span class="token punctuation">{</span>
-                    xWantedSize <span class="token operator">+=</span> xAdditionalRequiredSize<span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token comment">//反之设置为0</span>
-                <span class="token keyword">else</span>
-                <span class="token punctuation">{</span>
-                    xWantedSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token comment">//反之设置为0</span>
-        <span class="token keyword">else</span>
-        <span class="token punctuation">{</span>
-            xWantedSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">//暂停任务调度</span>
-    <span class="token function">vTaskSuspendAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment">//如果pxEnd == NULL说明堆并未初始化，需要进行堆的初始化</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span> pxEnd <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token function">prvHeapInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token comment">//最终的xWantedSize最高位不能为1</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapBLOCK_SIZE_IS_VALID</span><span class="token punctuation">(</span> xWantedSize <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token comment">//xWantedSize大于0且不会导致堆溢出</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> xWantedSize <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span> xWantedSize <span class="token operator">&lt;=</span> xFreeBytesRemaining <span class="token punctuation">)</span> <span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token comment">//遍历空闲链表，找到第一个xBlockSize大于xWantedSize的空闲内存块</span>
-                pxPreviousBlock <span class="token operator">=</span> <span class="token operator">&amp;</span>xStart<span class="token punctuation">;</span>
-                pxBlock <span class="token operator">=</span> xStart<span class="token punctuation">.</span>pxNextFreeBlock<span class="token punctuation">;</span>
-                <span class="token keyword">while</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">&lt;</span> xWantedSize <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>
-                <span class="token punctuation">{</span>
-                    pxPreviousBlock <span class="token operator">=</span> pxBlock<span class="token punctuation">;</span>
-                    pxBlock <span class="token operator">=</span> pxBlock<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token comment">//如果pxBlock != pxEnd则说明找到了合适的内存块</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span> pxBlock <span class="token operator">!=</span> pxEnd <span class="token punctuation">)</span>
-                <span class="token punctuation">{</span>
-                    <span class="token comment">//计算返回地址（需要跳过表头BlockLink_t），并且将该内存块从空闲列表中移除</span>
-                    pvReturn <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span>pxPreviousBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span> <span class="token operator">+</span> xHeapStructSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    pxPreviousBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxBlock<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token punctuation">;</span>
-                    <span class="token comment">//如果该内存块剩余空间大于heapMINIMUM_BLOCK_SIZE，则分割内存块</span>
-                    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">-</span> xWantedSize <span class="token punctuation">)</span> <span class="token operator">&gt;</span> heapMINIMUM_BLOCK_SIZE <span class="token punctuation">)</span>
-                    <span class="token punctuation">{</span>
-                        <span class="token comment">//构造新块头</span>
-                        pxNewBlockLink <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pxBlock <span class="token punctuation">)</span> <span class="token operator">+</span> xWantedSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                        <span class="token comment">//分割内存块</span>
-                        pxNewBlockLink<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">=</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">-</span> xWantedSize<span class="token punctuation">;</span>
-                        pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">=</span> xWantedSize<span class="token punctuation">;</span>
-                        <span class="token comment">//将分割出的内存块放回空闲列表</span>
-                        pxNewBlockLink<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxPreviousBlock<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token punctuation">;</span>
-                        pxPreviousBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxNewBlockLink<span class="token punctuation">;</span>
-                    <span class="token punctuation">}</span>
-                    <span class="token comment">//更新空闲内存信息</span>
-                    xFreeBytesRemaining <span class="token operator">-=</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
-                    <span class="token keyword">if</span><span class="token punctuation">(</span> xFreeBytesRemaining <span class="token operator">&lt;</span> xMinimumEverFreeBytesRemaining <span class="token punctuation">)</span>
-                    <span class="token punctuation">{</span>
-                        xMinimumEverFreeBytesRemaining <span class="token operator">=</span> xFreeBytesRemaining<span class="token punctuation">;</span>
-                    <span class="token punctuation">}</span>
-                    <span class="token comment">//将块标记为已分配</span>
-                    <span class="token function">heapALLOCATE_BLOCK</span><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token comment">//将pxBlock从空闲链表彻底移除</span>
-                    pxBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-                    <span class="token comment">//增加xNumberOfSuccessfulAllocations</span>
-                    xNumberOfSuccessfulAllocations<span class="token operator">++</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">//恢复任务调度</span>
-    <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> <span class="token function">xTaskResumeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> pvReturn<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>②内存块释放</strong></p>
-<blockquote>
-<p><strong>概述</strong>：找到释放内存块<strong>真正的起始地址</strong>，并使用<code>prvInsertBlockIntoFreeList</code>将其添加到空闲链表</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 用户使用的内存不包含块头BlockLink_t，所以需要将用户传入地址前移xHeapStructSize得到内存块真实起始地址</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以定义configHEAP_CLEAR_MEMORY_ON_FREE将清除释放内存块内容防止信息外泄</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在对内存块进行释放操作前，需要检查其地址有效性并检查其是否被分配以及是否不在空闲链表中</div>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 内存块释放 */</span>
-<span class="token keyword">void</span> <span class="token function">vPortFree</span><span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> pv <span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token comment">//puc用于字节级别的地址计算，pxLink用于访问内存块的管理信息</span>
-    <span class="token class-name">uint8_t</span> <span class="token operator">*</span> puc <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pv<span class="token punctuation">;</span>
-    BlockLink_t <span class="token operator">*</span> pxLink<span class="token punctuation">;</span>
-    <span class="token comment">//确保释放内存有效</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span> pv <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment">//找到内存块真正的起始地址</span>
-        puc <span class="token operator">-=</span> xHeapStructSize<span class="token punctuation">;</span>
-        pxLink <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> <span class="token punctuation">)</span> puc<span class="token punctuation">;</span>
-        <span class="token comment">//确认块确实被分配以及pxLink-&gt;pxNextFreeBlock == NULL即内存块不在空闲链表中，防止块重复释放</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapBLOCK_IS_ALLOCATED</span><span class="token punctuation">(</span> pxLink <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span> pxLink<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token comment">//将其标记为空闲</span>
-                <span class="token function">heapFREE_BLOCK</span><span class="token punctuation">(</span> pxLink <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment">//如果定义了configHEAP_CLEAR_MEMORY_ON_FREE，将释放内存全部填充0</span>
-                <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token punctuation">(</span> configHEAP_CLEAR_MEMORY_ON_FREE <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span></span></span>
-                <span class="token punctuation">{</span>
-                    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapSUBTRACT_WILL_UNDERFLOW</span><span class="token punctuation">(</span> pxLink<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">,</span> xHeapStructSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-                    <span class="token punctuation">{</span>
-                        <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> <span class="token function">memset</span><span class="token punctuation">(</span> puc <span class="token operator">+</span> xHeapStructSize<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> pxLink<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">-</span> xHeapStructSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">}</span>
-                <span class="token punctuation">}</span>
-                <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
-                <span class="token comment">//暂停调度并将该内存块通过prvInsertBlockIntoFreeList添加到空闲链表</span>
-                <span class="token function">vTaskSuspendAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">{</span>
-                    xFreeBytesRemaining <span class="token operator">+=</span> pxLink<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
-                    <span class="token function">prvInsertBlockIntoFreeList</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> BlockLink_t <span class="token operator">*</span> <span class="token punctuation">)</span> pxLink <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token comment">//增加xNumberOfSuccessfulFrees</span>
-                    xNumberOfSuccessfulFrees<span class="token operator">++</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token comment">//恢复调度</span>
-                <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> <span class="token function">xTaskResumeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>③内存块合并</strong></p>
-<blockquote>
-<p><strong>概述</strong>：遍历空闲链表找到其<strong>插入位置</strong>，并尝试进行<strong>前驱块/后继块</strong>和插入块的合并，最后将其插入空闲链表</p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 空闲链表将内存块按照地址从低到高排列</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当插入内存块的起始地址/结束地址等于其前驱块的结束地址/后继块的起始地址，说明需要发生内存块合并</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果需要合并后继块时后继块为pxEnd，只简单更新pxBlockToInsert-&gt;pxNextFreeBlock为pxEnd而不进行合并</div>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 将释放的内存块重新插入空闲列表，并执行前后相邻块的合并 */</span>
-<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">prvInsertBlockIntoFreeList</span><span class="token punctuation">(</span> BlockLink_t <span class="token operator">*</span> pxBlockToInsert <span class="token punctuation">)</span> 
-<span class="token punctuation">{</span>
-    <span class="token comment">//puc用于字节级别的地址计算，pxIterator用于访问内存块的管理信息</span>
-    BlockLink_t <span class="token operator">*</span> pxIterator<span class="token punctuation">;</span>
-    <span class="token class-name">uint8_t</span> <span class="token operator">*</span> puc<span class="token punctuation">;</span>
-    <span class="token comment">//遍历空闲列表，使得pxIterator的地址小于插入块，pxIterator-&gt;pxNextFreeBlock的地址大于插入块</span>
-    <span class="token comment">//即pxIterator指向前驱块，pxIterator-&gt;pxNextFreeBlock指向后驱块</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span> pxIterator <span class="token operator">=</span> <span class="token operator">&amp;</span>xStart<span class="token punctuation">;</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">&lt;</span> pxBlockToInsert<span class="token punctuation">;</span> pxIterator <span class="token operator">=</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
 
-    <span class="token punctuation">}</span>
-    puc <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pxIterator<span class="token punctuation">;</span>
-    <span class="token comment">//如果前驱块的结束地址等于待插入块的起始地址，则合并两个内存块</span>
-    <span class="token comment">//pxBlockToInsert更新为pxIterator，即后续处理以前驱块为主</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> puc <span class="token operator">+</span> pxIterator<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pxBlockToInsert <span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        pxIterator<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">+=</span> pxBlockToInsert<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
-        pxBlockToInsert <span class="token operator">=</span> pxIterator<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    puc <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pxBlockToInsert<span class="token punctuation">;</span>
-    <span class="token comment">//如果待插入块的结束地址等于后继块的起始地址</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> puc <span class="token operator">+</span> pxBlockToInsert<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span>pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment">//若后继块不为pxEnd，合并两个内存块</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">!=</span> pxEnd <span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            pxBlockToInsert<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">+=</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
-            pxBlockToInsert<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token comment">//反之只更新pxBlockToInsert-&gt;pxNextFreeBlock为pxEnd</span>
-        <span class="token keyword">else</span>
-        <span class="token punctuation">{</span>
-            pxBlockToInsert<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxEnd<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">//反之将更新pxBlockToInsert-&gt;pxNextFreeBlock为后继块</span>
-    <span class="token keyword">else</span>
-    <span class="token punctuation">{</span>
-        pxBlockToInsert<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">//如果没有发生前向合并，更新前驱块的pxNextFreeBlock指针</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span> pxIterator <span class="token operator">!=</span> pxBlockToInsert <span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxBlockToInsert<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">/* FREERTOS_CONFIG_H */</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
 
                 
@@ -1234,58 +1196,6 @@ xStart <span class="token operator">-&gt;</span> <span class="token punctuation"
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2026/07/19/rust-xue-xi-bi-ji-yi/">
-                    <div class="card-image">
-                        
-                        <img src="/medias/featureimages/30.webp" class="responsive-img" alt="Rust学习笔记（一）" loading="lazy" decoding="async">
-                        
-                        <span class="card-title">Rust学习笔记（一）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Rust 工具链、项目创建与代码检查
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2026-07-19
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    编程语言
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E3%80%8ARust-%E6%9D%83%E5%A8%81%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97%E3%80%8B/">
-                        <span class="chip bg-color">《Rust 权威学习指南》</span>
-                    </a>
-                    
-                    <a href="/tags/Rust/">
-                        <span class="chip bg-color">Rust</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
                 <a href="/2026/06/30/can-xie-yi-yi/">
                     <div class="card-image">
                         
@@ -1301,15 +1211,15 @@ xStart <span class="token operator">-&gt;</span> <span class="token punctuation"
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-06-30
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-06-30
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/CAN/" class="post-category">
-                                    CAN
+                            <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="post-category">
+                                    通信协议
                                 </a>
                             
                             
@@ -1319,8 +1229,56 @@ xStart <span class="token operator">-&gt;</span> <span class="token punctuation"
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%B8%B2%E8%A1%8C%E5%8D%8F%E8%AE%AE/">
-                        <span class="chip bg-color">串行协议</span>
+                    <a href="/tags/CAN/">
+                        <span class="chip bg-color">CAN</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/06/30/mcuboot-yuan-ma-yue-du-yi/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/13.webp" class="responsive-img" alt="MCUboot源码阅读（一）" loading="lazy" decoding="async">
+                        
+                        <span class="card-title">MCUboot源码阅读（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MCUboot 启动流程与安全启动基础
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-06-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/BootLoader/" class="post-category">
+                                    BootLoader
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/BootLoader/">
+                        <span class="chip bg-color">BootLoader</span>
                     </a>
                     
                 </div>

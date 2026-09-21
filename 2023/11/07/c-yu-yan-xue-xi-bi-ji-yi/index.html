@@ -428,24 +428,19 @@
         
 
         
-        <!-- 代码块折行 -->
-        <style type="text/css">
-            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
-        </style>
-        
 
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="编程语言"><a href="#编程语言" class="headerlink" title="编程语言"></a>编程语言</h1><h2 id="C语言学习笔记"><a href="#C语言学习笔记" class="headerlink" title="C语言学习笔记"></a>C语言学习笔记</h2><h3 id="C语言学习笔记（一）"><a href="#C语言学习笔记（一）" class="headerlink" title="C语言学习笔记（一）"></a>C语言学习笔记（一）</h3><h4 id="1-编译流程"><a href="#1-编译流程" class="headerlink" title="1.编译流程"></a>1.编译流程</h4><p><strong>①引言</strong></p>
 <blockquote>
-<p><strong>概述</strong>：编译就是将<strong>源代码</strong>即<code>.c</code>文件转化为计算机可执行的<strong>机器指令</strong>如<code>.exe</code>或<code>.out</code>文件</p>
+<p><strong>概述</strong>：编译就是将<strong>源代码</strong>如<code>.c</code>文件转换为计算机能够识别并执行的<strong>机器指令</strong>，最终生成<code>.exe</code>和<code>.out</code>等<strong>可执行文件</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 编译主要分为预处理、编译、汇编和链接四个阶段，这里主要以Ubuntu 22.04环境下的GCC编译器为例</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果不需要关心具体细节，可以使用gcc hello.c -o hello完成以下文件的整个编译流程</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 完整的汇编过程通常可分为预处理、编译、汇编和链接四个阶段，这里以Ubuntu 22.04环境下的GCC工具链为例</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 如果不需要关注中间过程，可以直接使用gcc hello.c -o hello完成对以下脚本的整个编译流程，并生成可执行文件hello</div>
 <blockquote>
 <p>编译完成后，直接在当前文件夹下运行<code>./hello</code>即可运行该可执行文件</p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在执行上述操作之前，需要确保安装了build-essential软件包，包含了GCC编译器以及一些必要的库</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 在执行上述操作之前，需要确保系统安装了GCC及相关编译工具，在Ubuntu 22.04可以安装build-essential软件包</div>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -454,10 +449,10 @@
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②预处理</strong></p>
 <blockquote>
-<p><strong>概述</strong>：预处理的<code>GCC</code>命令为<code>gcc -E hello.c -o hello.i</code>，主要处理以<code>#</code>开头的指令</p>
+<p><strong>概述</strong>：预处理阶段对应的<code>GCC</code>命令为<code>gcc -E hello.c -o hello.i</code>，主要处理源文件中以<code>#</code>开头的<strong>预处理指令</strong>并生成预处理后的<code>.i</code>文件</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 预处理的核心工作为宏定义与展开、文件包含、条件编译和剥离注释等</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 预处理阶段并不会进行语法检查和类型检查，本质上是进行一些文本替换和清理工作</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 预处理的核心工作为宏定义与展开、文件包含、条件编译和注释移除等，分别对应#define、#include、#if和#ifdef等指令</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 预处理阶段并不会进行完整的语法检查和类型检查，本质上是进行一些文本替换和清理工作</div>
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 打开hello.i可以看到该文件被拓展到几百行，新增的代码主要是预处理器将stdio.h及其依赖无脑粘贴到对应位置</div>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 预处理前</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">PI</span> <span class="token expression"><span class="token number">3.14159</span></span></span>
@@ -471,10 +466,25 @@
 <span class="token keyword">int</span> buf<span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>③编译</strong></p>
 <blockquote>
-<p><strong>概述</strong>：编译的<code>GCC</code>命令为<code>gcc -S hello.i -o hello.s</code>，主要是将<strong>C语言代码</strong>转化为对应架构的<strong>汇编代码</strong></p>
+<p><strong>概述</strong>：编译阶段对应的<code>GCC</code>命令为<code>gcc -S hello.i -o hello.s</code>，主要是将<strong>C语言代码</strong>转化为对应架构的<strong>汇编代码</strong>，并进行<strong>一定的优化</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 编译的核心工作为词法分析、语法分析和语义分析，最后进行一些优化并生成目标代码</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 编译过程中，编译器会对代码进行一定优化如剔除死代码和函数内联等，可以使用`-O`控制优化程度，如下所示</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 编译阶段的核心工作包括词法分析、语法分析、语义分析、中间代码生成与代码优化，最终生成对应目标架构的汇编代码</div>
+<blockquote>
+<p>比如说<strong>非法字符</strong>、<strong>缺少分号</strong>、<strong>类型不匹配</strong>、<strong>未声明变量</strong>和<strong>未使用变量</strong>等错误都是出现在编译阶段</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 编译器通常会对代码进行常量折叠、死代码消除、函数内联等优化，可以通过-O0、-O1、-O2、-O3等选项控制优化等级</div>
+<blockquote>
+<p><code>-O0</code>：关闭大多数性能优化，仅完成<strong>代码生成所必需的转换</strong>，尽量保持源码结构<strong>便于调试</strong></p>
+</blockquote>
+<blockquote>
+<p><code>-O1</code>：启用<strong>较基础的优化</strong>，如<strong>常量传播</strong>、<strong>死代码删除</strong>、<strong>简单表达式化简</strong>和<strong>部分寄存器分配优化</strong>，在较低开销下提升性能</p>
+</blockquote>
+<blockquote>
+<p><code>-O2</code>：在<code>-O1</code>基础上启用更多全局和循环优化，如<strong>公共子表达式消除</strong>、更多<strong>代码移动</strong>、<strong>分支优化</strong>和更积极的<strong>数据流分析</strong></p>
+</blockquote>
+<blockquote>
+<p><code>-O3</code>：在<code>-O2</code>基础上进一步采用更激进的性能优化，如更积极的<strong>函数内联</strong>、<strong>循环展开</strong>、<strong>循环向量化</strong>和自动<code>SIMD</code>优化</p>
+</blockquote>
 <div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 若编译器判断某个变量在代码执行阶段不会被修改，则会将其存入寄存器中提升访问速度，但不一定是合理的</div>
 <div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 编译器只会考虑软件逻辑，所以当一个变量会被硬件、中断或者其他线程修改时进行上述优化会出现逻辑错误</div>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 常量折叠：将能提前计算好的值计算好 */</span>
@@ -508,12 +518,12 @@
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>④汇编</strong></p>
 <blockquote>
-<p><strong>概述</strong>：汇编的<code>GCC</code>命令为<code>gcc -c hello.c -o hello.o</code>，主要是将<strong>汇编代码</strong>转化为<strong>机器语言</strong></p>
+<p><strong>概述</strong>：汇编阶段对应的的<code>GCC</code>命令为<code>gcc -c hello.c -o hello.o</code>，主要是将<strong>汇编代码</strong>转化为<strong>机器语言</strong>，并生成目标文件<code>.o</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 汇编器的输出的目标文件通常为ELF格式，这个格式的文件通常被分为不同的段如代码段和数据段等</div>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以采用反汇编工具objdump -d hello.o查看目标文件，结果如下所示，分别为指令地址、机器码和汇编指令</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 目标文件中的指令地址为相对地址，并且某些未知地址会被设置为0作为占位符，等待链接的时候被设置</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 每个.c文件是独立编译的，汇编阶段结束后，只知道自己内部的函数和变量地址</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 汇编器生成的目标文件在Linux中通常采用ELF格式，其中包含.text、.data、.rodata和.bss等不同的节</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以使用objdump -d hello.o对目标文件中的机器指令进行反汇编，结果通常依次显示指令地址、机器码和对应的汇编指令</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 目标文件中的指令地址通常为相对地址，而暂时无法确定的地址会保留占位值并记录重定位信息，等待链接阶段统一解析和修正</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 每个.c文件通常是独立编译的，汇编阶段只能确定当前文件内部函数和变量的位置，外部符号仍需在链接阶段解析</div>
 <pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm"><span class="token label function">hello.o:</span>     file format elf64<span class="token operator">-</span>x86<span class="token operator">-</span><span class="token number">64</span>
 
 
@@ -531,18 +541,24 @@ Disassembly of section .text:
   <span class="token number">1d</span>:	c3                   	ret    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>⑤链接</strong></p>
 <blockquote>
-<p><strong>概述</strong>：链接的<code>GCC</code>命令为<code>gcc hello.o -o hello</code>，主要是将<strong>目标文件</strong>和<strong>库文件</strong>组合拼装为一个<strong>可执行文件</strong></p>
+<p><strong>概述</strong>：链接阶段对应的<code>GCC</code>命令为<code>gcc hello.o -o hello</code>，主要是将<strong>目标文件</strong>和所需的<strong>库文件</strong>组合拼装为一个完整的<strong>可执行文件</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 目标文件中有个符号表，记录了该文件定义或引用了那些符号（全局变量和函数），可分为强符号和弱符号</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 目标文件中包含符号表，记录当前文件定义或引用的函数、全局变量等符号，以及这些符号的类型、位置和链接属性</div>
 <blockquote>
-<p>强符号就是<strong>初始化的全局变量</strong>和<strong>所有函数</strong>，弱符号就是<strong>未初始化的全局变量</strong></p>
+<p>对于需要<strong>跨文件链接</strong>的符号，可以分为<strong>强符号</strong>和<strong>弱符号</strong>，用于描述符号的<strong>链接可见性</strong>，以及出现<strong>同名符号</strong>时的解析规则</p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 链接的核心工作为符号解析和重定位，其中符号解析主要是将每个符号的引用与对应的符号定义精确关联起来</div>
 <blockquote>
-<p><strong>重定位</strong>：将多个<code>.o</code>文件中<strong>相同的段</strong>合并随后为所有的符号分配<strong>绝对地址</strong>，最后遍历代码<strong>填补占位符</strong></p>
+<p><strong>普通函数</strong>和<strong>全局变量</strong>通常产生<strong>强符号</strong>，<strong>弱符号</strong>通常需要借助<code>GCC</code>的<code>__attribute__((weak))</code>等编译器扩展<strong>显式声明</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 链接器不允许同名的强符号，如果一个强符号和多个弱符号同名，链接器会选择强符号</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 如果有多个弱符号同名，链接器会任选其中一个，这个很容易导致隐蔽bug</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 链接阶段的核心工作主要包括符号解析和重定位，前者负责找到每个外部符号对应的定义，后者负责确定代码和数据的地址布局</div>
+<blockquote>
+<p><strong>符号解析</strong>：将各个<code>.o</code>文件中对<strong>函数和全局变量</strong>的引用，与<strong>其他目标文件或库</strong>中对应的符号定义建立关联</p>
+</blockquote>
+<blockquote>
+<p><strong>重定位</strong>：将多个<code>.o</code>文件中<strong>相同的段</strong>合并随后为所有的符号分配<strong>绝对地址</strong>，最后根据重定位信息<strong>填补占位符</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 链接器通常不允许出现多个同名的强符号定义，如果一个强符号与多个弱符号同名，则会优先选择强符号</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 如果存在多个同名的弱符号定义，链接器通常会选择其中一个，但具体结果可能受链接顺序和工具链影响，容易导致隐蔽bug</div>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* ------ main.c ------ */</span>
 <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment">// 强符号：初始化的全局变量</span>
 <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -559,10 +575,57 @@ Disassembly of section .text:
 <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 强符号</span>
     x <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>  <span class="token comment">// 表面上改的是 utils.c 的 x，实际把 main.c 的 x 给改了！</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="2-程序内存布局"><a href="#2-程序内存布局" class="headerlink" title="2.程序内存布局"></a>2.程序内存布局</h4><p><strong>①引言</strong></p>
+<p><strong>⑥程序内存布局</strong></p>
 <blockquote>
-<p><strong>概述</strong>：</p>
+<p><strong>概述</strong>：一个典型的<strong>用户态进程内存布局</strong>如下图所示，主要由<code>.text</code>、<code>.rodata</code>、<code>.data</code>、<code>.bss</code>、<code>heap</code>和<code>stack</code>组成</p>
 </blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 程序运行后，不同类型的代码和数据通常会被组织到不同的内存区域，不同区域具有不同的用途、访问权限、生命周期和管理方式</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 这种分区方式便于操作系统对代码和数据进行独立的加载、保护、分配与回收，提高内存管理效率并增强程序运行时的安全性</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 该布局只是现代操作系统中常见的典型模型，实际地址分布会受到操作系统、处理器架构、编译器、链接方式和ASLR等因素影响</div>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">High Address  ┌──────────────────────────────────────┐
+              │                                      │
+              │                                      │   Stack
+              │                Stack                 │   作用：保存函数调用过程中的运行时数据
+              │                                      │   典型对象：局部变量、返回地址、栈帧
+              │                                      │   特点：可读、可写、通常不可执行；通常向下增长
+              ├──────────────────────────────────────┤
+              │                                      │
+              │                                      │   mmap / Shared Libraries
+              │       mmap / Shared Libraries        │   作用：建立文件、匿名内存和动态库映射
+              │                                      │   典型对象：动态库、文件映射、匿名映射
+              │                                      │   特点：权限可配置，取决于具体映射属性
+              ├──────────────────────────────────────┤
+              │                                      │
+              │                                      │   Heap
+              │                 Heap                 │   作用：提供运行时动态内存分配
+              │                                      │   典型对象：malloc/calloc/realloc 分配的对象
+              │                                      │   特点：可读、可写、通常不可执行；通常向上增长
+              ├──────────────────────────────────────┤
+              │                                      │
+              │                                      │   .bss
+              │                  .bss                │   作用：保存零初始化的静态存储期数据
+              │                                      │   典型对象：未初始化或零初始化的全局/static 变量
+              │                                      │   特点：可读、可写、通常不可执行；加载时清零
+              ├──────────────────────────────────────┤
+              │                                      │
+              │                                      │   .data
+              │                 .data                │   作用：保存已初始化的可写静态数据
+              │                                      │   典型对象：已初始化的全局变量、static 变量
+              │                                      │   特点：可读、可写、通常不可执行；初值存于程序镜像
+              ├──────────────────────────────────────┤
+              │                                      │
+              │                                      │   .rodata
+              │                .rodata               │   作用：保存程序中的只读数据
+              │                                      │   典型对象：字符串字面量、只读常量数据
+              │                                      │   特点：可读、不可写、通常不可执行
+              ├──────────────────────────────────────┤
+              │                                      │
+              │                                      │   .text
+              │                 .text                │   作用：保存程序编译后的机器指令
+              │                                      │   典型对象：函数代码、可执行指令
+Low Address   │                                      │   特点：可读、可执行、不可写
+              └──────────────────────────────────────┘<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -729,21 +792,21 @@ Disassembly of section .text:
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2023/11/07/hexo-bo-ke-kuang-jia-da-jian-yi-ji-ge-xing-hua/">
+                <a href="/2023/11/07/c-yu-yan-xue-xi-bi-ji-yi/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/18.webp" class="responsive-img" alt="Hexo个人博客搭建" loading="lazy" decoding="async">
+                        <img src="/medias/featureimages/0.webp" class="responsive-img" alt="C语言学习笔记（一）" loading="lazy" decoding="async">
                         
-                        <span class="card-title">Hexo个人博客搭建</span>
+                        <span class="card-title">C语言学习笔记（一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Hexo 环境配置、部署与主题个性化
+                            C 语言编译流程与程序内存布局
                         
                     </div>
                     <div class="publish-info">
@@ -754,23 +817,24 @@ Disassembly of section .text:
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E4%BD%9C%E6%B5%81/" class="post-category">
-                                    工作流
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    编程语言
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
                     </a>
                     
-                    <a href="/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6/">
-                        <span class="chip bg-color">静态博客框架</span>
+                    <a href="/tags/%E3%80%8AC%E5%92%8C%E6%8C%87%E9%92%88%E3%80%8B/">
+                        <span class="chip bg-color">《C和指针》</span>
                     </a>
                     
                 </div>

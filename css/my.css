@@ -6,6 +6,43 @@
     cursor: url("/medias/mouse/Hand.cur"),auto!important;
 }
 
+/* Keep homepage article-card images at a consistent 16:9 ratio. */
+#articles .card-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+#articles .card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+/* On wide desktops, widen the three-column grid so 220px images remain 16:9. */
+@media only screen and (min-width: 1400px) {
+    #articles {
+        max-width: 1245px;
+    }
+
+    #articles .card-image {
+        height: 220px;
+        aspect-ratio: auto;
+    }
+}
+
+/* Anchor previous/next badges to their corresponding card containers. */
+.prev-next .article {
+    position: relative;
+}
+
+/* Align the next badge with the card's actual right edge. */
+.prev-next .right-badge {
+    right: 0;
+}
+
 /* Keep the article, its background, and the previous/next cards aligned. */
 @media only screen and (min-width: 768px) {
     #artDetail {
@@ -70,6 +107,32 @@
     }
 }
 
+/* Keep previous/next cards readable and scroll-free on small screens. */
+@media only screen and (max-width: 767px) {
+    #artDetail #prenext-posts {
+        width: auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    #artDetail #prenext-posts .article-row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #artDetail #prenext-posts .article {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #artDetail #prenext-posts .card {
+        width: 100%;
+    }
+}
+
 /* Keep inline code on the surrounding text baseline. */
 #articleContent p code:not(pre code),
 #articleContent li code:not(pre code),
@@ -90,21 +153,31 @@
 
 /* Region trees use a scoped, high-contrast palette on the Prism background. */
 #articleContent pre.language-region-tree,
-#articleContent pre.language-memory-map {
+#articleContent pre.language-memory-map,
+#articleContent pre.language-tree,
+#articleContent pre.language-uboot {
     --region-code-fg: #d6deeb;
     --region-title: #ffcc66;
     --region-property: #82aaff;
     --region-value: #c3e88d;
     --region-number: #f78c6c;
     --region-structure: #89ddff;
+    --uboot-command: #c792ea;
+    --uboot-variable: #82aaff;
+    --uboot-comment: #8796a5;
+    --uboot-string: #c3e88d;
     overflow-x: auto;
 }
 
 #articleContent pre.language-region-tree,
 #articleContent pre.language-memory-map,
+#articleContent pre.language-tree,
+#articleContent pre.language-uboot,
 #articleContent pre.language-region-tree code.language-region-tree,
-#articleContent pre.language-memory-map code.language-memory-map {
-    color: var(--region-code-fg) !important;
+#articleContent pre.language-memory-map code.language-memory-map,
+#articleContent pre.language-tree code.language-tree,
+#articleContent pre.language-uboot code.language-uboot {
+    color: #d6deeb !important;
     white-space: pre !important;
     word-break: normal !important;
     overflow-wrap: normal !important;
@@ -143,6 +216,62 @@
 #articleContent pre.language-memory-map code.language-memory-map .token.region-name {
     color: var(--region-title) !important;
     font-weight: 600;
+}
+
+#articleContent pre.language-tree code.language-tree .token.tree-root,
+#articleContent pre.language-tree code.language-tree .token.tree-node,
+#articleContent pre.language-tree code.language-tree .token.tree-comment,
+#articleContent pre.language-tree code.language-tree .token.tree-glyph,
+#articleContent pre.language-uboot code.language-uboot .token.comment,
+#articleContent pre.language-uboot code.language-uboot .token.command,
+#articleContent pre.language-uboot code.language-uboot .token.subcommand,
+#articleContent pre.language-uboot code.language-uboot .token.filename,
+#articleContent pre.language-uboot code.language-uboot .token.variable,
+#articleContent pre.language-uboot code.language-uboot .token.string,
+#articleContent pre.language-uboot code.language-uboot .token.number {
+    opacity: 1;
+}
+
+#articleContent pre.language-tree code.language-tree .token.tree-root {
+    color: #ffcc66 !important;
+    font-weight: 700;
+}
+
+#articleContent pre.language-tree code.language-tree .token.tree-node {
+    color: #82aaff !important;
+    font-weight: 600;
+}
+
+#articleContent pre.language-tree code.language-tree .token.tree-comment,
+#articleContent pre.language-uboot code.language-uboot .token.comment {
+    color: #8796a5 !important;
+    font-style: italic;
+}
+
+#articleContent pre.language-tree code.language-tree .token.tree-glyph {
+    color: #89ddff !important;
+}
+
+#articleContent pre.language-uboot code.language-uboot .token.command {
+    color: #c792ea !important;
+    font-weight: 700;
+}
+
+#articleContent pre.language-uboot code.language-uboot .token.subcommand,
+#articleContent pre.language-uboot code.language-uboot .token.filename {
+    color: #82aaff !important;
+}
+
+#articleContent pre.language-uboot code.language-uboot .token.variable {
+    color: #82aaff !important;
+}
+
+#articleContent pre.language-uboot code.language-uboot .token.string {
+    color: #c3e88d !important;
+}
+
+#articleContent pre.language-uboot code.language-uboot .token.number {
+    color: #f78c6c !important;
 }
 
 .mobile-menu-toggle {
@@ -234,7 +363,9 @@ a:focus-visible {
 }
 
 #articleContent pre.language-region-tree,
-#articleContent pre.language-memory-map {
+#articleContent pre.language-memory-map,
+#articleContent pre.language-tree,
+#articleContent pre.language-uboot {
     max-width: 100%;
     box-sizing: border-box;
 }

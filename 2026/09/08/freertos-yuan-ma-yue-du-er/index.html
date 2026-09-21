@@ -1,0 +1,1743 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="FreeRTOS,内存管理,heap_4,动态内存分配">
+    <meta name="description" content="FreeRTOS内存管理，主要围绕heap_4.c">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://paopaoziye.github.io/2026/09/08/freertos-yuan-ma-yue-du-er/">
+    <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="FreeRTOS源码阅读（二） | Zfk&#39;s Study Notes">
+    <meta property="og:description" content="FreeRTOS内存管理，主要围绕heap_4.c">
+    <meta property="og:url" content="https://paopaoziye.github.io/2026/09/08/freertos-yuan-ma-yue-du-er/">
+    <meta property="og:site_name" content="Zfk&#39;s Study Notes">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="FreeRTOS源码阅读（二） | Zfk&#39;s Study Notes">
+    <meta name="twitter:description" content="FreeRTOS内存管理，主要围绕heap_4.c">
+    <meta name="twitter:url" content="https://paopaoziye.github.io/2026/09/08/freertos-yuan-ma-yue-du-er/">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>FreeRTOS源码阅读（二） | Zfk&#39;s Study Notes</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <style type="text/css">
+        .uk-alert {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #ebf7fd;
+            color: #2d7091;
+            border: 0px solid #ffffff;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .uk-alert-success {
+            background: rgba(120, 199, 9, 0.1);
+            color: rgba(120, 199, 9);
+            border-left: 6px solid rgba(120, 199, 9);
+            font-weight: 600;
+        }
+        .uk-alert-warning {
+            background: #FFF8E9;
+            color: #FFB91F;
+            border-left: 6px solid #FFB91F;
+            font-weight: 600;
+        }
+        .uk-alert-danger {
+            background: #FFE6E6;
+            color: #FF7979;
+            border-left: 6px solid#FF7979;
+            font-weight: 600;
+        }
+        .uk-alert-list {
+            background: #ECF7FE;
+            color: #3CACF4;
+            border-left: 6px solid#3CACF4;
+            font-weight: 600;
+        }
+ </style>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/my_logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zfk&#39;s Study Notes</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse" aria-label="打开导航菜单"><i class="fas fa-bars" aria-hidden="true"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" aria-hidden="true" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/my_logo.png" class="logo-img circle responsive-img" alt="Zfk&#39;s Study Notes">
+        
+        <div class="logo-name">Zfk&#39;s Study Notes</div>
+        <div class="logo-desc">
+            
+            嵌入式系统、通信协议、RTOS 与软件开发学习笔记
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/38.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">FreeRTOS源码阅读（二）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
+    }
+
+    #articleContent :focus-visible {
+        outline: 2px solid #42b983;
+        outline-offset: 3px;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/FreeRTOS/">
+                                <span class="chip bg-color">FreeRTOS</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/RTOS/" class="post-category">
+                                RTOS
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-09-08
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="RTOS"><a href="#RTOS" class="headerlink" title="RTOS"></a>RTOS</h1><h2 id="FreeRTOS"><a href="#FreeRTOS" class="headerlink" title="FreeRTOS"></a>FreeRTOS</h2><h3 id="FreeRTOS源码阅读（二）"><a href="#FreeRTOS源码阅读（二）" class="headerlink" title="FreeRTOS源码阅读（二）"></a>FreeRTOS源码阅读（二）</h3><h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><p><strong>①引言</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>FreeRTOS</code>创建内核对象时，需要为其<strong>控制结构</strong>及<strong>相关存储区域</strong>提供内存，有<strong>静态内存分配</strong>与<strong>动态内存分配</strong>两种方式</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 静态内存分配由用户提前提供对象所需内存，动态内存分配则由FreeRTOS在对象创建时从Heap中动态申请内存</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> FreeRTOS提供五种不同的动态内存分配算法，即portable/MemMang下的heap_x.c，统一实现pvPortMalloc和vPortFree接口</div>
+<blockquote>
+<p><code>heap_1.c</code>：只支持内存申请而<strong>不支持释放</strong>，通过不断移动<strong>堆顶指针</strong>完成内存申请，适合<strong>对象创建后长期不删除</strong>的系统</p>
+</blockquote>
+<blockquote>
+<p><code>heap_2.c</code>：支持内存申请和释放，空闲内存块按照<strong>块的大小</strong>升序排列，但不会合并相<strong>邻空闲块</strong>，长期运行<strong>容易产生碎片</strong></p>
+</blockquote>
+<blockquote>
+<p><code>heap_3.c</code>：本质上是对标准<code>C</code>库的<code>malloc</code>和<code>free</code>的封装，其具体的<strong>内存分配</strong>与<strong>释放机制</strong>由底层<code>C</code>库实现决定</p>
+</blockquote>
+<blockquote>
+<p><code>heap_4.c</code>：支持内存申请和释放，空闲内存块按照<strong>起始地址大小</strong>升序排列，采用<strong>首次匹配算法</strong>并支持<strong>合并相邻空闲块</strong></p>
+</blockquote>
+<blockquote>
+<p><code>heap_5.c</code>：在<code>heap_4.c</code>的基础上增加了对<strong>多个非连续内存区域</strong>的支持，适合系统中存在多块独立<code>RAM</code>区域的情况</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> heap_3.c的实时性、内存碎片和线程安全依赖底层C库实现，可控性相对较弱，通常用于需要复用标准库内存管理机制的场景</div>
+<p><strong>②匹配算法</strong></p>
+<blockquote>
+<p><strong>概述</strong>：常用的匹配算法有<strong>最佳匹配算法</strong>、<strong>首次匹配算法</strong>、<strong>最坏匹配算法</strong>和<strong>临近匹配算法</strong>，如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 在动态内存频繁申请和释放的过程中，往往会产生一些无法被充分利用的内存空间，主要分为内部碎片和外部碎片</div>
+<blockquote>
+<p><strong>内部碎片</strong>：指<strong>已分配内存块中</strong>未被实际使用的空间，主要来源于<strong>内存对齐</strong>、<strong>固定分配粒度</strong>以及<strong>最小块大小限制</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>外部碎片</strong>：指空闲内存被分散成<strong>多个不连续的小块</strong>，主要来源于<strong>不同大小</strong>内存块的<strong>频繁申请和释放</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> heap_4.c和heap_5.c采用首次匹配降低空闲块搜索开销，并结合相邻空闲块合并机制，在分配效率和碎片控制之间取得较好平衡</div>
+<blockquote>
+<p><code>heap_2.c</code>采用<strong>最佳匹配</strong>，尽量保留较大的空闲块<strong>供后续分配使用</strong>，但是长时间运行容易产生<strong>外部内存碎片</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> heap_2.c和heap_4.c的工作机制不同，所以其空闲内存块组织方式不同，前者基于内存块大小，后者基于内存块起始地址</div>
+<blockquote>
+<p>按照<strong>内存块大小</strong>组织空闲内存便于优先找到<strong>与申请大小最接近的空闲块</strong>，按照<strong>内存块起始地址</strong>组织空闲内存便于<strong>合并相邻内存块</strong></p>
+</blockquote>
+<p><img src="/images/loading.gif" data-original="/image/FreeRTOS_1.png" alt="匹配算法"><br><strong>③堆初始化</strong></p>
+<blockquote>
+<p><strong>概述</strong>：以下主要围绕<code>heap_4.c</code>进行拆解，其相关<strong>数据结构</strong>、<strong>统计信息</strong>、<strong>宏定义</strong>和<strong>堆初始化接口</strong><code>prvHeapInit</code>如下所示</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> heap_4.c采用静态数组作为内存堆，每个内存块都有一个块头BlockLink_t，将空闲内存块按照起始地址大小串联为一个单向链表</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 内存堆有两个哨兵节点xStart和pxEnd，初始时整个内存堆（不包含pxEnd）为唯一的空闲内存块，详细如下图所示</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 内存对齐要求数据起始地址满足一定的规则，若不满足内存对齐，会增加访问内存所需的CPU周期数甚至引发异常</div>
+<p><img src="/images/loading.gif" data-original="/image/Freertos_5.png" alt="初始堆内存"></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// configAPPLICATION_ALLOCATED_HEAP 为 1 时使用外部 ucHeap，否则由本文件定义</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token punctuation">(</span> configAPPLICATION_ALLOCATED_HEAP <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span></span></span>
+    <span class="token comment">// ucHeap 在其他文件中定义，可通过链接配置安排其存放位置</span>
+    <span class="token keyword">extern</span> <span class="token class-name">uint8_t</span> ucHeap<span class="token punctuation">[</span> configTOTAL_HEAP_SIZE <span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+    <span class="token comment">// 在本文件的特权数据区定义堆数组</span>
+    PRIVILEGED_DATA <span class="token keyword">static</span> <span class="token class-name">uint8_t</span> ucHeap<span class="token punctuation">[</span> configTOTAL_HEAP_SIZE <span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">/* 结束堆数组来源选择 */</span></span>
+
+<span class="token comment">/*
+ * 空闲块链表节点，同时作为每个内存块前部的管理头
+ * 空闲链表按内存地址升序排列，从而能够判断并合并物理相邻块
+ */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">A_BLOCK_LINK</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 指向地址更高的下一个空闲块，启用堆保护时保存异或编码后的地址</span>
+    <span class="token keyword">struct</span> <span class="token class-name">A_BLOCK_LINK</span> <span class="token operator">*</span> pxNextFreeBlock<span class="token punctuation">;</span>
+    <span class="token comment">// 保存包含本块管理头在内的总字节数，最高位兼作已分配标志</span>
+    <span class="token class-name">size_t</span> xBlockSize<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> BlockLink_t<span class="token punctuation">;</span>
+
+<span class="token comment">// 把块头结构大小向上调整为端口对齐单位的整数倍</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token class-name">size_t</span> xHeapStructSize <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span> BlockLink_t <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> portBYTE_ALIGNMENT <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">~</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 起始哨兵保存空闲链表入口；结束哨兵指针在首次初始化后指向堆尾块头</span>
+PRIVILEGED_DATA <span class="token keyword">static</span> BlockLink_t xStart<span class="token punctuation">;</span>
+PRIVILEGED_DATA <span class="token keyword">static</span> BlockLink_t <span class="token operator">*</span> pxEnd <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* 堆使用情况和操作次数统计 */</span>
+PRIVILEGED_DATA <span class="token keyword">static</span> <span class="token class-name">size_t</span> xFreeBytesRemaining <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0U</span><span class="token punctuation">;</span>             <span class="token comment">// 当前空闲字节总数，不代表最大连续空闲块</span>
+PRIVILEGED_DATA <span class="token keyword">static</span> <span class="token class-name">size_t</span> xMinimumEverFreeBytesRemaining <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0U</span><span class="token punctuation">;</span>  <span class="token comment">// 历史最小空闲字节数</span>
+PRIVILEGED_DATA <span class="token keyword">static</span> <span class="token class-name">size_t</span> xNumberOfSuccessfulAllocations <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0U</span><span class="token punctuation">;</span>  <span class="token comment">// 成功分配次数</span>
+PRIVILEGED_DATA <span class="token keyword">static</span> <span class="token class-name">size_t</span> xNumberOfSuccessfulFrees <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0U</span><span class="token punctuation">;</span>        <span class="token comment">// 成功释放次数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
+ * 函数功能：
+ * 初始化哨兵节点xStart和pxEnd，将剩余内存作为第一个空闲内存块并建立链表逻辑，最后更新相关统计信息
+ *
+ * 参数：
+ * 无
+ *
+ * 返回值：
+ * 无返回值
+ */</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">prvHeapInit</span><span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 指向初始化后创建的第一个空闲块</span>
+    BlockLink_t <span class="token operator">*</span> pxFirstFreeBlock<span class="token punctuation">;</span>
+
+    <span class="token comment">// 保存整理后的堆首地址和堆尾结束标记地址</span>
+    portPOINTER_SIZE_TYPE uxStartAddress<span class="token punctuation">,</span> uxEndAddress<span class="token punctuation">;</span>
+
+    <span class="token comment">// 记录实际可用于初始化堆的容量</span>
+    <span class="token class-name">size_t</span> xTotalHeapSize <span class="token operator">=</span> configTOTAL_HEAP_SIZE<span class="token punctuation">;</span>
+
+    <span class="token comment">// 转成整数地址，便于检查和调整堆首的对齐位置，32位系统上默认为uint32_t</span>
+    uxStartAddress <span class="token operator">=</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> ucHeap<span class="token punctuation">;</span>
+
+    <span class="token comment">// 堆首未对齐时，将它移到下一个对齐位置</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> uxStartAddress <span class="token operator">&amp;</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 未对齐的地址加上“对齐值减一”，跨到下一个对齐区间</span>
+        uxStartAddress <span class="token operator">+=</span> <span class="token punctuation">(</span> portBYTE_ALIGNMENT <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 清掉地址低位，得到对齐后的堆首地址</span>
+        uxStartAddress <span class="token operator">&amp;=</span> <span class="token operator">~</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 扣掉堆数组开头因对齐而不能使用的字节</span>
+        xTotalHeapSize <span class="token operator">-=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> uxStartAddress <span class="token operator">-</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> ucHeap <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 启用堆保护时，获取用于编码空闲链表指针的随机值</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token punctuation">(</span> configENABLE_HEAP_PROTECTOR <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span></span></span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 将随机指针保护值保存到 xHeapCanary</span>
+        <span class="token function">vApplicationGetRandomHeapCanary</span><span class="token punctuation">(</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span> xHeapCanary <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+    <span class="token comment">// 将空闲链表表头连接到堆中的第一个空闲块</span>
+    xStart<span class="token punctuation">.</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> uxStartAddress <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 链表表头不对应实际堆块，因此块大小为零</span>
+    xStart<span class="token punctuation">.</span>xBlockSize <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 计算这段堆空间末尾的地址</span>
+    uxEndAddress <span class="token operator">=</span> uxStartAddress <span class="token operator">+</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> xTotalHeapSize<span class="token punctuation">;</span>
+
+    <span class="token comment">// 在堆尾留出一个块管理头，用作空闲链表的结束标记</span>
+    uxEndAddress <span class="token operator">-=</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> xHeapStructSize<span class="token punctuation">;</span>
+
+    <span class="token comment">// 将结束标记的地址向下调整到对齐位置</span>
+    uxEndAddress <span class="token operator">&amp;=</span> <span class="token operator">~</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 让 pxEnd 指向堆尾的结束标记</span>
+    pxEnd <span class="token operator">=</span> <span class="token punctuation">(</span> BlockLink_t <span class="token operator">*</span> <span class="token punctuation">)</span> uxEndAddress<span class="token punctuation">;</span>
+
+    <span class="token comment">// pxEnd 不包含可分配空间</span>
+    pxEnd<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 空指针表示空闲链表到此结束</span>
+    pxEnd<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 在对齐后的堆首放置第一个空闲块的管理头</span>
+    pxFirstFreeBlock <span class="token operator">=</span> <span class="token punctuation">(</span> BlockLink_t <span class="token operator">*</span> <span class="token punctuation">)</span> uxStartAddress<span class="token punctuation">;</span>
+
+    <span class="token comment">// 第一个空闲块占据堆首到结束标记之间的全部空间</span>
+    pxFirstFreeBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> uxEndAddress <span class="token operator">-</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> pxFirstFreeBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 第一个空闲块后面连接堆尾的结束标记</span>
+    pxFirstFreeBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxEnd <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 初始时只有一个空闲块，当前值也是历史最小空闲量</span>
+    xMinimumEverFreeBytesRemaining <span class="token operator">=</span> pxFirstFreeBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
+    xFreeBytesRemaining <span class="token operator">=</span> pxFirstFreeBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>④<code>pvPortMalloc</code></strong></p>
+<blockquote>
+<p><strong>概述</strong>：负责<strong>从头遍历</strong>空闲链表使用<strong>首次匹配算法</strong>分配空闲内存块，并根据剩余空间决定是否进行<strong>内存块分割</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 内核实际分配的内存大小为用户请求大小 + 块头，并继续向上对齐到portBYTE_ALIGNMENT的整数倍</div>
+<blockquote>
+<p><code>FreeRTOS</code>还提供<code>pvPortCalloc</code>，用于申请<strong>连续堆内存</strong>并将其初始化为<code>0</code>，本质上是对<code>pvPortMalloc</code>的封装</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> heap_4.c使用内存块大小的最高位作为内存块是否被分配的标记，当最高位为1时，表明该内存块被分配</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果选中空闲块在满足本次申请后，剩余空间大于heapMINIMUM_BLOCK_SIZE，需要进行内存块分割避免产生过小的空闲内存块</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 分配前需要检查尺寸计算是否发生整数溢出、请求大小是否占用xBlockSize的最高状态位，以及请求大小是否超过当前总空闲内存</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 拆分后剩余部分必须大于两个对齐块头，避免产生过小的独立空闲块</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">heapMINIMUM_BLOCK_SIZE</span>    <span class="token expression"><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> xHeapStructSize <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span></span></span>
+
+<span class="token comment">/* size_t 位宽和算术溢出检查相关 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">heapBITS_PER_BYTE</span>                         <span class="token expression"><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">8</span> <span class="token punctuation">)</span>                                                    </span><span class="token comment">// 每字节 8 位，供最高位标志计算使用</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">heapSIZE_MAX</span>                              <span class="token expression"><span class="token punctuation">(</span> <span class="token operator">~</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>                                               </span><span class="token comment">// size_t 能表示的最大值</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapMULTIPLY_WILL_OVERFLOW</span><span class="token expression"><span class="token punctuation">(</span> a<span class="token punctuation">,</span> b <span class="token punctuation">)</span>        <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> a <span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> b <span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token punctuation">(</span> heapSIZE_MAX <span class="token operator">/</span> <span class="token punctuation">(</span> a <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>           </span><span class="token comment">// 判断 a*b 是否溢出</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapADD_WILL_OVERFLOW</span><span class="token expression"><span class="token punctuation">(</span> a<span class="token punctuation">,</span> b <span class="token punctuation">)</span>             <span class="token punctuation">(</span> <span class="token punctuation">(</span> a <span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token punctuation">(</span> heapSIZE_MAX <span class="token operator">-</span> <span class="token punctuation">(</span> b <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>                                </span><span class="token comment">// 判断 a+b 是否溢出</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapSUBTRACT_WILL_UNDERFLOW</span><span class="token expression"><span class="token punctuation">(</span> a<span class="token punctuation">,</span> b <span class="token punctuation">)</span>       <span class="token punctuation">(</span> <span class="token punctuation">(</span> a <span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token punctuation">(</span> b <span class="token punctuation">)</span> <span class="token punctuation">)</span>                                                   </span><span class="token comment">// 判断 a-b 是否下溢</span></span>
+
+<span class="token comment">/* 内存块分配状态相关 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">heapBLOCK_ALLOCATED_BITMASK</span>               <span class="token expression"><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> <span class="token operator">*</span> heapBITS_PER_BYTE <span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>  </span><span class="token comment">// xBlockSize 的最高位作为已分配标志</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapBLOCK_SIZE_IS_VALID</span><span class="token expression"><span class="token punctuation">(</span> xBlockSize <span class="token punctuation">)</span>      <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> xBlockSize <span class="token punctuation">)</span> <span class="token operator">&amp;</span> heapBLOCK_ALLOCATED_BITMASK <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>                </span><span class="token comment">// 最高位未占用时，块大小有效</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapBLOCK_IS_ALLOCATED</span><span class="token expression"><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span>          <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">&amp;</span> heapBLOCK_ALLOCATED_BITMASK <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span>       </span><span class="token comment">// 判断内存块是否已分配</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapALLOCATE_BLOCK</span><span class="token expression"><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span>              <span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">|=</span> heapBLOCK_ALLOCATED_BITMASK <span class="token punctuation">)</span>               </span><span class="token comment">// 把内存块标记为已分配</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapFREE_BLOCK</span><span class="token expression"><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span>                  <span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">&amp;=</span> <span class="token operator">~</span>heapBLOCK_ALLOCATED_BITMASK <span class="token punctuation">)</span>              </span><span class="token comment">// 把内存块标记为空闲</span></span>
+
+<span class="token comment">// configENABLE_HEAP_PROTECTOR 为 1 时，使用随机指针保护值对链表指针进行异或编码</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token punctuation">(</span> configENABLE_HEAP_PROTECTOR <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span></span></span>
+
+    <span class="token comment">// 外部函数通过输出参数返回随机指针保护值</span>
+    <span class="token keyword">extern</span> <span class="token keyword">void</span> <span class="token function">vApplicationGetRandomHeapCanary</span><span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token operator">*</span> pxHeapCanary <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 保存空闲链表指针使用的随机保护值</span>
+    PRIVILEGED_DATA <span class="token keyword">static</span> portPOINTER_SIZE_TYPE xHeapCanary<span class="token punctuation">;</span>
+
+    <span class="token comment">// 写入和读取指针时使用同一保护值异或，指针损坏后更容易被范围断言发现</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapPROTECT_BLOCK_POINTER</span><span class="token expression"><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span>    <span class="token punctuation">(</span> <span class="token punctuation">(</span> BlockLink_t <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> portPOINTER_SIZE_TYPE <span class="token punctuation">)</span> <span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">^</span> xHeapCanary <span class="token punctuation">)</span> <span class="token punctuation">)</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+
+    <span class="token comment">// configENABLE_HEAP_PROTECTOR 不为 1 时，链表指针保持原值</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapPROTECT_BLOCK_POINTER</span><span class="token expression"><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span>    <span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span></span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">/* 结束堆保护器配置分支 */</span></span>
+
+<span class="token comment">// 断言解码后的块指针位于内部堆数组的首尾地址范围内</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">heapVALIDATE_BLOCK_POINTER</span><span class="token expression"><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span>                          </span><span class="token punctuation">\</span>
+    <span class="token expression"><span class="token function">configASSERT</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span> <span class="token operator">&gt;=</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span> ucHeap<span class="token punctuation">[</span> <span class="token number">0</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> </span><span class="token punctuation">\</span>
+                  <span class="token expression"><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span> ucHeap<span class="token punctuation">[</span> configTOTAL_HEAP_SIZE <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
+ * 函数功能：
+ * 从按地址排序的空闲链表中选择首个足够大的块，必要时拆分，并返回块头后的有效载荷地址
+ *
+ * 参数：
+ * xWantedSize  调用者请求的有效载荷字节数
+ *
+ * 返回值：
+ * 非 NULL  指向已分配块有效载荷的首地址
+ * NULL      请求尺寸无效、算术溢出、空闲总量不足或没有足够大的连续块
+ */</span>
+<span class="token keyword">void</span> <span class="token operator">*</span> <span class="token function">pvPortMalloc</span><span class="token punctuation">(</span> <span class="token class-name">size_t</span> xWantedSize <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 指向遍历后选中的空闲块</span>
+    BlockLink_t <span class="token operator">*</span> pxBlock<span class="token punctuation">;</span>
+    <span class="token comment">// 记录选中块在空闲链表中的前驱，以便摘除或接入拆分块</span>
+    BlockLink_t <span class="token operator">*</span> pxPreviousBlock<span class="token punctuation">;</span>
+    <span class="token comment">// 当选中块被拆分时，指向剩余空间形成的新空闲块头</span>
+    BlockLink_t <span class="token operator">*</span> pxNewBlockLink<span class="token punctuation">;</span>
+    <span class="token comment">// 初始值为 NULL，分配成功后改为有效载荷地址</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span> pvReturn <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token comment">// 保存把包含块头的请求尺寸补齐到对齐边界所需的额外字节数</span>
+    <span class="token class-name">size_t</span> xAdditionalRequiredSize<span class="token punctuation">;</span>
+    <span class="token comment">// 保存本次实际分配的块总大小，供跟踪接口使用</span>
+    <span class="token class-name">size_t</span> xAllocatedBlockSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 零尺寸请求不参与块头开销与对齐计算</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> xWantedSize <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 先确认有效载荷尺寸加上块头尺寸不会发生 size_t 溢出</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapADD_WILL_OVERFLOW</span><span class="token punctuation">(</span> xWantedSize<span class="token punctuation">,</span> xHeapStructSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 实际块大小必须包含对调用者隐藏的管理头</span>
+            xWantedSize <span class="token operator">+=</span> xHeapStructSize<span class="token punctuation">;</span>
+
+            <span class="token comment">// portBYTE_ALIGNMENT_MASK 是端口对齐掩码，低位不为零表示当前大小尚未对齐</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> xWantedSize <span class="token operator">&amp;</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0x00</span> <span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// portBYTE_ALIGNMENT 是端口要求的对齐字节数，这里计算还需补多少字节</span>
+                xAdditionalRequiredSize <span class="token operator">=</span> portBYTE_ALIGNMENT <span class="token operator">-</span> <span class="token punctuation">(</span> xWantedSize <span class="token operator">&amp;</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 只有补齐操作不会令 size_t 溢出时才扩大请求尺寸</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapADD_WILL_OVERFLOW</span><span class="token punctuation">(</span> xWantedSize<span class="token punctuation">,</span> xAdditionalRequiredSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// 把实际块大小向上调整为端口要求的对齐倍数</span>
+                    xWantedSize <span class="token operator">+=</span> xAdditionalRequiredSize<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// 对齐尺寸发生溢出，将请求大小置零，后续检查会拒绝该请求</span>
+                    xWantedSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 标记请求尺寸原本已对齐的测试覆盖路径</span>
+                <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 加上块头后发生溢出，将请求大小置零，后续检查会拒绝该请求</span>
+            xWantedSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 标记调用者传入零尺寸请求的测试覆盖路径</span>
+        <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 暂停任务调度，串行保护首次初始化、链表修改以及堆统计量更新</span>
+    <span class="token function">vTaskSuspendAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 堆尾结束标记尚未创建，说明堆还没有初始化</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> pxEnd <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 建立对齐后的堆边界、空闲链表和初始统计量</span>
+            <span class="token function">prvHeapInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 标记堆已经初始化、无需重复初始化的测试覆盖路径</span>
+            <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// 最高位必须保持空闲，因为该位稍后用于记录块的所有权状态</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapBLOCK_SIZE_IS_VALID</span><span class="token punctuation">(</span> xWantedSize <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 请求必须非零且不能超过全部空闲块的总字节数</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> xWantedSize <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span> xWantedSize <span class="token operator">&lt;=</span> xFreeBytesRemaining <span class="token punctuation">)</span> <span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 从地址最低的空闲块开始遍历，并同时维护当前节点的前驱</span>
+                pxPreviousBlock <span class="token operator">=</span> <span class="token operator">&amp;</span>xStart<span class="token punctuation">;</span>
+                pxBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> xStart<span class="token punctuation">.</span>pxNextFreeBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">// 在解引用链表节点前确认解码指针仍落在堆数组内</span>
+                <span class="token function">heapVALIDATE_BLOCK_POINTER</span><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 跳过过小的空闲块，直到找到足够大的块或到达链表末尾</span>
+                <span class="token keyword">while</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">&lt;</span> xWantedSize <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">!=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// 当前块成为下一候选块的前驱</span>
+                    pxPreviousBlock <span class="token operator">=</span> pxBlock<span class="token punctuation">;</span>
+                    <span class="token comment">// 解码并沿地址有序链表取得下一个候选块</span>
+                    pxBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment">// 每次推进后都验证候选块地址，尽早发现链表指针损坏</span>
+                    <span class="token function">heapVALIDATE_BLOCK_POINTER</span><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// 当前节点不是结束标记，说明已经找到足够大的连续空闲块</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span> pxBlock <span class="token operator">!=</span> pxEnd <span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// 解码前驱保存的块地址并跳过块头，得到调用者可见的有效载荷地址</span>
+                    pvReturn <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxPreviousBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">+</span> xHeapStructSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment">// 有效载荷仍应落在内部堆数组范围内</span>
+                    <span class="token function">heapVALIDATE_BLOCK_POINTER</span><span class="token punctuation">(</span> pvReturn <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// 从空闲链表摘除选中块，前驱直接接到其编码后的后继</span>
+                    pxPreviousBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxBlock<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token punctuation">;</span>
+
+                    <span class="token comment">// 先断言选中块大小足以执行后续无符号减法</span>
+                    <span class="token function">configASSERT</span><span class="token punctuation">(</span> <span class="token function">heapSUBTRACT_WILL_UNDERFLOW</span><span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">,</span> xWantedSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// 剩余空间足以容纳独立空闲块时，把选中块拆成已用部分和剩余部分</span>
+                    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">-</span> xWantedSize <span class="token punctuation">)</span> <span class="token operator">&gt;</span> heapMINIMUM_BLOCK_SIZE <span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment">// 新空闲块头位于选中块起点之后的 xWantedSize 偏移处</span>
+                        pxNewBlockLink <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pxBlock <span class="token punctuation">)</span> <span class="token operator">+</span> xWantedSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token comment">// 尺寸已对齐，因此拆分形成的新块头也必须满足端口对齐要求</span>
+                        <span class="token function">configASSERT</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> pxNewBlockLink <span class="token punctuation">)</span> <span class="token operator">&amp;</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                        <span class="token comment">// 剩余块继承选中块超出请求的全部尾部空间</span>
+                        pxNewBlockLink<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">=</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">-</span> xWantedSize<span class="token punctuation">;</span>
+                        <span class="token comment">// 把选中块记录的大小缩减为本次实际请求的总块大小</span>
+                        pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">=</span> xWantedSize<span class="token punctuation">;</span>
+
+                        <span class="token comment">// 新空闲块位于原块地址处，直接接回前驱当前保存的后继</span>
+                        pxNewBlockLink<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxPreviousBlock<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token punctuation">;</span>
+                        <span class="token comment">// 前驱保存编码后的新块地址，恢复地址有序链表</span>
+                        pxPreviousBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxNewBlockLink <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">else</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment">// 标记剩余空间过小、整个选中块都交给调用者的测试覆盖路径</span>
+                        <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+
+                    <span class="token comment">// 从空闲总量中扣除最终交给调用者的块总大小</span>
+                    xFreeBytesRemaining <span class="token operator">-=</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
+
+                    <span class="token comment">// 当前空闲总量低于历史记录时更新最低水位</span>
+                    <span class="token keyword">if</span><span class="token punctuation">(</span> xFreeBytesRemaining <span class="token operator">&lt;</span> xMinimumEverFreeBytesRemaining <span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment">// 更新历史最小空闲字节数</span>
+                        xMinimumEverFreeBytesRemaining <span class="token operator">=</span> xFreeBytesRemaining<span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">else</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment">// 标记本次分配未刷新最低水位的测试覆盖路径</span>
+                        <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+
+                    <span class="token comment">// 在写入所有权标志前保存纯尺寸，供分配跟踪事件使用</span>
+                    xAllocatedBlockSize <span class="token operator">=</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
+
+                    <span class="token comment">// 置位块大小的最高位，将该块标记为已分配</span>
+                    <span class="token function">heapALLOCATE_BLOCK</span><span class="token punctuation">(</span> pxBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment">// 已分配块不属于空闲链表，以受保护空指针标记其后继无效</span>
+                    pxBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment">// 记录一次成功分配，供堆统计接口汇总</span>
+                    xNumberOfSuccessfulAllocations<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// 记录已经遍历到链表末尾但仍没有合适空闲块的测试路径</span>
+                    <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 标记请求为零或超过空闲总量的测试覆盖路径</span>
+                <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 标记请求尺寸占用所有权最高位而被拒绝的测试覆盖路径</span>
+            <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// 向跟踪设施报告结果地址以及本次实际占用的块总大小</span>
+        <span class="token function">traceMALLOC</span><span class="token punctuation">(</span> pvReturn<span class="token punctuation">,</span> xAllocatedBlockSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 跟踪宏被配置为空时仍显式使用变量，避免产生未使用变量告警</span>
+        <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> xAllocatedBlockSize<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 共享堆状态修改结束，恢复任务调度</span>
+    <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> <span class="token function">xTaskResumeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// configUSE_MALLOC_FAILED_HOOK 为 1 时，分配失败后调用回调函数</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token punctuation">(</span> configUSE_MALLOC_FAILED_HOOK <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span></span></span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 空返回地址表示本次请求没有获得内存块</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> pvReturn <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 调用分配失败回调函数</span>
+            <span class="token function">vApplicationMallocFailedHook</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 标记启用失败钩子但本次分配成功的测试覆盖路径</span>
+            <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+    <span class="token comment">// 无论成功或失败，返回值都必须满足端口对齐掩码检查；空指针通常也满足该表达式</span>
+    <span class="token function">configASSERT</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> pvReturn <span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span> <span class="token class-name">size_t</span> <span class="token punctuation">)</span> portBYTE_ALIGNMENT_MASK <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 返回有效载荷地址，分配失败时返回 NULL</span>
+    <span class="token keyword">return</span> pvReturn<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
+ * 函数功能：
+ * 分配可容纳 xNum 个 xSize 字节元素的连续空间，并把有效载荷清零
+ *
+ * 参数：
+ * xNum   元素数量
+ * xSize  每个元素的字节数
+ *
+ * 返回值：
+ * 非 NULL  已清零的有效载荷地址
+ * NULL      尺寸乘法溢出或底层分配失败
+ */</span>
+<span class="token keyword">void</span> <span class="token operator">*</span> <span class="token function">pvPortCalloc</span><span class="token punctuation">(</span> <span class="token class-name">size_t</span> xNum<span class="token punctuation">,</span>
+                     <span class="token class-name">size_t</span> xSize <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 默认记录失败，只有乘法安全且 malloc 成功后才得到有效地址</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span> pv <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 先验证元素数量与元素大小的乘积能够由 size_t 表示</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapMULTIPLY_WILL_OVERFLOW</span><span class="token punctuation">(</span> xNum<span class="token punctuation">,</span> xSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 按全部元素所需的总字节数申请连续内存</span>
+        pv <span class="token operator">=</span> <span class="token function">pvPortMalloc</span><span class="token punctuation">(</span> xNum <span class="token operator">*</span> xSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 只有分配成功时才能访问并初始化有效载荷</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> pv <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 把所有元素占用的字节清零，实现 calloc 的初始化语义</span>
+            <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> <span class="token function">memset</span><span class="token punctuation">(</span> pv<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> xNum <span class="token operator">*</span> xSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 返回已清零地址，或把溢出与分配失败统一表示为空地址</span>
+    <span class="token keyword">return</span> pv<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>⑤<code>vPortFree</code></strong></p>
+<blockquote>
+<p><strong>概述</strong>：找到释放内存块<strong>真实起始地址</strong>，清除<strong>分配标志</strong>并通过<code>prvInsertBlockIntoFreeList</code>将其加入空闲链表并进行<strong>内存块合并</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> pvPortMalloc返回的块头之后的有效载荷地址，因此释放的时需要将用户传入地址向低地址方向回退xHeapStructSize得到真实地址</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 空闲链表中的内存块按照地址从低到高排列，因此插入位置的前驱和后继正好是最可能与释放块物理相邻的两个空闲块</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 释放前需要检查恢复出的块地址是否合法、内存块是否带有已分配标志，以及pxNextFreeBlock是否仍为受保护的NULL</div>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 控制释放内存时是否清零：未定义 configHEAP_CLEAR_MEMORY_ON_FREE 时，默认设为 0，即释放时不清零 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">configHEAP_CLEAR_MEMORY_ON_FREE</span></span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">configHEAP_CLEAR_MEMORY_ON_FREE</span>    <span class="token expression"><span class="token number">0</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
+ * 函数功能：
+ * 校验并释放一个已分配块，按配置擦除有效载荷，再把它插入地址有序链表并合并相邻块
+ *
+ * 参数：
+ * pv  先前由本分配器返回的有效载荷地址；NULL 不触发任何操作
+ *
+ * 返回值：
+ * 无返回值
+ */</span>
+<span class="token keyword">void</span> <span class="token function">vPortFree</span><span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> pv <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 用字节指针保存调用者地址，便于向前移动到隐藏块头</span>
+    <span class="token class-name">uint8_t</span> <span class="token operator">*</span> puc <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pv<span class="token punctuation">;</span>
+    <span class="token comment">// 指向从有效载荷地址恢复出的块管理头</span>
+    BlockLink_t <span class="token operator">*</span> pxLink<span class="token punctuation">;</span>
+
+    <span class="token comment">// 空地址无需执行块头恢复和链表操作</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> pv <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 有效载荷之前紧邻一个经过对齐的 BlockLink_t 管理头</span>
+        puc <span class="token operator">-=</span> xHeapStructSize<span class="token punctuation">;</span>
+
+        <span class="token comment">// 把字节地址转换为块头指针，供后续读取大小和所有权状态</span>
+        pxLink <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span> <span class="token punctuation">)</span> puc<span class="token punctuation">;</span>
+
+        <span class="token comment">// 在读取块头字段前确认恢复出的地址位于内部堆数组范围内</span>
+        <span class="token function">heapVALIDATE_BLOCK_POINTER</span><span class="token punctuation">(</span> pxLink <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 正常释放的块必须仍带有已分配所有权标志</span>
+        <span class="token function">configASSERT</span><span class="token punctuation">(</span> <span class="token function">heapBLOCK_IS_ALLOCATED</span><span class="token punctuation">(</span> pxLink <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 正常释放的块不应链接在空闲链表中</span>
+        <span class="token function">configASSERT</span><span class="token punctuation">(</span> pxLink<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">==</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 即使 configASSERT 未启用，也只处理带有已分配标志的块</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapBLOCK_IS_ALLOCATED</span><span class="token punctuation">(</span> pxLink <span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 受保护空后继进一步防止把已在空闲链表中的块重复释放</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span> pxLink<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">==</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 清除块大小最高位，使 xBlockSize 恢复为纯块尺寸并标记为空闲</span>
+                <span class="token function">heapFREE_BLOCK</span><span class="token punctuation">(</span> pxLink <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">// configHEAP_CLEAR_MEMORY_ON_FREE 为 1 时，释放前清零有效载荷</span>
+                <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token punctuation">(</span> configHEAP_CLEAR_MEMORY_ON_FREE <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span></span></span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// 块大小必须不小于块头，才能安全计算有效载荷长度</span>
+                    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapSUBTRACT_WILL_UNDERFLOW</span><span class="token punctuation">(</span> pxLink<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">,</span> xHeapStructSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment">// 跳过管理头，将整个有效载荷区域按字节清零</span>
+                        <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> <span class="token function">memset</span><span class="token punctuation">(</span> puc <span class="token operator">+</span> xHeapStructSize<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> pxLink<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">-</span> xHeapStructSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+                <span class="token comment">// 暂停任务调度，串行保护空闲链表、计数器和容量统计</span>
+                <span class="token function">vTaskSuspendAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// 先把该块的总大小归还到空闲字节统计值</span>
+                    xFreeBytesRemaining <span class="token operator">+=</span> pxLink<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
+                    <span class="token comment">// 向跟踪设施报告调用者地址和本次释放的块总大小</span>
+                    <span class="token function">traceFREE</span><span class="token punctuation">(</span> pv<span class="token punctuation">,</span> pxLink<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment">// 按地址插回空闲链表，并尝试与前后物理相邻块合并</span>
+                    <span class="token function">prvInsertBlockIntoFreeList</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> BlockLink_t <span class="token operator">*</span> <span class="token punctuation">)</span> pxLink <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment">// 记录一次成功释放，供堆统计接口汇总</span>
+                    xNumberOfSuccessfulFrees<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token comment">// 共享堆状态更新完成后恢复任务调度</span>
+                <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> <span class="token function">xTaskResumeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 标记块后继状态异常、拒绝重复释放的测试覆盖路径</span>
+                <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 标记块未处于已分配状态、拒绝释放的测试覆盖路径</span>
+            <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
+ * 函数功能：
+ * 按内存地址把空闲块插入链表，并在地址连续时与前驱和后继合并
+ *
+ * 参数：
+ * pxBlockToInsert  待插入的空闲块头；调用者已清除其分配标志
+ *
+ * 返回值：
+ * 无返回值
+ */</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">prvInsertBlockIntoFreeList</span><span class="token punctuation">(</span> BlockLink_t <span class="token operator">*</span> pxBlockToInsert <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 遍历结束后指向插入位置之前的空闲块，插在链表开头时指向 xStart</span>
+    BlockLink_t <span class="token operator">*</span> pxIterator<span class="token punctuation">;</span>
+    <span class="token comment">// 用字节地址计算块尾，以判断两个块在物理内存中是否连续</span>
+    <span class="token class-name">uint8_t</span> <span class="token operator">*</span> puc<span class="token punctuation">;</span>
+
+    <span class="token comment">// 从链表头开始，按地址寻找待插入块的前一个节点</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span> pxIterator <span class="token operator">=</span> <span class="token operator">&amp;</span>xStart<span class="token punctuation">;</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span> <span class="token operator">&lt;</span> pxBlockToInsert<span class="token punctuation">;</span> pxIterator <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 循环推进由 for 的迭代表达式完成，循环体无需修改状态</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// xStart 位于堆数组之外，仅对实际空闲块检查地址范围</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> pxIterator <span class="token operator">!=</span> <span class="token operator">&amp;</span>xStart <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 确认插入位置前驱仍位于内部堆数组范围内</span>
+        <span class="token function">heapVALIDATE_BLOCK_POINTER</span><span class="token punctuation">(</span> pxIterator <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 将前驱起始地址转换为字节指针，以“起点加大小”计算其尾后地址</span>
+    puc <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pxIterator<span class="token punctuation">;</span>
+
+    <span class="token comment">// 前驱尾后地址等于待插入块首地址时，两块在物理上相邻</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> puc <span class="token operator">+</span> pxIterator<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pxBlockToInsert <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 扩大前驱块，使其覆盖待插入块的全部空间</span>
+        pxIterator<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">+=</span> pxBlockToInsert<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
+        <span class="token comment">// 后续操作统一以合并后的前驱块作为待连接块</span>
+        pxBlockToInsert <span class="token operator">=</span> pxIterator<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 标记待插入块未与前驱相邻的测试覆盖路径</span>
+        <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 重新计算当前待连接块的字节首地址，以检查它与后继是否相邻</span>
+    puc <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pxBlockToInsert<span class="token punctuation">;</span>
+
+    <span class="token comment">// 当前块尾后地址等于解码后的后继地址时，两块在物理上相邻</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> puc <span class="token operator">+</span> pxBlockToInsert<span class="token operator">-&gt;</span>xBlockSize <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token punctuation">(</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// pxEnd 只表示链表末尾，不能把它占用的块头空间合并进普通空闲块</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span> <span class="token operator">!=</span> pxEnd <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 把后继空闲块大小并入当前块，形成更大的连续空闲区域</span>
+            pxBlockToInsert<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">+=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span><span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
+            <span class="token comment">// 跳过被合并的后继块，继承它保存的受保护后继指针</span>
+            pxBlockToInsert<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span><span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 当前块紧邻堆尾时，直接连接到结束标记</span>
+            pxBlockToInsert<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxEnd <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 未与后继相邻时，保持链表关系并接到前驱原有的受保护后继</span>
+        pxBlockToInsert<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 未与前驱合并时，需要显式让前驱指向新插入块</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> pxIterator <span class="token operator">!=</span> pxBlockToInsert <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 保存经过可选异或编码的待插入块地址</span>
+        pxIterator<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxBlockToInsert <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 与前驱合并时前驱本身已在链表中，无需修改其前驱链接</span>
+        <span class="token function">mtCOVERAGE_TEST_MARKER</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>⑥状态检测</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>heap_4.c</code> 提供堆状态查询接口<code>vPortGetHeapStats</code>，用于查看<strong>当前空闲空间</strong>、<strong>历史最低空闲空间</strong>以及<strong>空闲块分布情况</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 除此之外，heap_4.c还提供其他接口查看堆内存的部分状态，如xPortGetFreeHeapSize用于查看空闲字节总量</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 通过比较总空闲空间、最大连续空闲块和空闲块数量，可以辅助判断堆中是否存在较严重的外部内存碎片</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> vPortGetHeapStats() 遍历空闲链表时会暂停任务调度，并在读取统计变量时短暂进入临界区，不宜在高实时性路径中频繁调用</div>
+
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
+ * 函数功能：
+ * 汇总空闲块数量、最大与最小块尺寸，以及分配释放计数和空闲水位
+ *
+ * 参数：
+ * pxHeapStats  输出参数，接收当前堆统计快照
+ *
+ * 返回值：
+ * 无返回值
+ */</span>
+<span class="token keyword">void</span> <span class="token function">vPortGetHeapStats</span><span class="token punctuation">(</span> HeapStats_t <span class="token operator">*</span> pxHeapStats <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 遍历期间指向当前空闲块</span>
+    BlockLink_t <span class="token operator">*</span> pxBlock<span class="token punctuation">;</span>
+    <span class="token comment">// SIZE_MAX 是 size_t 能表示的最大值，便于首次比较时记录任意实际空闲块</span>
+    <span class="token comment">// 这三个变量分别累计空闲块数量、最大块大小和最小块大小</span>
+    <span class="token class-name">size_t</span> xBlocks <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> xMaxSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> xMinSize <span class="token operator">=</span> SIZE_MAX<span class="token punctuation">;</span>
+
+    <span class="token comment">// 暂停任务调度，避免分配或释放在遍历过程中改变空闲链表</span>
+    <span class="token function">vTaskSuspendAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 从链表头取出第一个空闲块地址，并在启用保护时完成解码</span>
+        pxBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> xStart<span class="token punctuation">.</span>pxNextFreeBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 堆尚未初始化时链表入口为空，不执行块遍历</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> pxBlock <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 逐块访问，直到到达不计入空闲块数量的结束标记</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span> pxBlock <span class="token operator">!=</span> pxEnd <span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 当前节点代表一个独立的连续空闲区域</span>
+                xBlocks<span class="token operator">++</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 当前块大于已知最大值时刷新最大连续空闲块尺寸</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">&gt;</span> xMaxSize <span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    xMaxSize <span class="token operator">=</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// 当前块小于已知最小值时刷新最小空闲块尺寸</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize <span class="token operator">&lt;</span> xMinSize <span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    xMinSize <span class="token operator">=</span> pxBlock<span class="token operator">-&gt;</span>xBlockSize<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// 解码当前节点保存的后继地址并推进到下一空闲块</span>
+                pxBlock <span class="token operator">=</span> <span class="token function">heapPROTECT_BLOCK_POINTER</span><span class="token punctuation">(</span> pxBlock<span class="token operator">-&gt;</span>pxNextFreeBlock <span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 链表遍历结束后恢复任务调度</span>
+    <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> <span class="token function">xTaskResumeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 写出遍历得到的最大连续空闲块尺寸</span>
+    pxHeapStats<span class="token operator">-&gt;</span>xSizeOfLargestFreeBlockInBytes <span class="token operator">=</span> xMaxSize<span class="token punctuation">;</span>
+    <span class="token comment">// 写出遍历得到的最小空闲块尺寸；堆未初始化时保持初始 SIZE_MAX</span>
+    pxHeapStats<span class="token operator">-&gt;</span>xSizeOfSmallestFreeBlockInBytes <span class="token operator">=</span> xMinSize<span class="token punctuation">;</span>
+    <span class="token comment">// 写出地址链表中统计到的空闲块数量</span>
+    pxHeapStats<span class="token operator">-&gt;</span>xNumberOfFreeBlocks <span class="token operator">=</span> xBlocks<span class="token punctuation">;</span>
+
+    <span class="token comment">// 使用任务临界区读取可能被分配或释放路径更新的标量统计值</span>
+    <span class="token function">taskENTER_CRITICAL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 写出所有空闲块的当前总字节数</span>
+        pxHeapStats<span class="token operator">-&gt;</span>xAvailableHeapSpaceInBytes <span class="token operator">=</span> xFreeBytesRemaining<span class="token punctuation">;</span>
+        <span class="token comment">// 写出成功分配累计次数</span>
+        pxHeapStats<span class="token operator">-&gt;</span>xNumberOfSuccessfulAllocations <span class="token operator">=</span> xNumberOfSuccessfulAllocations<span class="token punctuation">;</span>
+        <span class="token comment">// 写出成功释放累计次数</span>
+        pxHeapStats<span class="token operator">-&gt;</span>xNumberOfSuccessfulFrees <span class="token operator">=</span> xNumberOfSuccessfulFrees<span class="token punctuation">;</span>
+        <span class="token comment">// 写出运行以来记录到的最小空闲字节总量</span>
+        pxHeapStats<span class="token operator">-&gt;</span>xMinimumEverFreeBytesRemaining <span class="token operator">=</span> xMinimumEverFreeBytesRemaining<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 统计快照复制完成后退出任务临界区</span>
+    <span class="token function">taskEXIT_CRITICAL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Paopaozi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://paopaoziye.github.io/2026/09/08/freertos-yuan-ma-yue-du-er/">https://paopaoziye.github.io/2026/09/08/freertos-yuan-ma-yue-du-er/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank" rel="noopener noreferrer">Paopaozi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/FreeRTOS/">
+                                    <span class="chip bg-color">FreeRTOS</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2026/09/10/freertos-yuan-ma-yue-du-san/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/38.webp" class="responsive-img" alt="FreeRTOS源码阅读（三）" loading="lazy" decoding="async">
+                        
+                        <span class="card-title">FreeRTOS源码阅读（三）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            FreeRTOS任务调度
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-09-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/RTOS/" class="post-category">
+                                    RTOS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/09/03/uboot-yuan-ma-yue-du-yi/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/32.webp" class="responsive-img" alt="Uboot源码阅读（一）" loading="lazy" decoding="async">
+                        
+                        <span class="card-title">Uboot源码阅读（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            U-Boot工作原理简介
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-09-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/BootLoader/" class="post-category">
+                                    BootLoader
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Uboot/">
+                        <span class="chip bg-color">Uboot</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color" href="#toc-content" aria-label="显示或隐藏目录" aria-controls="toc-content" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function (event) {
+            event.preventDefault();
+            let expanded = $tocAside.hasClass(expandedClass);
+            if (expanded) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            $(this).attr('aria-expanded', String(!expanded));
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2026</span>
+            
+            <a href="/about" target="_blank" rel="noopener noreferrer">Paopaozi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2023";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var start = new Date(
+                        Number(startYear), Number(startMonth) - 1, Number(startDate),
+                        Number(startHour), Number(startMinute), Number(startSecond)
+                    );
+                    var diff = Date.now() - start.getTime();
+                    var diffYears = todayYear - start.getFullYear();
+                    var anniversary = new Date(start);
+                    anniversary.setFullYear(start.getFullYear() + diffYears);
+                    if (anniversary.getTime() > Date.now()) {
+                        diffYears--;
+                        anniversary.setFullYear(start.getFullYear() + diffYears);
+                    }
+                    diff = Date.now() - anniversary.getTime();
+                    var diffDays = Math.floor(diff / days);
+                    var diffHours = Math.floor((diff - diffDays * days) / hours);
+                    var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
+                    var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                siteTime();
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/paopaoziye" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1781206070@qq.com" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1781206070" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="QQ联系我: 1781206070" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   aria-label="搜索" class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/effects.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script>
+        window.MateryEffects.init({
+            effects: [
+                {
+                    name: 'clicklove',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/others/clicklove.js",
+                    options: { maxHearts: 32 }
+                },
+                {
+                    name: 'canvasNest',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/canvas-nest.js",
+                    options: {
+                        color: "0,0,255",
+                        opacity: 0.7,
+                        zIndex: -1,
+                        count: 99,
+                        fps: 30
+                    }
+                },
+                {
+                    name: 'ribbon',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon.min.js",
+                    options: {
+                        size: 150,
+                        alpha: 0.6,
+                        zIndex: -1,
+                        clickChange: true
+                    }
+                },
+                {
+                    name: 'ribbonDynamic',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/libs/background/ribbon-dynamic.js",
+                    options: { fps: 30 }
+                },
+                {
+                    name: 'cursor',
+                    enabled: true,
+                    policy: 'desktop',
+                    src: "/js/cursor.js",
+                    options: { maxParticles: 80 }
+                }
+            ],
+            typed: window.materyTypedConfig || null,
+            live2d: {"enabled":true,"src":"/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05","options":{"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false}}
+        });
+    </script>
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+
+</html>

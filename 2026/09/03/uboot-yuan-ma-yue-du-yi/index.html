@@ -6,19 +6,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="U-Boot,BootLoader,启动流程">
-    <meta name="description" content="U-Boot 启动流程源码阅读">
+    <meta name="description" content="U-Boot工作原理简介">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://paopaoziye.github.io/2026/09/03/uboot-yuan-ma-yue-du-yi/">
     <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Uboot源码阅读（一） | Zfk&#39;s Study Notes">
-    <meta property="og:description" content="U-Boot 启动流程源码阅读">
+    <meta property="og:description" content="U-Boot工作原理简介">
     <meta property="og:url" content="https://paopaoziye.github.io/2026/09/03/uboot-yuan-ma-yue-du-yi/">
     <meta property="og:site_name" content="Zfk&#39;s Study Notes">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Uboot源码阅读（一） | Zfk&#39;s Study Notes">
-    <meta name="twitter:description" content="U-Boot 启动流程源码阅读">
+    <meta name="twitter:description" content="U-Boot工作原理简介">
     <meta name="twitter:url" content="https://paopaoziye.github.io/2026/09/03/uboot-yuan-ma-yue-du-yi/">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
@@ -251,7 +251,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/39.webp')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/32.webp')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -424,96 +424,152 @@
         
 
         
-        <!-- 代码块折行 -->
-        <style type="text/css">
-            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
-        </style>
-        
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="BootLoader"><a href="#BootLoader" class="headerlink" title="BootLoader"></a>BootLoader</h1><h2 id="U-Boot源码阅读"><a href="#U-Boot源码阅读" class="headerlink" title="U-Boot源码阅读"></a>U-Boot源码阅读</h2><h3 id="U-Boot源码阅读（一）"><a href="#U-Boot源码阅读（一）" class="headerlink" title="U-Boot源码阅读（一）"></a>U-Boot源码阅读（一）</h3><h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h4><p><strong>①简介</strong></p>
+                <h1 id="BootLoader"><a href="#BootLoader" class="headerlink" title="BootLoader"></a>BootLoader</h1><h2 id="U-Boot源码阅读"><a href="#U-Boot源码阅读" class="headerlink" title="U-Boot源码阅读"></a>U-Boot源码阅读</h2><h3 id="U-Boot源码阅读（一）"><a href="#U-Boot源码阅读（一）" class="headerlink" title="U-Boot源码阅读（一）"></a>U-Boot源码阅读（一）</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p><strong>①引言</strong></p>
 <blockquote>
-<p><strong>概述</strong>：一个用于启动<code>Linux</code>内核的<code>Bootloader</code>主要用于负责<strong>初始化必要硬件</strong>、加载<code>Linux</code><strong>内核</strong>、<strong>设备树</strong>和<strong>根文件系统</strong>等</p>
+<p><strong>概述</strong>：一个用于启动<code>Linux</code>内核的<code>Bootloader</code>，主要用于负责<strong>初始化必要硬件</strong>并加载<code>Linux Kernel</code>、<strong>设备树</strong>和<strong>根文件系统</strong>等</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 由于刚上电时DDR未初始化，片内SRAM空间不足以容纳完整U-Boot，U-Boot通常分为SPL和U-Boot proper两个阶段</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 由于刚上电时DDR未初始化且片内SRAM空间不足以容纳完整U-Boot，因此U-Boot通常分为SPL和U-Boot proper两个阶段</div>
 <blockquote>
-<p><code>SPL</code>：精简版<code>U-Boot</code>，通常被<code>BootROM</code>加载到<strong>片内</strong><code>SRAM</code>，主要负责<strong>初始化</strong><code>DDR</code>等关键硬件，然后加载完整<code>U-Boot</code></p>
+<p><code>SPL</code>：本质上是一个<strong>精简版</strong><code>U-Boot</code>，主要负责<strong>初始化</strong><code>DDR</code>等关键硬件，然后加载<code>U-Boot proper</code>到<code>DDR</code>中</p>
 </blockquote>
 <blockquote>
-<p><code>U-Boot proper</code>：完整的<code>U-Boot</code>，负责<code>MMC</code>、<strong>网络</strong>、<strong>文件系统</strong>和<strong>环境变量</strong>等功能，并最终加载<code>Linux Kernel</code>、<code>DTB</code>等</p>
+<p><code>U-Boot proper</code>：完整的<code>U-Boot</code>，提供<code>MMC</code>、<strong>网络通信</strong>、<strong>文件系统</strong>和<strong>环境变量</strong>等功能，并最终加载<code>Linux Kernel</code>、<code>DTB</code>等资源</p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以在U-Boot提示自动启动前按键打断该过程进入其Shell，提供命令行用于调试、烧写、升级</div>
-
-<pre class="line-numbers language-none"><code class="language-none">基本硬件初始化；
-DRAM 初始化后的系统初始化；
-从 Flash / eMMC / SD / NAND / 网络读取文件；
-解析环境变量；
-加载 Linux Kernel；
-加载 Device Tree；
-加载 initramfs；
-设置 Linux 启动参数；
-最终跳转到 Linux Kernel；
-提供命令行用于调试、烧写、升级<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>U-Boot 通过 bootargs 向 Kernel 传递启动参数，告诉它控制台、RootFS 位置和挂载方式等信息<br>传递启动参数setenv bootargs <br>“console=ttyS2,1500000 root=/dev/mmcblk0p2 rw rootwait”</p>
-<p>有一套环境变量Environment Variables，如bootcmd、bootargs和bootdelay</p>
-<p>U-Boot 启动 Linux 的命令有bootm、booti和bootz</p>
-<p>SPL<br>+<br>U-Boot proper<br>由于片内SRAM非常小，且DDR尚未初始化，所以需要SPL，SPL 是精简版 U-Boot，主要负责初始化 DDR，并加载完整的 U-Boot<br>Bootloader 最核心的动作之一就是“从存储器搬到 RAM”</p>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> </div>
-<pre class="line-numbers language-none"><code class="language-none">DDR 还没初始化
-时钟还没完整配置
-Pinmux 还没配置
-eMMC/SD 驱动还没准备好
-设备树还没加载
-Kernel 还不知道放在哪里
-bootargs 还没有准备<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>U-Boot会传递一套启动参数给Kernel</p>
-<pre class="line-numbers language-none"><code class="language-none">U-Boot
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以在U-Boot自动启动前按键打断启动过程进入其Shell，用于修改启动配置以及进行调试、烧写和升级</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 由于CPU上电后DDR、存储设备等尚未完成初始化，因此需要U-Boot先建立基本运行环境，再加载并启动Linux内核</div>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">U-Boot proper
  │
- ├─ 初始化 CPU / Cache / MMU 的相关环境
+ ├─ 完成 CPU / 时钟 / Cache 等基础运行环境初始化
  │
- ├─ 初始化串口
+ ├─ 初始化串口和控制台
  │
- ├─ 初始化 GPIO
+ ├─ 确认 / 初始化 DRAM
  │
- ├─ 初始化 MMC
+ ├─ 将 U-Boot 重定位到 DRAM
  │
- ├─ 初始化 USB
- │
- ├─ 初始化 Ethernet
+ ├─ 初始化 malloc、Driver Model 等运行环境
  │
  ├─ 读取 environment
  │
- ├─ 判断启动方式
+ ├─ 初始化 / 探测 MMC、USB、Ethernet 等启动设备
+ │
+ ├─ 执行 bootcmd / bootflow，选择启动方式
  │
  ├─ 加载 Kernel
  │
  ├─ 加载 DTB
  │
- ├─ 加载 initramfs
+ ├─ 可选：加载 initramfs
  │
- └─ 启动 Kernel<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-none"><code class="language-none">U-Boot
+ ├─ 设置 bootargs 等启动参数
  │
- ├── 搬 Kernel → DDR
- ├── 搬 DTB → DDR
- ├── 搬 initramfs → DDR（如果有）
- └── 准备 bootargs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ └─ 跳转到 Kernel 入口，启动 Linux<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>②Linux启动流程</strong></p>
 <blockquote>
-<p><strong>概述</strong>：主要流程为<code>Reset -&gt; BootROM -&gt; SPL -&gt; U-Boot proper -&gt; Linux Kernel -&gt; RootFS</code>，实际上是一个逐级增强的过程</p>
+<p><strong>概述</strong>：<strong>系统上电后</strong>会依次经历<code>BootROM</code>、<code>SPL</code>、<code>U-Boot proper</code>、<code>Linux Kernel</code>和<strong>用户空间</strong>等阶段，最终完成<strong>整个系统的启动</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> </div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Bootloader阶段负责建立启动环境，Kernel阶段负责初始化内核并挂载根文件系统，用户空间阶段负责启动init及各类系统服务</div>
 <blockquote>
-<p>CPU Reset之后首先进入SoC厂商固化在芯片内部的BootROM，主要负责读取启动模式、确定启动介质，读取下一阶段程序，将其放入SRAM并跳转过去执行</p>
+<p><code>BootROM</code>为固化在<code>SoC</code>内部的启动代码，负责在上电后完成<strong>最基础的启动检查</strong>，并从指定<strong>启动介质</strong>加载下一阶段<code>Bootloader</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> </div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> </div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> </div>
+<blockquote>
+<p><code>SPL</code>和<code>U-Boot proper</code>通常存放在<code>SPI Flash</code>等<strong>启动介质中</strong>，前者被<code>BootROM</code>加载到片内<code>SRAM</code>中，后者被前者加载到<code>DDR</code>中</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> U-Boot在启动Linux前会通过bootargs等方式向内核传递串口、根文件系统位置和启动模式等参数，同时提供DTB描述硬件信息</div>
+<blockquote>
+<p><code>U-boot</code>还可以加载<code>initramfs</code>给<code>Linux Kernel</code>使用，本质上也是一种<strong>根文件系统</strong>，可作为<code>Kernel</code>与<code>RootFS</code>之间的<strong>临时启动环境</strong></p>
+</blockquote>
+<blockquote>
+<p>一些<strong>体积较小</strong>、<strong>功能相对简单</strong>的嵌入式系统也可以直接将<code>initramfs</code>作为最终<code>RootFS</code>使用，例如<code>BusyBox</code>小系统</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Linux Kernel开始运行并不代表整个系统已经启动完成，还需要挂载RootFS并执行/sbin/init才能真正进入用户空间</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> bootargs中的root=通常用于指定最终RootFS的位置，而initramfs则是内核启动早期使用的内存根文件系统</div>
+<p><strong>③环境变量</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>U-Boot</code>环境变量用于保存<strong>控制系统启动</strong>所需的各类参数，如<strong>启动命令</strong>、<strong>内核参数</strong>、<strong>加载地址</strong>和<strong>网络配置</strong>等</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> U-Boot常用的环境变量有bootcmd、bootargs、kernel_addr_r、fdt_addr_r和ramdisk_addr_r等</div>
+<blockquote>
+<p><code>bootcmd</code>为自启动时执行的<strong>启动脚本</strong>，<code>bootargs</code>用于向<code>Linux Kernel</code>传递<strong>控制台</strong>、<strong>根文件系统</strong>和<strong>启动模式</strong>等参数</p>
+</blockquote>
+<blockquote>
+<p><code>kernel_addr_r</code>、<code>fdt_addr_r</code>和<code>ramdisk_addr_r</code>分别用于指定<code>Kernel</code>、<code>DTB</code>和<code>initramfs</code>在<code>DDR</code>中的<strong>加载地址</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 可以在U-Boot Shell中使用printenv、setenv和saveenv分别查看、修改和保存环境变量，如setenv bootdelay 5</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 环境变量修改后通常被保存在RAM中，只有执行saveenv保存操作后，才会写入配置好的持久化存储后端，如SPI Flash、eMMC等</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> kernel_addr_r、fdt_addr_r和ramdisk_addr_r是常见的环境变量命名约定，具体变量名称和默认值可能因开发板配置而不同</div>
+<p><strong>④启动命令</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>U-Boot</code>提供<code>booti</code>、<code>bootz</code>和<code>bootm</code>等不同的启动命令，分别对应不同的<strong>镜像格式</strong>与<strong>启动方式</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> booti通常用于启动Image，bootz用于启动zImage，而bootm主要用于启动uImage和FIT Imag</div>
+<blockquote>
+<p><code>Image</code>为<code>Linux</code>内核编译生成的<strong>直接可启动镜像</strong>，<code>zImage</code>为<strong>经过压缩</strong>并带有<strong>自解压代码</strong>的<code>Linux</code>内核镜像</p>
+</blockquote>
+<blockquote>
+<p><code>uImage</code>在Linux内核镜像外加入<code>U-Boot Legacy Header</code>的封装格式，其中包含<strong>加载地址</strong>、<strong>入口地址</strong>和<strong>镜像类型</strong>等启动信息</p>
+</blockquote>
+<blockquote>
+<p><code>FIT Image</code>是一种可同时封装<code>Kernel</code>、<code>DTB</code>、<code>initramfs</code>及<strong>配置</strong>、<strong>校验</strong>和<strong>签名信息</strong>的<code>U-Boot</code>镜像格式，并支持<strong>多套启动配置</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Image和zImage主要描述Linux内核本身的镜像形式，而uImage和FIT Image则进一步加入了供U-Boot解析的镜像描述</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> uImage和FIT Image可以封装压缩后的内核数据，启动时由U-Boot根据镜像中的压缩信息完成解压并继续启动内核</div>
+
+<p><strong>⑤启动脚本</strong></p>
+<blockquote>
+<p><strong>概述</strong>：用于<strong>组织系统启动</strong>所需的一系列命令，通常包括<strong>选择启动设备</strong>、<strong>加载启动资源</strong>、<strong>设置启动参数</strong>并最终启动<code>Linux Kernel</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> bootcmd通常保存系统自动启动时执行的启动脚本，也可以通过run调用其他环境变量中定义的子脚本，典型脚本如下所示</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 启动脚本通常由设备操作命令、文件加载命令和内核启动命令三类命令组成，如mmc、load和bootx</div>
+<blockquote>
+<p><code>mmc</code>：用于管理和操作<code>MMC</code>设备，如<strong>选择设备</strong>、<strong>扫描设备</strong>和<strong>查看分区</strong>等，类似的设备操作命令还有<code>usb</code>、<code>nvme</code>、<code>sf</code>和<code>nand</code></p>
+</blockquote>
+<blockquote>
+<p><code>load</code>：用于从指定设备的<strong>文件系统</strong>中读取<code>Kernel</code>、<code>DTB</code>等文件并加载到<code>DDR</code>，类似的命令还有<code>fatload</code>、<code>ext4load</code>和<code>tftp</code></p>
+</blockquote>
+<blockquote>
+<p><code>bootx</code>：可泛指<code>booti</code>、<code>bootz</code>、<code>bootm</code>等启动命令，用于<strong>启动已加载到内存中的系统镜像</strong>并将控制权交给内核</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 启动脚本中的设备编号、分区号、文件名和加载地址必须与实际硬件及存储布局保持一致，否则会导致启动资源加载失败</div>
+<pre class="line-numbers language-tree" data-language="tree"><code class="language-tree"><span class="token tree-root">MMC0</span>
+<span class="token tree-glyph">│</span>
+<span class="token tree-glyph">├</span><span class="token tree-glyph">─</span> <span class="token tree-node">Partition 1</span>
+<span class="token tree-glyph">│</span>    <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span> <span class="token tree-node">Image</span>           <span class="token tree-comment comment"># Linux Kernel 镜像</span>
+<span class="token tree-glyph">│</span>    <span class="token tree-glyph">├</span><span class="token tree-glyph">─</span> <span class="token tree-node">board.dtb</span>       <span class="token tree-comment comment"># 设备树文件</span>
+<span class="token tree-glyph">│</span>    <span class="token tree-glyph">└</span><span class="token tree-glyph">─</span> <span class="token tree-node">initramfs.img</span>   <span class="token tree-comment comment"># 启动早期使用的内存根文件系统</span>
+<span class="token tree-glyph">│</span>
+<span class="token tree-glyph">└</span><span class="token tree-glyph">─</span> <span class="token tree-node">Partition 2</span>
+     <span class="token tree-glyph">└</span><span class="token tree-glyph">─</span> <span class="token tree-node">RootFS</span>          <span class="token tree-comment comment"># 最终根文件系统</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-uboot" data-language="uboot"><code class="language-uboot"><span class="token comment"># 选择编号为 0 的 MMC 设备，通常对应 eMMC 或 SD 卡</span>
+<span class="token command keyword">mmc</span> <span class="token subcommand function">dev</span> <span class="token number">0</span>
+<span class="token comment"># 重新扫描 MMC0，确认设备和分区可以正常访问</span>
+<span class="token command keyword">mmc</span> <span class="token subcommand function">rescan</span>
+<span class="token comment"># 从 MMC0 的第 1 分区读取 Image</span>
+<span class="token comment"># 并将 Linux Kernel 加载到 kernel_addr_r 指定的 DDR 地址</span>
+<span class="token command keyword">load</span> <span class="token command keyword">mmc</span> <span class="token number">0</span><span class="token operator">:</span><span class="token number">1</span> <span class="token variable variable">${kernel_addr_r}</span> <span class="token filename property">Image</span>
+<span class="token comment"># 从 MMC0 的第 1 分区读取 board.dtb</span>
+<span class="token comment"># 并将设备树加载到 fdt_addr_r 指定的 DDR 地址</span>
+<span class="token command keyword">load</span> <span class="token command keyword">mmc</span> <span class="token number">0</span><span class="token operator">:</span><span class="token number">1</span> <span class="token variable variable">${fdt_addr_r}</span> <span class="token filename property">board.dtb</span>
+<span class="token comment"># 从 MMC0 的第 1 分区读取 initramfs.img</span>
+<span class="token comment"># 并将其加载到 ramdisk_addr_r 指定的 DDR 地址</span>
+<span class="token comment"># load 执行完成后，${filesize} 会保存本次加载的 initramfs 文件大小</span>
+<span class="token command keyword">load</span> <span class="token command keyword">mmc</span> <span class="token number">0</span><span class="token operator">:</span><span class="token number">1</span> <span class="token variable variable">${ramdisk_addr_r}</span> <span class="token filename property">initramfs.img</span>
+<span class="token comment"># 设置传递给 Linux Kernel 的启动参数：</span>
+<span class="token comment"># console=ttyS0,115200  → 使用 ttyS0 作为控制台，波特率为 115200</span>
+<span class="token comment"># root=/dev/mmcblk0p2   → 最终 RootFS 位于 MMC0 的第 2 分区</span>
+<span class="token comment"># rw                    → 以可读写方式挂载 RootFS</span>
+<span class="token comment"># rootwait              → 等待根文件系统所在设备初始化完成</span>
+<span class="token command keyword">setenv</span> bootargs <span class="token string">"console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootwait"</span>
+<span class="token comment"># 启动 Linux Kernel：</span>
+<span class="token comment"># ${kernel_addr_r}              → Kernel 所在地址</span>
+<span class="token comment"># ${ramdisk_addr_r}:${filesize} → initramfs 的起始地址和大小</span>
+<span class="token comment"># ${fdt_addr_r}                 → DTB 所在地址</span>
+<span class="token comment"># 执行后 U-Boot 将控制权交给 Linux Kernel</span>
+<span class="token command keyword">booti</span> <span class="token variable variable">${kernel_addr_r}</span> <span class="token variable variable">${ramdisk_addr_r}</span><span class="token operator">:</span><span class="token variable variable">${filesize}</span> <span class="token variable variable">${fdt_addr_r}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>
@@ -622,47 +678,45 @@ bootargs 还没有准备<span aria-hidden="true" class="line-numbers-rows"><span
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2026/09/03/uboot-yuan-ma-yue-du-yi/">
+                <a href="/2026/09/08/freertos-yuan-ma-yue-du-er/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/39.webp" class="responsive-img" alt="Uboot源码阅读（一）" loading="lazy" decoding="async">
+                        <img src="/medias/featureimages/38.webp" class="responsive-img" alt="FreeRTOS源码阅读（二）" loading="lazy" decoding="async">
                         
-                        <span class="card-title">Uboot源码阅读（一）</span>
+                        <span class="card-title">FreeRTOS源码阅读（二）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            U-Boot 启动流程源码阅读
+                            FreeRTOS内存管理，主要围绕heap_4.c
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-09-03
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-09-08
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/BootLoader/" class="post-category">
-                                    BootLoader
+                            <a href="/categories/RTOS/" class="post-category">
+                                    RTOS
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Uboot/">
-                        <span class="chip bg-color">Uboot</span>
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
                     </a>
                     
                 </div>

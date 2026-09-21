@@ -424,189 +424,189 @@
         
 
         
-        <!-- 代码块折行 -->
-        <style type="text/css">
-            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
-        </style>
-        
 
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="处理器架构"><a href="#处理器架构" class="headerlink" title="处理器架构"></a>处理器架构</h1><h2 id="Arm体系架构"><a href="#Arm体系架构" class="headerlink" title="Arm体系架构"></a>Arm体系架构</h2><h3 id="Arm体系架构（一）"><a href="#Arm体系架构（一）" class="headerlink" title="Arm体系架构（一）"></a>Arm体系架构（一）</h3><h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h4><p><strong>①简介</strong></p>
 <blockquote>
-<p><strong>概述</strong>：<code>Arm</code>是一种以<strong>精简指令集</strong>思想为基础的处理器架构家族，具有较高的<strong>执行效率</strong>和<strong>能效</strong></p>
+<p><strong>概述</strong>：<code>Arm</code>是一种以<strong>精简指令集</strong><code>RISC</code>理念为基础的<strong>处理器架构家族</strong>，兼顾了优秀的<strong>执行效率</strong>、<strong>能效表现</strong>和<strong>可扩展性</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Arm体系架构是一种处理器的行为规范，规定指令集、寄存器、内存访问、异常与中断和特权级等内容</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> Arm体系架构是一套处理器的行为规范，规定指令集、寄存器模型、内存访问机制、异常与中断处理和特权级划分等内容</div>
 <blockquote>
-<p><code>Arm</code>体系架构一般不规定<strong>流水线级数</strong>、<strong>缓存大小</strong>和<strong>主频</strong>等具体硬件实现细节</p>
+<p><code>Arm</code>体系架构一般不规定<strong>流水线级数</strong>、<strong>缓存大小</strong>和<strong>主频</strong>等具体<strong>硬件实现细节</strong>，通常由<strong>芯片设计厂商</strong>自行实现</p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Arm主要提供A、R和M三类架构Profile，分别面向应用处理器、实时处理器和微控制器处理器</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> Arm主要提供A、R和M三类架构Profile，分别面向应用处理器、实时处理器和微控制器等不同应用场景</div>
 <blockquote>
-<p>每种系列又有<code>Armv7</code>、<code>Armv8</code>、<code>Armv9</code>等不同版本，如<code>Armv8-A</code>、<code>Armv8-R</code>和<code>Armv8-M</code>等</p>
+<p>每类<code>Profile</code>又包含<code>Armv7</code>、<code>Armv8</code>、<code>Armv9</code>等不同<strong>架构版本</strong>，更早还有<code>Armv1-Armv6</code>等架构，但是没有分类体系</p>
 </blockquote>
 <blockquote>
-<p><code>R-Profile</code>和<code>M-Profile</code>通常使用<code>MPU</code>，只提供<strong>内存区域保护</strong>而不能提供<strong>虚拟地址到物理地址的转换</strong></p>
+<p>不同<code>Arm</code>架构版本会在<strong>指令集</strong>、<strong>位宽</strong>、<strong>内存管理</strong>、<strong>安全机制</strong>和<strong>扩展功能</strong>等方面不断演进，例如<code>Armv8-A</code>引入了<code>AArch64</code>执行状态</p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Cortex-A/R/M是Arm公司依据相应架构Profile设计的处理器核系列，属于架构规范的具体处理器核实现</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> Cortex-A、Cortex-R和Cortex-M是Arm公司基于相应架构Profile设计的处理器核系列，可以理解为Arm架构规范的具体实现</div>
 <blockquote>
-<p>比如<code>Cortex-M33</code>实现了<code>Armv8-M</code>、<code>Cortex-A53/A72</code>实现了<code>Armv8-A</code>、<code>Cortex-R52</code>实现了<code>Armv8-R</code></p>
+<p>比如<code>Cortex-M33</code>基于<code>Armv8-M</code>架构，<code>Cortex-A53</code>和<code>Cortex-A72</code>基于<code>Armv8-A</code>架构，而<code>Cortex-R52</code>则基于<code>Armv8-R</code>架构</p>
+</blockquote>
+<blockquote>
+<p><strong>芯片厂商</strong>可以在这些<strong>处理器核</strong>上集成<strong>存储器</strong>、<strong>总线</strong>、<strong>外设</strong>及其他<strong>功能模块</strong>，设计成完整的<code>MCU</code>、<code>SoC</code>或其他类型的<strong>处理器芯片</strong></p>
 </blockquote>
 <p><strong>②执行状态</strong></p>
 <blockquote>
-<p><strong>概述</strong>：<code>Arm</code>主要定义了<code>AArch32</code>和<code>AArch64</code>两种执行状态，支持哪种状态取决于<strong>架构<code>Profile</code><strong>和</strong>处理器</strong></p>
+<p><strong>概述</strong>：<code>Arm</code>定义了<code>AArch32</code>和<code>AArch64</code>两种执行状态，支持哪种状态取决于<strong>架构<code>Profile</code><strong>、</strong>架构版本</strong>和<strong>处理器具体实现</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 执行状态决定处理器所采用的指令集、寄存器模型以及相应的特权与异常处理模型等</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> AArch32与AArch64的主要区别体现在寄存器位宽与数量、所使用的指令集、地址空间以及异常与特权模型等方面</div>
 <blockquote>
-<p><code>AArch32</code>状态使用<code>A32</code>或<code>T32</code>指令集，<code>AArch64</code>使用<code>A64</code>指令集</p>
+<p><code>AArch32</code>可使用<code>A32</code>或<code>T32</code>指令集，而<code>AArch64</code>使用重新设计的<code>A64</code>指令集</p>
 </blockquote>
 <blockquote>
-<p><code>AArch32</code>状态使用<code>32</code>位通用寄存器，<code>AArch64</code>使用<code>64</code>位通用寄存器</p>
+<p><code>AArch32</code>提供<code>R0~R15</code>等<strong>32位通用寄存器</strong>，而<code>AArch64</code>提供<code>X0~X30</code>共 <strong>31个64位通用寄存器</strong>，寄存器资源更加丰富</p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 在同时支持AArch32和AArch64的处理器中，两种执行状态之间通常通过异常进入或异常返回过程切换</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> M-profile不采用AArch32/AArch64这套执行状态分类，采用32位程序员模型，并仅支持T32指令集</div>
+<blockquote>
+<p><code>AArch32</code>采用传统的<code>User</code>、<code>SVC</code>、<code>IRQ</code>、<code>FIQ</code>等处理器模式，而<code>AArch64</code>采用<code>EL0~EL3</code><strong>异常级模型</strong>管理不同的特权级</p>
+</blockquote>
+<blockquote>
+<p><code>AArch32</code>主要采用<strong>32位地址模型</strong>，而<code>AArch64</code>支持更大的<strong>虚拟地址空间和物理地址空间</strong>，更适合现代操作系统</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 在同时支持AArch32和AArch64的处理器中，通常可以在异常进入或异常返回过程中结合目标异常级的配置完成两种状态的转换</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> M-Profile不采用AArch32/AArch64的执行状态划分，而是采用面向微控制器的32位程序员模型，并仅执行T32指令集</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 两种执行状态在系统寄存器、异常机制和SIMD模型等方面也存在差异，因此AArch64并非只是AArch32的简单64位扩展</div>
 <p><strong>③指令集</strong></p>
 <blockquote>
-<p><strong>概述</strong>：<code>Arm</code>体系架构主要包括<code>A32</code>、<code>T32</code>和<code>A64</code>三种指令集</p>
+<p><strong>概述</strong>：<code>Arm</code>体系架构主要包括<code>A32</code>、<code>T32</code>和<code>A64</code>三种指令集，用于规定处理器<strong>可执行的指令</strong>及其<strong>编码格式</strong>和<strong>基本行为</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> A32的指令编码固定为32位，T32指令编码混合使用16位和32位，A64的每条指令编码固定为32位</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> A32和A64都采用固定32位指令编码，而T32由Thumb指令集发展而来，引入Thumb-2形成了混合使用16位和32位编码的指令体系</div>
 <blockquote>
-<p><code>T32</code>由<code>Thumb</code>演进而来，通过引入<code>Thumb-2</code>技术，形成了混合使用<code>16</code>位和<code>32</code>位编码的指令体系</p>
-</blockquote>
-<blockquote>
-<p><code>A32/T32</code>以<code>32</code>位通用运算为主，也支持部分<code>64</code>位操作；<code>A64</code>同时原生支持<code>64</code>位和<code>32</code>位通用运算</p>
-</blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> A32指令规整，便于处理器取指、译码和执行，且功能成熟，能够兼容大量传统Arm32位程序</div>
-<blockquote>
-<p><code>T32</code>在兼顾指令功能的同时具有<strong>较高的代码密度</strong>，适合存储资源受限的嵌入式系统</p>
+<p><code>Thumb</code>指令集以<code>16</code>位编码为主，目的是<strong>提高代码密度</strong>，<code>Thumb-2</code>在其基础上加入大量<code>32</code>位编码指令<strong>完善其功能</strong></p>
 </blockquote>
 <blockquote>
-<p><code>A64</code>具有<strong>更大的地址空间</strong>以及<strong>更多通用寄存器</strong>，适合现代高性能计算系统</p>
+<p>此外，<code>A32</code>、<code>T32</code>和<code>A64</code>在<strong>寄存器使用</strong>、<strong>寻址方式</strong>、<strong>条件执行方式</strong>、<strong>分支控制</strong>和<strong>扩展支持</strong>等方面均存在差异</p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> A32和T32可以在同一个AArch32程序中协同使用，需要通过特定的分支指令完成指令集状态切换</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> A64不能与A32或T32指令直接混合执行，程序通常需要针对AArch64重新适配与编译</div>
-<h4 id="2-寄存器模型"><a href="#2-寄存器模型" class="headerlink" title="2.寄存器模型"></a>2.寄存器模型</h4><p><strong>①32位寄存器模型</strong></p>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> A32指令规整且兼容性好，T32在兼顾功能的同时具有较高的代码密度，而A64寄存器资源丰富、地址空间大且64位运算能力强</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> A32和T32可以在同一个AArch32程序中协同使用，但需要通过特定的分支指令在两种指令集状态之间切换</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> A64不能与A32或T32指令直接混合执行，从AArch32代码迁移到AArch64时，通常需要针对A64重新编译或适配</div>
+
+<h4 id="2-寄存器模型"><a href="#2-寄存器模型" class="headerlink" title="2.寄存器模型"></a>2.寄存器模型</h4><p><strong>①AArch32寄存器模型</strong></p>
 <blockquote>
-<p><strong>概述</strong>：通常提供<code>16</code>个<code>32</code>位程序员可见的寄存器<code>R0-R15</code>和当前程序状态寄存器<code>CPSR</code>，如下图所示</p>
+<p><strong>概述</strong>：在<code>AArch32</code>执行状态下，程序通常可见<code>16</code>个<code>32</code>位寄存器<code>R0-R15</code>，以及<strong>当前程序状态寄存器</strong><code>CPSR</code>，如下所示</p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> R0-R12为通用寄存器，R13为栈指针寄存器SP，R14为链接寄存器LR，R15为程序计数器</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> R0-R12为通用寄存器，R13、R14和R15则分别具有SP、LR和PC的专用含义，分别表示栈指针寄存器、链接寄存器和程序计数器</div>
 <blockquote>
-<p><code>R0-R12</code>主要用于<strong>数据运算和地址计算</strong>，还需要遵循<code>AAPCS32</code>约定</p>
-</blockquote>
-<blockquote>
-<p><code>SP</code>指向当前<strong>栈顶</strong>，栈主要用于保存<strong>函数局部变量</strong>、<strong>函数调用现场</strong>、<strong>中断现场</strong>和<strong>任务上下文</strong>等</p>
-</blockquote>
-<blockquote>
-<p><code>LR</code>通常保存<strong>函数调用</strong>或<strong>异常处理</strong>所需的返回信息，当函数和异常结束后可以通过<code>BX LR</code>返回</p>
+<p><code>R0-R12</code>主要用于<strong>数据运算</strong>、<strong>参数传递</strong>、<strong>临时数据保存</strong>和<strong>地址计算</strong>等，其具体用途还需要遵循<code>AAPCS32</code><strong>调用约定</strong></p>
 </blockquote>
 <blockquote>
-<p><code>PC</code>用于控制处理器的<strong>指令执行位置</strong>，<strong>分支</strong>、<strong>调用</strong>、<strong>返回和部分加载指令</strong>可以更新<code>PC</code>以改变程序控制流</p>
+<p><code>SP</code>指向<strong>当前栈顶</strong>，栈通常用于保存<strong>函数局部变量</strong>、<strong>函数调用现场</strong>、<strong>中断现场</strong>和<strong>任务上下文</strong>等临时数据</p>
 </blockquote>
 <blockquote>
-<p><code>CPSR</code>用于保存<strong>当前处理器状态</strong>，包括<strong>条件标志位</strong>、<strong>当前执行状态</strong>、<strong>中断屏蔽位</strong>和<strong>处理器模式</strong>等</p>
-</blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 部分异常模式拥有银行化寄存器，可以快速保存和切换关键现场，减少软件保存开销</div>
-<blockquote>
-<p><strong>银行化寄存器</strong>即处理器<strong>切换模式</strong>后，对应的寄存器编号会自动映射到<strong>另一组物理寄存器</strong></p>
+<p><code>LR</code>通常保存<strong>函数调用</strong>或<strong>异常处理</strong>所需的<strong>返回信息</strong>，前者可通过<code>BX LR</code>等方式返回，后者则需要相应的<strong>异常返回机制</strong>恢复执行</p>
 </blockquote>
 <blockquote>
-<p><code>SPSR</code>用于保存<code>CPSR</code>，因为<strong>异常发生时</strong>处理器需要改变<code>CPSR</code>，将其保存到<code>SPSR</code>，直到<strong>异常返回</strong>再恢复</p>
-</blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果函数内部还需要继续调用其它函数，LR可能会被覆盖，所以通常需要将其保存到栈中</div>
-<p><strong>②64位寄存器模型</strong></p>
-<blockquote>
-<p><strong>概述</strong>：通常提供<code>31</code>个<code>64</code>位通用寄存器<code>X0-X30</code>、栈指针寄存器<code>SP</code>、零寄存器<code>XZR</code>和程序状态<code>PSTATE</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个通用寄存器还可通过W0-W30访问其低32位，但是对Wn的写入会把对应Xn的高32位自动清零</div>
-<blockquote>
-<p><code>X29</code>通常作为帧指针<code>FP</code>，用于定位<strong>当前函数的栈帧</strong>，<code>X30</code>为链接寄存器<code>LR</code></p>
+<p><code>PC</code>用于保存和控制处理器的<strong>指令执行位置</strong>，<strong>分支跳转</strong>、<strong>函数调用</strong>、<strong>函数返回</strong>和<strong>部分加载指令</strong>可以更新<code>PC</code>以改变<strong>程序执行流</strong></p>
 </blockquote>
 <blockquote>
-<p><code>SP</code>不属于通用寄存器，只能在<strong>部分指令编码</strong>中使用</p>
+<p><code>CPSR</code>用于保存处理器的<strong>当前运行状态</strong>，包括<strong>条件标志位</strong>、<strong>当前执行状态</strong>、<strong>中断屏蔽状态</strong>和<strong>处理器模式</strong>等信息</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 部分异常模式拥有银行化寄存器，异常进入和返回过程中能够更快地保存、切换和恢复关键现场，减少软件手动保存寄存器的开销</div>
+<blockquote>
+<p><strong>银行化寄存器</strong>是指处理器切换到<strong>对应异常模式</strong>后，相同的寄存器编号会<strong>自动映射到另一组独立的物理寄存器</strong></p>
 </blockquote>
 <blockquote>
-<p><code>XZR</code>读取时恒为<code>0</code>，写入时<strong>结果被丢弃</strong>，可以避免为了读取常量<code>0</code>而额外分配一个真实寄存器</p>
+<p><code>SPSR</code>用于保存<strong>异常发生前</strong>的<code>CPSR</code>，因为<strong>异常发生时</strong>处理器需要改变<code>CPSR</code>，故将其保存到<code>SPSR</code>，直到<strong>异常返回</strong>再恢复</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 如果函数内部还需要调用其它函数，新的调用会更新LR中的返回地址，因此通常需要提前将原有LR保存到栈中，并在返回前恢复</div>
+<p><strong>②AArch64寄存器模型</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>AArch64</code>定义了<code>31</code>个<code>64</code>位<strong>通用寄存器</strong><code>X0-X30</code>，同时提供<strong>栈指针</strong><code>SP</code>、<strong>零寄存器</strong><code>XZR</code>以及<strong>描述当前处理器状态</strong>的<code>PSTATE</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 每个X0-X30都可以通过对应的W0-W30访问其低32位，向Wn写入数据时，对应Xn的高32位会自动清零</div>
+<blockquote>
+<p><code>X29</code>通常作为<strong>帧指针</strong><code>FP</code>，用于建立和定位<strong>当前函数的栈帧结构</strong>，<code>X30</code>为链接寄存器<code>LR</code>，用于保存<strong>函数调用的返回地址</strong></p>
 </blockquote>
 <blockquote>
-<p><code>AArch64</code>没有对应<code>AArch32 CPSR</code>的单一可见寄存器，而是使用一组<strong>程序状态字段</strong>，统称为<code>PSTATE</code></p>
-</blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 与AArch32不同，AArch64中的程序计数器由处理器内部维护，这样使指令编码和流水线行为更加规整</div>
-<blockquote>
-<p><code>AArch64</code>中不同异常级别通常有<strong>各自的状态保存寄存器</strong>用于保存异常前的<code>PSTATE</code>和<strong>返回地址</strong></p>
+<p><code>SP</code>是<strong>独立的栈指针寄存器</strong>，不属于<code>X0-X30</code>通用寄存器组，只能在支持<code>SP</code>操作数的<strong>部分数据处理和访存指令</strong>中使用</p>
 </blockquote>
 <blockquote>
-<p><code>AArch64</code>还提供<code>32</code>个<code>128</code>位浮点寄存器<code>V0-V31</code>，可用于<strong>浮点运算</strong>、<strong>向量运算</strong>、<strong>加密和媒体处理</strong>等</p>
+<p><code>XZR</code>是特殊的<strong>零寄存器</strong>，读取时始终得到<code>0</code>，写入的数据则<strong>直接丢弃</strong>，可以避免为了读取常量<code>0</code>而<strong>额外分配一个真实寄存器</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> X29作为帧指针属于调用约定，在不需要栈回溯或编译器省略帧指针时，X29也作为普通寄存器使用</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> AArch64中寄存器编号X31的含义取决于具体指令，可能为栈指针寄存器SP也可能为零寄存器XZR</div>
+<blockquote>
+<p><code>AArch64</code>不再使用类似<code>AArch32 CPSR</code>的<strong>单一程序状态寄存器</strong>，而是使用一组<strong>程序状态字段</strong>，统称为<code>PSTATE</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> AArch64中的程序计数器由处理器内部维护，主要通过分支、异常和PC相对寻址等机制使用，使指令编码和流水线行为更加规整</div>
+<blockquote>
+<p><code>AArch64</code>的不同异常级别提供对应的<code>SPSR_ELx</code>保存<strong>异常发生前的程序状态</strong>，并使用<code>ELR_ELx</code>保存<strong>异常返回地址</strong></p>
+</blockquote>
+<blockquote>
+<p><code>AArch64</code>还提供<code>32</code>个<code>128</code>位<code>SIMD&amp;FP</code>寄存器<code>V0-V31</code>，可按<strong>不同宽度访问</strong>，可用于<strong>浮点运算</strong>、<strong>向量运算</strong>、<strong>加密和媒体处理</strong>等</p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> X29作为帧指针主要由AAPCS64和具体平台的调用约定决定，若允许省略帧指针，它也可以作为普通的被调用者保存寄存器使用</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> A64指令编码中的寄存器编码值31具有特殊含义，根据具体指令可能表示栈指针寄存器SP或零寄存器XZR</div>
 <p><strong>③M-profile寄存器模型</strong></p>
 <blockquote>
-<p><strong>概述</strong>：<code>M-profile</code>也采用<code>32</code>位寄存器模型，但是针对<code>MCU</code>和<strong>实时控制</strong>进行了简化</p>
+<p><strong>概述</strong>：<code>M-Profile</code>的寄存器模型类似于<code>AArch32</code>，但是针对<code>MCU</code>和<strong>实时控制场景</strong>简化了<strong>处理器状态</strong>、<strong>异常处理</strong>和<strong>栈管理机制</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 将程序状态拆分到xPSR中，并采用PRIMASK、BASEPRI、FAULTMASK和CONTROL完成中断和权限管理</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> M-Profile保留R0-R15，并将程序状态拆分到xPSR中，并采用PRIMASK、BASEPRI、FAULTMASK和CONTROL完成中断和权限管理</div>
 <blockquote>
-<p><code>xPSR</code>可分为<code>APSR</code>、<code>IPSR</code>和<code>EPSR</code>，分别用于记录<strong>程序状态</strong>、<strong>当前异常编号</strong>和<strong>指令执行状态</strong></p>
-</blockquote>
-<blockquote>
-<p><code>CONTROL</code>用于控制<code>Thread mode</code>的部分运行状态如<strong>特权级</strong>、使用<code>MPS/PSP</code>以及<strong>浮点上下文状态</strong></p>
+<p><code>xPSR</code>是程序状态寄存器的组合视图，可分为<code>APSR</code>、<code>IPSR</code>和<code>EPSR</code>字段，分别用于记录<strong>运算状态</strong>、<strong>当前异常编号</strong>和<strong>指令执行状态</strong></p>
 </blockquote>
 <blockquote>
-<p><code>PRIMASK</code>用于屏蔽所有<strong>可配置优先级</strong>的异常，但不包括<code>NMI</code>和<code>HardFault</code></p>
+<p><code>CONTROL</code>主要控制<code>Thread mode</code>的<strong>特权级</strong>和<strong>栈指针选择</strong>，在支持<strong>浮点扩展</strong>的处理器中，还可包含<strong>浮点上下文</strong>状态相关控制信息</p>
 </blockquote>
 <blockquote>
-<p><code>BASEPRI</code>用于设置一个<strong>优先级阈值</strong>，屏蔽<strong>优先级数值大于等于该值</strong>的所有可配置异常</p>
+<p><code>PRIMASK</code>用于屏蔽所有<strong>可配置优先级</strong>的异常，提供一种简单的<strong>全局异常屏蔽机制</strong>，但不包括<code>NMI</code>和<code>HardFault</code></p>
 </blockquote>
 <blockquote>
-<p><code>FAULTMASK</code>用于屏蔽除了<code>NMI</code>以外的所有异常，包括<code>HardFault</code></p>
+<p><code>BASEPRI</code>用于设置一个<strong>优先级阈值</strong>，优先级数值<strong>大于或等于该阈值的可配置异常</strong>将被屏蔽，同样不能屏蔽<code>NMI</code>和<code>HardFault</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> M-profile实际有两个栈指针MSP和PSP，前者常用于启动代码、异常和中断，后者常用于RTOS线程</div>
 <blockquote>
-<p>在<code>Thread mode</code>下可以通过<code>CONTROL.SPSEL</code>选择使用哪一个栈指针，但是<code>Handler mode</code>始终使用<code>MSP</code></p>
+<p><code>FAULTMASK</code>用于进行<strong>最高级别的异常屏蔽</strong>，置位后可屏蔽除<code>NMI</code>外的所有异常，包括<code>HardFault</code></p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> M-profile没有银行化寄存器，但是进入异常时，硬件会自动保存一部分现场到对应的栈中</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 不同的Cortex-M处理器实现的特殊寄存器并不完全相同，比如Cortex-M0不提供BASEPRI和FAULTMASK</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> M-Profile提供MSP和PSP两套栈指针，其中MSP常用于系统启动和异常处理，而PSP常用于应用线程或RTOS任务</div>
+<blockquote>
+<p>在<code>Thread mode</code>下可以通过<code>CONTROL.SPSEL</code>选择使用<code>MSP</code>或<code>PSP</code>，进入<code>Handler mode</code>后则始终使用<code>MSP</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> M-Profile的异常处理不依赖传统的银行化通用寄存器，进入异常时由硬件自动保存部分关键现场，并在异常返回时恢复</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 不同M-Profile架构版本和Cortex-M内核支持的特殊寄存器并不完全相同，比如Cortex-M0不提供BASEPRI和FAULTMASK</div>
 <h4 id="3-过程调用标准"><a href="#3-过程调用标准" class="headerlink" title="3.过程调用标准"></a>3.过程调用标准</h4><p><strong>①简介</strong></p>
 <blockquote>
-<p><strong>概述</strong>：过程调用标准<code>PCS</code>为<code>ABI</code>的重要组成部分，用于规定<strong>调用者与被调用者</strong>之间的接口约定</p>
+<p><strong>概述</strong>：也称为<code>PCS</code>，是<code>ABI</code>的重要组成部分，用于规定<strong>调用者与被调用者</strong>之间的<strong>函数调用接口</strong>和<strong>行为约定</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 过程调用标准规定参数和返回值的传递方式、调用者与被调用者的寄存器保存责任、栈的组织和对齐等</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 过程调用标准主要规定参数与返回值传递、寄存器保存责任、栈的使用与对齐以及函数调用过程等基本规则</div>
 <blockquote>
-<p><code>Arm</code>主要提供面向<code>AArch32</code>的<code>AAPCS32</code>和面向<code>AArch64</code>的<code>AAPCS64</code></p>
-</blockquote>
-<blockquote>
-<p><code>ABI</code>规定程序编译为机器码后，不同<strong>目标文件</strong>、<strong>库和程序模块</strong>如何相互配合</p>
+<p><code>Arm</code>主要提供面向<code>AArch32</code>的<code>AAPCS32</code>和面向<code>AArch64</code>的<code>AAPCS64</code>，用于规范<strong>不同执行环境下</strong>的过程调用方式</p>
 </blockquote>
 <blockquote>
-<p><code>ABI</code>通常还涉及<strong>数据类型布局</strong>、<strong>目标文件格式</strong>、<strong>符号链接</strong>和<strong>异常展开</strong>等内容</p>
+<p><code>ABI</code>从更高层规定二进制程序之间的兼容接口，使不同编译器生成的<strong>目标文件</strong>、<strong>库文件</strong>和<strong>程序模块</strong>能够<strong>正确链接并协同运行</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 高级语言编译器通常会根据目标平台和编译选项自动遵循相应的过程调用标准</div>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 汇编代码与编译器生成的代码交互时，也必须遵守相同标准，且不同模块还应采用兼容的ABI变体</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> AAPCS不规定处理器的硬件异常入口和返回机制，但异常处理程序中的普通函数调用仍须遵循AAPCS</div>
+<blockquote>
+<p>除过程调用标准外，<code>ABI</code>通常还涉及<strong>数据类型布局</strong>、<strong>目标文件格式</strong>、<strong>符号与链接规则</strong>以及<strong>异常展开</strong>等内容</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 高级语言编译器通常会根据目标架构、操作系统和编译选项，自动按照相应的PCS和ABI生成函数调用代码</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 汇编代码与编译器生成的代码交互时，同样需要遵循相应的PCS，并确保各程序模块采用兼容的ABI约定</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> AAPCS并不定义处理器的硬件异常进入和返回机制，但异常处理程序调用普通函数时，仍需要遵循相应的AAPCS</div>
 <p><strong>②AAPCS32</strong></p>
 <blockquote>
-<p><strong>概述</strong>：<code>AAPCS32</code>采用<strong>满递减栈</strong>即栈向低地址增长，<code>SP</code>指向栈有效空间<strong>最低地址</strong></p>
+<p><strong>概述</strong>：规定<code>AArch32</code>的函数调用规则，采用<strong>满递减栈模型</strong>，即栈空间向<strong>低地址方向</strong>增长，<code>SP</code>始终指向<strong>当前栈顶位置</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 使用R0-R3传递参数，如果寄存器空间不足，使用栈传递参数，对于64位参数，采用R0-R1或R2-R3传递</div>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 函数参数优先通过R0-R3传递，寄存器不足时则使用栈传递，对于需要两个连续寄存器的64位参数，采用R0-R1或R2-R3传递</div>
 <blockquote>
-<p>对于<strong>返回值</strong>，不超过<code>32</code>位使用<code>R0</code>，<code>64</code>位使用<code>R0-R1</code>，<code>128</code>位的<strong>容器化向量</strong>使用<code>R0-R3</code></p>
-</blockquote>
-<blockquote>
-<p>如果返回值为<strong>较大的结构体</strong>，通常需要通过<strong>调用者提供的内存</strong>间接返回</p>
-</blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> AAPCS32规定调用者需要保存R0-R3、R12和LR，被调用者需要保存R4-R11和SP</div>
-<blockquote>
-<p><strong>调用者</strong>需要保存<code>LR</code>是因为其会被<strong>函数调用指令</strong>如<code>BL</code>和<code>BLX</code>改写覆盖</p>
+<p>对于<strong>返回值</strong>，不超过<code>32</code>位的数据通常通过<code>R0</code>返回，<code>64</code>位数据通常通过<code>R0-R1</code>返回，<code>128</code>位的<strong>容器化向量</strong>通常通过<code>R0-R3</code>返回</p>
 </blockquote>
 <blockquote>
-<p><strong>被调用者</strong>需要保存<code>R9</code>是建立在<code>R9</code>作为<strong>普通的被调用者保存寄存器</strong>使用为前提的</p>
+<p>如果返回值为较大的<strong>结构体或复合数据类型</strong>，通常由<strong>调用者预先提供存储空间</strong>，并通过<strong>隐式参数</strong>传递地址，由<strong>被调用函数</strong>写入</p>
 </blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> R9在一些平台可能用于保存平台专用数据，除非明确知道目标平台约定，否则尽量不要使用R9</div>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> AAPCS32规定调用者负责保存可能被覆盖的R0-R3、R12和LR，被调用者负责恢复需要保持不变的R4-R11和SP</div>
 <blockquote>
-<p><code>R9</code>可能被用于保存<strong>静态基址</strong>或<strong>线程局部存储指针</strong>，也可能被当作<strong>普通被调用者保存寄存器</strong></p>
+<p><strong>调用者</strong>需要保存<code>LR</code>是因为<strong>函数调用指令</strong><code>BL</code>和<code>BLX</code>会将返回地址写入<code>LR</code>，从而<strong>覆盖原有内容</strong></p>
 </blockquote>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> AAPCS32规定SP始终应保持4字节对齐，并在公共函数调用边界保持8字节对齐</div>
 <blockquote>
-<p><strong>公共函数调用边界</strong>指调用者把参数准备好并执行调用，被调用函数刚开始执行的那个交界位置</p>
+<p><strong>被调用者</strong>保存<code>R9</code>的规则取决于<strong>具体平台</strong><code>ABI</code>，当<code>R9</code>被定义为<strong>普通被调用者保存寄存器</strong>时，需要保证其值不变</p>
 </blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> R9在部分平台中具有特殊用途，例如保存静态基址或线程局部存储指针，除非明确目标平台约定，否则不应随意修改</div>
+<blockquote>
+<p><strong>静态基址</strong>用于保存访问<strong>静态数据区域</strong>的基准地址，程序可以通过它快速定位<strong>全局变量</strong>或<strong>静态变量</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>线程局部存储指针</strong>用于指向<strong>当前线程</strong>独有的数据区域，使程序能够快速访问<strong>线程私有变量</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> AAPCS32要求SP至少保持4字节对齐，并在公共函数调用边界即被调用函数开始执行时保持8字节对齐</div>
 <pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm">.syntax unified
 .cpu cortex<span class="token operator">-</span>m3
 .thumb
@@ -614,123 +614,32 @@
 .<span class="token keyword">global _start</span>
 .type _start, <span class="token operator">%</span>function
 .thumb_func
-<span class="token comment">;调用者-主程序</span>
-<span class="token label function">_start:</span>
-    <span class="token comment">; 假设SP已经初始化并保持8字节对齐</span>
 
-    <span class="token comment">; 准备参数，前四个参数通过 R0-R3 传递</span>
+<span class="token comment">; 调用者</span>
+<span class="token label function">_start:</span>
+    <span class="token comment">; 假设 SP 已初始化，并满足 AAPCS32 的 8 字节对齐要求</span>
+
+    <span class="token comment">; 准备参数：</span>
+    <span class="token comment">; 前四个参数通过 R0-R3 传递</span>
     MOVS    <span class="token register variable">R0</span>, #<span class="token number">1</span>
     MOVS    <span class="token register variable">R1</span>, #<span class="token number">2</span>
     MOVS    <span class="token register variable">R2</span>, #<span class="token number">3</span>
     MOVS    <span class="token register variable">R3</span>, #<span class="token number">4</span>
 
-    <span class="token comment">; 分配8字节参数区，其中4字节作为对齐填充</span>
-    <span class="token comment">; 因为马上就是公共函数调用边界，SP需要8字节对齐</span>
+    <span class="token comment">; 为第五个参数分配栈空间</span>
+    <span class="token comment">; 同时保证公共函数调用边界满足 8 字节对齐</span>
     SUB     <span class="token register variable">SP</span>, <span class="token register variable">SP</span>, #<span class="token number">8</span>
-    MOV.W   <span class="token register variable">R12</span>, #<span class="token number">5</span>
+
+    <span class="token comment">; 第五个参数通过栈传递</span>
+    MOVS    <span class="token register variable">R12</span>, #<span class="token number">5</span>
     STR     <span class="token register variable">R12</span>, <span class="token operator">[</span><span class="token register variable">SP</span>, #<span class="token number">0</span><span class="token operator">]</span>
-    
-    <span class="token comment">; 调用函数calculate</span>
+
+    <span class="token comment">; 调用函数 calculate</span>
     <span class="token register variable">BL</span>      calculate
 
-    <span class="token comment">; 清理栈空间，并且此时 R0 中保存了返回值</span>
+    <span class="token comment">; 清理栈参数区</span>
+    <span class="token comment">; 返回值保存在 R0 中</span>
     ADD     <span class="token register variable">SP</span>, <span class="token register variable">SP</span>, #<span class="token number">8</span>
-
-<span class="token label function">end_loop:</span>
-    B       end_loop
-
-.type calculate, <span class="token operator">%</span>function
-.thumb_func
-
-<span class="token comment">; 被调用者</span>
-<span class="token comment">;</span>
-<span class="token comment">; 函数原型：</span>
-<span class="token comment">; int calculate(int a, int b, int c, int d, int e);</span>
-<span class="token comment">;</span>
-<span class="token comment">; 参数：</span>
-<span class="token comment">;   R0       = 第一个参数a</span>
-<span class="token comment">;   R1       = 第二个参数b</span>
-<span class="token comment">;   R2       = 第三个参数c</span>
-<span class="token comment">;   R3       = 第四个参数d</span>
-<span class="token comment">;   入口[SP] = 第五个参数e</span>
-<span class="token comment">;</span>
-<span class="token comment">; 计算：</span>
-<span class="token comment">;   result = (a+b)*(c+d)+e</span>
-<span class="token comment">;</span>
-<span class="token comment">; 返回值：</span>
-<span class="token comment">;   R0 = result</span>
-<span class="token label function">calculate:</span>
-    <span class="token comment">; 保存需要使用的被调用者保存寄存器</span>
-    PUSH    {<span class="token register variable">R4</span><span class="token operator">-</span><span class="token register variable">R6</span>, LR}      
-    
-    <span class="token comment">; 从栈中读取第五个参数</span>
-    LDR     <span class="token register variable">R4</span>, <span class="token operator">[</span><span class="token register variable">SP</span>, #<span class="token number">16</span><span class="token operator">]</span>    
-
-    <span class="token comment">; 计算返回值为(1+2)*(3+4)+5=26，并将其保存到R0中</span>
-    ADD     <span class="token register variable">R5</span>, <span class="token register variable">R0</span>, <span class="token register variable">R1</span>
-    ADD     <span class="token register variable">R6</span>, <span class="token register variable">R2</span>, <span class="token register variable">R3</span>
-    MUL     <span class="token register variable">R5</span>, <span class="token register variable">R6</span>, <span class="token register variable">R5</span>
-    ADD     <span class="token register variable">R0</span>, <span class="token register variable">R5</span>, <span class="token register variable">R4</span>       
-
-    <span class="token comment">; 恢复保存的寄存器</span>
-    POP     {<span class="token register variable">R4</span><span class="token operator">-</span><span class="token register variable">R6</span>, PC}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>③AAPCS64</strong></p>
-<blockquote>
-<p><strong>概述</strong>：<code>AAPCS64</code>采用<strong>满递减栈</strong>即栈向低地址增长，<code>SP</code>指向有效栈空间<strong>最低地址</strong></p>
-</blockquote>
-<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 整数和指针参数优先使用X0-X7传递，浮点和向量参数优先使用V0-V7传递，寄存器空间不足则使用栈</div>
-<blockquote>
-<p>不超过<code>64</code>位的<strong>整数和指针</strong>返回值通常使用<code>X0</code>，<code>128</code>位整数使用<code>X0-X1</code></p>
-</blockquote>
-<blockquote>
-<p><strong>标量浮点或短向量</strong>返回值使用<code>V0</code>，<code>HFA/HVA</code>可使用<code>V0-V3</code></p>
-</blockquote>
-<blockquote>
-<p>不能通过寄存器返回的<strong>大型结果</strong>通过<code>X8</code>指定的内存间接返回</p>
-</blockquote>
-<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> AAPCS32规定调用者需要保存X0-X17和LR，被调用者需要保存X18-X29和SP，详细如下所示</div>
-<blockquote>
-<p><strong>调用者</strong>需要保存<code>LR</code>是因为其会被<strong>函数调用指令</strong>如<code>BL</code>和<code>BLX</code>改写覆盖</p>
-</blockquote>
-<blockquote>
-<p><strong>被调用者</strong>需要保存<code>X18</code>是建立在<code>X18</code>作为<strong>普通的被调用者保存寄存器</strong>使用为前提的</p>
-</blockquote>
-<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> X18在一些平台可能用于保存平台专用数据，除非明确知道目标平台约定，否则尽量不要使用X18</div>
-<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> AAPCS64规定通过SP访问内存以及进入公共函数接口时，SP必须保持16字节对齐</div>
-<pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm">.arch armv8<span class="token operator">-</span>a
-
-.text
-.balign <span class="token number">4</span>
-
-.<span class="token keyword">global _start</span>
-.type _start, <span class="token operator">%</span>function
-
-<span class="token comment">; 调用者——主程序</span>
-<span class="token label function">_start:</span>
-    <span class="token comment">; 假设SP已经初始化并保持16字节对齐</span>
-
-    <span class="token comment">; 准备参数：前8个64位整数参数通过X0-X7传递</span>
-    MOV     X0, #<span class="token number">1</span>
-    MOV     X1, #<span class="token number">2</span>
-    MOV     X2, #<span class="token number">3</span>
-    MOV     X3, #<span class="token number">4</span>
-    MOV     X4, #<span class="token number">5</span>
-    MOV     X5, #<span class="token number">6</span>
-    MOV     X6, #<span class="token number">7</span>
-    MOV     X7, #<span class="token number">8</span>
-
-    <span class="token comment">; 为第9个参数分配16字节</span>
-    <span class="token comment">; 其中8字节保存参数，另外8字节作为对齐填充</span>
-    SUB     <span class="token register variable">SP</span>, <span class="token register variable">SP</span>, #<span class="token number">16</span>
-    MOV     X9, #<span class="token number">9</span>
-    STR     X9, <span class="token operator">[</span><span class="token register variable">SP</span>, #<span class="token number">0</span><span class="token operator">]</span>
-
-    <span class="token comment">; 调用calculate</span>
-    <span class="token comment">; 此处是公共函数调用边界，SP保持16字节对齐</span>
-    <span class="token register variable">BL</span>      calculate
-
-    <span class="token comment">; 清理栈参数区，此时X0中保存返回值</span>
-    ADD     <span class="token register variable">SP</span>, <span class="token register variable">SP</span>, #<span class="token number">16</span>
 
 <span class="token label function">end_loop:</span>
     B       end_loop
@@ -740,62 +649,183 @@
 
 .<span class="token keyword">global calculate</span>
 .type calculate, <span class="token operator">%</span>function
+.thumb_func
+
+<span class="token comment">; 被调用者</span>
+<span class="token comment">;</span>
+<span class="token comment">; 函数原型：</span>
+<span class="token comment">; int calculate(int a, int b, int c, int d, int e);</span>
+<span class="token comment">;</span>
+<span class="token comment">; 参数：</span>
+<span class="token comment">;   R0       = a</span>
+<span class="token comment">;   R1       = b</span>
+<span class="token comment">;   R2       = c</span>
+<span class="token comment">;   R3       = d</span>
+<span class="token comment">;   [入口SP] = e</span>
+<span class="token comment">;</span>
+<span class="token comment">; 返回值：</span>
+<span class="token comment">;   R0 = result</span>
+<span class="token comment">;</span>
+<span class="token comment">; 计算：</span>
+<span class="token comment">;   result = (a+b)*(c+d)+e</span>
+
+<span class="token label function">calculate:</span>
+    <span class="token comment">; 保存被调用者需要保护的寄存器</span>
+    <span class="token comment">; 同时保存 LR，避免后续调用覆盖返回地址</span>
+    PUSH    {<span class="token register variable">R4</span><span class="token operator">-</span><span class="token register variable">R6</span>, LR}
+
+    <span class="token comment">; 读取第五个参数 e</span>
+    <span class="token comment">; PUSH 保存4个寄存器，共占用16字节</span>
+    LDR     <span class="token register variable">R4</span>, <span class="token operator">[</span><span class="token register variable">SP</span>, #<span class="token number">16</span><span class="token operator">]</span>
+
+    <span class="token comment">; 计算 (a+b)*(c+d)+e</span>
+    ADD     <span class="token register variable">R5</span>, <span class="token register variable">R0</span>, <span class="token register variable">R1</span>
+    ADD     <span class="token register variable">R6</span>, <span class="token register variable">R2</span>, <span class="token register variable">R3</span>
+    MUL     <span class="token register variable">R5</span>, <span class="token register variable">R5</span>, <span class="token register variable">R6</span>
+    ADD     <span class="token register variable">R0</span>, <span class="token register variable">R5</span>, <span class="token register variable">R4</span>
+
+    <span class="token comment">; 恢复寄存器并返回</span>
+    POP     {<span class="token register variable">R4</span><span class="token operator">-</span><span class="token register variable">R6</span>, PC}
+
+.size calculate, .<span class="token operator">-</span>calculate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>③AAPCS64</strong></p>
+<blockquote>
+<p><strong>概述</strong>：规定<code>AArch64</code>的函数调用规则，采用<strong>满递减栈模型</strong>，即栈空间向<strong>低地址方向</strong>增长，<code>SP</code>始终指向<strong>当前栈顶位置</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 整数和指针类型参数优先通过X0-X7传递，浮点和向量类型参数优先通过V0-V7传递，当寄存器空间不足时，剩余参数通过栈传递</div>
+<blockquote>
+<p>对于<strong>返回值</strong>，不超过<code>64</code>位的<strong>整数和指针</strong>通常通过<code>X0</code>返回，<code>128</code>位整数通常通过<code>X0-X1</code>返回</p>
+</blockquote>
+<blockquote>
+<p><strong>标量浮点数据或短向量类型</strong>通常通过<code>V0</code>返回，而<code>HFA/HVA</code>等<strong>复合浮点或向量类型</strong>可通过<code>V0-V3</code>返回</p>
+</blockquote>
+<blockquote>
+<p>对于无法通过寄存器返回的<strong>大型结果类型</strong>，通常由<strong>调用者提供存储空间</strong>，并通过<code>X8</code>传递<strong>该存储空间地址</strong>，由<strong>被调用函数</strong>写入</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> AAPCS64规定调用者负责保存可能被覆盖 X0-X17和LR，被调用者负责保存需要保持不变的X19-X29和SP</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 类似地，X18部分平台中具有特殊用途，例如保存静态基址或线程局部存储指针，除非明确目标平台约定，否则不应随意修改</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> AAPCS64规定通过SP访问内存时，以及进入公共函数调用边界即被调用函数开始执行时，SP必须保持16字节对齐</div>
+<pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm">.arch armv8<span class="token operator">-</span>a
+
+.text
+.balign <span class="token number">4</span>
+
+.<span class="token keyword">global _start</span>
+.type _start, <span class="token operator">%</span>function
+
+
+<span class="token comment">; 调用者</span>
+<span class="token label function">_start:</span>
+
+    <span class="token comment">; 假设 SP 已初始化，并满足 AAPCS64 的 16 字节对齐要求</span>
+
+    <span class="token comment">; 前8个64位整数参数通过 X0-X7 传递</span>
+    MOV     X0, #<span class="token number">1</span>
+    MOV     X1, #<span class="token number">2</span>
+    MOV     X2, #<span class="token number">3</span>
+    MOV     X3, #<span class="token number">4</span>
+    MOV     X4, #<span class="token number">5</span>
+    MOV     X5, #<span class="token number">6</span>
+    MOV     X6, #<span class="token number">7</span>
+    MOV     X7, #<span class="token number">8</span>
+
+
+    <span class="token comment">; 第9个参数通过栈传递</span>
+    <span class="token comment">; 额外分配16字节，保持SP 16字节对齐</span>
+    SUB     <span class="token register variable">SP</span>, <span class="token register variable">SP</span>, #<span class="token number">16</span>
+
+    MOV     X9, #<span class="token number">9</span>
+    STR     X9, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0</span><span class="token operator">]</span>
+
+
+    <span class="token comment">; 公共函数调用边界</span>
+    <span class="token comment">; 此时 SP 满足16字节对齐</span>
+    <span class="token register variable">BL</span>      calculate
+
+
+    <span class="token comment">; 清理栈参数区</span>
+    <span class="token comment">; 返回值保存在 X0</span>
+    ADD     <span class="token register variable">SP</span>, <span class="token register variable">SP</span>, #<span class="token number">16</span>
+
+
+<span class="token label function">end_loop:</span>
+    B       end_loop
+
+
+.size _start, .<span class="token operator">-</span>_start
+
+
+
+.<span class="token keyword">global calculate</span>
+.type calculate, <span class="token operator">%</span>function
+
 
 <span class="token comment">; 被调用者</span>
 <span class="token comment">;</span>
 <span class="token comment">; int64_t calculate(</span>
-<span class="token comment">;     int64_t a, int64_t b, int64_t c,</span>
-<span class="token comment">;     int64_t d, int64_t e, int64_t f,</span>
-<span class="token comment">;     int64_t g, int64_t h, int64_t i);</span>
+<span class="token comment">;     int64_t a,b,c,d,e,f,g,h,i</span>
+<span class="token comment">; );</span>
 <span class="token comment">;</span>
 <span class="token comment">; 参数：</span>
 <span class="token comment">;   X0-X7    = a-h</span>
-<span class="token comment">;   入口[SP] = i</span>
+<span class="token comment">;   [入口SP] = i</span>
 <span class="token comment">;</span>
-<span class="token comment">; 计算：</span>
-<span class="token comment">;   result = (a+b)*(c+d)+e+f+g+h+i</span>
-<span class="token comment">;</span>
-<span class="token comment">; 返回值：</span>
+<span class="token comment">; 返回：</span>
 <span class="token comment">;   X0 = result</span>
+<span class="token comment">;</span>
+<span class="token comment">; result=(a+b)*(c+d)+e+f+g+h+i</span>
+
 
 <span class="token label function">calculate:</span>
-    <span class="token comment">; 建立48字节栈帧并保持16字节对齐</span>
-    <span class="token comment">; 保存帧指针X29和链接寄存器X30</span>
-    STP     X29, X30, <span class="token operator">[</span><span class="token register variable">SP</span>, #<span class="token operator">-</span><span class="token number">48</span><span class="token operator">]</span><span class="token operator">!</span>
+
+    <span class="token comment">; 创建64字节栈帧</span>
+    <span class="token comment">; 保存 FP(X29) 和 LR(X30)</span>
+    STP     X29, X30, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token operator">-</span><span class="token number">64</span><span class="token operator">]</span><span class="token operator">!</span>
+
     MOV     X29, <span class="token register variable">SP</span>
 
-    <span class="token comment">; 保存即将使用的被调用者保存寄存器</span>
-    STP     X19, X20, <span class="token operator">[</span><span class="token register variable">SP</span>, #<span class="token number">16</span><span class="token operator">]</span>
-    STR     X21, <span class="token operator">[</span><span class="token register variable">SP</span>, #<span class="token number">32</span><span class="token operator">]</span>
-    <span class="token comment">; [SP,#40]作为对齐填充</span>
 
-    <span class="token comment">; 函数入口处的SP等于当前X29+48</span>
-    <span class="token comment">; 因此第9个参数位于[X29,#48]</span>
-    LDR     X21, <span class="token operator">[</span>X29, #<span class="token number">48</span><span class="token operator">]</span>
+    <span class="token comment">; 保存被调用者保存寄存器</span>
+    STP     X19, X20, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">16</span><span class="token operator">]</span>
+    STP     X21, X22, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">32</span><span class="token operator">]</span>
+
+
+    <span class="token comment">; 函数入口SP位于当前FP上方64字节处</span>
+    <span class="token comment">; 第9个参数位于 [X29,#64]</span>
+    LDR     X21, <span class="token operator">[</span>X29,#<span class="token number">64</span><span class="token operator">]</span>
+
 
     <span class="token comment">; 计算(a+b)*(c+d)</span>
     ADD     X19, X0, X1
+
     ADD     X20, X2, X3
+
     MUL     X19, X19, X20
+
 
     <span class="token comment">; 加上e、f、g、h、i</span>
     ADD     X19, X19, X4
     ADD     X19, X19, X5
     ADD     X19, X19, X6
     ADD     X19, X19, X7
+
     ADD     X0, X19, X21
 
+
     <span class="token comment">; 恢复被调用者保存寄存器</span>
-    LDR     X21, <span class="token operator">[</span><span class="token register variable">SP</span>, #<span class="token number">32</span><span class="token operator">]</span>
-    LDP     X19, X20, <span class="token operator">[</span><span class="token register variable">SP</span>, #<span class="token number">16</span><span class="token operator">]</span>
+    LDP     X21, X22, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">32</span><span class="token operator">]</span>
+    LDP     X19, X20, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">16</span><span class="token operator">]</span>
 
-    <span class="token comment">; 恢复帧指针、链接寄存器和栈指针</span>
-    LDP     X29, X30, <span class="token operator">[</span><span class="token register variable">SP</span><span class="token operator">]</span>, #<span class="token number">48</span>
 
-    <span class="token comment">; 根据X30中的返回地址返回</span>
+    <span class="token comment">; 恢复FP、LR和SP</span>
+    LDP     X29, X30, <span class="token operator">[</span><span class="token register variable">SP</span><span class="token operator">]</span>,#<span class="token number">64</span>
+
+
+    <span class="token comment">; 返回</span>
     RET
 
-.size calculate, .<span class="token operator">-</span>calculate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+.size calculate, .<span class="token operator">-</span>calculate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -919,7 +949,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ARM A32/T32/A64 指令系统
+                            ARM指令系统基础
                         
                     </div>
                     <div class="publish-info">

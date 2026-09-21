@@ -6,19 +6,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="I2C,IIC,串行通信,通信协议">
-    <meta name="description" content="I2C 总线组成、信号线与通信过程">
+    <meta name="description" content="IIC主机协议基础与收发流程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://paopaoziye.github.io/2026/07/27/iic-xie-yi-yi/">
     <link rel="alternate" type="application/atom+xml" title="Zfk&#39;s Study Notes Atom Feed" href="/atom.xml">
     <meta property="og:type" content="article">
     <meta property="og:title" content="IIC协议（一） | Zfk&#39;s Study Notes">
-    <meta property="og:description" content="I2C 总线组成、信号线与通信过程">
+    <meta property="og:description" content="IIC主机协议基础与收发流程">
     <meta property="og:url" content="https://paopaoziye.github.io/2026/07/27/iic-xie-yi-yi/">
     <meta property="og:site_name" content="Zfk&#39;s Study Notes">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="IIC协议（一） | Zfk&#39;s Study Notes">
-    <meta name="twitter:description" content="I2C 总线组成、信号线与通信过程">
+    <meta name="twitter:description" content="IIC主机协议基础与收发流程">
     <meta name="twitter:url" content="https://paopaoziye.github.io/2026/07/27/iic-xie-yi-yi/">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
@@ -378,8 +378,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%B8%B2%E8%A1%8C%E5%8D%8F%E8%AE%AE/">
-                                <span class="chip bg-color">串行协议</span>
+                            <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
+                                <span class="chip bg-color">通信协议</span>
                             </a>
                         
                     </div>
@@ -424,18 +424,190 @@
         
 
         
-        <!-- 代码块折行 -->
-        <style type="text/css">
-            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
-        </style>
-        
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="串行协议"><a href="#串行协议" class="headerlink" title="串行协议"></a>串行协议</h1><h2 id="IIC协议"><a href="#IIC协议" class="headerlink" title="IIC协议"></a>IIC协议</h2><h3 id="IIC协议（一）"><a href="#IIC协议（一）" class="headerlink" title="IIC协议（一）"></a>IIC协议（一）</h3><h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h4><p><strong>①简介</strong></p>
+                <h1 id="串行协议"><a href="#串行协议" class="headerlink" title="串行协议"></a>串行协议</h1><h2 id="IIC协议"><a href="#IIC协议" class="headerlink" title="IIC协议"></a>IIC协议</h2><h3 id="IIC协议（一）"><a href="#IIC协议（一）" class="headerlink" title="IIC协议（一）"></a>IIC协议（一）</h3><h4 id="协议简介"><a href="#协议简介" class="headerlink" title="协议简介"></a>协议简介</h4><p><strong>①引言</strong></p>
 <blockquote>
-<p><strong>概述</strong>：</p>
+<p><strong>概述</strong>：也称为<strong>集成电路总线</strong>，是一种常用的<strong>同步半双工串行通信方式</strong>，主要用于<strong>短距离</strong>、<strong>中低速</strong>的<strong>多设备通信</strong>，采用<code>MSB First</code></p>
 </blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 典型IIC由SCL和SDA线组成，前者用于传输时钟信号，后者用于传输数据信号，并且IIC将设备分为主设备和从设备</div>
+<blockquote>
+<p><strong>主设备</strong>：负责<strong>发起通信</strong>并产生<strong>时钟信号</strong>，通过发送<strong>从机地址</strong>选择需要通信的设备，同时决定本次通信<strong>是读还是写</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>从设备</strong>：持续<strong>监听总线地址</strong>，在地址匹配后通过<code>ACK</code>响应主设备，并按照主设备指定的<strong>读写方向</strong>完成<strong>数据接收或发送</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> SCL和SDA通常采用开漏输出结构，设备只能主动拉低总线或释放总线，高电平由外部上拉电阻提供，从而实现逻辑线与</div>
+<blockquote>
+<p><strong>开漏结构</strong>让所有设备<strong>不能主动拉高总线</strong>，因此多个设备可以<strong>安全共享</strong>同一根<code>SDA</code>和<code>SCL</code>，并实现<strong>总线仲裁</strong>和<strong>时钟拉伸</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>逻辑线与</strong>：当<strong>所有设备都释放总线</strong>时，总线被<strong>上拉电阻</strong>拉到高电平，当<strong>任意一个设备输出低电平</strong>时，总线变为低电平</p>
+</blockquote>
+<blockquote>
+<p><strong>总线仲裁</strong>：主机发送<strong>逻辑</strong><code>1</code>时发现<strong>总线实际为低电平</strong>，就知道有<strong>其他主机正在拉低总线</strong>，于是判定自己<strong>失去仲裁并停止发送</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>时钟拉伸</strong>：当从机暂时<strong>无法继续处理数据时</strong>，可以在主机释放<code>SCL</code>后继续将其<strong>拉低并保持低电平</strong>，使主机<strong>暂停后续通信</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> IIC总线必须具有合适的上拉电阻，上拉电阻过大会导致信号上升沿过慢，上拉电阻过小则会增加低电平状态下的灌电流和功耗</div>
+<p><strong>②帧格式</strong></p>
+<blockquote>
+<p><strong>概述</strong>：典型的<code>IIC</code>通信帧由<strong>起始信号</strong>、<strong>从机地址</strong>、<strong>读写位</strong>、<strong>应答位</strong>、<strong>数据段</strong>和<strong>停止信号</strong>组成，并以设定的<strong>通信速率</strong>传输</p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 一次典型通信可以表示为START -&gt; Address + R/W -&gt; ACK -&gt; Data -&gt; ACK -&gt; ... -&gt; STOP，总线空闲时SCL和SDA均为高电平</div>
+<blockquote>
+<p><strong>起始信号</strong>：当<code>SCL</code><strong>保持高电平时</strong>，<code>SDA</code>由<strong>高电平变为低电平</strong>，通知总线上的<strong>所有从设备</strong>一次新的通信即将开始</p>
+</blockquote>
+<blockquote>
+<p><strong>从机地址</strong>：用于选择当前需要通信的<strong>从设备</strong>，通常是<code>7 bit</code><strong>从机地址</strong>，随后再发送<code>1 bit</code>的<strong>读写位</strong>，可以整体视作为<strong>第一个数据段</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>读写位</strong>：用于指定本次通信的<strong>数据传输方向</strong>，<code>R/W = 0</code>表示主设备向从设备<strong>写数据</strong>，<code>R/W = 1</code>表示主设备从从设备<strong>读数据</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>应答位</strong>：每传输完<code>8 bit</code><strong>数据</strong>后，第<code>9</code>个时钟用于应答；<code>ACK = 0</code>表示<strong>接收方应答</strong>，<code>NACK = 1</code>表示<strong>未应答或不再继续接收</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>数据段</strong>：长度为<code>8 bit</code>，通常采用<code>MSB First</code>，即<strong>高位先发送</strong>，每传输完一个字节后，接收方都会在第<code>9</code>个时钟周期应答</p>
+</blockquote>
+<blockquote>
+<p><strong>停止信号</strong>：当<code>SCL</code><strong>保持高电平时</strong>，<code>SDA</code>由<strong>低电平变为高电平</strong>，表示当前<strong>通信结束并释放总线</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 主设备在不发送停止信号且不释放总线的情况下，再次产生一个START条件，用于在同一次通信过程中重新寻址或切换读写方向</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 发送方在传输完8 bit后释放SDA，由接收方在第9个时钟周期产生ACK/NACK，发送方通过监听SDA电平判断应答结果</div>
+<div class="uk-alert uk-alert-danger"><i class="fas fa-exclamation-triangle"></i> 传输数据和ACK/NACK应答位时，SDA只能在SCL为低电平时改变状态，并在SCL为高电平时保持稳定以保证接收方能够正确采样</div>
+<p><strong>③发送流程</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>IIC</code>的发送流程为<code>CPU -&gt; TXDR -&gt; TX FIFO -&gt; TX Shift Register -&gt; SDA</code>，其中部分<code>IIC</code>外设可能<strong>不提供</strong><code>TX FIFO</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 发送开始前主设备需要通过控制寄存器CR2配置从机地址、读写方向、传输长度以及START、AUTOEND、RELOAD等传输控制信息</div>
+<blockquote>
+<p>在<code>IIC</code>发送过程中，可以通过<code>BUSY</code>、<code>TXIS</code>、<code>NACKF</code>、<code>TC</code>、<code>TCR</code>和等<code>STOPF</code>标志位判断<strong>总线状态</strong>和<strong>发送结果</strong></p>
+</blockquote>
+<blockquote>
+<p><code>BUSY</code>表示总线处于<strong>忙状态</strong>，<code>TXIS</code>表示<code>TXDR</code>可以写入<strong>新的发送数据</strong>，<code>NACKF</code>表示接收到<code>NACK</code>，<code>STOPF</code>表示检测到<strong>停止信号</strong></p>
+</blockquote>
+<blockquote>
+<p><code>TC</code>表示<strong>当前配置的一段传输</strong>已经完成，等待软件产生<strong>停止信号</strong>结束通信或重新配置<code>CR2</code>后产生<code>Repeated START</code>开启<strong>新的传输</strong></p>
+</blockquote>
+<blockquote>
+<p><code>TCR</code>表示当前一段传输完成后进入<strong>重载阶段</strong>，此时总线仍<strong>保持通信状态</strong>，需要<strong>重新配置下一段传输</strong>的<code>NBYTES</code>等参数</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 连续发送多个字节时，通常只需要在TXIS置位后不断向TXDR写入数据，无需每发送一个字节都重新配置CR2</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> TC只表示当前配置的一段传输完成，并不一定表示整个IIC通信结束，只有产生STOP并置位STOPF后，才表示本次通信已经结束</div>
+<pre class="line-numbers language-none"><code class="language-none">CPU配置 CR2 │ ├─ Slave Address ├─ Write ├─ NBYTES ├─ AUTOEND / RELOAD └─ START ↓ 硬件发送 START ↓ 硬件发送 Address + W ↓ ACK ? / \ ACK NACK │ ↓ │ NACKF=1 ↓ TXIS=1 ↓ CPU写 TXDR ↓ TX Shift Register ↓ SDA发送8 bit ↓ 等待ACK ↓ 还有数据？ / \ 是 否 │ ↓ TXIS=1 NBYTES完成 │ │ 继续发送 ├─ RELOAD=1 │ ↓ │ TCR=1 │ ↓ │ 重新配置下一段 │ ├─ AUTOEND=0 │ ↓ │ TC=1 │ ↓ │ STOP / Repeated START │ └─ AUTOEND=1 ↓ 自动STOP ↓ STOPF=1 ↓ BUSY=0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>④接收流程</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>IIC</code>的接收流程为<code>SDA -&gt; RX Shift Register -&gt; RX FIFO -&gt; RXDR -&gt; CPU</code>，其中部分<code>IIC</code>外设可能<strong>不提供</strong><code>RX FIFO</code></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 主设备接收前同样需要配置控制寄存器CR2并完成从机寻址，但需要将传输方向设置为读，随后由从设备向主设备发送数据</div>
+<blockquote>
+<p>接收过程中最主要的状态标志为<code>RXNE</code>，表示<code>RXDR</code>中已经存在<strong>待读取数据</strong>，<code>CPU</code>读取后硬件<strong>继续接收后续数据</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 连续接收多个字节时，主设备对前面的字节返回ACK表示继续接收，对最后一个字节返回NACK表示结束接收</div>
+<blockquote>
+<p>支持<code>NBYTES</code>的<code>STM32 IIC</code>外设通常可以<strong>由硬件自动完成该过程</strong>，并在启用<code>AUTOEND</code>时自动产生<strong>停止信号</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 主设备接收时，如果RXDR未及时读取，IIC外设通常会暂停SCL等待CPU处理，读取完成后再继续接收后续数据</div>
+<pre class="line-numbers language-none"><code class="language-none">CPU 配置 CR2
+│
+├─ Slave Address
+├─ Write
+├─ NBYTES
+├─ AUTOEND / RELOAD
+└─ START
+        │
+        ▼
+硬件发送 START
+        │
+        ▼
+硬件发送 Address + W
+        │
+        ▼
+      ACK ?
+     /     \
+   ACK     NACK
+    │        │
+    │        ▼
+    │     NACKF = 1
+    │
+    ▼
+ TXIS = 1
+    │
+    ▼
+CPU 写 TXDR
+    │
+    ▼
+TX Shift Register
+    │
+    ▼
+SDA 发送 8 bit
+    │
+    ▼
+等待 ACK
+    │
+    ▼
+ 还有数据？
+   /     \
+  是      否
+  │        │
+  ▼        ▼
+TXIS=1   NBYTES 完成
+  │        │
+  │        ├───────────────┬───────────────┐
+  │        │               │               │
+  │        ▼               ▼               ▼
+  │    RELOAD = 1      AUTOEND = 0     AUTOEND = 1
+  │        │               │               │
+  │        ▼               ▼               ▼
+  │     TCR = 1         TC = 1         自动 STOP
+  │        │               │               │
+  │        ▼               ▼               ▼
+  │   重新配置下一段   STOP / Repeated   STOPF = 1
+  │                    START              │
+  │                                       ▼
+  │                                    BUSY = 0
+  │
+  └─────────────── 继续发送
+          │
+          └──────────────→ TXIS = 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>⑤错误标志</strong></p>
+<blockquote>
+<p><strong>概述</strong>：<code>IIC</code>可以通过<code>BERR</code>、<code>ARLO</code>、<code>OVR</code>和<code>TIMEOUT</code>等错误标志判断是否发生<strong>总线错误</strong>、<strong>仲裁丢失</strong>、<strong>数据溢出</strong>和<strong>通信超时</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> IIC发生异常时，硬件会置位对应的错误标志，CPU可通过读取状态寄存器判断当前故障类型</div>
+<blockquote>
+<p><code>BERR</code>：表示检测到<strong>总线时序错误</strong>，例如通信过程中出现不符合协议要求的<strong>起始信号</strong>和<strong>停止信号</strong></p>
+</blockquote>
+<blockquote>
+<p><code>ARLO</code>：表示主设备在<strong>多主机仲裁过程中</strong>检测到发送电平与实际总线电平不一致，从而<strong>失去总线控制权</strong></p>
+</blockquote>
+<blockquote>
+<p><code>OVR</code>：表示发生<strong>接收溢出</strong>或<strong>发送欠载</strong>，通常出现在<strong>从机模式且禁止时钟拉伸时</strong>，<code>CPU</code>未及时读取<code>RXDR</code>或写入<code>TXDR</code></p>
+</blockquote>
+<blockquote>
+<p><code>TIMEOUT</code>：表示<strong>总线状态</strong>长时间未发生预期变化，可能由<strong>从设备长时间拉低时钟</strong>、<strong>总线锁死</strong>或<strong>设备异常</strong>引起</p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 多个错误标志可能同时出现，实际排查时应结合当前通信阶段和总线电平状态共同判断异常原因</div>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 多数错误标志在异常发生后会被硬件锁存，需要软件按照芯片参考手册规定的方式清除，否则可能影响后续通信</div>
+<p><strong>⑥总线锁死</strong></p>
+<blockquote>
+<p><strong>概述</strong>：指<code>SDA</code>或<code>SCL</code><strong>被从设备持续拉低</strong>，导致总线<strong>无法恢复到空闲状态</strong>，使主设备无法正常产生<strong>新的起始信号并继续通信</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-list"><i class="fas fa-list-ul"></i> 常见原因是通信过程中主设备异常复位、掉电或传输被中断，而从设备仍停留在原来的通信状态并继续占用总线</div>
+<blockquote>
+<p><strong><code>SDA</code>锁死</strong>：从设备仍认为<strong>当前传输尚未结束</strong>，因此持续拉低<code>SDA</code>，主设备无法重新产生正常的<strong>起始信号</strong></p>
+</blockquote>
+<blockquote>
+<p><strong><code>SCL</code>锁死</strong>：从设备持续拉低<code>SCL</code>，可能是<strong>异常的时钟拉伸</strong>或<strong>设备内部状态异常</strong>引起，使主设备无法继续产生<strong>时钟信号</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-success"><i class="fa fa-check-circle"></i> 当SDA持续被拉低时，主设备可临时将SCL配置为GPIO，主动产生最多约9个时钟脉冲，使从设备继续运行并释放SDA</div>
+<blockquote>
+<p>因为一个<code>IIC</code>字节通常由<code>8 bit</code>数据和<code>1 bit</code>应答组成，因此<code>9</code>个<code>SCL</code>时钟脉冲通常可以<strong>使卡在字节传输中的从设备完成传输</strong></p>
+</blockquote>
+<div class="uk-alert uk-alert-warning"><i class="fa fa-exclamation-circle"></i> 总线恢复前应先判断是SDA还是SCL被持续拉低，若SCL本身无法释放，说明从设备仍在持续占用时钟线，通常需要复位从设备</div>
 
                 
             </div>
@@ -500,8 +672,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%B8%B2%E8%A1%8C%E5%8D%8F%E8%AE%AE/">
-                                    <span class="chip bg-color">串行协议</span>
+                                <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
+                                    <span class="chip bg-color">通信协议</span>
                                 </a>
                             
                         </div>
@@ -560,7 +732,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            UART 异步通信、帧格式与波特率
+                            协议基础、收发原理与串口协议帧
                         
                     </div>
                     <div class="publish-info">

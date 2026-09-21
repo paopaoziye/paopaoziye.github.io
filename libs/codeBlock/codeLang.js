@@ -15,7 +15,10 @@ var lang_name = code_language.replace("line-numbers", "").trim().replace("langua
 var languageNames = {
   "region-tree": "Text",
   "region": "Text",
-  "regiontree": "Text"
+  "regiontree": "Text",
+  "tree": "Tree",
+  "uboot": "U-Boot",
+  "u-boot": "U-Boot"
 };
 lang_name = languageNames[lang_name] || lang_name;
 
